@@ -1,0 +1,91 @@
+SYMBOLSET
+
+    SYMBOL
+        NAME "circle"
+        TYPE ELLIPSE
+        FILLED TRUE
+        POINTS
+            1 1
+        END
+    END
+
+    SYMBOL
+        NAME "dashed"
+        TYPE ELLIPSE
+        POINTS 1 1 END
+        FILLED true
+    END
+
+    SYMBOL
+        NAME "dashed-spaced"
+        TYPE VECTOR
+        POINTS
+            0 0
+            0 0.6
+            1 0.6
+            1 0
+            0 0
+        END
+        FILLED TRUE
+    END
+
+    SYMBOL
+        NAME "line"
+        TYPE ELLIPSE
+        POINTS
+            1 1
+        END
+        FILLED TRUE
+    END
+
+    SYMBOL
+        NAME "line-dots"
+        TYPE ELLIPSE
+        POINTS
+            1 1
+        END
+        FILLED TRUE
+    END
+
+    SYMBOL
+        NAME "square"
+        TYPE VECTOR
+        FILLED TRUE
+        POINTS 
+            0 0
+            0 1
+            1 1
+            1 0
+            0 0
+        END
+    END
+
+    SYMBOL
+        NAME "tie"
+        TYPE TRUETYPE
+        FONT "arial"
+        CHARACTER "I"
+    END
+
+    SYMBOL
+        NAME "dashed2"
+        TYPE ELLIPSE
+        POINTS 1 0 END
+        FILLED true
+    END
+
+    SYMBOL
+        NAME "point2"
+        TYPE ELLIPSE
+        POINTS 
+            1 1
+        END
+        FILLED TRUE
+    END
+
+    SYMBOL
+        NAME "round-miter"
+        TYPE SIMPLE
+    END
+
+END
