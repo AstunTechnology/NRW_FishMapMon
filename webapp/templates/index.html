@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Natural Resources Wales / Fish Map Môn</title>
+    <link href="{{ url_for('static', filename='img/favicon.png') }}" type="image/png" rel="icon" />
+
+    <!--[if lt IE 9]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <link href="{{ url_for('static', filename='js/OpenLayers-2.12/theme/default/style.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/base.css') }}" rel="stylesheet" />
+
+</head>
+
+<body>
+
+    <div id="main">
+      <div id="toolbar"><p><a href="#">Sign in</a> | <a href="#">Cymru</a> </p></div>
+      <div id="map"></div>
+    </div>
+
+    <aside>
+        <img src="{{ url_for('static', filename='img/nrw-logo.png') }}" alt="Natural Resources Wales" />
+    </aside>
+
+    <script src="{{ url_for('static', filename='js/OpenLayers-2.12/OpenLayers.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/map.js') }}"></script>
+
+</body>
+</html>
