@@ -70,6 +70,21 @@ aside {
     border: 1px solid grey;
 }
 
+.heading h1 {
+    float: left;
+    border-left: 2px solid #bfbfbf;
+    padding-left: 10px;
+    margin-left: 10px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    margin-top: 46px;
+}
+
+.heading img {
+    width: 146px;
+    float: left;
+}
+
 /* OpenLayer overrides */
 
 .olControlLayerSwitcher .layersDiv {

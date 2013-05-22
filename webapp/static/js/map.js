@@ -1,4 +1,5 @@
 (function(){
+
     var controls = [
         new OpenLayers.Control.TouchNavigation({
             dragPanOptions: {
@@ -15,13 +16,27 @@
 
     map = new OpenLayers.Map('map', {controls: controls});
 
+    var charts = wmsLayer(
+        "Charts",
+        'http://localhost/cgi-bin/mapserv?map=/home/matt/Software/FishMap/config/mapserver/charts.map',
+        {
+            layers: 'charts',
+            transparent: false
+        },
+        {
+            resolutions: [4, 8, 12, 25, 75, 150, 300]
+        }
+    );
+    map.addLayer(charts);
+
     var base_osm = new OpenLayers.Layer.OSM("OpenStreetMap");
     map.addLayer(base_osm);
 
     var project_area = wmsLayer(
-        "Project Area",
+        "Overlays",
         'http://localhost/cgi-bin/mapserv?map=/home/matt/Software/FishMap/config/mapserver/fishmap.map',
         {
+            // layers: 'project_area,subtidal_habitats'
             layers: 'project_area'
         },
         {}
