@@ -21,6 +21,19 @@
         controls: controls
     });
 
+    var os = wmsLayer(
+        "OS Map",
+        'http://localhost/cgi-bin/mapserv?map=/home/matt/Software/FishMap/config/mapserver/os.map',
+        {
+            layers: 'os',
+            transparent: false
+        },
+        {
+            resolutions: [2.5, 5, 10, 25, 50, 100, 150]
+        }
+    );
+    map.addLayer(os);
+
     var charts = wmsLayer(
         "Charts",
         'http://localhost/cgi-bin/mapserv?map=/home/matt/Software/FishMap/config/mapserver/charts.map',
