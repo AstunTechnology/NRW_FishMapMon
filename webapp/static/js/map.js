@@ -42,7 +42,7 @@
             transparent: false
         },
         {
-            resolutions: [4, 8, 12, 25, 75, 150, 300]
+            resolutions: [4, 8, 12, 25, 75, 150]
         }
     );
     map.addLayer(charts);
@@ -50,16 +50,67 @@
     // var base_osm = new OpenLayers.Layer.OSM("OpenStreetMap");
     // map.addLayer(base_osm);
 
-    var project_area = wmsLayer(
+    var overlayLayers = 
+        [
+            {
+                "id": "project_area_grp", 
+                "layers": [
+                    {
+                        "id": "project_area", 
+                        "visible": true,
+                        "info": false, 
+                        "legend": false
+                    }
+                ]
+            }, 
+            {
+                "id": "habitats_grp", 
+                "layers": [
+                    {
+                        "id": "intertidal_habitats", 
+                        "visible": false,
+                        "info": true, 
+                        "legend": true
+                    }, 
+                    {
+                        "id": "subtidal_habitats", 
+                        "visible": false,
+                        "info": true, 
+                        "legend": true
+                    }, 
+                    {
+                        "id": "subtidal_habitats_confidence", 
+                        "visible": false,
+                        "info": true, 
+                        "legend": true
+                    }
+                ]
+            }
+        ];
+
+    function getVisibleOverlays() {
+        var visible = [];
+        for (var m = 0, grp; m < overlayLayers.length; m++) {
+            grp = overlayLayers[m];
+            for (var n = 0, lyr; n < grp.layers.length; n++) {
+                lyr = grp.layers[n];
+                if (lyr.visible) {
+                    visible.push(lyr.id);
+                }
+            }
+        }
+        return visible;
+    }
+
+    var overlays = wmsLayer(
         "Overlays",
         'http://localhost/cgi-bin/mapserv?map=/home/matt/Software/FishMap/config/mapserver/fishmap.map',
         {
-            // layers: 'project_area,subtidal_habitats'
-            layers: 'project_area'
+            layers: getVisibleOverlays().join(',')
         },
         {}
     );
-    map.addLayer(project_area);
+    map.addLayer(overlays);
 
     map.setCenter(new OpenLayers.LonLat(241500, 379000), 10);
 
