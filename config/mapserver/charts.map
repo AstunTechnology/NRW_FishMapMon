@@ -2,10 +2,9 @@ MAP
 
     CONFIG PROJ_LIB "/usr/share/proj"
     PROJECTION
-        # "init=epsg:4326"
-        "init=epsg:900913"
+        "init=epsg:27700"
     END
-    EXTENT -180.0000 -90.0000 180.0000 90.0000
+    EXTENT -3276800 -3276800 3276800 3276800
     FONTSET "fonts/fonts.list"
     TEMPLATEPATTERN "."
     SYMBOLSET "symbols/symbols.sym"
@@ -22,7 +21,7 @@ MAP
         METADATA
             WMS_TITLE "Charts Base Mapping"
             AUTHOR "Astun Technology Ltd - www.astuntechnology.com"
-            WMS_SRS "EPSG:4326 EPSG:900913"
+            WMS_SRS "EPSG:27700 EPSG:4326 EPSG:900913"
             "ows_enable_request"   "*"
         END
         IMAGEPATH "/tmp/"
@@ -86,7 +85,6 @@ MAP
         GROUP charts
         MAXSCALEDENOM 52000
         DATA "/home/matt/Downloads/naturalresourceswales/FMM/Data_for_Contractor/BaseMapping/Hydrospatial/ChartedRaster/large/1464-2_W.png"
-        # DATA "/home/matt/Downloads/naturalresourceswales/FMM/Data_for_Contractor/BaseMapping/Hydrospatial/ChartedRaster/large/1464-2_W.tif"
         TYPE RASTER
         PROJECTION
             "proj=tmerc"
@@ -111,7 +109,6 @@ MAP
         NAME "1464-1_W"
         GROUP charts
         MAXSCALEDENOM 52000
-        # DATA "/home/matt/Downloads/naturalresourceswales/FMM/Data_for_Contractor/BaseMapping/Hydrospatial/ChartedRaster/large/1464-1_W.tif"
         DATA "/home/matt/Downloads/naturalresourceswales/FMM/Data_for_Contractor/BaseMapping/Hydrospatial/ChartedRaster/large/1464-1_W.png"
         TYPE RASTER
         PROJECTION

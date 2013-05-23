@@ -2,10 +2,10 @@ MAP
 
     CONFIG PROJ_LIB "/usr/share/proj"
     PROJECTION
-        # "init=epsg:4326"
-        "init=epsg:900913"
+        "init=epsg:27700"
     END
-    EXTENT -180.0000 -90.0000 180.0000 90.0000
+    EXTENT -3276800 -3276800 3276800 3276800
+    IMAGECOLOR 228 240 254
     FONTSET "fonts/fonts.list"
     TEMPLATEPATTERN "."
     SYMBOLSET "symbols/symbols.sym"
@@ -23,7 +23,7 @@ MAP
         METADATA
             WMS_TITLE "OS Base Mapping"
             AUTHOR "Astun Technology Ltd - www.astuntechnology.com"
-            WMS_SRS "EPSG:4326 EPSG:900913"
+            WMS_SRS "EPSG:27700 EPSG:4326 EPSG:900913"
             "ows_enable_request"   "*"
         END
         IMAGEPATH "/tmp/"
@@ -51,6 +51,7 @@ MAP
 
     LAYER
         NAME "os25k"
+        GROUP "os"
 		TILEINDEX "/home/matt/Downloads/naturalresourceswales/FMM/Data_for_Contractor/BaseMapping/OS25k/os25k.shp"
 		TYPE RASTER
         PROJECTION
@@ -64,7 +65,25 @@ MAP
     END
 
     LAYER
+        NAME "os50k"
+        GROUP "os"
+        MINSCALEDENOM 14000
+		TILEINDEX "/home/matt/Downloads/naturalresourceswales/FMM/Data_for_Contractor/BaseMapping/OS50k/os50k.shp"
+		TYPE RASTER
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            ows_title "OS 50k"
+        END
+        STATUS OFF
+        UNITS METERS
+    END
+
+    LAYER
         NAME "os250k"
+        GROUP "os"
+        MINSCALEDENOM 35000
 		TILEINDEX "/home/matt/Downloads/naturalresourceswales/FMM/Data_for_Contractor/BaseMapping/OS250k/os250k.shp"
 		TYPE RASTER
         PROJECTION

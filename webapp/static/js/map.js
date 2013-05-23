@@ -14,7 +14,12 @@
         new OpenLayers.Control.PanZoomBar()
     ];
 
-    map = new OpenLayers.Map('map', {controls: controls});
+    map = new OpenLayers.Map('map', {
+        projection: "EPSG:27700",
+        units: "m",
+        maxExtent: new OpenLayers.Bounds(-3276800,-3276800,3276800,3276800),
+        controls: controls
+    });
 
     var charts = wmsLayer(
         "Charts",
@@ -29,8 +34,8 @@
     );
     map.addLayer(charts);
 
-    var base_osm = new OpenLayers.Layer.OSM("OpenStreetMap");
-    map.addLayer(base_osm);
+    // var base_osm = new OpenLayers.Layer.OSM("OpenStreetMap");
+    // map.addLayer(base_osm);
 
     var project_area = wmsLayer(
         "Overlays",
@@ -43,13 +48,15 @@
     );
     map.addLayer(project_area);
 
-    map.setCenter(
-        new OpenLayers.LonLat(-4.356, 53.286).transform(
-            new OpenLayers.Projection("EPSG:4326"),
-            map.getProjectionObject()
-        ),
-        10
-    );
+    map.setCenter(new OpenLayers.LonLat(241500, 379000), 10);
+
+    // map.setCenter(
+    //     new OpenLayers.LonLat(-4.356, 53.286).transform(
+    //         new OpenLayers.Projection("EPSG:4326"),
+    //         map.getProjectionObject()
+    //     ),
+    //     10
+    // );
 
     function wmsLayer(name, path, wms_options, layer_options) {
         var urls = path;
@@ -62,7 +69,8 @@
                         }),
                     OpenLayers.Util.applyDefaults(layer_options,
                         {
-                            projection: 'EPSG:900913',
+                            // projection: 'EPSG:900913',
+                            projection: 'EPSG:27700',
                             singleTile: true,
                             buffer: 0,
                             ratio: 1

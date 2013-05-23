@@ -2,10 +2,9 @@ MAP
 
     CONFIG PROJ_LIB "/usr/share/proj"
     PROJECTION
-        # "init=epsg:4326"
-        "init=epsg:900913"
+        "init=epsg:27700"
     END
-    EXTENT -180.0000 -90.0000 180.0000 90.0000
+    EXTENT -3276800 -3276800 3276800 3276800
     FONTSET "fonts/fonts.list"
     TEMPLATEPATTERN "."
     SYMBOLSET "symbols/symbols.sym"
@@ -22,7 +21,7 @@ MAP
         METADATA
             WMS_TITLE "FishMap Overlays"
             AUTHOR "Astun Technology Ltd - www.astuntechnology.com"
-            WMS_SRS "EPSG:4326 EPSG:900913"
+            WMS_SRS "EPSG:27700"
             "ows_enable_request"   "*"
         END
         IMAGEPATH "/tmp/"
@@ -48,6 +47,18 @@ MAP
         STYLE HILITE
     END
 
+    LEGEND
+        STATUS ON
+        KEYSIZE 18 12
+        # LABEL object
+        LABEL
+            TYPE TRUETYPE
+            FONT Arial
+            SIZE 10
+            COLOR 0 0 89
+        END
+    END
+
     LAYER
         NAME "project_area"
         INCLUDE "pgconnection.inc"
@@ -62,8 +73,13 @@ MAP
         TYPE POLYGON
         UNITS METERS
         CLASS
+            NAME "Project Area"
             STYLE
                 OUTLINECOLOR 255 0 0
+            END
+            STYLE
+                COLOR 255 0 0
+                OPACITY 0
             END
         END
     END
@@ -82,8 +98,38 @@ MAP
         TYPE POLYGON
         UNITS METERS
         CLASS
+            NAME "Shale and mud"
             STYLE
                 OUTLINECOLOR 255 0 0
+            END
+            STYLE
+                COLOR 255 0 0
+                OPACITY 0
+            END
+        END
+    END
+
+    LAYER
+        NAME "subtidal_habitats_confidence"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from subtidal_habitats_confidence) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            ows_title "Subtidal Habitats Confidence"
+        END
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            NAME "High Confidence"
+            STYLE
+                OUTLINECOLOR 255 0 0
+            END
+            STYLE
+                COLOR 255 0 0
+                OPACITY 0
             END
         END
     END
