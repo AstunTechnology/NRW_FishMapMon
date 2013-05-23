@@ -85,6 +85,31 @@ MAP
     END
 
     LAYER
+        NAME "intertidal_habitats"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from intertidal_habitats) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            ows_title "Intertidal Habitats"
+        END
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            NAME "Exposed rock"
+            STYLE
+                OUTLINECOLOR 0 0 255
+            END
+            STYLE
+                COLOR 255 0 0
+                OPACITY 0
+            END
+        END
+    END
+
+    LAYER
         NAME "subtidal_habitats"
         INCLUDE "pgconnection.inc"
         DATA "wkb_geometry from (select * from subtidal_habitats) as foo using unique ogc_fid using srid=27700"

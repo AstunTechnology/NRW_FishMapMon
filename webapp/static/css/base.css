@@ -70,6 +70,10 @@ aside {
     border: 1px solid grey;
 }
 
+.heading {
+    height: 160px;
+}
+
 .heading h1 {
     float: left;
     border-left: 2px solid #bfbfbf;
@@ -83,6 +87,23 @@ aside {
 .heading img {
     width: 146px;
     float: left;
+}
+
+.overlays {
+    font-size: 1.2em;
+}
+
+.overlays ul {
+    padding-left: 10px;
+}
+
+.overlays li {
+    list-style-image: none;
+    list-style-type: none;
+}
+
+.overlays h3 {
+    margin-bottom: 0.4em;
 }
 
 /* OpenLayer overrides */

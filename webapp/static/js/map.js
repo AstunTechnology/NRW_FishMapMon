@@ -1,5 +1,43 @@
 (function(){
 
+    var overlayLayers =
+        [
+            {
+                "id": "project_area_grp", 
+                "layers": [
+                    {
+                        "id": "project_area", 
+                        "visible": true,
+                        "info": false, 
+                        "legend": false
+                    }
+                ]
+            }, 
+            {
+                "id": "habitats_grp", 
+                "layers": [
+                    {
+                        "id": "intertidal_habitats", 
+                        "visible": false,
+                        "info": true, 
+                        "legend": true
+                    }, 
+                    {
+                        "id": "subtidal_habitats", 
+                        "visible": false,
+                        "info": true, 
+                        "legend": true
+                    }, 
+                    {
+                        "id": "subtidal_habitats_confidence", 
+                        "visible": false,
+                        "info": true, 
+                        "legend": true
+                    }
+                ]
+            }
+        ];
+
     var controls = [
         new OpenLayers.Control.TouchNavigation({
             dragPanOptions: {
@@ -47,80 +85,17 @@
     );
     map.addLayer(charts);
 
-    // var base_osm = new OpenLayers.Layer.OSM("OpenStreetMap");
-    // map.addLayer(base_osm);
-
-    var overlayLayers = 
-        [
-            {
-                "id": "project_area_grp", 
-                "layers": [
-                    {
-                        "id": "project_area", 
-                        "visible": true,
-                        "info": false, 
-                        "legend": false
-                    }
-                ]
-            }, 
-            {
-                "id": "habitats_grp", 
-                "layers": [
-                    {
-                        "id": "intertidal_habitats", 
-                        "visible": false,
-                        "info": true, 
-                        "legend": true
-                    }, 
-                    {
-                        "id": "subtidal_habitats", 
-                        "visible": false,
-                        "info": true, 
-                        "legend": true
-                    }, 
-                    {
-                        "id": "subtidal_habitats_confidence", 
-                        "visible": false,
-                        "info": true, 
-                        "legend": true
-                    }
-                ]
-            }
-        ];
-
-    function getVisibleOverlays() {
-        var visible = [];
-        for (var m = 0, grp; m < overlayLayers.length; m++) {
-            grp = overlayLayers[m];
-            for (var n = 0, lyr; n < grp.layers.length; n++) {
-                lyr = grp.layers[n];
-                if (lyr.visible) {
-                    visible.push(lyr.id);
-                }
-            }
-        }
-        return visible;
-    }
-
     var overlays = wmsLayer(
         "Overlays",
         'http://localhost/cgi-bin/mapserv?map=/home/matt/Software/FishMap/config/mapserver/fishmap.map',
         {
-            layers: getVisibleOverlays().join(',')
+            layers: getVisibleOverlays(overlayLayers).join(',')
         },
         {}
     );
     map.addLayer(overlays);
 
     map.setCenter(new OpenLayers.LonLat(241500, 379000), 10);
-
-    // map.setCenter(
-    //     new OpenLayers.LonLat(-4.356, 53.286).transform(
-    //         new OpenLayers.Projection("EPSG:4326"),
-    //         map.getProjectionObject()
-    //     ),
-    //     10
-    // );
 
     function wmsLayer(name, path, wms_options, layer_options) {
         var urls = path;
@@ -143,4 +118,55 @@
         map.addLayer(lyr);
         return lyr;
     }
+
+    function getVisibleOverlays(groups) {
+        var visible = [];
+        for (var m = 0, grp; m < groups.length; m++) {
+            grp = groups[m];
+            for (var n = 0, lyr; n < grp.layers.length; n++) {
+                lyr = grp.layers[n];
+                if (lyr.visible) {
+                    visible.push(lyr.id);
+                }
+            }
+        }
+        return visible;
+    }
+
+    function getLayerById(groups, id) {
+        for (var m = 0, grp; m < groups.length; m++) {
+            grp = groups[m];
+            for (var n = 0, lyr; n < grp.layers.length; n++) {
+                lyr = grp.layers[n];
+                if (lyr.id === id) {
+                    return lyr;
+                }
+            }
+        }
+    }
+
+    function layer_toggle(groups, id, visible) {
+        // Update the model
+        getLayerById(groups, id).visible = visible;
+        // Refresh the overlay WMS layer
+        var visibleLayers = getVisibleOverlays(groups);
+        // Hide the layer if there are no visible layers to avoid an invalid
+        // WMS request being generated
+        overlays.setVisibility(visibleLayers.length);
+        overlays.mergeNewParams({'LAYERS': visibleLayers.join(',')});
+    }
+
+    createLayerTree(overlayLayers, jQuery('.overlays'), layer_toggle);
+
+    function createLayerTree(groups, container, toggleCallback) {
+        var tmpl = jQuery('#treeTmpl').html();
+        var treeElm = jQuery.mustache(tmpl, {"groups": groups});
+        // console.log(treeElm);
+        var tree$ = jQuery(container).append(treeElm);
+        tree$.find('input').change(function() {
+            toggleCallback(groups, this.value, this.checked);
+        });
+    }
+
 })();
+
