@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-05-24 15:34+0100\n"
+"POT-Creation-Date: 2013-05-24 16:12+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -27,6 +27,26 @@ msgstr ""
 
 #: templates/index.html:20
 msgid "Sign in"
+msgstr ""
+
+#: templates/index.html:41 templates/index.html:42 templates/project_area.sld:7
+msgid "Project Area"
+msgstr ""
+
+#: templates/index.html:43
+msgid "Habitats"
+msgstr ""
+
+#: templates/index.html:44
+msgid "Intertidal Habitats"
+msgstr ""
+
+#: templates/index.html:45
+msgid "Subtidal Habitats"
+msgstr ""
+
+#: templates/index.html:46
+msgid "Subtidal Habitats Confidence"
 msgstr ""
 
 #: templates/intertidal_habitats.sld:7
@@ -135,10 +155,6 @@ msgstr ""
 
 #: templates/intertidal_habitats.sld:371 templates/subtidal_habitats.sld:217
 msgid "Seagrass Beds"
-msgstr ""
-
-#: templates/project_area.sld:7
-msgid "Project Area"
 msgstr ""
 
 #: templates/subtidal_habitats.sld:7

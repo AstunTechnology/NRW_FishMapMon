@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-05-24 15:34+0100\n"
+"POT-Creation-Date: 2013-05-24 16:12+0100\n"
 "PO-Revision-Date: 2013-05-23 16:30+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: cy <LL@li.org>\n"
@@ -30,6 +30,26 @@ msgstr "Fish Map Môn"
 #: templates/index.html:20
 msgid "Sign in"
 msgstr "Mewngofnodi"
+
+#: templates/index.html:41 templates/index.html:42 templates/project_area.sld:7
+msgid "Project Area"
+msgstr "prosiect Ardal"
+
+#: templates/index.html:43
+msgid "Habitats"
+msgstr "cynefinoedd"
+
+#: templates/index.html:44
+msgid "Intertidal Habitats"
+msgstr ""
+
+#: templates/index.html:45
+msgid "Subtidal Habitats"
+msgstr ""
+
+#: templates/index.html:46
+msgid "Subtidal Habitats Confidence"
+msgstr ""
 
 #: templates/intertidal_habitats.sld:7
 msgid "Upper Shore Stable Rock with Lichens and Algal Crusts"
@@ -138,10 +158,6 @@ msgstr ""
 #: templates/intertidal_habitats.sld:371 templates/subtidal_habitats.sld:217
 msgid "Seagrass Beds"
 msgstr ""
-
-#: templates/project_area.sld:7
-msgid "Project Area"
-msgstr "prosiect Ardal"
 
 #: templates/subtidal_habitats.sld:7
 msgid "Erect and Branching Species That are Very Slow Growing"

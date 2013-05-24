@@ -35,6 +35,18 @@
         <div class="overlays"></div>
     </aside>
 
+    <script type="text/javascript">
+        window.FISH_MAP = {
+            "text": {
+                "project_area_grp": "{{ _('Project Area') }}",
+                "project_area": "{{ _('Project Area') }}",
+                "habitats_grp": "{{ _('Habitats') }}",
+                "intertidal_habitats": "{{ _('Intertidal Habitats') }}",
+                "subtidal_habitats": "{{ _('Subtidal Habitats') }}",
+                "subtidal_habitats_confidence": "{{ _('Subtidal Habitats Confidence') }}"
+            }
+        };
+    </script>
     <script src="{{ url_for('static', filename='js/jquery-1.9.1.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery.mustache.js') }}"></script>
     <script src="{{ url_for('static', filename='js/OpenLayers-2.12/OpenLayers.js') }}"></script>
@@ -43,10 +55,10 @@
         <ul>
         {{#groups}}
             <li>
-                <h3>{{id}}</h3>
+                <h3>{{name}}</h3>
                 <ul>
                     {{#layers}}
-                    <li><input type="checkbox" value="{{id}}" id="lyr_{{id}}" {{#visible}}checked="checked"{{/visible}} /> <label for="lyr_{{id}}">{{id}}</label></li>
+                    <li><input type="checkbox" value="{{id}}" id="lyr_{{id}}" {{#visible}}checked="checked"{{/visible}} /> <label for="lyr_{{id}}">{{name}}</label></li>
                     {{/layers}}
                 </ul>
             </li>

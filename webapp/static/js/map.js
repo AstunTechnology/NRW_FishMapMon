@@ -169,7 +169,12 @@
 
     function createLayerTree(groups, container, toggleCallback) {
         var tmpl = jQuery('#treeTmpl').html();
-        var treeElm = jQuery.mustache(tmpl, {"groups": groups});
+        var treeElm = jQuery.mustache(tmpl, {
+            "groups": groups,
+            "name": function() {
+                return window.FISH_MAP.text[this.id];
+            }
+        });
         // console.log(treeElm);
         var tree$ = jQuery(container).append(treeElm);
         tree$.find('input').change(function() {
