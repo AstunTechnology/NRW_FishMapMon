@@ -9,7 +9,7 @@ from flaskext.babel import Babel
 
 LOCALES = {
     'en': 'English',
-    'cy': 'Cymru'
+    'cy': 'Cymraeg',
 }
 
 fm = Blueprint('fishmap', __name__, url_prefix='/<locale>')
