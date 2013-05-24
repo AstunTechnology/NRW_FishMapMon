@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-05-23 16:30+0100\n"
+"POT-Creation-Date: 2013-05-24 15:34+0100\n"
 "PO-Revision-Date: 2013-05-23 16:30+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: cy <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: templates/index.html:5 templates/index.html:25
+#: templates/index.html:5
 msgid "Natural Resources Wales"
 msgstr "Cyfoeth Naturiol Cymru"
 
@@ -31,7 +31,151 @@ msgstr "Fish Map Môn"
 msgid "Sign in"
 msgstr "Mewngofnodi"
 
-#: templates/index.html:20
-msgid "Cymraeg"
-msgstr "English"
+#: templates/intertidal_habitats.sld:7
+msgid "Upper Shore Stable Rock with Lichens and Algal Crusts"
+msgstr "Shore Upper Rock Stabl gyda Cennau a crystiau algaidd"
+
+#: templates/intertidal_habitats.sld:21
+msgid "Wave Exposed Intertidal Stable Rock"
+msgstr "Wave Rock Exposed Sefydlog rhynglanwol"
+
+#: templates/intertidal_habitats.sld:35
+msgid "Moderately Exposed Intertidal Rock"
+msgstr ""
+
+#: templates/intertidal_habitats.sld:49
+msgid "Seaweeds and Mussels on Moderately Exposed Rock"
+msgstr ""
+
+#: templates/intertidal_habitats.sld:63
+msgid "Mussels and Piddocks on Intertidal Clay and Peat"
+msgstr ""
+
+#: templates/intertidal_habitats.sld:77
+msgid "Honeycomb Worm Reefs"
+msgstr ""
+
+#: templates/intertidal_habitats.sld:91
+msgid "Sheltered Bedrock, Boulders and Cobbles"
+msgstr ""
+
+#: templates/intertidal_habitats.sld:105
+msgid "Rockpools and Overhangs"
+msgstr ""
+
+#: templates/intertidal_habitats.sld:119
+msgid "Brown Seaweeds, Barnacles and Fucoids"
+msgstr ""
+
+#: templates/intertidal_habitats.sld:133
+msgid "Muddy Sands - Excluding Gaper Clams"
+msgstr ""
+
+#: templates/intertidal_habitats.sld:147
+msgid "Muds and Sands - Including Gaper Clams"
+msgstr ""
+
+#: templates/intertidal_habitats.sld:161
+msgid "Intertidal Muds"
+msgstr ""
+
+#: templates/intertidal_habitats.sld:175
+msgid "Saltmarshes"
+msgstr ""
+
+#: templates/intertidal_habitats.sld:189
+msgid "Vertical Subtidal Rock with Associated Community"
+msgstr ""
+
+#: templates/intertidal_habitats.sld:203 templates/subtidal_habitats.sld:49
+msgid "Stable Subtidal Fine Sands"
+msgstr ""
+
+#: templates/intertidal_habitats.sld:217 templates/subtidal_habitats.sld:63
+msgid "Stable Muddy Sands, Sandy Muds and Muds"
+msgstr ""
+
+#: templates/intertidal_habitats.sld:231 templates/subtidal_habitats.sld:77
+msgid "Rockwith Low-lying Fast Growing Faunal Turf"
+msgstr ""
+
+#: templates/intertidal_habitats.sld:245 templates/subtidal_habitats.sld:91
+msgid "Rock with Erect and Branching Species"
+msgstr ""
+
+#: templates/intertidal_habitats.sld:259 templates/subtidal_habitats.sld:105
+msgid "Shallow Subtidal Rock with Kelp"
+msgstr ""
+
+#: templates/intertidal_habitats.sld:273 templates/subtidal_habitats.sld:119
+msgid "Kelp and Seaweeds on Sand Scoured Rock"
+msgstr ""
+
+#: templates/intertidal_habitats.sld:287 templates/subtidal_habitats.sld:133
+msgid "Dynamic, Shallow Water Fine Sands"
+msgstr ""
+
+#: templates/intertidal_habitats.sld:301 templates/subtidal_habitats.sld:147
+msgid "Oyster Beds"
+msgstr ""
+
+#: templates/intertidal_habitats.sld:315 templates/subtidal_habitats.sld:161
+msgid "Underboulder and Cobbles Shallow Subtidal Community"
+msgstr ""
+
+#: templates/intertidal_habitats.sld:329 templates/subtidal_habitats.sld:175
+msgid "Biogenic Reef on Sediment"
+msgstr ""
+
+#: templates/intertidal_habitats.sld:343 templates/subtidal_habitats.sld:189
+msgid "Stable, Species Rich Mixed Sediments"
+msgstr ""
+
+#: templates/intertidal_habitats.sld:357 templates/subtidal_habitats.sld:203
+msgid "Unstable Coarse Sediments - Robust Fauna"
+msgstr ""
+
+#: templates/intertidal_habitats.sld:371 templates/subtidal_habitats.sld:217
+msgid "Seagrass Beds"
+msgstr ""
+
+#: templates/project_area.sld:7
+msgid "Project Area"
+msgstr "prosiect Ardal"
+
+#: templates/subtidal_habitats.sld:7
+msgid "Erect and Branching Species That are Very Slow Growing"
+msgstr ""
+
+#: templates/subtidal_habitats.sld:21
+msgid "Sand and Gravels with Long Lived Bivalves"
+msgstr ""
+
+#: templates/subtidal_habitats.sld:35
+msgid "Maerl Beds"
+msgstr ""
+
+#: templates/subtidal_habitats.sld:231
+msgid "Stable but Tidal Swept Cobbles, Pebbles and Gravel"
+msgstr ""
+
+#: templates/subtidal_habitats.sld:245
+msgid "Mosaic of Rock and Sediment"
+msgstr ""
+
+#: templates/subtidal_habitats_confidence.sld:7
+msgid "Very poor"
+msgstr ""
+
+#: templates/subtidal_habitats_confidence.sld:21
+msgid "Poor"
+msgstr ""
+
+#: templates/subtidal_habitats_confidence.sld:35
+msgid "Fair"
+msgstr ""
+
+#: templates/subtidal_habitats_confidence.sld:49
+msgid "Good"
+msgstr ""
 

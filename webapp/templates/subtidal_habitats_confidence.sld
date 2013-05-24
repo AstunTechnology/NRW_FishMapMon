@@ -4,7 +4,7 @@
         <Name>name</Name>
         <FeatureTypeStyle>
             <Rule>
-                <Name>Very poor</Name>
+                <Name>{{ _('Very poor') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>confiden11</PropertyName>
@@ -18,7 +18,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Poor</Name>
+                <Name>{{ _('Poor') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>confiden11</PropertyName>
@@ -32,7 +32,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Fair</Name>
+                <Name>{{ _('Fair') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>confiden11</PropertyName>
@@ -46,7 +46,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Good</Name>
+                <Name>{{ _('Good') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>confiden11</PropertyName>

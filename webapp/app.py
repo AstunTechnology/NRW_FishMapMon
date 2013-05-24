@@ -39,6 +39,19 @@ def before_request_fm():
 def home():
     return render_template('index.html')
 
+
+@fm.route('/sld')
+def sld():
+    layers = request.args.get('layers')
+    if layers:
+        layers = ['%s.sld' % layer for layer in layers.split(',')]
+        resp = make_response(render_template('base.sld', layers=layers))
+        resp.headers['Content-Type'] = 'text/xml'
+        return resp
+    else:
+        return ('Please specify one or more layers', 500)
+
+
 app = Flask(__name__)
 app.register_blueprint(fm)
 babel = Babel(app)
@@ -61,15 +74,8 @@ def redirect_to_home():
 
 
 @app.route('/sld')
-def sld():
-    layers = request.args.get('layers')
-    if layers:
-        layers = ['%s.sld' % layer for layer in layers.split(',')]
-        resp = make_response(render_template('base.sld', layers=layers))
-        resp.headers['Content-Type'] = 'text/xml'
-        return resp
-    else:
-        return ('Please specify one or more layers', 500)
+def redirect_to_sld():
+    return redirect(url_for('fishmap.sld', layers=request.args.get('layers'), locale=g.locale))
 
 
 if __name__ == '__main__':

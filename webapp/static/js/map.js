@@ -1,7 +1,7 @@
 (function(){
 
-    var FISHMAP_ROOT_URL = window.location.protocol + '//' + window.location.host;
-    var FISHMAP_SLD_URL = FISHMAP_ROOT_URL + '/sld?layers=';
+    var FISHMAP_ROOT_URL = window.location.protocol + '//' + window.location.host + window.location.pathname;
+    var FISHMAP_SLD_URL = FISHMAP_ROOT_URL + 'sld?layers=';
 
     var overlayLayers =
         [
@@ -94,13 +94,14 @@
         'http://localhost/cgi-bin/mapserv?map=/home/matt/Software/FishMap/config/mapserver/fishmap.map',
         {
             layers: visibleOverlays,
-            sld: 'http://localhost:5000/sld?layers=' + visibleOverlays
+            sld: FISHMAP_SLD_URL + visibleOverlays
         },
         {}
     );
     map.addLayer(overlays);
 
-    map.setCenter(new OpenLayers.LonLat(241500, 379000), 10);
+    map.setCenter(new OpenLayers.LonLat(260050, 371700), 3);
+    // map.setCenter(new OpenLayers.LonLat(241500, 379000), 10);
 
     function wmsLayer(name, path, wms_options, layer_options) {
         var urls = path;

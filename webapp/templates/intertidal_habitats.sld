@@ -4,7 +4,7 @@
         <Name>name</Name>
         <FeatureTypeStyle>
             <Rule>
-                <Name>Upper Shore Stable Rock with Lichens and Algal Crusts</Name>
+                <Name>{{ _('Upper Shore Stable Rock with Lichens and Algal Crusts') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
@@ -18,7 +18,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Wave Exposed Intertidal Stable Rock</Name>
+                <Name>{{ _('Wave Exposed Intertidal Stable Rock') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
@@ -32,7 +32,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Moderately Exposed Intertidal Rock</Name>
+                <Name>{{ _('Moderately Exposed Intertidal Rock') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
@@ -46,7 +46,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Seaweeds and Mussels on Moderately Exposed Rock</Name>
+                <Name>{{ _('Seaweeds and Mussels on Moderately Exposed Rock') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
@@ -60,7 +60,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Mussels and Piddocks on Intertidal Clay and Peat</Name>
+                <Name>{{ _('Mussels and Piddocks on Intertidal Clay and Peat') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
@@ -74,7 +74,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Honeycomb Worm Reefs</Name>
+                <Name>{{ _('Honeycomb Worm Reefs') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
@@ -88,7 +88,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Sheltered Bedrock, Boulders and Cobbles</Name>
+                <Name>{{ _('Sheltered Bedrock, Boulders and Cobbles') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
@@ -102,7 +102,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Rockpools and Overhangs</Name>
+                <Name>{{ _('Rockpools and Overhangs') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
@@ -116,7 +116,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Brown Seaweeds, Barnacles and Fucoids</Name>
+                <Name>{{ _('Brown Seaweeds, Barnacles and Fucoids') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
@@ -130,7 +130,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Muddy Sands - Excluding Gaper Clams</Name>
+                <Name>{{ _('Muddy Sands - Excluding Gaper Clams') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
@@ -144,7 +144,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Muds and Sands - Including Gaper Clams</Name>
+                <Name>{{ _('Muds and Sands - Including Gaper Clams') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
@@ -158,7 +158,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Intertidal Muds</Name>
+                <Name>{{ _('Intertidal Muds') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
@@ -172,7 +172,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Saltmarshes</Name>
+                <Name>{{ _('Saltmarshes') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
@@ -186,7 +186,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Vertical Subtidal Rock with Associated Community</Name>
+                <Name>{{ _('Vertical Subtidal Rock with Associated Community') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
@@ -200,7 +200,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Stable Subtidal Fine Sands</Name>
+                <Name>{{ _('Stable Subtidal Fine Sands') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
@@ -214,7 +214,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Stable Muddy Sands, Sandy Muds and Muds</Name>
+                <Name>{{ _('Stable Muddy Sands, Sandy Muds and Muds') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
@@ -228,7 +228,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Rockwith Low-lying Fast Growing Faunal Turf</Name>
+                <Name>{{ _('Rockwith Low-lying Fast Growing Faunal Turf') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
@@ -242,7 +242,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Rock with Erect and Branching Species</Name>
+                <Name>{{ _('Rock with Erect and Branching Species') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
@@ -256,7 +256,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Shallow Subtidal Rock with Kelp</Name>
+                <Name>{{ _('Shallow Subtidal Rock with Kelp') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
@@ -270,7 +270,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Kelp and Seaweeds on Sand Scoured Rock</Name>
+                <Name>{{ _('Kelp and Seaweeds on Sand Scoured Rock') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
@@ -284,7 +284,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Dynamic, Shallow Water Fine Sands</Name>
+                <Name>{{ _('Dynamic, Shallow Water Fine Sands') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
@@ -298,7 +298,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Oyster Beds</Name>
+                <Name>{{ _('Oyster Beds') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
@@ -312,7 +312,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Underboulder and Cobbles Shallow Subtidal Community</Name>
+                <Name>{{ _('Underboulder and Cobbles Shallow Subtidal Community') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
@@ -326,7 +326,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Biogenic Reef on Sediment</Name>
+                <Name>{{ _('Biogenic Reef on Sediment') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
@@ -340,7 +340,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Stable, Species Rich Mixed Sediments</Name>
+                <Name>{{ _('Stable, Species Rich Mixed Sediments') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
@@ -354,7 +354,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Unstable Coarse Sediments - Robust Fauna</Name>
+                <Name>{{ _('Unstable Coarse Sediments - Robust Fauna') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
@@ -368,7 +368,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>Seagrass Beds</Name>
+                <Name>{{ _('Seagrass Beds') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>type</PropertyName>
