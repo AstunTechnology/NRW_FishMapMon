@@ -119,6 +119,19 @@
         return lyr;
     }
 
+    function layer_toggle(groups, id, visible) {
+        // Update the model
+        getLayerById(groups, id).visible = visible;
+        // Refresh the overlay WMS layer
+        var visibleLayers = getVisibleOverlays(groups);
+        // Hide the layer if there are no visible layers to avoid an invalid
+        // WMS request being generated
+        overlays.setVisibility(visibleLayers.length);
+        overlays.mergeNewParams({'LAYERS': visibleLayers.join(',')});
+    }
+
+    createLayerTree(overlayLayers, jQuery('.overlays'), layer_toggle);
+
     function getVisibleOverlays(groups) {
         var visible = [];
         for (var m = 0, grp; m < groups.length; m++) {
@@ -144,19 +157,6 @@
             }
         }
     }
-
-    function layer_toggle(groups, id, visible) {
-        // Update the model
-        getLayerById(groups, id).visible = visible;
-        // Refresh the overlay WMS layer
-        var visibleLayers = getVisibleOverlays(groups);
-        // Hide the layer if there are no visible layers to avoid an invalid
-        // WMS request being generated
-        overlays.setVisibility(visibleLayers.length);
-        overlays.mergeNewParams({'LAYERS': visibleLayers.join(',')});
-    }
-
-    createLayerTree(overlayLayers, jQuery('.overlays'), layer_toggle);
 
     function createLayerTree(groups, container, toggleCallback) {
         var tmpl = jQuery('#treeTmpl').html();
