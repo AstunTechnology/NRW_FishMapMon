@@ -1,5 +1,8 @@
 (function(){
 
+    var FISHMAP_ROOT_URL = window.location.protocol + '//' + window.location.host;
+    var FISHMAP_SLD_URL = FISHMAP_ROOT_URL + '/sld?layers=';
+
     var overlayLayers =
         [
             {
@@ -85,11 +88,13 @@
     );
     map.addLayer(charts);
 
+    var visibleOverlays = getVisibleOverlays(overlayLayers).join(',');
     var overlays = wmsLayer(
         "Overlays",
         'http://localhost/cgi-bin/mapserv?map=/home/matt/Software/FishMap/config/mapserver/fishmap.map',
         {
-            layers: getVisibleOverlays(overlayLayers).join(',')
+            layers: visibleOverlays,
+            sld: 'http://localhost:5000/sld?layers=' + visibleOverlays
         },
         {}
     );
@@ -127,7 +132,10 @@
         // Hide the layer if there are no visible layers to avoid an invalid
         // WMS request being generated
         overlays.setVisibility(visibleLayers.length);
-        overlays.mergeNewParams({'LAYERS': visibleLayers.join(',')});
+        overlays.mergeNewParams({
+            'LAYERS': visibleLayers.join(','),
+            'SLD': FISHMAP_SLD_URL + visibleLayers.join(',')
+        });
     }
 
     createLayerTree(overlayLayers, jQuery('.overlays'), layer_toggle);

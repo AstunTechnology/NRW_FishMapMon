@@ -15,3 +15,9 @@ To create the OS raster tile index:
 
 `cd ~/Downloads/naturalresourceswales/FMM/Data_for_Contractor/BaseMapping`
 `gdaltindex ./OS250k/os250k.shp ./OS250k/*.TIF`
+
+Paths:
+
+* Root URL to webapp (http://localhost:5000)
+* Path to mapfiles
+* Path to data

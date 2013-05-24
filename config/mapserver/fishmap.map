@@ -71,6 +71,7 @@ MAP
         STATUS OFF
         TYPE POLYGON
         UNITS METERS
+        OPACITY 50
         CLASS
             NAME "Project Area"
             STYLE
@@ -96,6 +97,7 @@ MAP
         STATUS OFF
         TYPE POLYGON
         UNITS METERS
+        OPACITY 50
         CLASS
             STYLE
                 COLOR 0 255 0
@@ -117,14 +119,11 @@ MAP
         STATUS OFF
         TYPE POLYGON
         UNITS METERS
+        OPACITY 50
         CLASS
-            NAME "Shale and mud"
-            STYLE
-                OUTLINECOLOR 255 0 0
-            END
             STYLE
                 COLOR 255 0 0
-                OPACITY 0
+                OPACITY 50
             END
         END
     END
@@ -142,14 +141,11 @@ MAP
         STATUS OFF
         TYPE POLYGON
         UNITS METERS
+        OPACITY 50
         CLASS
-            NAME "High Confidence"
-            STYLE
-                OUTLINECOLOR 255 0 0
-            END
             STYLE
                 COLOR 255 0 0
-                OPACITY 0
+                OPACITY 50
             END
         END
     END

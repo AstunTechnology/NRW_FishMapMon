@@ -1,9 +1,10 @@
-from flask import Flask
 from flask import Blueprint
-from flask import render_template
+from flask import Flask
 from flask import g
-from flask import request
+from flask import make_response
 from flask import redirect
+from flask import render_template
+from flask import request
 from flask import url_for
 from flaskext.babel import Babel
 
@@ -61,8 +62,14 @@ def redirect_to_home():
 
 @app.route('/sld')
 def sld():
-    layer = request.args.get('layer')
-    return render_template(('%s.sld' % layer))
+    layers = request.args.get('layers')
+    if layers:
+        layers = ['%s.sld' % layer for layer in layers.split(',')]
+        resp = make_response(render_template('base.sld', layers=layers))
+        resp.headers['Content-Type'] = 'text/xml'
+        return resp
+    else:
+        return ('Please specify one or more layers', 500)
 
 
 if __name__ == '__main__':
