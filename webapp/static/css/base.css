@@ -70,6 +70,8 @@ aside {
     border: 1px solid grey;
 }
 
+/* Sidebar */
+
 .heading {
     height: 160px;
 }
@@ -104,6 +106,48 @@ aside {
 
 .overlays h3 {
     margin-bottom: 0.4em;
+}
+
+/* Legend Panel */
+
+.olControlLegendPanel {
+    left: 5px;
+    bottom: 5px;
+    width: 450px;
+    background-color: white;
+    font-size: 1.2em;
+    /* background-image: url("images/transparent.gif"); */
+}
+
+.olControlLegendPanel .atHelp.open {
+    background-image: url(images/minus.png);
+}
+.olControlLegendPanel .atHelp.closed {
+    background-image: url(images/plus.png);
+}
+
+.olControlLegendPanel .content {
+    padding: 0 1em 1em 1em;
+    border: 1px solid grey;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.olControlLegendPanel .legend h2 {
+    padding: 6px;
+    border-radius: 5px 5px 0 0;
+    margin: 0;
+    font-weight: bold;
+    color: white;
+    background-color: #3f3f3f;
+    font-size: 1.2em;
+    vertical-align: middle;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 /* OpenLayer overrides */
