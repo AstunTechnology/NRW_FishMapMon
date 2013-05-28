@@ -22,6 +22,7 @@ MAP
             AUTHOR "Astun Technology Ltd - www.astuntechnology.com"
             WMS_SRS "EPSG:27700"
             "ows_enable_request"   "*"
+            "wms_feature_info_mime_type" "text/csv,text/html"
         END
         IMAGEPATH "/tmp/"
         IMAGEURL ""
@@ -68,6 +69,9 @@ MAP
         METADATA
             ows_title "Project Area"
         END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
         UNITS METERS
@@ -92,8 +96,11 @@ MAP
             "init=epsg:27700"
         END
         METADATA
-            ows_title "Intertidal Habitats"
+            "ows_title" "Intertidal Habitats"
         END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
         UNITS METERS
@@ -116,6 +123,9 @@ MAP
         METADATA
             ows_title "Subtidal Habitats"
         END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
         UNITS METERS
@@ -138,6 +148,9 @@ MAP
         METADATA
             ows_title "Subtidal Habitats Confidence"
         END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
         UNITS METERS

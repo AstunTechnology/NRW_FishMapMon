@@ -3,7 +3,7 @@
     window.FISH_MAP.ROOT_URL = window.location.protocol + '//' + window.location.host + window.location.pathname;
     window.FISH_MAP.SLD_URL = FISH_MAP.ROOT_URL + 'sld?layers=';
 
-    window.FISH_MAP.WMS_ROOT_URL = 'http://localhost/cgi-bin/mapserv?map=/home/matt/Software/FishMap/config/mapserver/';
+    window.FISH_MAP.WMS_ROOT_URL = window.location.protocol + '//' + window.location.host + '/cgi-bin/mapserv?map=/home/matt/Software/FishMap/config/mapserver/';
     window.FISH_MAP.WMS_OVERLAY_URL = FISH_MAP.WMS_ROOT_URL + 'fishmap.map';
     window.FISH_MAP.WMS_OS_URL = FISH_MAP.WMS_ROOT_URL + 'os.map';
     window.FISH_MAP.WMS_CHARTS_URL = FISH_MAP.WMS_ROOT_URL + 'charts.map';
@@ -32,7 +32,7 @@
                     }, 
                     {
                         "id": "subtidal_habitats", 
-                        "visible": false,
+                        "visible": true,
                         "info": true, 
                         "legend": true
                     }, 
@@ -108,6 +108,28 @@
     var legendPanel = new OpenLayers.Control.LegendPanel({layers: [overlays]});
     map.addControl(legendPanel);
     legendPanel.showLayers(visibleOverlays);
+
+    info = new OpenLayers.Control.WMSGetFeatureInfo({
+        url: FISH_MAP.WMS_OVERLAY_URL, 
+        infoFormat: 'text/html',
+        queryVisible: true,
+        eventListeners: {
+            getfeatureinfo: function(event) {
+                console.log(event.text);
+                var content = event.text.replace('\n', '<br />');
+                map.addPopup(new OpenLayers.Popup.FramedCloud(
+                    'info',
+                    map.getLonLatFromPixel(event.xy),
+                    null,
+                    content,
+                    null,
+                    true
+                ), true);
+            }
+        }
+    });
+    map.addControl(info);
+    info.activate();
 
     map.setCenter(new OpenLayers.LonLat(260050, 371700), 3);
     // map.setCenter(new OpenLayers.LonLat(241500, 379000), 10);
