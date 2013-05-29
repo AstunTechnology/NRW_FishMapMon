@@ -97,6 +97,7 @@ MAP
         END
         METADATA
             "ows_title" "Intertidal Habitats"
+            "gml_include_items" "all"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -121,7 +122,8 @@ MAP
             "init=epsg:27700"
         END
         METADATA
-            ows_title "Subtidal Habitats"
+            "ows_title" "Subtidal Habitats"
+            "gml_include_items" "all"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -146,7 +148,8 @@ MAP
             "init=epsg:27700"
         END
         METADATA
-            ows_title "Subtidal Habitats Confidence"
+            "ows_title" "Subtidal Habitats Confidence"
+            "gml_include_items" "all"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2

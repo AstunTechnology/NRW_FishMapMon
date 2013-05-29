@@ -46,6 +46,16 @@
             }
         ];
 
+    // Allow layers to be quickly looked up on layer name
+    overlayLayers.layers = {};
+    for (var m = 0, grp; m < overlayLayers.length; m++) {
+        grp = overlayLayers[m];
+        for (var n = 0, lyr; n < grp.layers.length; n++) {
+            lyr = grp.layers[n];
+            overlayLayers.layers[lyr.id] = lyr;
+        }
+    }
+
     var controls = [
         new OpenLayers.Control.TouchNavigation({
             dragPanOptions: {
@@ -111,20 +121,69 @@
 
     info = new OpenLayers.Control.WMSGetFeatureInfo({
         url: FISH_MAP.WMS_OVERLAY_URL, 
-        infoFormat: 'text/html',
+        infoFormat: 'application/vnd.ogc.gml',
         queryVisible: true,
         eventListeners: {
-            getfeatureinfo: function(event) {
-                console.log(event.text);
-                var content = event.text.replace('\n', '<br />');
-                map.addPopup(new OpenLayers.Popup.FramedCloud(
+            beforegetfeatureinfo: function(event) {
+
+                this.popup = new OpenLayers.Popup.FramedCloud(
                     'info',
                     map.getLonLatFromPixel(event.xy),
                     null,
-                    content,
+                    '<div id="popup_content"><p class="loading">Loading...</p></div>',
                     null,
                     true
-                ), true);
+                );
+                this.map.addPopup(this.popup, true);
+
+            },
+            getfeatureinfo: function(event) {
+
+                var features = [];
+                for (var i = 0, feature; i < event.features.length; i++) {
+                    feature = event.features[i];
+                    if (overlayLayers.layers[feature.type].info) {
+                        features.push(feature);
+                    }
+                }
+
+                if (features.length) {
+
+                    // Assign features to an lookup keyed on layer name
+                    // for use in the template
+                    var lookup = {
+                        "lang": function() {
+                            return function(id) {
+                                // console.log(id);
+                                return window.FISH_MAP.text[id];
+                            }
+                        }
+                    };
+
+                    for (var i = 0, feature; i < features.length; i++) {
+                        feature = features[i];
+                        if (!lookup[feature.type]) {
+                            lookup[feature.type] = {
+                                features: []
+                            };
+                        }
+                        lookup[feature.type].features.push(feature);
+                    }
+
+                    var content = jQuery('#popup_content');
+                    jQuery('.loading', content).detach();
+
+                    var tmpl = jQuery('#infoTmpl').html();
+                    var html = jQuery.mustache(tmpl, lookup);
+                    content.append(jQuery.mustache(tmpl, lookup));
+                    this.popup.updateSize();
+
+                } else {
+
+                    this.map.removePopup(this.popup);
+
+                }
+
             }
         }
     });

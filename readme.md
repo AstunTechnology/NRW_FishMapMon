@@ -55,3 +55,6 @@ We need to work out how to handle the following paths which are currently hard c
 
 * Map
     * http://localhost/cgi-bin/mapserv?map=/home/matt/Software/FishMap/config/mapserver/fishmap.map&LAYERS=subtidal_habitats&VERSION=1.1.1&FORMAT=image%2Fpng&TRANSPARENT=TRUE&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS=EPSG%3A27700&BBOX=221800,352075,275000,385125&WIDTH=1064&HEIGHT=661&SLD=http%3A//localhost%3A5000/en/sld%3Flayers%3Dsubtidal_habitats
+
+* GetFeatureInfo
+    * GML: localhost/cgi-bin/mapserv?map=/home/matt/Software/FishMap/config/mapserver/fishmap.map&LAYERS=intertidal_habitats&QUERY_LAYERS=intertidal_habitats&STYLES=&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&BBOX=246750%2C368462.5%2C273350%2C374937.5&FEATURE_COUNT=10&HEIGHT=259&WIDTH=1064&FORMAT=image%2Fpng&INFO_FORMAT=application/vnd.ogc.gml&SRS=EPSG%3A27700&X=603&Y=47

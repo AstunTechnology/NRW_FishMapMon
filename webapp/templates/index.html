@@ -43,7 +43,10 @@
                 "habitats_grp": "{{ _('Habitats') }}",
                 "intertidal_habitats": "{{ _('Intertidal Habitats') }}",
                 "subtidal_habitats": "{{ _('Subtidal Habitats') }}",
-                "subtidal_habitats_confidence": "{{ _('Subtidal Habitats Confidence') }}"
+                "subtidal_habitats_confidence": "{{ _('Subtidal Habitats Confidence') }}",
+                "name": "{{ _('Name') }}",
+                "habitat": "{{ _('Habitat') }}",
+                "confidence": "{{ _('Confidence') }}"
             }
         };
     </script>
@@ -71,6 +74,57 @@
     {% raw %}
         <h3>{{name}}</h3>
         <img src="{{{url}}}" alt="legend" />
+    {% endraw %}
+    </script>
+    <script id="infoTmpl" type="text/template">
+    {% raw %}
+        {{#intertidal_habitats}}
+        <h2>{{#lang}}intertidal_habitats{{/lang}}</h2>
+        <table class="info">
+            <tbody>
+                {{#features}}
+                <tr>
+                    <th>{{#lang}}name{{/lang}}</th>
+                    <td>{{attributes.lifeform}}</td>
+                </tr>
+                <tr>
+                    <th>{{#lang}}habitat{{/lang}}</th>
+                    <td>{{attributes.type}}</td>
+                </tr>
+                {{/features}}
+            </tbody>
+        </table>
+        {{/intertidal_habitats}}
+        {{#subtidal_habitats}}
+        <h2>{{#lang}}subtidal_habitats{{/lang}}</h2>
+        <table class="info">
+            <tbody>
+                {{#features}}
+                <tr>
+                    <th>{{#lang}}name{{/lang}}</th>
+                    <td>{{attributes.name}}</td>
+                </tr>
+                <tr>
+                    <th>{{#lang}}habitat{{/lang}}</th>
+                    <td>{{attributes.summary}}</td>
+                </tr>
+                {{/features}}
+            </tbody>
+        </table>
+        {{/subtidal_habitats}}
+        {{#subtidal_habitats_confidence}}
+        <h2>{{#lang}}subtidal_habitats_confidence{{/lang}}</h2>
+        <table class="info">
+            <tbody>
+                {{#features}}
+                <tr>
+                    <th>{{#lang}}confidence{{/lang}}</th>
+                    <td>{{attributes.confiden11}}</td>
+                </tr>
+                {{/features}}
+            </tbody>
+        </table>
+        {{/subtidal_habitats_confidence}}
     {% endraw %}
     </script>
     <script src="{{ url_for('static', filename='js/map.js') }}"></script>
