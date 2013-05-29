@@ -67,7 +67,7 @@ aside {
     left: 0px;
     right: 0px;
     bottom: 0px;
-    background: lightGrey;
+    background-color: #F0F8FF;
     border: 1px solid grey;
 }
 
@@ -146,6 +146,30 @@ aside {
     -moz-border-radius-topright: 5px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+}
+
+/* Base Map Switcher */
+
+.olControlBaseMapSwitcher {
+    right: 5px;
+    top: 5px;
+}
+
+.olControlBaseMapSwitcher a {
+    background-color: #3f3f3f;
+    color: #cccccc;
+    display: inline-block;
+    margin: 2px;
+    padding: 6px 10px;
+    text-decoration: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    border-radius: 5px;
+}
+
+.olControlBaseMapSwitcher a.active {
+    color: white;
+    font-weight: bold;
 }
 
 /* OpenLayer overrides */

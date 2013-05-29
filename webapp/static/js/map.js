@@ -1,11 +1,11 @@
 (function(){
 
-    window.FISH_MAP.ROOT_URL = window.location.protocol + '//' + window.location.host + window.location.pathname;
-    window.FISH_MAP.SLD_URL = FISH_MAP.ROOT_URL + 'sld?layers=';
-    window.FISH_MAP.WMS_ROOT_URL = FISH_MAP.ROOT_URL + 'wms?map=';
-    window.FISH_MAP.WMS_OVERLAY_URL = FISH_MAP.WMS_ROOT_URL + 'fishmap';
-    window.FISH_MAP.WMS_OS_URL = FISH_MAP.WMS_ROOT_URL + 'os';
-    window.FISH_MAP.WMS_CHARTS_URL = FISH_MAP.WMS_ROOT_URL + 'charts';
+    FISH_MAP.ROOT_URL = window.location.protocol + '//' + window.location.host + window.location.pathname;
+    FISH_MAP.SLD_URL = FISH_MAP.ROOT_URL + 'sld?layers=';
+    FISH_MAP.WMS_ROOT_URL = FISH_MAP.ROOT_URL + 'wms?map=';
+    FISH_MAP.WMS_OVERLAY_URL = FISH_MAP.WMS_ROOT_URL + 'fishmap';
+    FISH_MAP.WMS_OS_URL = FISH_MAP.WMS_ROOT_URL + 'os';
+    FISH_MAP.WMS_CHARTS_URL = FISH_MAP.WMS_ROOT_URL + 'charts';
 
     var overlayLayers =
         [
@@ -64,7 +64,6 @@
         new OpenLayers.Control.Attribution(),
         new OpenLayers.Control.Scale(),
         new OpenLayers.Control.Navigation(),
-        new OpenLayers.Control.LayerSwitcher(),
         new OpenLayers.Control.MousePosition(),
         new OpenLayers.Control.PanZoomBar()
     ];
@@ -72,35 +71,39 @@
     map = new OpenLayers.Map('map', {
         projection: "EPSG:27700",
         units: "m",
+        resolutions: [2.5, 5, 10, 25, 50, 100, 150],
         maxExtent: new OpenLayers.Bounds(-3276800,-3276800,3276800,3276800),
         controls: controls
     });
 
     var os = wmsLayer(
-        "OS Map",
+        FISH_MAP.getText('os_map'),
         FISH_MAP.WMS_OS_URL,
         {
             layers: 'os',
             transparent: false
         },
         {
-            resolutions: [2.5, 5, 10, 25, 50, 100, 150]
+            // resolutions: [2.5, 5, 10, 25, 50, 100, 150]
         }
     );
     map.addLayer(os);
 
     var charts = wmsLayer(
-        "Charts",
+        FISH_MAP.getText('admiralty_chart'),
         FISH_MAP.WMS_CHARTS_URL,
         {
             layers: 'charts',
             transparent: false
         },
         {
-            resolutions: [4, 8, 12, 25, 75, 150]
+            // resolutions: [4, 8, 12, 25, 75, 150]
         }
     );
     map.addLayer(charts);
+
+    var blank = new OpenLayers.Layer(FISH_MAP.getText('no_map'), {isBaseLayer: true});
+    map.addLayer(blank);
 
     var visibleOverlays = getVisibleOverlays(overlayLayers);
     var overlays = wmsLayer(
@@ -117,6 +120,10 @@
     var legendPanel = new OpenLayers.Control.LegendPanel({layers: [overlays]});
     map.addControl(legendPanel);
     legendPanel.showLayers(visibleOverlays);
+
+    var baseMapSwitcher = new OpenLayers.Control.BaseMapSwitcher();
+    map.addControl(baseMapSwitcher);
+
 
     info = new OpenLayers.Control.WMSGetFeatureInfo({
         url: FISH_MAP.WMS_OVERLAY_URL, 
@@ -154,7 +161,7 @@
                         "lang": function() {
                             return function(id) {
                                 // console.log(id);
-                                return window.FISH_MAP.text[id];
+                                return FISH_MAP.getText(id);
                             }
                         }
                     };
@@ -262,7 +269,7 @@
         var treeElm = jQuery.mustache(tmpl, {
             "groups": groups,
             "name": function() {
-                return window.FISH_MAP.text[this.id];
+                return FISH_MAP.text[this.id];
             }
         });
         // console.log(treeElm);
@@ -273,4 +280,3 @@
     }
 
 })();
-
