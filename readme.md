@@ -1,12 +1,14 @@
 Natural Resources Wales FishMap Mon
 ===================================
 
-Set-up notes
+Dependencies
 ------------
 
-All data is displayed in Spherical Mercator, to enable MapServer to output data in this format the following definition must be added to /usr/share/proj/epsg:
+The dependencies for the Python web applicaion are defined in webapp/REQUIREMENTS and can be installed using pip, it is assumed that the application is installed with a Python 2.7 virtualenv. Additional dependencies include:
 
-    <900913> +proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs
+* ppa:ubuntugis/ppa
+    * cgi-mapserver
+    * postgresql-9.1-postgis
 
 Notes
 -----
@@ -40,7 +42,6 @@ Edit translations/cy/LC_MESSAGES/messages.po to add the msgstr value for each st
 
 We need to work out how to handle the following paths which are currently hard coded:
 
-* Path to mapfiles
 * Path to data
 
 #### Example URLs
