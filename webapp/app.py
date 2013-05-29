@@ -7,6 +7,7 @@ from flask import render_template
 from flask import request
 from flask import url_for
 from flaskext.babel import Babel
+import requests
 
 LOCALES = {
     'en': 'English',
@@ -40,6 +41,14 @@ def home():
     return render_template('index.html')
 
 
+@fm.route('/wms')
+def wms():
+    r = requests.get('%s%s.map' % (app.config['WMS_URL'], request.args.get('map')), params=request.args)
+    resp = make_response(r.content)
+    resp.headers['Content-Type'] = r.headers['Content-Type']
+    return resp
+
+
 @fm.route('/sld')
 def sld():
     layers = request.args.get('layers')
@@ -55,6 +64,9 @@ def sld():
 app = Flask(__name__)
 app.register_blueprint(fm)
 babel = Babel(app)
+
+# Set basic config
+app.config['WMS_URL'] = 'http://localhost/cgi-bin/mapserv?map=%s/../config/mapserver/' % app.root_path
 
 
 @babel.localeselector
@@ -73,10 +85,5 @@ def redirect_to_home():
     return redirect(url_for('fishmap.home', locale=g.locale))
 
 
-@app.route('/sld')
-def redirect_to_sld():
-    return redirect(url_for('fishmap.sld', layers=request.args.get('layers'), locale=g.locale))
-
-
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, processes=4)

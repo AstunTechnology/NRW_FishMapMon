@@ -2,11 +2,10 @@
 
     window.FISH_MAP.ROOT_URL = window.location.protocol + '//' + window.location.host + window.location.pathname;
     window.FISH_MAP.SLD_URL = FISH_MAP.ROOT_URL + 'sld?layers=';
-
-    window.FISH_MAP.WMS_ROOT_URL = window.location.protocol + '//' + window.location.host + '/cgi-bin/mapserv?map=/home/matt/Software/FishMap/config/mapserver/';
-    window.FISH_MAP.WMS_OVERLAY_URL = FISH_MAP.WMS_ROOT_URL + 'fishmap.map';
-    window.FISH_MAP.WMS_OS_URL = FISH_MAP.WMS_ROOT_URL + 'os.map';
-    window.FISH_MAP.WMS_CHARTS_URL = FISH_MAP.WMS_ROOT_URL + 'charts.map';
+    window.FISH_MAP.WMS_ROOT_URL = FISH_MAP.ROOT_URL + 'wms?map=';
+    window.FISH_MAP.WMS_OVERLAY_URL = FISH_MAP.WMS_ROOT_URL + 'fishmap';
+    window.FISH_MAP.WMS_OS_URL = FISH_MAP.WMS_ROOT_URL + 'os';
+    window.FISH_MAP.WMS_CHARTS_URL = FISH_MAP.WMS_ROOT_URL + 'charts';
 
     var overlayLayers =
         [
