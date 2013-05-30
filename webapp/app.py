@@ -43,7 +43,10 @@ def home():
 
 @fm.route('/wms')
 def wms():
-    r = requests.get('%s%s.map' % (app.config['WMS_URL'], request.args.get('map')), params=request.args)
+    r = requests.get(
+        '%s%s.map' % (app.config['WMS_URL'], request.args.get('map')),
+        params=request.args
+    )
     resp = make_response(r.content)
     resp.headers['Content-Type'] = r.headers['Content-Type']
     return resp
@@ -66,7 +69,8 @@ app.register_blueprint(fm)
 babel = Babel(app)
 
 # Set basic config
-app.config['WMS_URL'] = 'http://localhost/cgi-bin/mapserv?map=%s/../config/mapserver/' % app.root_path
+app.config['WMS_URL'] = 'http://localhost/cgi-bin/mapserv?' \
+                        'map=%s/../config/mapserver/' % app.root_path
 
 
 @babel.localeselector
