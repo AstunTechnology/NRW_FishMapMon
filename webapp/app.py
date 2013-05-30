@@ -58,7 +58,7 @@ def sld():
         resp.headers['Content-Type'] = 'text/xml'
         return resp
     else:
-        return ('Please specify one or more layers', 500)
+        return ''
 
 
 app = Flask(__name__)
