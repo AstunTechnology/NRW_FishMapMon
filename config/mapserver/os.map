@@ -5,7 +5,7 @@ MAP
         "init=epsg:27700"
     END
     EXTENT -3276800 -3276800 3276800 3276800
-    IMAGECOLOR 228 240 254
+    IMAGECOLOR 255 255 255
     FONTSET "fonts/fonts.list"
     TEMPLATEPATTERN "."
     SYMBOLSET "symbols/symbols.sym"
@@ -52,6 +52,8 @@ MAP
     LAYER
         NAME "os25k"
         GROUP "os"
+        MAXSCALEDENOM 14000
+        OPACITY 40
 		TILEINDEX "/home/matt/Downloads/naturalresourceswales/FMM/Data_for_Contractor/BaseMapping/OS25k/os25k.shp"
 		TYPE RASTER
         PROJECTION
@@ -68,6 +70,8 @@ MAP
         NAME "os50k"
         GROUP "os"
         MINSCALEDENOM 14000
+        MAXSCALEDENOM 35000
+        OPACITY 40
 		TILEINDEX "/home/matt/Downloads/naturalresourceswales/FMM/Data_for_Contractor/BaseMapping/OS50k/os50k.shp"
 		TYPE RASTER
         PROJECTION
@@ -84,6 +88,7 @@ MAP
         NAME "os250k"
         GROUP "os"
         MINSCALEDENOM 35000
+        OPACITY 40
 		TILEINDEX "/home/matt/Downloads/naturalresourceswales/FMM/Data_for_Contractor/BaseMapping/OS250k/os250k.shp"
 		TYPE RASTER
         PROJECTION
