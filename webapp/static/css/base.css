@@ -85,6 +85,7 @@ aside {
     padding-top: 25px;
     padding-bottom: 25px;
     margin-top: 46px;
+    font-size: 1.2em;
 }
 
 .heading img {
@@ -115,14 +116,17 @@ aside {
     bottom: 5px;
     width: 450px;
     background-color: white;
-    /* background-image: url("images/transparent.gif"); */
+    /* background-image: url("../img/transparent.gif"); */
 }
 
-.olControlLegendPanel .atHelp.open {
-    background-image: url(images/minus.png);
+.olControlLegendPanel h2 {
+    background-image: url(../img/plus.png);
+    background-position: right 6px center;
+    background-repeat: no-repeat;
 }
-.olControlLegendPanel .atHelp.closed {
-    background-image: url(images/plus.png);
+
+.olControlLegendPanel .open h2 {
+    background-image: url(../img/minus.png);
 }
 
 .olControlLegendPanel .content {
@@ -136,6 +140,7 @@ aside {
     padding: 6px;
     border-radius: 5px 5px 0 0;
     margin: 0;
+    font-size: 1.0em;
     font-weight: bold;
     color: white;
     background-color: #3f3f3f;
@@ -176,4 +181,8 @@ aside {
 
 .olControlLayerSwitcher .layersDiv {
     background-color: #406254;
+}
+
+.olFramedCloudPopupContent h2 {
+    margin: 0.2em;
 }
