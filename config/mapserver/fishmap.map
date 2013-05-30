@@ -218,4 +218,82 @@ MAP
         END
     END
 
+    LAYER
+        NAME "rsa_standing_areas"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from rsa_standing_areas) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "RSA Standing Areas"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        OPACITY 50
+        CLASS
+            STYLE
+                COLOR 255 0 0
+                OPACITY 50
+            END
+        END
+    END
+
+    LAYER
+        NAME "rsa_casting_sites"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from rsa_casting_sites) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "RSA Casting Areas"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        OPACITY 50
+        CLASS
+            STYLE
+                COLOR 255 0 0
+                OPACITY 50
+            END
+        END
+    END
+
+    LAYER
+        NAME "national_limits"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from national_limits) as foo using unique ogc_fid using srid=4326"
+        PROJECTION
+            "init=epsg:4326"
+        END
+        METADATA
+            "ows_title" "National Limits"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS ON
+        TYPE LINE
+        UNITS METERS
+        # OPACITY 50
+        CLASS
+            STYLE
+                OUTLINECOLOR 255 0 0
+                # OPACITY 50
+            END
+        END
+    END
+
 END

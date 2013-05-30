@@ -48,6 +48,11 @@
                 "restricted_grp": "{{ _('Restricted Zones') }}",
                 "restricted_closed_scalloping": "{{ _('Areas Closed to Scalloping') }}",
                 "several_and_regulatory_orders": "{{ _('Several and Regulatory Orders') }}",
+                "rsa_sites_grp": "{{ _('Recreational Sea Anglers Sites') }}",
+                "rsa_standing_areas": "{{ _('RSA Standing Areas') }}",
+                "rsa_casting_sites": "{{ _('RSA Casting Areas') }}",
+                "contextual_grp": "{{ _('Contextual') }}",
+                "national_limits": "{{ _('National Limits') }}",
                 "admiralty_chart": "{{ _('Admiralty Chart') }}",
                 "os_map": "{{ _('OS Map') }}",
                 "no_map": "{{ _('No Map') }}",
@@ -176,6 +181,32 @@
             </tbody>
         </table>
         {{/several_and_regulatory_orders}}
+        {{#rsa_standing_areas}}
+        <h2>{{#_}}rsa_standing_areas{{/_}}</h2>
+        <table class="info">
+            <tbody>
+                {{#features}}
+                <tr>
+                    <th>{{#_}}Activity{{/_}}</th>
+                    <td>{{attributes.activity}}</td>
+                </tr>
+                {{/features}}
+            </tbody>
+        </table>
+        {{/rsa_standing_areas}}
+        {{#rsa_casting_sites}}
+        <h2>{{#_}}rsa_casting_sites{{/_}}</h2>
+        <table class="info">
+            <tbody>
+                {{#features}}
+                <tr>
+                    <th>{{#_}}Activity{{/_}}</th>
+                    <td>{{attributes.activity}}</td>
+                </tr>
+                {{/features}}
+            </tbody>
+        </table>
+        {{/rsa_casting_sites}}
     {% endraw %}
     </script>
     <script src="{{ url_for('static', filename='js/map.js') }}"></script>

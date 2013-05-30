@@ -18,3 +18,9 @@ ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=
 export PGCLIENTENCODING=LATIN1
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=postgres password=postgres' "RestrictedZones/Sev_and_ reg_orders_Wales_polyv_3_region.tab" -nln several_and_regulatory_orders -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 export PGCLIENTENCODING=UTF-8
+
+ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=postgres password=postgres' "FMM_Data/RSA_Sites/RSA_sites_poly_new.TAB" -nln rsa_standing_areas -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+
+ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=postgres password=postgres' "FMM_Data/RSA_Sites/RSA_Sites_Casting_New.TAB" -nln rsa_casting_sites -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+
+ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=postgres password=postgres' "BaseMapping/Hydrospatial/szSE_UK_NATIONAL_LIMITS.TAB" -nln national_limits -s_srs "EPSG:4326" -a_srs "EPSG:4326" -explodecollections
