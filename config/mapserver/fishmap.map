@@ -166,4 +166,56 @@ MAP
         END
     END
 
+    LAYER
+        NAME "restricted_closed_scalloping"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from restricted_closed_scalloping) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "Areas closed to Scalloping"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        OPACITY 50
+        CLASS
+            STYLE
+                COLOR 255 0 0
+                OPACITY 50
+            END
+        END
+    END
+
+    LAYER
+        NAME "several_and_regulatory_orders"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from several_and_regulatory_orders) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "Several and regulatory orders"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        OPACITY 50
+        CLASS
+            STYLE
+                COLOR 255 0 0
+                OPACITY 50
+            END
+        END
+    END
+
 END

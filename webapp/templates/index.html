@@ -38,21 +38,37 @@
     <script type="text/javascript">
         window.FISH_MAP = {
             "text": {
+                // Layer and group names
                 "project_area_grp": "{{ _('Project Area') }}",
                 "project_area": "{{ _('Project Area') }}",
                 "habitats_grp": "{{ _('Habitats') }}",
                 "intertidal_habitats": "{{ _('Intertidal Habitats') }}",
                 "subtidal_habitats": "{{ _('Subtidal Habitats') }}",
                 "subtidal_habitats_confidence": "{{ _('Subtidal Habitats Confidence') }}",
-                "name": "{{ _('Name') }}",
-                "habitat": "{{ _('Habitat') }}",
-                "confidence": "{{ _('Confidence') }}",
+                "restricted_grp": "{{ _('Restricted Zones') }}",
+                "restricted_closed_scalloping": "{{ _('Areas Closed to Scalloping') }}",
+                "several_and_regulatory_orders": "{{ _('Several and Regulatory Orders') }}",
                 "admiralty_chart": "{{ _('Admiralty Chart') }}",
                 "os_map": "{{ _('OS Map') }}",
-                "no_map": "{{ _('No Map') }}"
+                "no_map": "{{ _('No Map') }}",
+                // Column names
+                "name": "{{ _('Name') }}",
+                "habitat": "{{ _('Habitat') }}",
+                "confidence": "{{ _('Confidence') }}"
             },
             getText: function(id) {
-                return FISH_MAP.text[id];
+                return FISH_MAP.text[id] || id;
+            },
+            tmplView: {
+                // Convience object that can be extended for use as a Mustache
+                // template view that includes a _ function that will lookup a
+                // translated string either a property (expressed as {{name}})
+                // or literal string.
+                "_": function() {
+                    return function(text) {
+                        return FISH_MAP.getText(Mustache.render(text, this));
+                    }
+                }
             }
         };
     </script>
@@ -66,10 +82,10 @@
         <ul>
         {{#groups}}
             <li>
-                <h3>{{name}}</h3>
+                <h3>{{#_}}{{id}}{{/_}}</h3>
                 <ul>
                     {{#layers}}
-                    <li><input type="checkbox" value="{{id}}" id="lyr_{{id}}" {{#visible}}checked="checked"{{/visible}} /> <label for="lyr_{{id}}">{{name}}</label></li>
+                    <li><input type="checkbox" value="{{id}}" id="lyr_{{id}}" {{#visible}}checked="checked"{{/visible}} /> <label for="lyr_{{id}}">{{#_}}{{id}}{{/_}}</label></li>
                     {{/layers}}
                 </ul>
             </li>
@@ -79,23 +95,23 @@
     </script>
     <script id="legendTmpl" type="text/template">
     {% raw %}
-        <h3>{{name}}</h3>
+        <h3>{{#_}}{{name}}{{/_}}</h3>
         <img src="{{{url}}}" alt="legend" />
     {% endraw %}
     </script>
     <script id="infoTmpl" type="text/template">
     {% raw %}
         {{#intertidal_habitats}}
-        <h2>{{#lang}}intertidal_habitats{{/lang}}</h2>
+        <h2>{{#_}}intertidal_habitats{{/_}}</h2>
         <table class="info">
             <tbody>
                 {{#features}}
                 <tr>
-                    <th>{{#lang}}name{{/lang}}</th>
+                    <th>{{#_}}name{{/_}}</th>
                     <td>{{attributes.lifeform}}</td>
                 </tr>
                 <tr>
-                    <th>{{#lang}}habitat{{/lang}}</th>
+                    <th>{{#_}}habitat{{/_}}</th>
                     <td>{{attributes.type}}</td>
                 </tr>
                 {{/features}}
@@ -103,16 +119,16 @@
         </table>
         {{/intertidal_habitats}}
         {{#subtidal_habitats}}
-        <h2>{{#lang}}subtidal_habitats{{/lang}}</h2>
+        <h2>{{#_}}subtidal_habitats{{/_}}</h2>
         <table class="info">
             <tbody>
                 {{#features}}
                 <tr>
-                    <th>{{#lang}}name{{/lang}}</th>
+                    <th>{{#_}}name{{/_}}</th>
                     <td>{{attributes.name}}</td>
                 </tr>
                 <tr>
-                    <th>{{#lang}}habitat{{/lang}}</th>
+                    <th>{{#_}}habitat{{/_}}</th>
                     <td>{{attributes.summary}}</td>
                 </tr>
                 {{/features}}
@@ -120,18 +136,46 @@
         </table>
         {{/subtidal_habitats}}
         {{#subtidal_habitats_confidence}}
-        <h2>{{#lang}}subtidal_habitats_confidence{{/lang}}</h2>
+        <h2>{{#_}}subtidal_habitats_confidence{{/_}}</h2>
         <table class="info">
             <tbody>
                 {{#features}}
                 <tr>
-                    <th>{{#lang}}confidence{{/lang}}</th>
+                    <th>{{#_}}confidence{{/_}}</th>
                     <td>{{attributes.confiden11}}</td>
                 </tr>
                 {{/features}}
             </tbody>
         </table>
         {{/subtidal_habitats_confidence}}
+        {{#restricted_closed_scalloping}}
+        <h2>{{#_}}restricted_closed_scalloping{{/_}}</h2>
+        <table class="info">
+            <tbody>
+                <tr>
+                    <th>{{#_}}Description{{/_}}</th>
+                    <td>{{#_}}Closed{{/_}}</td>
+                </tr>
+            </tbody>
+        </table>
+        {{/restricted_closed_scalloping}}
+        {{#several_and_regulatory_orders}}
+        <h2>{{#_}}several_and_regulatory_orders{{/_}}</h2>
+        <table class="info">
+            <tbody>
+                {{#features}}
+                <tr>
+                    <th>{{#_}}Order Name{{/_}}</th>
+                    <td>{{#_}}{{attributes.order_name}}{{/_}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}Order Type{{/_}}</th>
+                    <td>{{attributes.order_type}}</td>
+                </tr>
+                {{/features}}
+            </tbody>
+        </table>
+        {{/several_and_regulatory_orders}}
     {% endraw %}
     </script>
     <script src="{{ url_for('static', filename='js/map.js') }}"></script>

@@ -31,12 +31,29 @@
                     }, 
                     {
                         "id": "subtidal_habitats", 
-                        "visible": true,
+                        "visible": false,
                         "info": true, 
                         "legend": true
                     }, 
                     {
                         "id": "subtidal_habitats_confidence", 
+                        "visible": false,
+                        "info": true, 
+                        "legend": true
+                    }
+                ]
+            },
+            {
+                "id": "restricted_grp", 
+                "layers": [
+                    {
+                        "id": "restricted_closed_scalloping", 
+                        "visible": false,
+                        "info": true,
+                        "legend": true
+                    }, 
+                    {
+                        "id": "several_and_regulatory_orders", 
                         "visible": false,
                         "info": true, 
                         "legend": true
@@ -76,6 +93,9 @@
         controls: controls
     });
 
+    var blank = new OpenLayers.Layer(FISH_MAP.getText('no_map'), {isBaseLayer: true});
+    map.addLayer(blank);
+
     var os = wmsLayer(
         FISH_MAP.getText('os_map'),
         FISH_MAP.WMS_OS_URL,
@@ -101,9 +121,6 @@
         }
     );
     map.addLayer(charts);
-
-    var blank = new OpenLayers.Layer(FISH_MAP.getText('no_map'), {isBaseLayer: true});
-    map.addLayer(blank);
 
     var visibleOverlays = getVisibleOverlays(overlayLayers);
     var overlays = wmsLayer(
@@ -157,14 +174,7 @@
 
                     // Assign features to an lookup keyed on layer name
                     // for use in the template
-                    var lookup = {
-                        "lang": function() {
-                            return function(id) {
-                                // console.log(id);
-                                return FISH_MAP.getText(id);
-                            }
-                        }
-                    };
+                   var lookup = jQuery.extend({}, FISH_MAP.tmplView);
 
                     for (var i = 0, feature; i < features.length; i++) {
                         feature = features[i];
@@ -266,12 +276,9 @@
 
     function createLayerTree(groups, container, toggleCallback) {
         var tmpl = jQuery('#treeTmpl').html();
-        var treeElm = jQuery.mustache(tmpl, {
-            "groups": groups,
-            "name": function() {
-                return FISH_MAP.text[this.id];
-            }
-        });
+        var treeElm = jQuery.mustache(tmpl, jQuery.extend({
+                "groups": groups
+            }, FISH_MAP.tmplView));
         // console.log(treeElm);
         var tree$ = jQuery(container).append(treeElm);
         tree$.find('input').change(function() {

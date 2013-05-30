@@ -16,12 +16,10 @@ OpenLayers.Control.LegendPanel = OpenLayers.Class(OpenLayers.Control, {
         jQuery('.content', this.legendDiv).empty();
         for (var n = 0, lyr; n < layers.length; n++) {
             lyr = layers[n];
-            var legendElm = jQuery.mustache(tmpl, {
-                "url": FISH_MAP.WMS_OVERLAY_URL + "&LAYER=" + lyr + "&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png&SLD=" + encodeURIComponent(FISH_MAP.SLD_URL + lyr),
-                "name": function() {
-                    return window.FISH_MAP.text[lyr];
-                }
-            });
+            var legendElm = jQuery.mustache(tmpl, jQuery.extend({
+                    "url": FISH_MAP.WMS_OVERLAY_URL + "&LAYER=" + lyr + "&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png&SLD=" + encodeURIComponent(FISH_MAP.SLD_URL + lyr),
+                    "name": lyr,
+                }, FISH_MAP.tmplView));
             jQuery('.content', this.legendDiv).append(legendElm);
         }
     },
