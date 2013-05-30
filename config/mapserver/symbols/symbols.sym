@@ -1,6 +1,13 @@
 SYMBOLSET
 
     SYMBOL
+        NAME "wreck"
+        TYPE TRUETYPE
+        FONT metoc_wrecks
+        CHARACTER "3"
+    END
+
+    SYMBOL
         NAME "circle"
         TYPE ELLIPSE
         FILLED TRUE

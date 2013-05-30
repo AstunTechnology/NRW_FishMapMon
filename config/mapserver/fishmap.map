@@ -287,11 +287,62 @@ MAP
         STATUS ON
         TYPE LINE
         UNITS METERS
-        # OPACITY 50
+        OPACITY 50
         CLASS
             STYLE
                 OUTLINECOLOR 255 0 0
-                # OPACITY 50
+                OPACITY 50
+            END
+        END
+    END
+
+    LAYER
+        NAME "wrecks_point"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from wrecks where st_geometrytype(wkb_geometry) = 'ST_Point') as foo using unique ogc_fid using srid=4326"
+        PROJECTION
+            "init=epsg:4326"
+        END
+        METADATA
+            "ows_title" "Wrecks Point"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS ON
+        TYPE POINT
+        UNITS METERS
+        # OPACITY 50
+        CLASS
+            SYMBOL "wreck"
+            COLOR 0 0 0
+            SIZE 40
+        END
+    END
+
+    LAYER
+        NAME "wrecks_polygon"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from wrecks where st_geometrytype(wkb_geometry) = 'ST_Polygon') as foo using unique ogc_fid using srid=4326"
+        PROJECTION
+            "init=epsg:4326"
+        END
+        METADATA
+            "ows_title" "Wrecks Areas"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 10
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        OPACITY 50
+        CLASS
+            STYLE
+                COLOR 255 0 0
+                OPACITY 50
             END
         END
     END

@@ -85,6 +85,12 @@
                             "info": false, 
                             "legend": false, 
                             "visible": false
+                        },
+                        {
+                            "id": "wrecks_point", 
+                            "info": true,
+                            "legend": false,
+                            "visible": true
                         }
                     ]
                 }
@@ -148,7 +154,7 @@
         FISH_MAP.WMS_OVERLAY_URL,
         {
             layers: visibleOverlays.join(','),
-            sld: FISH_MAP.SLD_URL + visibleOverlays.join(',')
+            sld: FISH_MAP.SLD_URL + jQuery.grep(visibleOverlays, function(item) {return item.legend})
         },
         {}
     );
@@ -261,7 +267,7 @@
         overlays.setVisibility(visibleLayers.length);
         overlays.mergeNewParams({
             'LAYERS': visibleLayers.join(','),
-            'SLD': FISH_MAP.SLD_URL + visibleLayers.join(',')
+            'SLD': FISH_MAP.SLD_URL + jQuery.grep(visibleLayers, function(item) {return item.legend})
         });
         legendPanel.showLayers(jQuery.grep(visibleLayers, function(item) {return item.legend}));
     }

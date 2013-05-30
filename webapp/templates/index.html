@@ -53,6 +53,7 @@
                 "rsa_casting_sites": "{{ _('RSA Casting Areas') }}",
                 "contextual_grp": "{{ _('Contextual') }}",
                 "national_limits": "{{ _('National Limits') }}",
+                "wrecks_point": "{{ _('Wrecks') }}",
                 "admiralty_chart": "{{ _('Admiralty Chart') }}",
                 "os_map": "{{ _('OS Map') }}",
                 "no_map": "{{ _('No Map') }}",
@@ -207,6 +208,23 @@
             </tbody>
         </table>
         {{/rsa_casting_sites}}
+        {{#wrecks_point}}
+        <h2>{{#_}}wrecks_point{{/_}}</h2>
+        <table class="info">
+            <tbody>
+                {{#features}}
+                <tr>
+                    <th>{{#_}}Category{{/_}}</th>
+                    <td>{{attributes.catwrk}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}Classification{{/_}}</th>
+                    <td>{{attributes.classf}}</td>
+                </tr>
+                {{/features}}
+            </tbody>
+        </table>
+        {{/wrecks_point}}
     {% endraw %}
     </script>
     <script src="{{ url_for('static', filename='js/map.js') }}"></script>
