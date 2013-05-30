@@ -7,70 +7,90 @@
     FISH_MAP.WMS_OS_URL = FISH_MAP.WMS_ROOT_URL + 'os';
     FISH_MAP.WMS_CHARTS_URL = FISH_MAP.WMS_ROOT_URL + 'charts';
 
-    var overlayLayers =
-        [
-            {
-                "id": "project_area_grp", 
-                "layers": [
-                    {
-                        "id": "project_area", 
-                        "visible": true,
-                        "info": false, 
-                        "legend": false
-                    }
-                ]
-            }, 
-            {
-                "id": "habitats_grp", 
-                "layers": [
-                    {
-                        "id": "intertidal_habitats", 
-                        "visible": false,
-                        "info": true, 
-                        "legend": true
-                    }, 
-                    {
-                        "id": "subtidal_habitats", 
-                        "visible": false,
-                        "info": true, 
-                        "legend": true
-                    }, 
-                    {
-                        "id": "subtidal_habitats_confidence", 
-                        "visible": false,
-                        "info": true, 
-                        "legend": true
-                    }
-                ]
-            },
-            {
-                "id": "restricted_grp", 
-                "layers": [
-                    {
-                        "id": "restricted_closed_scalloping", 
-                        "visible": false,
-                        "info": true,
-                        "legend": true
-                    }, 
-                    {
-                        "id": "several_and_regulatory_orders", 
-                        "visible": false,
-                        "info": true, 
-                        "legend": true
-                    }
-                ]
-            }
-        ];
-
-    // Allow layers to be quickly looked up on layer name
-    overlayLayers.layers = {};
-    for (var m = 0, grp; m < overlayLayers.length; m++) {
-        grp = overlayLayers[m];
-        for (var n = 0, lyr; n < grp.layers.length; n++) {
-            lyr = grp.layers[n];
-            overlayLayers.layers[lyr.id] = lyr;
+    var overlayLayers = layersCollection({
+            "groups": [
+                {
+                    "id": "project_area_grp", 
+                    "layers": [
+                        {
+                            "id": "project_area", 
+                            "info": false, 
+                            "legend": false, 
+                            "visible": true
+                        }
+                    ]
+                }, 
+                {
+                    "id": "habitats_grp", 
+                    "layers": [
+                        {
+                            "id": "intertidal_habitats", 
+                            "info": true, 
+                            "legend": true, 
+                            "visible": false
+                        }, 
+                        {
+                            "id": "subtidal_habitats", 
+                            "info": true, 
+                            "legend": true, 
+                            "visible": false
+                        }, 
+                        {
+                            "id": "subtidal_habitats_confidence", 
+                            "info": true, 
+                            "legend": true, 
+                            "visible": false
+                        }
+                    ]
+                }, 
+                {
+                    "id": "restricted_grp", 
+                    "layers": [
+                        {
+                            "id": "restricted_closed_scalloping", 
+                            "info": true, 
+                            "legend": true, 
+                            "visible": false
+                        }, 
+                        {
+                            "id": "several_and_regulatory_orders", 
+                            "info": true, 
+                            "legend": true, 
+                            "visible": false
+                        }
+                    ]
+                }, 
+                {
+                    "id": "rsa_sites_grp", 
+                    "layers": [
+                        {
+                            "id": "rsa_standing_areas", 
+                            "info": true, 
+                            "legend": true, 
+                            "visible": false
+                        }, 
+                        {
+                            "id": "rsa_casting_sites", 
+                            "info": true, 
+                            "legend": true, 
+                            "visible": false
+                        }
+                    ]
+                }, 
+                {
+                    "id": "contextual_grp", 
+                    "layers": [
+                        {
+                            "id": "national_limits", 
+                            "info": false, 
+                            "legend": false, 
+                            "visible": false
+                        }
+                    ]
+                }
+            ]
         }
-    }
+    );
 
     var controls = [
         new OpenLayers.Control.TouchNavigation({
@@ -93,9 +113,6 @@
         controls: controls
     });
 
-    var blank = new OpenLayers.Layer(FISH_MAP.getText('no_map'), {isBaseLayer: true});
-    map.addLayer(blank);
-
     var os = wmsLayer(
         FISH_MAP.getText('os_map'),
         FISH_MAP.WMS_OS_URL,
@@ -108,6 +125,9 @@
         }
     );
     map.addLayer(os);
+
+    var blank = new OpenLayers.Layer(FISH_MAP.getText('no_map'), {isBaseLayer: true});
+    map.addLayer(blank);
 
     var charts = wmsLayer(
         FISH_MAP.getText('admiralty_chart'),
@@ -122,7 +142,7 @@
     );
     map.addLayer(charts);
 
-    var visibleOverlays = getVisibleOverlays(overlayLayers);
+    var visibleOverlays = overlayLayers.getVisibleLayers();
     var overlays = wmsLayer(
         "Overlays",
         FISH_MAP.WMS_OVERLAY_URL,
@@ -136,7 +156,7 @@
 
     var legendPanel = new OpenLayers.Control.LegendPanel({layers: [overlays]});
     map.addControl(legendPanel);
-    legendPanel.showLayers(visibleOverlays);
+    legendPanel.showLayers(jQuery.grep(visibleOverlays, function(item) {return item.legend}));
 
     var baseMapSwitcher = new OpenLayers.Control.BaseMapSwitcher();
     map.addControl(baseMapSwitcher);
@@ -165,7 +185,7 @@
                 var features = [];
                 for (var i = 0, feature; i < event.features.length; i++) {
                     feature = event.features[i];
-                    if (overlayLayers.layers[feature.type].info) {
+                    if (overlayLayers.getLayerById(feature.type).info) {
                         features.push(feature);
                     }
                 }
@@ -231,11 +251,11 @@
         return lyr;
     }
 
-    function layer_toggle(groups, id, visible) {
+    function layer_toggle(layers, id, visible) {
         // Update the model
-        getLayerById(groups, id).visible = visible;
+        layers.getLayerById(id).visible = visible;
         // Refresh the overlay WMS layer
-        var visibleLayers = getVisibleOverlays(groups);
+        var visibleLayers = layers.getVisibleLayers();
         // Hide the layer if there are no visible layers to avoid an invalid
         // WMS request being generated
         overlays.setVisibility(visibleLayers.length);
@@ -243,46 +263,100 @@
             'LAYERS': visibleLayers.join(','),
             'SLD': FISH_MAP.SLD_URL + visibleLayers.join(',')
         });
-        legendPanel.showLayers(visibleLayers);
+        legendPanel.showLayers(jQuery.grep(visibleLayers, function(item) {return item.legend}));
     }
 
     createLayerTree(overlayLayers, jQuery('.overlays'), layer_toggle);
 
-    function getVisibleOverlays(groups) {
-        var visible = [];
-        for (var m = 0, grp; m < groups.length; m++) {
-            grp = groups[m];
+    function layersCollection(layers) {
+
+        // Allow layers to be quickly looked up on layer name and add a toString
+        // function to each layer to make getting a list of id's as simple as
+        // calling join on an Array of layer objects
+
+        // Define lookup for layers
+        layers.layers = {};
+
+        for (var m = 0, grp; m < layers.groups.length; m++) {
+            grp = layers.groups[m];
             for (var n = 0, lyr; n < grp.layers.length; n++) {
                 lyr = grp.layers[n];
-                if (lyr.visible) {
-                    visible.push(lyr.id);
-                }
+
+                // Add the layer to the lookup
+                layers.layers[lyr.id] = lyr;
+
+                // Add the toString function
+                jQuery.extend(lyr, {
+                    toString: function() {
+                        return this.id;
+                    }
+                });
+
             }
         }
-        return visible;
-    }
 
-    function getLayerById(groups, id) {
-        for (var m = 0, grp; m < groups.length; m++) {
-            grp = groups[m];
-            for (var n = 0, lyr; n < grp.layers.length; n++) {
-                lyr = grp.layers[n];
-                if (lyr.id === id) {
-                    return lyr;
+        // Add convience functions to the layers object
+
+        layers.getLayerById = function(id) {
+            // return getLayerById(this, id);
+            return getLayersByProperty(this, 'id', id)[0];
+        };
+
+        layers.getVisibleLayers = function() {
+            // return getVisibleLayers(this);
+            return getLayersByProperty(this, 'visible', true);
+        };
+
+        function getLayersByProperty(layers, name, val) {
+            var matched = [];
+            for (var m = 0, grp; m < layers.groups.length; m++) {
+                grp = layers.groups[m];
+                for (var n = 0, lyr; n < grp.layers.length; n++) {
+                    lyr = grp.layers[n];
+                    if (lyr[name] === val) {
+                        matched.push(lyr);
+                    }
                 }
             }
+            return matched;
         }
+
+        // function getLayerById(layers, id) {
+        //     for (var m = 0, grp; m < layers.groups.length; m++) {
+        //         grp = layers.groups[m];
+        //         for (var n = 0, lyr; n < grp.layers.length; n++) {
+        //             lyr = grp.layers[n];
+        //             if (lyr.id === id) {
+        //                 return lyr;
+        //             }
+        //         }
+        //     }
+        // }
+
+        // function getVisibleLayers(layers) {
+        //     var visible = [];
+        //     for (var m = 0, grp; m < layers.groups.length; m++) {
+        //         grp = layers.groups[m];
+        //         for (var n = 0, lyr; n < grp.layers.length; n++) {
+        //             lyr = grp.layers[n];
+        //             if (lyr.visible) {
+        //                 visible.push(lyr);
+        //             }
+        //         }
+        //     }
+        //     return visible;
+        // }
+
+        return layers;
     }
 
-    function createLayerTree(groups, container, toggleCallback) {
+    function createLayerTree(layers, container, toggleCallback) {
         var tmpl = jQuery('#treeTmpl').html();
-        var treeElm = jQuery.mustache(tmpl, jQuery.extend({
-                "groups": groups
-            }, FISH_MAP.tmplView));
+        var treeElm = jQuery.mustache(tmpl, jQuery.extend(layers, FISH_MAP.tmplView));
         // console.log(treeElm);
         var tree$ = jQuery(container).append(treeElm);
         tree$.find('input').change(function() {
-            toggleCallback(groups, this.value, this.checked);
+            toggleCallback(layers, this.value, this.checked);
         });
     }
 

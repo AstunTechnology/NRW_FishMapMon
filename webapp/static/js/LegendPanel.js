@@ -14,13 +14,18 @@ OpenLayers.Control.LegendPanel = OpenLayers.Class(OpenLayers.Control, {
     showLayers: function(layers) {
         var tmpl = jQuery('#legendTmpl').html();
         jQuery('.content', this.legendDiv).empty();
-        for (var n = 0, lyr; n < layers.length; n++) {
-            lyr = layers[n];
-            var legendElm = jQuery.mustache(tmpl, jQuery.extend({
-                    "url": FISH_MAP.WMS_OVERLAY_URL + "&LAYER=" + lyr + "&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png&SLD=" + encodeURIComponent(FISH_MAP.SLD_URL + lyr),
-                    "name": lyr,
-                }, FISH_MAP.tmplView));
-            jQuery('.content', this.legendDiv).append(legendElm);
+        if (layers.length) {
+            for (var n = 0, lyr; n < layers.length; n++) {
+                lyr = layers[n];
+                var legendElm = jQuery.mustache(tmpl, jQuery.extend({
+                        "url": FISH_MAP.WMS_OVERLAY_URL + "&LAYER=" + lyr + "&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png&SLD=" + encodeURIComponent(FISH_MAP.SLD_URL + lyr),
+                        "name": lyr,
+                    }, FISH_MAP.tmplView));
+                jQuery('.content', this.legendDiv).append(legendElm);
+            }
+            jQuery(this.div).show();
+        } else {
+            jQuery(this.div).hide();
         }
     },
 
@@ -41,7 +46,7 @@ OpenLayers.Control.LegendPanel = OpenLayers.Class(OpenLayers.Control, {
 
         jQuery('.legend', this.div).children().prev().click(function(evt) {
             jQuery(this).siblings().toggle();
-            jQuery(this).parent().toggleClass('open')
+            jQuery(this).parent().toggleClass('open');
         });
 
         this.events = new OpenLayers.Events(this, this.div, null, true);
