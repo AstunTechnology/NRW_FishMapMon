@@ -56,8 +56,19 @@ def wms():
 def sld():
     layers = request.args.get('layers')
     if layers:
-        layers = ['%s.sld' % layer for layer in layers.split(',')]
-        resp = make_response(render_template('base.sld', layers=layers))
+        layer_info = []
+        for layer in layers.split(','):
+            template = '%s.sld' % layer
+            if layer.startswith('intensity_'):
+                template = 'intensity.sld'
+            if layer.startswith('vessels_'):
+                template = 'vessels.sld'
+            if layer.startswith('sensitivity_'):
+                template = 'sensitivity.sld'
+            layer_info.append({'template': template, 'name': layer})
+        resp = make_response(
+            render_template('base.sld', layer_info=layer_info)
+        )
         resp.headers['Content-Type'] = 'text/xml'
         return resp
     else:

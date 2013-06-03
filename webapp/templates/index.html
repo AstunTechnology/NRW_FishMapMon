@@ -225,8 +225,119 @@
             </tbody>
         </table>
         {{/wrecks_polygon}}
+        {{#intensity_lvls_cas_hand_gath_gen}}
+        <h2>{{#_}}intensity_lvls_cas_hand_gath_gen{{/_}}</h2>
+        <table class="info">
+            <tbody>
+                {{#features}}
+                <tr>
+                    <th>{{#_}}Activity{{/_}}</th>
+                    <td>{{attributes.activity}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}Gear class{{/_}}</th>
+                    <td>{{attributes.gearclass}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}Gear type{{/_}}</th>
+                    <td>{{attributes.geartype}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}Species{{/_}}</th>
+                    <td>{{attributes.speciescom}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}Intensity Level{{/_}}</th>
+                    <td>{{attributes.intensity_level}}</td>
+                </tr>
+                {{/features}}
+            </tbody>
+        </table>
+        {{/intensity_lvls_cas_hand_gath_gen}}
+        {{#intensity_lvls_nets_gen}}
+        <h2>{{#_}}intensity_lvls_nets_gen{{/_}}</h2>
+        <table class="info">
+            <tbody>
+                {{#features}}
+                <tr>
+                    <th>{{#_}}Activity{{/_}}</th>
+                    <td>{{attributes.activity}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}Gear class{{/_}}</th>
+                    <td>{{attributes.gearclass}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}Gear type{{/_}}</th>
+                    <td>{{attributes.geartype}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}Species{{/_}}</th>
+                    <td>{{attributes.speciescom}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}Intensity Level{{/_}}</th>
+                    <td>{{attributes.intensity_level}}</td>
+                </tr>
+                {{/features}}
+            </tbody>
+        </table>
+        {{/intensity_lvls_nets_gen}}
+        {{#vessels_lvls_cas_hand_gath_gen}}
+        <h2>{{#_}}vessels_lvls_cas_hand_gath_gen{{/_}}</h2>
+        <table class="info">
+            <tbody>
+                {{#features}}
+                <tr>
+                    <th>{{#_}}Number of Vessels{{/_}}</th>
+                    <td>{{attributes._overlaps}}</td>
+                </tr>
+                {{/features}}
+            </tbody>
+        </table>
+        {{/vessels_lvls_cas_hand_gath_gen}}
+        {{#vessels_lvls_nets_gen}}
+        <h2>{{#_}}vessels_lvls_nets_gen{{/_}}</h2>
+        <table class="info">
+            <tbody>
+                {{#features}}
+                <tr>
+                    <th>{{#_}}Number of Vessels{{/_}}</th>
+                    <td>{{attributes._overlaps}}</td>
+                </tr>
+                {{/features}}
+            </tbody>
+        </table>
+        {{/vessels_lvls_nets_gen}}
+        {{#sensitivity_lvls_cas_hand_gath}}
+        <h2>{{#_}}sensitivity_lvls_cas_hand_gath{{/_}}</h2>
+        <table class="info">
+            <tbody>
+                {{#features}}
+                <tr>
+                    <th>{{#_}}Sensitivity level{{/_}}</th>
+                    <td>{{attributes.sensitivity_level}}</td>
+                </tr>
+                {{/features}}
+            </tbody>
+        </table>
+        {{/sensitivity_lvls_cas_hand_gath}}
+        {{#sensitivity_lvls_nets}}
+        <h2>{{#_}}sensitivity_lvls_nets{{/_}}</h2>
+        <table class="info">
+            <tbody>
+                {{#features}}
+                <tr>
+                    <th>{{#_}}Sensitivity level{{/_}}</th>
+                    <td>{{attributes.sensitivity_level}}</td>
+                </tr>
+                {{/features}}
+            </tbody>
+        </table>
+        {{/sensitivity_lvls_nets}}
     {% endraw %}
     </script>
+
     <script src="{{ url_for('static', filename='js/map.js') }}"></script>
 
 </body>

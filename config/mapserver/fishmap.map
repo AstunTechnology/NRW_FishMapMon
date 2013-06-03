@@ -350,4 +350,266 @@ MAP
         END
     END
 
+    # ---- Intensity Layers ----
+
+    LAYER
+        NAME "intensity_lvls_cas_hand_gath_gen"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from intensity_lvls_cas_hand_gath_gen) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "intensity_lvls_cas_hand_gath_gen"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        OPACITY 50
+        CLASS
+            STYLE
+                COLOR 255 0 0
+                OPACITY 50
+            END
+        END
+    END
+
+    LAYER
+        NAME "intensity_lvls_cas_hand_gath_detailed"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from intensity_lvls_cas_hand_gath_detailed) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "intensity_lvls_cas_hand_gath_detailed"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        OPACITY 50
+        CLASS
+            STYLE
+                COLOR 255 0 0
+                OPACITY 50
+            END
+        END
+    END
+
+    LAYER
+        NAME "intensity_lvls_nets_gen"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from intensity_lvls_nets_gen) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "intensity_lvls_nets_gen"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        OPACITY 50
+        CLASS
+            STYLE
+                COLOR 255 0 0
+                OPACITY 50
+            END
+        END
+    END
+
+    LAYER
+        NAME "intensity_lvls_nets_detailed"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from intensity_lvls_nets_detailed) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "intensity_lvls_nets_detailed"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        OPACITY 50
+        CLASS
+            STYLE
+                COLOR 255 0 0
+                OPACITY 50
+            END
+        END
+    END
+
+    LAYER
+        NAME "vessels_lvls_cas_hand_gath_gen"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from intensity_lvls_cas_hand_gath_gen) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "vessels_lvls_cas_hand_gath_gen"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        OPACITY 50
+        CLASS
+            STYLE
+                COLOR 255 0 0
+                OPACITY 50
+            END
+        END
+    END
+
+    LAYER
+        NAME "vessels_lvls_cas_hand_gath_detailed"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from intensity_lvls_cas_hand_gath_detailed) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "vessels_lvls_cas_hand_gath_detailed"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        OPACITY 50
+        CLASS
+            STYLE
+                COLOR 255 0 0
+                OPACITY 50
+            END
+        END
+    END
+
+    LAYER
+        NAME "vessels_lvls_nets_gen"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from intensity_lvls_nets_gen) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "vessels_lvls_nets_gen"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        OPACITY 50
+        CLASS
+            STYLE
+                COLOR 255 0 0
+                OPACITY 50
+            END
+        END
+    END
+
+    LAYER
+        NAME "vessels_lvls_nets_detailed"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from intensity_lvls_nets_detailed) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "vessels_lvls_nets_detailed"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        OPACITY 50
+        CLASS
+            STYLE
+                COLOR 255 0 0
+                OPACITY 50
+            END
+        END
+    END
+
+    LAYER
+        NAME "sensitivity_lvls_cas_hand_gath"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from sensitivity_lvls_cas_hand_gath) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "sensitivity_lvls_cas_hand_gath"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        OPACITY 50
+        CLASS
+            STYLE
+                COLOR 255 0 0
+                OPACITY 50
+            END
+        END
+    END
+
+    LAYER
+        NAME "sensitivity_lvls_nets"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from sensitivity_lvls_nets) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "sensitivity_lvls_nets"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        OPACITY 50
+        CLASS
+            STYLE
+                COLOR 255 0 0
+                OPACITY 50
+            END
+        END
+    END
+
 END
