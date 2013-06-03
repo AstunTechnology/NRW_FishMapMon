@@ -90,7 +90,7 @@
                             "id": "wrecks_polygon", 
                             "info": true,
                             "legend": false,
-                            "visible": true
+                            "visible": false
                         }
                     ]
                 }
@@ -127,7 +127,8 @@
             transparent: false
         },
         {
-            // resolutions: [2.5, 5, 10, 25, 50, 100, 150]
+            singleTile: false,
+            tileSize: new OpenLayers.Size(512, 512)
         }
     );
     map.addLayer(os);
@@ -143,7 +144,8 @@
             transparent: false
         },
         {
-            // resolutions: [4, 8, 12, 25, 75, 150]
+            singleTile: false,
+            tileSize: new OpenLayers.Size(512, 512)
         }
     );
     map.addLayer(charts);
