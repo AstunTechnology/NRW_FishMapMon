@@ -87,7 +87,7 @@
                             "visible": false
                         },
                         {
-                            "id": "wrecks_point", 
+                            "id": "wrecks_polygon", 
                             "info": true,
                             "legend": false,
                             "visible": true

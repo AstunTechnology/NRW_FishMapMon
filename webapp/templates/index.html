@@ -53,7 +53,7 @@
                 "rsa_casting_sites": "{{ _('RSA Casting Areas') }}",
                 "contextual_grp": "{{ _('Contextual') }}",
                 "national_limits": "{{ _('National Limits') }}",
-                "wrecks_point": "{{ _('Wrecks') }}",
+                "wrecks_polygon": "{{ _('Wrecks') }}",
                 "admiralty_chart": "{{ _('Admiralty Chart') }}",
                 "os_map": "{{ _('OS Map') }}",
                 "no_map": "{{ _('No Map') }}",
@@ -208,8 +208,8 @@
             </tbody>
         </table>
         {{/rsa_casting_sites}}
-        {{#wrecks_point}}
-        <h2>{{#_}}wrecks_point{{/_}}</h2>
+        {{#wrecks_polygon}}
+        <h2>{{#_}}wrecks_polygon{{/_}}</h2>
         <table class="info">
             <tbody>
                 {{#features}}
@@ -224,7 +224,7 @@
                 {{/features}}
             </tbody>
         </table>
-        {{/wrecks_point}}
+        {{/wrecks_polygon}}
     {% endraw %}
     </script>
     <script src="{{ url_for('static', filename='js/map.js') }}"></script>

@@ -296,6 +296,8 @@ MAP
         END
     END
 
+    # This layer is only used for displaying a wreck symbol, it's enabled via
+    # the REQUIRES clause
     LAYER
         NAME "wrecks_point"
         INCLUDE "pgconnection.inc"
@@ -310,7 +312,8 @@ MAP
         TOLERANCEUNITS pixels
         TOLERANCE 2
         TEMPLATE 'id.tmpl'
-        STATUS ON
+        STATUS DEFAULT
+        REQUIRES "[wrecks_polygon]"
         TYPE POINT
         UNITS METERS
         # OPACITY 50
@@ -320,13 +323,14 @@ MAP
             SIZE 40
         END
     END
-
+ 
+    # This is the layer that is actually enabled and info is returned from
     LAYER
         NAME "wrecks_polygon"
         INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (select * from wrecks where st_geometrytype(wkb_geometry) = 'ST_Polygon') as foo using unique ogc_fid using srid=4326"
+        DATA "wkb_geometry from (select * from wrecks_polygon) as foo using unique ogc_fid using srid=27700"
         PROJECTION
-            "init=epsg:4326"
+            "init=epsg:27700"
         END
         METADATA
             "ows_title" "Wrecks Areas"
@@ -338,11 +342,10 @@ MAP
         STATUS OFF
         TYPE POLYGON
         UNITS METERS
-        OPACITY 50
         CLASS
             STYLE
                 COLOR 255 0 0
-                OPACITY 50
+                OPACITY 0
             END
         END
     END
