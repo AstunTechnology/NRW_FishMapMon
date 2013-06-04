@@ -417,6 +417,9 @@
         tree$.find('input').change(function() {
             toggleCallback(layers, this.value, this.checked);
         });
+        tree$.find('h3').click(function() {
+            jQuery(this).toggleClass('collapsed').siblings().toggle();
+        }).click().first().click();
     }
 
 })();

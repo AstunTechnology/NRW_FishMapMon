@@ -74,7 +74,7 @@ aside {
 /* Sidebar */
 
 .heading {
-    height: 160px;
+    height: 145px;
 }
 
 .heading h1 {
@@ -107,6 +107,15 @@ aside {
 
 .overlays h3 {
     margin-bottom: 0.4em;
+    background-image: url(../img/minus_dark.png);
+    background-position: left center;
+    background-repeat: no-repeat;
+    padding-left: 17px;
+    cursor: pointer;
+}
+
+.overlays h3.collapsed {
+    background-image: url(../img/plus_dark.png);
 }
 
 /* Legend Panel */
