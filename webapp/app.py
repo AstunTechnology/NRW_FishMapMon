@@ -43,10 +43,29 @@ def home():
 
 @fm.route('/wms')
 def wms():
+    args = request.args.copy()
+
+    # Add SLD parameter for all layers passed. A single LAYER parameter will be
+    # passed for GetLegendInfo while LAYERS is passed with GetMap
+    if 'LAYER' in args:
+        args['SLD'] = url_for(
+            '.sld',
+            layers='%s' % args['LAYER'],
+            _external=True
+        )
+
+    if 'LAYERS' in args:
+        args['SLD'] = url_for(
+            '.sld',
+            layers='%s' % args['LAYERS'],
+            _external=True
+        )
+
     r = requests.get(
         '%s%s.map' % (app.config['WMS_URL'], request.args.get('map')),
-        params=request.args
+        params=args
     )
+
     resp = make_response(r.content)
     resp.headers['Content-Type'] = r.headers['Content-Type']
     return resp
@@ -101,4 +120,4 @@ def redirect_to_home():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, processes=4)
+    app.run(debug=True, processes=8)

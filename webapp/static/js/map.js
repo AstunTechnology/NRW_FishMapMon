@@ -1,7 +1,6 @@
 (function(){
 
     FISH_MAP.ROOT_URL = window.location.protocol + '//' + window.location.host + window.location.pathname;
-    FISH_MAP.SLD_URL = FISH_MAP.ROOT_URL + 'sld?layers=';
     FISH_MAP.WMS_ROOT_URL = FISH_MAP.ROOT_URL + 'wms?map=';
     FISH_MAP.WMS_OVERLAY_URL = FISH_MAP.WMS_ROOT_URL + 'fishmap';
     FISH_MAP.WMS_OS_URL = FISH_MAP.WMS_ROOT_URL + 'os';
@@ -206,8 +205,7 @@
         "Overlays",
         FISH_MAP.WMS_OVERLAY_URL,
         {
-            layers: visibleOverlays.join(','),
-            sld: FISH_MAP.SLD_URL + jQuery.grep(visibleOverlays, function(item) {return item.legend})
+            layers: visibleOverlays.join(',')
         },
         {}
     );
@@ -319,8 +317,7 @@
         // WMS request being generated
         overlays.setVisibility(visibleLayers.length);
         overlays.mergeNewParams({
-            'LAYERS': visibleLayers.join(','),
-            'SLD': FISH_MAP.SLD_URL + jQuery.grep(visibleLayers, function(item) {return item.legend})
+            'LAYERS': visibleLayers.join(',')
         });
         legendPanel.showLayers(jQuery.grep(visibleLayers, function(item) {return item.legend}));
     }
@@ -362,7 +359,6 @@
         };
 
         layers.getVisibleLayers = function() {
-            // return getVisibleLayers(this);
             return getLayersByProperty(this, 'visible', true);
         };
 
@@ -379,32 +375,6 @@
             }
             return matched;
         }
-
-        // function getLayerById(layers, id) {
-        //     for (var m = 0, grp; m < layers.groups.length; m++) {
-        //         grp = layers.groups[m];
-        //         for (var n = 0, lyr; n < grp.layers.length; n++) {
-        //             lyr = grp.layers[n];
-        //             if (lyr.id === id) {
-        //                 return lyr;
-        //             }
-        //         }
-        //     }
-        // }
-
-        // function getVisibleLayers(layers) {
-        //     var visible = [];
-        //     for (var m = 0, grp; m < layers.groups.length; m++) {
-        //         grp = layers.groups[m];
-        //         for (var n = 0, lyr; n < grp.layers.length; n++) {
-        //             lyr = grp.layers[n];
-        //             if (lyr.visible) {
-        //                 visible.push(lyr);
-        //             }
-        //         }
-        //     }
-        //     return visible;
-        // }
 
         return layers;
     }
