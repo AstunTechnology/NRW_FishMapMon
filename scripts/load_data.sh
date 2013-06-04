@@ -33,7 +33,7 @@ ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=
 # Generic GEOMETRY as points and polygons
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "BaseMapping/Hydrospatial/szSO_WRECKS.TAB" -sql "select *, OGR_STYLE from szSO_WRECKS" -nln wrecks -s_srs "EPSG:4326" -a_srs "EPSG:4326" -nlt GEOMETRY
 # Create a buffered polygon layer for wrecks so that info is reliably returned
-psql -U postgres -d fishmap -c "drop table if exists wrecks_polygon; create table wrecks_polygon as select st_buffer(st_transform(wkb_geometry, 27700), 100) as wkb_geometry, ogc_fid, classf, catwrk from wrecks where st_geometrytype(wkb_geometry) = 'ST_Point';"
+psql -h localhost -U fishmap_webapp -W -d fishmap -c "drop table if exists wrecks_polygon; create table wrecks_polygon as select st_buffer(st_transform(wkb_geometry, 27700), 100) as wkb_geometry, ogc_fid, classf, catwrk from wrecks where st_geometrytype(wkb_geometry) = 'ST_Point';"
 
 
 # Intensity
