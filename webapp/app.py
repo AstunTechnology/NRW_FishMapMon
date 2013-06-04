@@ -121,7 +121,7 @@ app.register_blueprint(fm)
 babel = Babel(app)
 
 # Set basic config
-app.config['WMS_URL'] = 'http://localhost/cgi-bin/mapserv?' \
+app.config['WMS_URL'] = 'http://127.0.0.1:5001/cgi-bin/mapserv?' \
                         'map=%s/../config/mapserver/' % app.root_path
 
 

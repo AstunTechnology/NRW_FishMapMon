@@ -10,7 +10,7 @@ MAP
     TEMPLATEPATTERN "."
     SYMBOLSET "symbols/symbols.sym"
     # SHAPEPATH "./"
-    SHAPEPATH "/home/matt/Downloads/naturalresourceswales/FMM/Data_for_Contractor/BaseMapping/"
+    SHAPEPATH "../../data/BaseMapping/"
     SIZE 1500 1500
     MAXSIZE 8192
     STATUS ON
@@ -54,7 +54,7 @@ MAP
         GROUP "os"
         MAXSCALEDENOM 14000
         OPACITY 40
-        TILEINDEX "/home/matt/Downloads/naturalresourceswales/FMM/Data_for_Contractor/BaseMapping/OS25k/os25k.shp"
+        TILEINDEX "OS25k/os25k.shp"
         TYPE RASTER
         PROJECTION
             "init=epsg:27700"
@@ -72,7 +72,7 @@ MAP
         MINSCALEDENOM 14000
         MAXSCALEDENOM 35000
         OPACITY 40
-        TILEINDEX "/home/matt/Downloads/naturalresourceswales/FMM/Data_for_Contractor/BaseMapping/OS50k/os50k.shp"
+        TILEINDEX "OS50k/os50k.shp"
         TYPE RASTER
         PROJECTION
             "init=epsg:27700"
@@ -89,7 +89,7 @@ MAP
         GROUP "os"
         MINSCALEDENOM 35000
         OPACITY 40
-        TILEINDEX "/home/matt/Downloads/naturalresourceswales/FMM/Data_for_Contractor/BaseMapping/OS250k/os250k.shp"
+        TILEINDEX "OS250k/os250k.shp"
         TYPE RASTER
         PROJECTION
             "init=epsg:27700"
