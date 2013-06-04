@@ -9,13 +9,12 @@ MAP
     FONTSET "fonts/fonts.list"
     TEMPLATEPATTERN "."
     SYMBOLSET "symbols/symbols.sym"
-    # SHAPEPATH "./"
-    SHAPEPATH "/home/matt/Downloads/naturalresourceswales/FMM/Data_for_Contractor/BaseMapping/"
+    SHAPEPATH "data/fishmap/basemaps/"
     SIZE 1500 1500
     MAXSIZE 8192
     STATUS ON
     UNITS METERS
-    CONFIG MS_ERRORFILE "/var/log/mapserver/chart.log"
+    CONFIG MS_ERRORFILE "/var/log/mapserver/charts-debug.log"
     NAME "Charts Base Mapping"
 
     WEB
@@ -27,7 +26,7 @@ MAP
         END
         IMAGEPATH "/tmp/"
         IMAGEURL ""
-        LOG "/var/log/mapserver/chart-web.log"
+        LOG "/var/log/mapserver/charts-web.log"
         TEMPLATE "globexml.xml"
     END
 
@@ -52,7 +51,7 @@ MAP
         NAME "small"
         GROUP charts
         MINSCALEDENOM 110000
-        TILEINDEX "/home/matt/Downloads/naturalresourceswales/FMM/Data_for_Contractor/BaseMapping/Hydrospatial/ChartedRaster/small/small.shp"
+        TILEINDEX "Hydrospatial/ChartedRaster/small/small.shp"
         TYPE RASTER
         PROJECTION
             "init=epsg:3395"
@@ -69,7 +68,7 @@ MAP
         GROUP charts
         MAXSCALEDENOM 110000
         # MINSCALEDENOM 52000
-        TILEINDEX "/home/matt/Downloads/naturalresourceswales/FMM/Data_for_Contractor/BaseMapping/Hydrospatial/ChartedRaster/medium/medium.shp"
+        TILEINDEX "Hydrospatial/ChartedRaster/medium/medium.shp"
         TYPE RASTER
         PROJECTION
             "init=epsg:3395"
@@ -85,7 +84,7 @@ MAP
         NAME "1464-2_W"
         GROUP charts
         MAXSCALEDENOM 52000
-        DATA "/home/matt/Downloads/naturalresourceswales/FMM/Data_for_Contractor/BaseMapping/Hydrospatial/ChartedRaster/large/1464-2_W.png"
+        DATA "Hydrospatial/ChartedRaster/large/1464-2_W.png"
         TYPE RASTER
         PROJECTION
             "proj=tmerc"
@@ -110,7 +109,7 @@ MAP
         NAME "1464-1_W"
         GROUP charts
         MAXSCALEDENOM 52000
-        DATA "/home/matt/Downloads/naturalresourceswales/FMM/Data_for_Contractor/BaseMapping/Hydrospatial/ChartedRaster/large/1464-1_W.png"
+        DATA "Hydrospatial/ChartedRaster/large/1464-1_W.png"
         TYPE RASTER
         PROJECTION
             "proj=tmerc"
@@ -135,7 +134,7 @@ MAP
         NAME "1413-0_W"
         GROUP charts
         MAXSCALEDENOM 52000
-        DATA "/home/matt/Downloads/naturalresourceswales/FMM/Data_for_Contractor/BaseMapping/Hydrospatial/ChartedRaster/large/1413-0_W.tif"
+        DATA "Hydrospatial/ChartedRaster/large/1413-0_W.tif"
         TYPE RASTER
         PROJECTION
             "proj=tmerc"
@@ -160,7 +159,7 @@ MAP
         NAME "1512-5_W"
         GROUP charts
         MAXSCALEDENOM 52000
-        DATA "/home/matt/Downloads/naturalresourceswales/FMM/Data_for_Contractor/BaseMapping/Hydrospatial/ChartedRaster/large/1512-5_W.tif"
+        DATA "Hydrospatial/ChartedRaster/large/1512-5_W.tif"
         TYPE RASTER
         PROJECTION
             "proj=tmerc"
