@@ -45,6 +45,28 @@ def home():
 def wms():
     args = request.args.copy()
 
+    def munge_layer(layer):
+        if layer.startswith(('intensity', 'vessels')):
+            # TODO prefix with _det if user is logged in
+            return '%s_gen' % layer
+        else:
+            return layer
+
+    # For project output layers ensure that logged in users get the _detailed
+    # version and everyone else (the default) gets the _gen version
+    if 'LAYERS' in args:
+        layers = args['LAYERS'].split(',')
+
+        layers = ','.join([munge_layer(layer) for layer in layers])
+
+        args['LAYERS'] = layers
+
+        if 'QUERY_LAYERS' in args:
+            args['QUERY_LAYERS'] = layers
+
+    if 'LAYER' in args:
+        args['LAYER'] = munge_layer(args['LAYER'])
+
     # Add SLD parameter for all layers passed. A single LAYER parameter will be
     # passed for GetLegendInfo while LAYERS is passed with GetMap
     if 'LAYER' in args:

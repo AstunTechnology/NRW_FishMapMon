@@ -10,6 +10,7 @@
             "groups": [
                 {
                     "id": "project_area_grp", 
+                    "shown": true,
                     "layers": [
                         {
                             "id": "project_area", 
@@ -21,6 +22,7 @@
                 }, 
                 {
                     "id": "habitats_grp", 
+                    "shown": true,
                     "layers": [
                         {
                             "id": "intertidal_habitats", 
@@ -44,6 +46,7 @@
                 }, 
                 {
                     "id": "restricted_grp", 
+                    "shown": true,
                     "layers": [
                         {
                             "id": "restricted_closed_scalloping", 
@@ -61,6 +64,7 @@
                 }, 
                 {
                     "id": "rsa_sites_grp", 
+                    "shown": true,
                     "layers": [
                         {
                             "id": "rsa_standing_areas", 
@@ -78,6 +82,7 @@
                 }, 
                 {
                     "id": "contextual_grp", 
+                    "shown": true,
                     "layers": [
                         {
                             "id": "national_limits", 
@@ -95,15 +100,16 @@
                 },
                 {
                     "id": "intensity_grp", 
+                    "shown": false,
                     "layers": [
                         {
-                            "id": "intensity_lvls_cas_hand_gath_gen", 
+                            "id": "intensity_lvls_cas_hand_gath", 
                             "info": true, 
                             "legend": true, 
                             "visible": false
                         },
                         {
-                            "id": "intensity_lvls_nets_gen", 
+                            "id": "intensity_lvls_nets", 
                             "info": true, 
                             "legend": true, 
                             "visible": false
@@ -112,15 +118,16 @@
                 },
                 {
                     "id": "vessels_grp", 
+                    "shown": false,
                     "layers": [
                         {
-                            "id": "vessels_lvls_cas_hand_gath_gen", 
+                            "id": "vessels_lvls_cas_hand_gath", 
                             "info": true, 
                             "legend": true, 
                             "visible": false
                         },
                         {
-                            "id": "vessels_lvls_nets_gen", 
+                            "id": "vessels_lvls_nets", 
                             "info": true, 
                             "legend": true, 
                             "visible": false
@@ -129,6 +136,7 @@
                 },
                 {
                     "id": "sensitivity_grp", 
+                    "shown": false,
                     "layers": [
                         {
                             "id": "sensitivity_lvls_cas_hand_gath", 
@@ -140,7 +148,7 @@
                             "id": "sensitivity_lvls_nets", 
                             "info": true, 
                             "legend": true, 
-                            "visible": true
+                            "visible": false
                         }
                     ]
                 }
@@ -242,6 +250,10 @@
                 var features = [];
                 for (var i = 0, feature; i < event.features.length; i++) {
                     feature = event.features[i];
+                    // "Correct" the layer name (type) if it ends with
+                    // _gen or _det, this should probably be done server-side
+                    // but that would require rewriting the gml response
+                    feature.type = feature.type.replace(/(_gen|_det)$/, '')
                     if (overlayLayers.getLayerById(feature.type).info) {
                         features.push(feature);
                     }
@@ -324,6 +336,24 @@
 
     createLayerTree(overlayLayers, jQuery('.overlays'), layer_toggle);
 
+    var activites = [
+        {"id": "cas_hand_gath", "name": "Casual Hand Gather"},
+        {"id": "fixed_pots", "name": "Potting"},
+        {"id": "foot_access", "name": "Foot Access"},
+        {"id": "king_scallops", "name": "King Scallops"},
+        {"id": "lot", "name": "Light Otter Trawl"},
+        {"id": "mussels", "name": "Mussels"},
+        {"id": "nets", "name": "Netting"},
+        {"id": "pro_hand_gath", "name": "Professional Hand Gather"},
+        {"id": "queen_scallops", "name": "Queen Scallops"},
+        {"id": "rsa_charterboats", "name": "RSA Charter Boats"},
+        {"id": "rsa_commercial", "name": "RSA Commercial"},
+        {"id": "rsa_noncharter", "name": "RSA Non Charter Boats"},
+        {"id": "rsa_shore", "name": "RSA Shore Fishing"}
+    ];
+
+    createOutputPanel(overlayLayers, activites, jQuery('.outputs'), layer_toggle);
+
     function layersCollection(layers) {
 
         // Allow layers to be quickly looked up on layer name and add a toString
@@ -387,9 +417,45 @@
         tree$.find('input').change(function() {
             toggleCallback(layers, this.value, this.checked);
         });
+        addLayerTreeToggle(tree$);
+    }
+
+    /**
+     * Adds toggle behaviour to a tree of layers
+     */
+    function addLayerTreeToggle(tree$) {
         tree$.find('h3').click(function() {
             jQuery(this).toggleClass('collapsed').siblings().toggle();
         }).click().first().click();
+    }
+
+    function createOutputPanel(layers, activities, container, toggleCallback) {
+        var tmpl = jQuery('#outputTmpl').html();
+        var model = {layers: layers, activites: activites};
+        var treeElm = jQuery.mustache(tmpl, jQuery.extend(model, FISH_MAP.tmplView));
+        var tree$ = jQuery(container).append(treeElm);
+        tree$.find('input').change(function() {
+            toggleCallback(layers, this.value, this.checked);
+        });
+        addLayerTreeToggle(tree$);
+        var select = jQuery(container).find('select');
+        select.change(function() {
+            var val = this.value;
+            // Only show the intensity, vessels and sensitivity layers for the
+            // selected activity
+            jQuery('li.layer', container).hide().filter(function () {
+                return jQuery(this).find('input').val().match(val);
+            }).show();
+            // If the user is showing an intensity, vessels or sensitivity
+            // layer then hide the old layer and show the one associated with
+            // the current activity
+            jQuery('li.layer input:checked').each(function() {
+                this.checked = false;
+                jQuery(this).change();
+                var prefix = this.value.match(/^\w+_lvls_/)[0];
+                jQuery('input#' + prefix + val).prop('checked', true).change();
+            });
+        }).change();
     }
 
 })();
