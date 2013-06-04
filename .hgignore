@@ -1,4 +1,4 @@
 syntax: glob
 **/.ropeproject/
-
+data/
 syntax: regexp
