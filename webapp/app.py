@@ -101,4 +101,4 @@ def redirect_to_home():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, processes=4)
+    app.run(debug=True, processes=4, port=5000)
