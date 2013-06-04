@@ -2,7 +2,7 @@
 
     FISH_MAP.ROOT_URL = window.location.protocol + '//' + window.location.host + window.location.pathname;
     FISH_MAP.SLD_URL = FISH_MAP.ROOT_URL + 'sld?layers=';
-    FISH_MAP.WMS_ROOT_URL = FISH_MAP.ROOT_URL + 'wms?map=';
+    FISH_MAP.WMS_ROOT_URL = '/geoservices/';
     FISH_MAP.WMS_OVERLAY_URL = FISH_MAP.WMS_ROOT_URL + 'fishmap';
     FISH_MAP.WMS_OS_URL = FISH_MAP.WMS_ROOT_URL + 'os';
     FISH_MAP.WMS_CHARTS_URL = FISH_MAP.WMS_ROOT_URL + 'charts';
