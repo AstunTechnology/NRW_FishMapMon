@@ -9,7 +9,7 @@ MAP
     FONTSET "fonts/fonts.list"
     TEMPLATEPATTERN "."
     SYMBOLSET "symbols/symbols.sym"
-    SHAPEPATH "data/fishmap/basemaps/"
+    SHAPEPATH "../../data/BaseMapping/"
     SIZE 1500 1500
     MAXSIZE 8192
     STATUS ON

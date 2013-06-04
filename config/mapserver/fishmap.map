@@ -8,7 +8,7 @@ MAP
     FONTSET "fonts/fonts.list"
     TEMPLATEPATTERN "."
     SYMBOLSET "symbols/symbols.sym"
-    SHAPEPATH "./"
+    SHAPEPATH "../../data"
     SIZE 1500 1500
     MAXSIZE 8192
     STATUS ON

@@ -80,7 +80,7 @@ app.register_blueprint(fm)
 babel = Babel(app)
 
 # Set basic config
-app.config['WMS_URL'] = 'http://localhost/cgi-bin/mapserv?' \
+app.config['WMS_URL'] = 'http://127.0.0.1:5001/cgi-bin/mapserv?' \
                         'map=%s/../config/mapserver/' % app.root_path
 
 
@@ -101,4 +101,4 @@ def redirect_to_home():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, processes=4, port=5000)
+    app.run(debug=True, processes=4)
