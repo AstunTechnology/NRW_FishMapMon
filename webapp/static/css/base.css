@@ -96,7 +96,7 @@ aside {
 .overlays {
 }
 
-ul.tree {
+ul.tree, ul.tree ul {
     padding-left: 10px;
 }
 

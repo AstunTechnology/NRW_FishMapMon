@@ -393,7 +393,6 @@
     function createLayerTree(layers, container, toggleCallback) {
         var tmpl = jQuery('#treeTmpl').html();
         var treeElm = jQuery.mustache(tmpl, jQuery.extend(layers, FISH_MAP.tmplView));
-        // console.log(treeElm);
         var tree$ = jQuery(container).append(treeElm);
         tree$.find('input').change(function() {
             toggleCallback(layers, this.value, this.checked);
@@ -412,7 +411,6 @@
 
     function createOutputPanel(layers, activities, container, toggleCallback) {
         var tmpl = jQuery('#outputTmpl').html();
-        console.log(layers);
         var model = {"layers": layers, "activities": activities};
         var treeElm = jQuery.mustache(tmpl, jQuery.extend(model, FISH_MAP.tmplView));
         var tree$ = jQuery(container).append(treeElm);
