@@ -10,7 +10,7 @@
             "groups": [
                 {
                     "id": "project_area_grp", 
-                    "shown": true,
+                    "overlay": true,
                     "layers": [
                         {
                             "id": "project_area", 
@@ -22,7 +22,7 @@
                 }, 
                 {
                     "id": "habitats_grp", 
-                    "shown": true,
+                    "overlay": true,
                     "layers": [
                         {
                             "id": "intertidal_habitats", 
@@ -46,7 +46,7 @@
                 }, 
                 {
                     "id": "restricted_grp", 
-                    "shown": true,
+                    "overlay": true,
                     "layers": [
                         {
                             "id": "restricted_closed_scalloping", 
@@ -64,7 +64,7 @@
                 }, 
                 {
                     "id": "rsa_sites_grp", 
-                    "shown": true,
+                    "overlay": true,
                     "layers": [
                         {
                             "id": "rsa_standing_areas", 
@@ -82,7 +82,7 @@
                 }, 
                 {
                     "id": "contextual_grp", 
-                    "shown": true,
+                    "overlay": true,
                     "layers": [
                         {
                             "id": "national_limits", 
@@ -100,7 +100,7 @@
                 },
                 {
                     "id": "intensity_grp", 
-                    "shown": false,
+                    "output": true,
                     "layers": [
                         {
                             "id": "intensity_lvls_cas_hand_gath", 
@@ -118,7 +118,7 @@
                 },
                 {
                     "id": "vessels_grp", 
-                    "shown": false,
+                    "output": true,
                     "layers": [
                         {
                             "id": "vessels_lvls_cas_hand_gath", 
@@ -136,7 +136,7 @@
                 },
                 {
                     "id": "sensitivity_grp", 
-                    "shown": false,
+                    "output": true,
                     "layers": [
                         {
                             "id": "sensitivity_lvls_cas_hand_gath", 
@@ -337,19 +337,19 @@
     createLayerTree(overlayLayers, jQuery('.overlays'), layer_toggle);
 
     var activites = [
-        {"id": "cas_hand_gath", "name": "Casual Hand Gather"},
-        {"id": "fixed_pots", "name": "Potting"},
-        {"id": "foot_access", "name": "Foot Access"},
-        {"id": "king_scallops", "name": "King Scallops"},
-        {"id": "lot", "name": "Light Otter Trawl"},
-        {"id": "mussels", "name": "Mussels"},
-        {"id": "nets", "name": "Netting"},
-        {"id": "pro_hand_gath", "name": "Professional Hand Gather"},
-        {"id": "queen_scallops", "name": "Queen Scallops"},
-        {"id": "rsa_charterboats", "name": "RSA Charter Boats"},
-        {"id": "rsa_commercial", "name": "RSA Commercial"},
-        {"id": "rsa_noncharter", "name": "RSA Non Charter Boats"},
-        {"id": "rsa_shore", "name": "RSA Shore Fishing"}
+        "cas_hand_gath",
+        "fixed_pots",
+        "foot_access",
+        "king_scallops",
+        "lot",
+        "mussels",
+        "nets",
+        "pro_hand_gath",
+        "queen_scallops",
+        "rsa_charterboats",
+        "rsa_commercial",
+        "rsa_noncharter",
+        "rsa_shore"
     ];
 
     createOutputPanel(overlayLayers, activites, jQuery('.outputs'), layer_toggle);

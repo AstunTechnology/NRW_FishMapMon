@@ -33,7 +33,7 @@
             <h1 style="">Fish Map Môn</h1>
         </div>
         <div class="overlays"></div>
-        <div class="outputs"></div>
+        <div class="outputs"><h2>{{ _('Project Outputs') }}</h2></div>
     </aside>
 
     <script type="text/javascript">
@@ -55,6 +55,61 @@
                 "contextual_grp": "{{ _('Contextual') }}",
                 "national_limits": "{{ _('National Limits') }}",
                 "wrecks_polygon": "{{ _('Wrecks') }}",
+                "cas_hand_gath": "{{ _('Casual Hand Gather') }}",
+                "fixed_pots": "{{ _('Potting') }}",
+                "foot_access": "{{ _('Foot Access') }}",
+                "king_scallops": "{{ _('King Scallops') }}",
+                "lot": "{{ _('Light Otter Trawl') }}",
+                "mussels": "{{ _('Mussels') }}",
+                "nets": "{{ _('Netting') }}",
+                "pro_hand_gath": "{{ _('Professional Hand Gather') }}",
+                "queen_scallops": "{{ _('Queen Scallops') }}",
+                "rsa_charterboats": "{{ _('RSA Charter Boats') }}",
+                "rsa_commercial": "{{ _('RSA Commercial') }}",
+                "rsa_noncharter": "{{ _('RSA Non Charter Boats') }}",
+                "rsa_shore": "{{ _('RSA Shore Fishing') }}",
+                "intensity_grp": "{{ _('Fishing Intensity') }}",
+                "vessels_grp": "{{ _('Number of Vessels') }}",
+                "sensitivity_grp": "{{ _('Sensitivity') }}",
+                "intensity_lvls_cas_hand_gath": "{{ _('Casual Hand Gather Intensity') }}",
+                "intensity_lvls_fixed_pots": "{{ _('Potting Intensity') }}",
+                "intensity_lvls_foot_access": "{{ _('Foot Access Intensity') }}",
+                "intensity_lvls_king_scallops": "{{ _('King Scallops Intensity') }}",
+                "intensity_lvls_lot": "{{ _('Light Otter Trawl Intensity') }}",
+                "intensity_lvls_mussels": "{{ _('Mussels Intensity') }}",
+                "intensity_lvls_nets": "{{ _('Netting Intensity') }}",
+                "intensity_lvls_pro_hand_gath": "{{ _('Professional Hand Gather Intensity') }}",
+                "intensity_lvls_queen_scallops": "{{ _('Queen Scallops Intensity') }}",
+                "intensity_lvls_rsa_charterboats": "{{ _('RSA Charter Boats Intensity') }}",
+                "intensity_lvls_rsa_commercial": "{{ _('RSA Commercial Intensity') }}",
+                "intensity_lvls_rsa_noncharter": "{{ _('RSA Non Charter Boats Intensity') }}",
+                "intensity_lvls_rsa_shore": "{{ _('RSA Shore Fishing Intensity') }}",
+                "vessels_lvls_cas_hand_gath": "{{ _('Casual Hand Gather Vessels') }}",
+                "vessels_lvls_fixed_pots": "{{ _('Potting Vessels') }}",
+                "vessels_lvls_foot_access": "{{ _('Foot Access Vessels') }}",
+                "vessels_lvls_king_scallops": "{{ _('King Scallops Vessels') }}",
+                "vessels_lvls_lot": "{{ _('Light Otter Trawl Vessels') }}",
+                "vessels_lvls_mussels": "{{ _('Mussels Vessels') }}",
+                "vessels_lvls_nets": "{{ _('Netting Vessels') }}",
+                "vessels_lvls_pro_hand_gath": "{{ _('Professional Hand Gather Vessels') }}",
+                "vessels_lvls_queen_scallops": "{{ _('Queen Scallops Vessels') }}",
+                "vessels_lvls_rsa_charterboats": "{{ _('RSA Charter Boats Vessels') }}",
+                "vessels_lvls_rsa_commercial": "{{ _('RSA Commercial Vessels') }}",
+                "vessels_lvls_rsa_noncharter": "{{ _('RSA Non Charter Boats Vessels') }}",
+                "vessels_lvls_rsa_shore": "{{ _('RSA Shore Fishing Vessels') }}",
+                "sensitivity_lvls_cas_hand_gath": "{{ _('Casual Hand Gather Sensitivity') }}",
+                "sensitivity_lvls_fixed_pots": "{{ _('Potting Sensitivity') }}",
+                "sensitivity_lvls_foot_access": "{{ _('Foot Access Sensitivity') }}",
+                "sensitivity_lvls_king_scallops": "{{ _('King Scallops Sensitivity') }}",
+                "sensitivity_lvls_lot": "{{ _('Light Otter Trawl Sensitivity') }}",
+                "sensitivity_lvls_mussels": "{{ _('Mussels Sensitivity') }}",
+                "sensitivity_lvls_nets": "{{ _('Netting Sensitivity') }}",
+                "sensitivity_lvls_pro_hand_gath": "{{ _('Professional Hand Gather Sensitivity') }}",
+                "sensitivity_lvls_queen_scallops": "{{ _('Queen Scallops Sensitivity') }}",
+                "sensitivity_lvls_rsa_charterboats": "{{ _('RSA Charter Boats Sensitivity') }}",
+                "sensitivity_lvls_rsa_commercial": "{{ _('RSA Commercial Sensitivity') }}",
+                "sensitivity_lvls_rsa_noncharter": "{{ _('RSA Non Charter Boats Sensitivity') }}",
+                "sensitivity_lvls_rsa_shore": "{{ _('RSA Shore Fishing Sensitivity') }}",
                 "admiralty_chart": "{{ _('Admiralty Chart') }}",
                 "os_map": "{{ _('OS Map') }}",
                 "no_map": "{{ _('No Map') }}",
@@ -88,7 +143,7 @@
     {% raw %}
         <ul class="tree">
         {{#groups}}
-            {{#shown}}
+            {{#overlay}}
             <li>
                 <h3>{{#_}}{{id}}{{/_}}</h3>
                 <ul>
@@ -97,23 +152,22 @@
                     {{/layers}}
                 </ul>
             </li>
-            {{/shown}}
+            {{/overlay}}
         {{/groups}}
         </ul>
     {% endraw %}
     </script>
     <script id="outputTmpl" type="text/template">
     {% raw %}
-        <h2>Project Outputs</h2>
         <select>
         {{#activites}}
-            <option value="{{id}}">{{name}}</option>
+            <option value="{{.}}">{{#_}}{{.}}{{/_}}</option>
         {{/activites}}
         </select>
         <ul class="tree">
         {{#layers}}
             {{#groups}}
-                {{^shown}}
+                {{#output}}
                 <li>
                     <h3>{{#_}}{{id}}{{/_}}</h3>
                     <ul>
@@ -122,7 +176,7 @@
                         {{/layers}}
                     </ul>
                 </li>
-                {{/shown}}
+                {{/output}}
             {{/groups}}
         {{/layers}}
         </ul>
