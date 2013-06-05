@@ -88,6 +88,8 @@ def wms():
         params=args
     )
 
+    app.logger.debug('WMS Request: %s' % r.url)
+
     resp = make_response(r.content)
     resp.headers['Content-Type'] = r.headers['Content-Type']
     return resp

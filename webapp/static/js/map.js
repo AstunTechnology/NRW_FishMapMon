@@ -6,7 +6,7 @@
     FISH_MAP.WMS_OS_URL = FISH_MAP.WMS_ROOT_URL + 'os';
     FISH_MAP.WMS_CHARTS_URL = FISH_MAP.WMS_ROOT_URL + 'charts';
 
-    var overlayLayers = layersCollection({
+    var overlayLayers = {
             "groups": [
                 {
                     "id": "project_area_grp", 
@@ -97,64 +97,51 @@
                             "visible": false
                         }
                     ]
-                },
-                {
-                    "id": "intensity_grp", 
-                    "output": true,
-                    "layers": [
-                        {
-                            "id": "intensity_lvls_cas_hand_gath", 
-                            "info": true, 
-                            "legend": true, 
-                            "visible": false
-                        },
-                        {
-                            "id": "intensity_lvls_nets", 
-                            "info": true, 
-                            "legend": true, 
-                            "visible": false
-                        }
-                    ]
-                },
-                {
-                    "id": "vessels_grp", 
-                    "output": true,
-                    "layers": [
-                        {
-                            "id": "vessels_lvls_cas_hand_gath", 
-                            "info": true, 
-                            "legend": true, 
-                            "visible": false
-                        },
-                        {
-                            "id": "vessels_lvls_nets", 
-                            "info": true, 
-                            "legend": true, 
-                            "visible": false
-                        }
-                    ]
-                },
-                {
-                    "id": "sensitivity_grp", 
-                    "output": true,
-                    "layers": [
-                        {
-                            "id": "sensitivity_lvls_cas_hand_gath", 
-                            "info": true, 
-                            "legend": true, 
-                            "visible": false
-                        },
-                        {
-                            "id": "sensitivity_lvls_nets", 
-                            "info": true, 
-                            "legend": true, 
-                            "visible": false
-                        }
-                    ]
                 }
             ]
         }
-    );
+
+    var outputActivities = [
+        "cas_hand_gath",
+        "fixed_pots",
+        "foot_access",
+        "king_scallops",
+        "lot",
+        "mussels",
+        "nets",
+        "pro_hand_gath",
+        "queen_scallops",
+        "rsa_charterboats",
+        "rsa_commercial",
+        "rsa_noncharter",
+        "rsa_shore"
+    ];
+
+    var outputTypes = ['intensity', 'vessels', 'sensitivity'];
+
+    // Add the project output layers to the overlayLayers model, one per type /
+    // activity
+    for (var m = 0, type, grp; m < outputTypes.length; m++) {
+        type = outputTypes[m];
+        grp = {
+            "id": type + "_grp",
+            output: true,
+            layers:[]
+        };
+        overlayLayers.groups.push(grp);
+        for (var n = 0, activity, lyr; n < outputActivities.length; n++) {
+            activity = outputActivities[n];
+            lyr = {
+                "id": type + "_lvls_" + activity,
+                "info": true,
+                "legend": true,
+                "visible": false
+            };
+            grp.layers.push(lyr);
+        }
+    }
+
+    overlayLayers = layersCollection(overlayLayers);
 
     var controls = [
         new OpenLayers.Control.TouchNavigation({
@@ -261,26 +248,36 @@
 
                 if (features.length) {
 
-                    // Assign features to an lookup keyed on layer name
-                    // for use in the template
-                   var lookup = jQuery.extend({}, FISH_MAP.tmplView);
+                    // Assign features to a model keyed on layer name
+                    // for use in the info template. Project output layers are
+                    // a bit special as they all use the same template
+                   var model = jQuery.extend({}, FISH_MAP.tmplView);
 
                     for (var i = 0, feature; i < features.length; i++) {
                         feature = features[i];
-                        if (!lookup[feature.type]) {
-                            lookup[feature.type] = {
+                        var key = feature.type;
+                        // Determine if the feature is from an output layer and
+                        // if it is just use the output type as the key
+                        // ('intensity', 'vessels' or 'sensitivity')
+                        var prefix = key.match(/^(\w+)_lvls_/);
+                        if (prefix.length === 2) {
+                            key = prefix[1];
+                        }
+                        if (!model[key]) {
+                            model[key] = {
+                                id: feature.type,
                                 features: []
                             };
                         }
-                        lookup[feature.type].features.push(feature);
+                        model[key].features.push(feature);
                     }
 
                     var content = jQuery('#popup_content');
                     jQuery('.loading', content).detach();
 
                     var tmpl = jQuery('#infoTmpl').html();
-                    var html = jQuery.mustache(tmpl, lookup);
-                    content.append(jQuery.mustache(tmpl, lookup));
+                    var html = jQuery.mustache(tmpl, model);
+                    content.append(jQuery.mustache(tmpl, model));
                     this.popup.updateSize();
 
                 } else {
@@ -336,23 +333,7 @@
 
     createLayerTree(overlayLayers, jQuery('.overlays'), layer_toggle);
 
-    var activites = [
-        "cas_hand_gath",
-        "fixed_pots",
-        "foot_access",
-        "king_scallops",
-        "lot",
-        "mussels",
-        "nets",
-        "pro_hand_gath",
-        "queen_scallops",
-        "rsa_charterboats",
-        "rsa_commercial",
-        "rsa_noncharter",
-        "rsa_shore"
-    ];
-
-    createOutputPanel(overlayLayers, activites, jQuery('.outputs'), layer_toggle);
+    createOutputPanel(overlayLayers, outputActivities, jQuery('.outputs'), layer_toggle);
 
     function layersCollection(layers) {
 
@@ -431,7 +412,8 @@
 
     function createOutputPanel(layers, activities, container, toggleCallback) {
         var tmpl = jQuery('#outputTmpl').html();
-        var model = {layers: layers, activites: activites};
+        console.log(layers);
+        var model = {"layers": layers, "activities": activities};
         var treeElm = jQuery.mustache(tmpl, jQuery.extend(model, FISH_MAP.tmplView));
         var tree$ = jQuery(container).append(treeElm);
         tree$.find('input').change(function() {

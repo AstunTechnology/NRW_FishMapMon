@@ -160,9 +160,9 @@
     <script id="outputTmpl" type="text/template">
     {% raw %}
         <select>
-        {{#activites}}
+        {{#activities}}
             <option value="{{.}}">{{#_}}{{.}}{{/_}}</option>
-        {{/activites}}
+        {{/activities}}
         </select>
         <ul class="tree">
         {{#layers}}
@@ -308,8 +308,8 @@
             </tbody>
         </table>
         {{/wrecks_polygon}}
-        {{#intensity_lvls_cas_hand_gath}}
-        <h2>{{#_}}intensity_lvls_cas_hand_gath{{/_}}</h2>
+        {{#intensity}}
+        <h2>{{#_}}{{id}}{{/_}}</h2>
         <table class="info">
             <tbody>
                 {{#features}}
@@ -336,38 +336,9 @@
                 {{/features}}
             </tbody>
         </table>
-        {{/intensity_lvls_cas_hand_gath}}
-        {{#intensity_lvls_nets}}
-        <h2>{{#_}}intensity_lvls_nets{{/_}}</h2>
-        <table class="info">
-            <tbody>
-                {{#features}}
-                <tr>
-                    <th>{{#_}}Activity{{/_}}</th>
-                    <td>{{attributes.activity}}</td>
-                </tr>
-                <tr>
-                    <th>{{#_}}Gear class{{/_}}</th>
-                    <td>{{attributes.gearclass}}</td>
-                </tr>
-                <tr>
-                    <th>{{#_}}Gear type{{/_}}</th>
-                    <td>{{attributes.geartype}}</td>
-                </tr>
-                <tr>
-                    <th>{{#_}}Species{{/_}}</th>
-                    <td>{{attributes.speciescom}}</td>
-                </tr>
-                <tr>
-                    <th>{{#_}}Intensity Level{{/_}}</th>
-                    <td>{{attributes.intensity_level}}</td>
-                </tr>
-                {{/features}}
-            </tbody>
-        </table>
-        {{/intensity_lvls_nets}}
-        {{#vessels_lvls_cas_hand_gath}}
-        <h2>{{#_}}vessels_lvls_cas_hand_gath{{/_}}</h2>
+        {{/intensity}}
+        {{#vessels}}
+        <h2>{{#_}}{{id}}{{/_}}</h2>
         <table class="info">
             <tbody>
                 {{#features}}
@@ -378,25 +349,16 @@
                 {{/features}}
             </tbody>
         </table>
-        {{/vessels_lvls_cas_hand_gath}}
-        {{#vessels_lvls_nets}}
-        <h2>{{#_}}vessels_lvls_nets{{/_}}</h2>
+        {{/vessels}}
+        {{#sensitivity}}
+        <h2>{{#_}}{{id}}{{/_}}</h2>
         <table class="info">
             <tbody>
                 {{#features}}
                 <tr>
-                    <th>{{#_}}Number of Vessels{{/_}}</th>
-                    <td>{{attributes._overlaps}}</td>
+                    <th>{{#_}}Habitat{{/_}}</th>
+                    <td>{{attributes.name}}</td>
                 </tr>
-                {{/features}}
-            </tbody>
-        </table>
-        {{/vessels_lvls_nets}}
-        {{#sensitivity_lvls_cas_hand_gath}}
-        <h2>{{#_}}sensitivity_lvls_cas_hand_gath{{/_}}</h2>
-        <table class="info">
-            <tbody>
-                {{#features}}
                 <tr>
                     <th>{{#_}}Sensitivity level{{/_}}</th>
                     <td>{{attributes.sensitivity_level}}</td>
@@ -404,20 +366,7 @@
                 {{/features}}
             </tbody>
         </table>
-        {{/sensitivity_lvls_cas_hand_gath}}
-        {{#sensitivity_lvls_nets}}
-        <h2>{{#_}}sensitivity_lvls_nets{{/_}}</h2>
-        <table class="info">
-            <tbody>
-                {{#features}}
-                <tr>
-                    <th>{{#_}}Sensitivity level{{/_}}</th>
-                    <td>{{attributes.sensitivity_level}}</td>
-                </tr>
-                {{/features}}
-            </tbody>
-        </table>
-        {{/sensitivity_lvls_nets}}
+        {{/sensitivity}}
     {% endraw %}
     </script>
 
