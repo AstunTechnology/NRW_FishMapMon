@@ -199,3 +199,10 @@ ul.tree li h3.collapsed {
 .olFramedCloudPopupContent h2 {
     margin: 0.2em;
 }
+
+.olFramedCloudPopupContent > div {
+    max-height: 350px;
+    max-width: 450px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
