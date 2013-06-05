@@ -260,7 +260,7 @@
                         // if it is just use the output type as the key
                         // ('intensity', 'vessels' or 'sensitivity')
                         var prefix = key.match(/^(\w+)_lvls_/);
-                        if (prefix.length === 2) {
+                        if (prefix && prefix.length === 2) {
                             key = prefix[1];
                         }
                         if (!model[key]) {
