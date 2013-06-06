@@ -34,38 +34,64 @@ def before_request_fm():
         for locale in LOCALES:
             if locale != g.locale:
                 g.other_locales[locale] = LOCALES[locale]
+    # Mock user
+    g.user = False
 
 
 @fm.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index.html', user=g.user)
 
 
 @fm.route('/wms')
 def wms():
     args = request.args.copy()
 
-    def munge_layer(layer):
+    def update_layer(layer):
+        """ Updates project output layers to include the _det or _gen suffix
+        based on whether the user is logged in or not. All other layers just
+        pass through with the same name """
         if layer.startswith(('intensity', 'vessels')):
-            # TODO prefix with _det if user is logged in
-            return '%s_gen' % layer
-        else:
-            return layer
+            suffix = '_det' if g.user else '_gen'
+            return '%s%s' % (layer, suffix)
+        return layer
 
-    # For project output layers ensure that logged in users get the _detailed
-    # version and everyone else (the default) gets the _gen version
+    def authorise_layer(layer):
+        """ Tests if the current user has access to the specified layer """
+        restricted_layers = [
+            'activity_commercial_fishing_polygon',
+            'activity_noncommercial_fishing_point',
+            'activity_noncommercial_fishing_polygon']
+        return layer not in restricted_layers or g.user
+
+    # Check the LAYERS parameter passed with GetMap and GetFeatrueInfo requests
     if 'LAYERS' in args:
         layers = args['LAYERS'].split(',')
 
-        layers = ','.join([munge_layer(layer) for layer in layers])
+        layers = [
+            update_layer(layer)
+            for layer in layers
+            if authorise_layer(layer)
+        ]
+
+        if layers:
+            layers = ','.join(layers)
+        else:
+            return ('No valid layers', 500)
 
         args['LAYERS'] = layers
 
+        # Check QUERY_LAYERS passed by GetFeatureInfo in addition to LAYERS
         if 'QUERY_LAYERS' in args:
             args['QUERY_LAYERS'] = layers
 
+    # Check the LAYER parameter passed by GetLegendInfo
     if 'LAYER' in args:
-        args['LAYER'] = munge_layer(args['LAYER'])
+        layer = args['LAYER']
+        if authorise_layer(layer):
+            args['LAYER'] = update_layer(layer)
+        else:
+            return ('No valid layers', 500)
 
     # Add SLD parameter for all layers passed. A single LAYER parameter will be
     # passed for GetLegendInfo while LAYERS is passed with GetMap

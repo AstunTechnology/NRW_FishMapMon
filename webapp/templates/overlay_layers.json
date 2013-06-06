@@ -1,0 +1,120 @@
+{
+    "groups": [
+        {
+            "id": "project_area_grp", 
+            "layers": [
+                {
+                    "id": "project_area", 
+                    "info": false, 
+                    "legend": false, 
+                    "visible": true
+                }
+            ], 
+            "overlay": true
+        }, 
+        {
+            "id": "habitats_grp", 
+            "layers": [
+                {
+                    "id": "intertidal_habitats", 
+                    "info": true, 
+                    "legend": true, 
+                    "visible": false
+                }, 
+                {
+                    "id": "subtidal_habitats", 
+                    "info": true, 
+                    "legend": true, 
+                    "visible": false
+                }, 
+                {
+                    "id": "subtidal_habitats_confidence", 
+                    "info": true, 
+                    "legend": true, 
+                    "visible": false
+                }
+            ], 
+            "overlay": true
+        }, 
+        {
+            "id": "restricted_grp", 
+            "layers": [
+                {
+                    "id": "restricted_closed_scalloping", 
+                    "info": true, 
+                    "legend": true, 
+                    "visible": false
+                }, 
+                {
+                    "id": "several_and_regulatory_orders", 
+                    "info": true, 
+                    "legend": true, 
+                    "visible": false
+                }
+            ], 
+            "overlay": true
+        }, 
+        {
+            "id": "rsa_sites_grp", 
+            "layers": [
+                {
+                    "id": "rsa_standing_areas", 
+                    "info": true, 
+                    "legend": true, 
+                    "visible": false
+                }, 
+                {
+                    "id": "rsa_casting_sites", 
+                    "info": true, 
+                    "legend": true, 
+                    "visible": false
+                }
+            ], 
+            "overlay": true
+        }, 
+        {% if user %}
+        {
+            "id": "detailed_activity_grp", 
+            "layers": [
+                {
+                    "id": "activity_commercial_fishing_polygon", 
+                    "info": true, 
+                    "legend": false, 
+                    "visible": false
+                }, 
+                {
+                    "id": "activity_noncommercial_fishing_point", 
+                    "info": true, 
+                    "legend": false, 
+                    "visible": false
+                }, 
+                {
+                    "id": "activity_noncommercial_fishing_polygon", 
+                    "info": true, 
+                    "legend": false, 
+                    "visible": false
+                }
+            ], 
+            "overlay": true
+        }, 
+        {% endif %}
+        {
+            "id": "contextual_grp", 
+            "layers": [
+                {
+                    "id": "national_limits", 
+                    "info": false, 
+                    "legend": false, 
+                    "visible": false
+                }, 
+                {
+                    "id": "wrecks_polygon", 
+                    "info": true, 
+                    "legend": false, 
+                    "visible": false
+                }
+            ], 
+            "overlay": true
+        }
+    ]
+}
