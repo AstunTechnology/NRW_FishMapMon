@@ -219,6 +219,87 @@ MAP
     END
 
     LAYER
+        NAME "activity_commercial_fishing_polygon"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from activity_commercial_fishing_polygon) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "activity_commercial_fishing_polygon"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        OPACITY 50
+        CLASS
+            STYLE
+                COLOR 255 0 0
+                OPACITY 50
+            END
+        END
+    END
+
+    LAYER
+        NAME "activity_noncommercial_fishing_point"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from activity_noncommercial_fishing_point) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "activity_noncommercial_fishing_point"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 20
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POINT
+        UNITS METERS
+        OPACITY 50
+        CLASS
+            STYLE
+                COLOR 255 0 0
+                OUTLINECOLOR 255 0 0
+                SYMBOL "circle"
+                SIZE 12
+                OPACITY 50
+            END
+        END
+    END
+
+    LAYER
+        NAME "activity_noncommercial_fishing_polygon"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from activity_noncommercial_fishing_polygon) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "activity_noncommercial_fishing_polygon"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        OPACITY 50
+        CLASS
+            STYLE
+                COLOR 0 255 0
+                OPACITY 50
+            END
+        END
+    END
+
+    LAYER
         NAME "rsa_standing_areas"
         INCLUDE "pgconnection.inc"
         DATA "wkb_geometry from (select * from rsa_standing_areas) as foo using unique ogc_fid using srid=27700"

@@ -38,6 +38,11 @@
 
     <script type="text/javascript">
         window.FISH_MAP = {
+            "ROOT_URL": window.location.protocol + '//' + window.location.host + window.location.pathname,
+            "WMS_ROOT_URL": this.ROOT_URL + 'wms?map=',
+            "WMS_OVERLAY_URL": this.WMS_ROOT_URL + 'fishmap',
+            "WMS_OS_URL": this.WMS_ROOT_URL + 'os',
+            "WMS_CHARTS_URL": this.WMS_ROOT_URL + 'charts',
             "text": {
                 // Layer and group names
                 "project_area_grp": "{{ _('Project Area') }}",
@@ -131,7 +136,141 @@
                         return FISH_MAP.getText(Mustache.render(text, this));
                     }
                 }
-            }
+            },
+            overlayLayers: {
+                "groups": [
+                    {
+                        "id": "project_area_grp", 
+                        "overlay": true,
+                        "layers": [
+                            {
+                                "id": "project_area", 
+                                "info": false, 
+                                "legend": false, 
+                                "visible": true
+                            }
+                        ]
+                    }, 
+                    {
+                        "id": "habitats_grp", 
+                        "overlay": true,
+                        "layers": [
+                            {
+                                "id": "intertidal_habitats", 
+                                "info": true, 
+                                "legend": true, 
+                                "visible": false
+                            }, 
+                            {
+                                "id": "subtidal_habitats", 
+                                "info": true, 
+                                "legend": true, 
+                                "visible": false
+                            }, 
+                            {
+                                "id": "subtidal_habitats_confidence", 
+                                "info": true, 
+                                "legend": true, 
+                                "visible": false
+                            }
+                        ]
+                    }, 
+                    {
+                        "id": "restricted_grp", 
+                        "overlay": true,
+                        "layers": [
+                            {
+                                "id": "restricted_closed_scalloping", 
+                                "info": true, 
+                                "legend": true, 
+                                "visible": false
+                            }, 
+                            {
+                                "id": "several_and_regulatory_orders", 
+                                "info": true, 
+                                "legend": true, 
+                                "visible": false
+                            }
+                        ]
+                    }, 
+                    {
+                        "id": "rsa_sites_grp", 
+                        "overlay": true,
+                        "layers": [
+                            {
+                                "id": "rsa_standing_areas", 
+                                "info": true, 
+                                "legend": true, 
+                                "visible": false
+                            }, 
+                            {
+                                "id": "rsa_casting_sites", 
+                                "info": true, 
+                                "legend": true, 
+                                "visible": false
+                            }
+                        ]
+                    },
+                    {
+                        "id": "details_activity_grp", 
+                        "overlay": true,
+                        "layers": [
+                            {
+                                "id": "activity_commercial_fishing_polygon", 
+                                "info": true, 
+                                "legend": false, 
+                                "visible": false
+                            }, 
+                            {
+                                "id": "activity_noncommercial_fishing_point", 
+                                "info": true, 
+                                "legend": false, 
+                                "visible": false
+                            },
+                            {
+                                "id": "activity_noncommercial_fishing_polygon", 
+                                "info": true, 
+                                "legend": false, 
+                                "visible": false
+                            }
+                        ]
+                    }, 
+                    {
+                        "id": "contextual_grp", 
+                        "overlay": true,
+                        "layers": [
+                            {
+                                "id": "national_limits", 
+                                "info": false, 
+                                "legend": false, 
+                                "visible": false
+                            },
+                            {
+                                "id": "wrecks_polygon", 
+                                "info": true,
+                                "legend": false,
+                                "visible": false
+                            }
+                        ]
+                    }
+                ]
+            },
+            outputActivities: [
+                "cas_hand_gath",
+                "fixed_pots",
+                "foot_access",
+                "king_scallops",
+                "lot",
+                "mussels",
+                "nets",
+                "pro_hand_gath",
+                "queen_scallops",
+                "rsa_charterboats",
+                "rsa_commercial",
+                "rsa_noncharter",
+                "rsa_shore"
+            ],
+            outputTypes: ['intensity', 'vessels', 'sensitivity']
         };
     </script>
     <script src="{{ url_for('static', filename='js/jquery-1.9.1.min.js') }}"></script>
@@ -291,6 +430,553 @@
             </tbody>
         </table>
         {{/rsa_casting_sites}}
+        {{#activity_commercial_fishing_polygon}}
+        <h2>{{#_}}activity_commercial_fishing_polygon{{/_}}</h2>
+        <table class="info">
+            <tbody>
+                {{#features}}
+                <tr>
+                   <th>{{#_}}geodb_oid{{/_}}</th>
+                   <td>{{attributes.geodb_oid}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}objectid{{/_}}</th>
+                   <td>{{attributes.objectid}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}userid{{/_}}</th>
+                   <td>{{attributes.userid}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}polygonid{{/_}}</th>
+                   <td>{{attributes.polygonid}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}mapscale{{/_}}</th>
+                   <td>{{attributes.mapscale}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}gearclass{{/_}}</th>
+                   <td>{{attributes.gearclass}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}fishingtype{{/_}}</th>
+                   <td>{{attributes.fishingtype}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}geartype{{/_}}</th>
+                   <td>{{attributes.geartype}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}gear_time{{/_}}</th>
+                   <td>{{attributes.gear_time}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}gear_distance{{/_}}</th>
+                   <td>{{attributes.gear_distance}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}gear_speed{{/_}}</th>
+                   <td>{{attributes.gear_speed}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}gear_gearwidth{{/_}}</th>
+                   <td>{{attributes.gear_gearwidth}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}gear_nodredges{{/_}}</th>
+                   <td>{{attributes.gear_nodredges}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}gear_netlength{{/_}}</th>
+                   <td>{{attributes.gear_netlength}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}gear_nonets{{/_}}</th>
+                   <td>{{attributes.gear_nonets}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}gear_soaktime{{/_}}</th>
+                   <td>{{attributes.gear_soaktime}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}gear_nohooks{{/_}}</th>
+                   <td>{{attributes.gear_nohooks}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}gear_nolines{{/_}}</th>
+                   <td>{{attributes.gear_nolines}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}gear_norods{{/_}}</th>
+                   <td>{{attributes.gear_norods}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}gear_linelength{{/_}}</th>
+                   <td>{{attributes.gear_linelength}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}gear_noanchors{{/_}}</th>
+                   <td>{{attributes.gear_noanchors}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}gear_stringlength{{/_}}</th>
+                   <td>{{attributes.gear_stringlength}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}gear_nopots{{/_}}</th>
+                   <td>{{attributes.gear_nopots}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}gear_nostrings{{/_}}</th>
+                   <td>{{attributes.gear_nostrings}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}gear_nopeople{{/_}}</th>
+                   <td>{{attributes.gear_nopeople}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}gear_nosuvs{{/_}}</th>
+                   <td>{{attributes.gear_nosuvs}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}gear_noatvs{{/_}}</th>
+                   <td>{{attributes.gear_noatvs}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}gear_notrailbikes{{/_}}</th>
+                   <td>{{attributes.gear_notrailbikes}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}speciescommon1{{/_}}</th>
+                   <td>{{attributes.speciescommon1}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}specieslatin1{{/_}}</th>
+                   <td>{{attributes.specieslatin1}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}speciescode1{{/_}}</th>
+                   <td>{{attributes.speciescode1}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}speciescommon2{{/_}}</th>
+                   <td>{{attributes.speciescommon2}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}specieslatin2{{/_}}</th>
+                   <td>{{attributes.specieslatin2}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}speciescode2{{/_}}</th>
+                   <td>{{attributes.speciescode2}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}bycatchcommon{{/_}}</th>
+                   <td>{{attributes.bycatchcommon}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}bycatchlatin{{/_}}</th>
+                   <td>{{attributes.bycatchlatin}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}bycatchcode{{/_}}</th>
+                   <td>{{attributes.bycatchcode}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}jan{{/_}}</th>
+                   <td>{{attributes.jan}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}feb{{/_}}</th>
+                   <td>{{attributes.feb}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}mar{{/_}}</th>
+                   <td>{{attributes.mar}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}apr{{/_}}</th>
+                   <td>{{attributes.apr}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}may{{/_}}</th>
+                   <td>{{attributes.may}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}jun{{/_}}</th>
+                   <td>{{attributes.jun}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}jul{{/_}}</th>
+                   <td>{{attributes.jul}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}aug{{/_}}</th>
+                   <td>{{attributes.aug}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}sep{{/_}}</th>
+                   <td>{{attributes.sep}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}oct{{/_}}</th>
+                   <td>{{attributes.oct}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}nov{{/_}}</th>
+                   <td>{{attributes.nov}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}dec_{{/_}}</th>
+                   <td>{{attributes.dec_}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}normalpattern{{/_}}</th>
+                   <td>{{attributes.normalpattern}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}daysperyear{{/_}}</th>
+                   <td>{{attributes.daysperyear}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}importance{{/_}}</th>
+                   <td>{{attributes.importance}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}impreason{{/_}}</th>
+                   <td>{{attributes.impreason}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}shape_length{{/_}}</th>
+                   <td>{{attributes.shape_length}}</td>
+               </tr>
+                <tr>
+                   <th>{{#_}}shape_area{{/_}}</th>
+                   <td>{{attributes.shape_area}}</td>
+               </tr>
+                {{/features}}
+            </tbody>
+        </table>
+        {{/activity_commercial_fishing_polygon}}
+        {{#activity_noncommercial_fishing_point}}
+        <h2>{{#_}}activity_noncommercial_fishing_point{{/_}}</h2>
+        <table class="info">
+            <tbody>
+                {{#features}}
+                <tr>
+                    <th>{{#_}}geodb_oid{{/_}}</th>
+                    <td>{{attributes.geodb_oid}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}objectid{{/_}}</th>
+                    <td>{{attributes.objectid}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}userid{{/_}}</th>
+                    <td>{{attributes.userid}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}featureid{{/_}}</th>
+                    <td>{{attributes.featureid}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}mapscale{{/_}}</th>
+                    <td>{{attributes.mapscale}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}activity{{/_}}</th>
+                    <td>{{attributes.activity}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}anchor{{/_}}</th>
+                    <td>{{attributes.anchor}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}gearclass{{/_}}</th>
+                    <td>{{attributes.gearclass}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}fishingtype{{/_}}</th>
+                    <td>{{attributes.fishingtype}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}geartype{{/_}}</th>
+                    <td>{{attributes.geartype}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}nopotsanchors{{/_}}</th>
+                    <td>{{attributes.nopotsanchors}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}speciescommon1{{/_}}</th>
+                    <td>{{attributes.speciescommon1}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}specieslatin1{{/_}}</th>
+                    <td>{{attributes.specieslatin1}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}speciescode1{{/_}}</th>
+                    <td>{{attributes.speciescode1}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}speciescommon2{{/_}}</th>
+                    <td>{{attributes.speciescommon2}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}specieslatin2{{/_}}</th>
+                    <td>{{attributes.specieslatin2}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}speciescode2{{/_}}</th>
+                    <td>{{attributes.speciescode2}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}avgusersyr{{/_}}</th>
+                    <td>{{attributes.avgusersyr}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}charterboat{{/_}}</th>
+                    <td>{{attributes.charterboat}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}importance{{/_}}</th>
+                    <td>{{attributes.importance}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}impreason{{/_}}</th>
+                    <td>{{attributes.impreason}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}jan{{/_}}</th>
+                    <td>{{attributes.jan}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}feb{{/_}}</th>
+                    <td>{{attributes.feb}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}mar{{/_}}</th>
+                    <td>{{attributes.mar}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}apr{{/_}}</th>
+                    <td>{{attributes.apr}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}may{{/_}}</th>
+                    <td>{{attributes.may}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}jun{{/_}}</th>
+                    <td>{{attributes.jun}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}jul{{/_}}</th>
+                    <td>{{attributes.jul}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}aug{{/_}}</th>
+                    <td>{{attributes.aug}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}sep{{/_}}</th>
+                    <td>{{attributes.sep}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}oct{{/_}}</th>
+                    <td>{{attributes.oct}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}nov{{/_}}</th>
+                    <td>{{attributes.nov}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}dec_{{/_}}</th>
+                    <td>{{attributes.dec_}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}normalpattern{{/_}}</th>
+                    <td>{{attributes.normalpattern}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}daysperyear{{/_}}</th>
+                    <td>{{attributes.daysperyear}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}rsa_site{{/_}}</th>
+                    <td>{{attributes.rsa_site}}</td>
+                </tr>
+                {{/features}}
+            </tbody>
+        </table>
+        {{/activity_noncommercial_fishing_point}}
+        {{#activity_noncommercial_fishing_polygon}}
+        <h2>{{#_}}activity_noncommercial_fishing_polygon{{/_}}</h2>
+        <table class="info">
+            <tbody>
+                {{#features}}
+                <tr>
+                    <th>{{#_}}geodb_oid{{/_}}</th>
+                    <td>{{attributes.geodb_oid}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}objectid{{/_}}</th>
+                    <td>{{attributes.objectid}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}userid{{/_}}</th>
+                    <td>{{attributes.userid}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}featureid{{/_}}</th>
+                    <td>{{attributes.featureid}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}mapscale{{/_}}</th>
+                    <td>{{attributes.mapscale}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}activity{{/_}}</th>
+                    <td>{{attributes.activity}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}anchor{{/_}}</th>
+                    <td>{{attributes.anchor}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}gearclass{{/_}}</th>
+                    <td>{{attributes.gearclass}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}fishingtyp{{/_}}</th>
+                    <td>{{attributes.fishingtyp}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}geartype{{/_}}</th>
+                    <td>{{attributes.geartype}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}nopotsanch{{/_}}</th>
+                    <td>{{attributes.nopotsanch}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}speciescom{{/_}}</th>
+                    <td>{{attributes.speciescom}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}specieslat{{/_}}</th>
+                    <td>{{attributes.specieslat}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}speciescod{{/_}}</th>
+                    <td>{{attributes.speciescod}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}speciesc_1{{/_}}</th>
+                    <td>{{attributes.speciesc_1}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}speciesl_1{{/_}}</th>
+                    <td>{{attributes.speciesl_1}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}speciesc_2{{/_}}</th>
+                    <td>{{attributes.speciesc_2}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}avgusersyr{{/_}}</th>
+                    <td>{{attributes.avgusersyr}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}charterboa{{/_}}</th>
+                    <td>{{attributes.charterboa}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}importance{{/_}}</th>
+                    <td>{{attributes.importance}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}impreason{{/_}}</th>
+                    <td>{{attributes.impreason}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}jan{{/_}}</th>
+                    <td>{{attributes.jan}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}feb{{/_}}</th>
+                    <td>{{attributes.feb}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}mar{{/_}}</th>
+                    <td>{{attributes.mar}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}apr{{/_}}</th>
+                    <td>{{attributes.apr}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}may{{/_}}</th>
+                    <td>{{attributes.may}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}jun{{/_}}</th>
+                    <td>{{attributes.jun}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}jul{{/_}}</th>
+                    <td>{{attributes.jul}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}aug{{/_}}</th>
+                    <td>{{attributes.aug}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}sep{{/_}}</th>
+                    <td>{{attributes.sep}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}oct{{/_}}</th>
+                    <td>{{attributes.oct}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}nov{{/_}}</th>
+                    <td>{{attributes.nov}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}dec_{{/_}}</th>
+                    <td>{{attributes.dec_}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}normalpatt{{/_}}</th>
+                    <td>{{attributes.normalpatt}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}daysperyea{{/_}}</th>
+                    <td>{{attributes.daysperyea}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}shape_leng{{/_}}</th>
+                    <td>{{attributes.shape_leng}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}shape_area{{/_}}</th>
+                    <td>{{attributes.shape_area}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}buff_dist{{/_}}</th>
+                    <td>{{attributes.buff_dist}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}wreck_id{{/_}}</th>
+                    <td>{{attributes.wreck_id}}</td>
+                </tr>
+                {{/features}}
+            </tbody>
+        </table>
+        {{/activity_noncommercial_fishing_polygon}}
         {{#wrecks_polygon}}
         <h2>{{#_}}wrecks_polygon{{/_}}</h2>
         <table class="info">
