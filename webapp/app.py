@@ -95,17 +95,11 @@ def wms():
 
     # Add SLD parameter for all layers passed. A single LAYER parameter will be
     # passed for GetLegendInfo while LAYERS is passed with GetMap
-    if 'LAYER' in args:
+    layer_arg = next((a for a in ['LAYERS', 'LAYER'] if a in args), None)
+    if layer_arg:
         args['SLD'] = url_for(
             '.sld',
-            layers='%s' % args['LAYER'],
-            _external=True
-        )
-
-    if 'LAYERS' in args:
-        args['SLD'] = url_for(
-            '.sld',
-            layers='%s' % args['LAYERS'],
+            layers='%s' % args[layer_arg],
             _external=True
         )
 
@@ -123,25 +117,22 @@ def wms():
 
 @fm.route('/sld')
 def sld():
+    resp = ''
     layers = request.args.get('layers')
     if layers:
         layer_info = []
+        common_slds = ['intensity', 'vessels', 'sensitivity']
         for layer in layers.split(','):
             template = '%s.sld' % layer
-            if layer.startswith('intensity_'):
-                template = 'intensity.sld'
-            if layer.startswith('vessels_'):
-                template = 'vessels.sld'
-            if layer.startswith('sensitivity_'):
-                template = 'sensitivity.sld'
+            split_layer = layer.split('_')
+            if split_layer[0] in common_slds:
+                template = '%s.sld' % split_layer[0]
             layer_info.append({'template': template, 'name': layer})
         resp = make_response(
             render_template('base.sld', layer_info=layer_info)
         )
         resp.headers['Content-Type'] = 'text/xml'
-        return resp
-    else:
-        return ''
+    return resp
 
 
 app = Flask(__name__)
