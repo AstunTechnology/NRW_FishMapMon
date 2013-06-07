@@ -45,63 +45,11 @@ def home():
 
 @fm.route('/wms')
 def wms():
-    args = request.args.copy()
 
-    def update_layer(layer):
-        """ Updates project output layers to include the _det or _gen suffix
-        based on whether the user is logged in or not. All other layers just
-        pass through with the same name """
-        if layer.startswith(('intensity', 'vessels')):
-            suffix = '_det' if g.user else '_gen'
-            return '%s%s' % (layer, suffix)
-        return layer
-
-    def authorise_layer(layer):
-        """ Tests if the current user has access to the specified layer """
-        restricted_layers = [
-            'activity_commercial_fishing_polygon',
-            'activity_noncommercial_fishing_point',
-            'activity_noncommercial_fishing_polygon']
-        return layer not in restricted_layers or g.user
-
-    # Check the LAYERS parameter passed with GetMap and GetFeatrueInfo requests
-    if 'LAYERS' in args:
-        layers = args['LAYERS'].split(',')
-
-        layers = [
-            update_layer(layer)
-            for layer in layers
-            if authorise_layer(layer)
-        ]
-
-        if layers:
-            layers = ','.join(layers)
-        else:
-            return ('No valid layers', 500)
-
-        args['LAYERS'] = layers
-
-        # Check QUERY_LAYERS passed by GetFeatureInfo in addition to LAYERS
-        if 'QUERY_LAYERS' in args:
-            args['QUERY_LAYERS'] = layers
-
-    # Check the LAYER parameter passed by GetLegendInfo
-    if 'LAYER' in args:
-        layer = args['LAYER']
-        if authorise_layer(layer):
-            args['LAYER'] = update_layer(layer)
-        else:
-            return ('No valid layers', 500)
-
-    # Add SLD parameter for all layers passed. A single LAYER parameter will be
-    # passed for GetLegendInfo while LAYERS is passed with GetMap
-    layer_arg = next((a for a in ['LAYERS', 'LAYER'] if a in args), None)
-    if layer_arg:
-        args['SLD'] = url_for(
-            '.sld',
-            layers='%s' % args[layer_arg],
-            _external=True
-        )
+    try:
+        args = update_wms_args(request.args.copy(), g.user)
+    except (InvalidWmsArgs) as ex:
+        return (ex.message, 500)
 
     r = requests.get(
         '%s%s.map' % (app.config['WMS_URL'], request.args.get('map')),
@@ -112,6 +60,7 @@ def wms():
 
     resp = make_response(r.content)
     resp.headers['Content-Type'] = r.headers['Content-Type']
+
     return resp
 
 
@@ -158,6 +107,75 @@ def before_request():
 @app.route('/')
 def redirect_to_home():
     return redirect(url_for('fishmap.home', locale=g.locale))
+
+
+class InvalidWmsArgs(Exception):
+    def __init__(self, message=''):
+        Exception.__init__(self, message)
+
+
+def update_wms_args(args, user):
+    """ Update the WMS request parameters before they are passed to the back
+    end. Raises InvalidWmsArgs if the args to be returned are invalid such as
+    the LAYER or LAYERS arg does not have a value """
+
+    # Update the LAYER of LAYERS parameter
+    layers = None
+    layer_arg = next((a for a in ['LAYERS', 'LAYER'] if a in args), None)
+    if layer_arg:
+        layers = update_wms_layers(args[layer_arg].split(','), user)
+
+    if layers:
+        layers = ','.join(layers)
+    else:
+        raise InvalidWmsArgs('No valid layers')
+
+    args[layer_arg] = layers
+
+    # Check QUERY_LAYERS passed by GetFeatureInfo in addition to LAYERS
+    if 'QUERY_LAYERS' in args:
+        args['QUERY_LAYERS'] = layers
+
+    # Add SLD parameter for all layers passed. A single LAYER parameter will be
+    # passed for GetLegendInfo while LAYERS is passed with GetMap
+    args['SLD'] = url_for(
+        '.sld',
+        layers='%s' % layers,
+        _external=True
+    )
+
+    return args
+
+
+def update_wms_layers(layers, user):
+    """ Updates a list of layers to remove restricted layers if the user is not
+    logged in and add the appropriate suffix to project output layers depending
+    no whether a user is logged in or not """
+
+    def update_layer(layer):
+        """ Updates project output layers to include the _det or _gen suffix
+        based on whether the user is logged in or not. All other layers just
+        pass through with the same name """
+        if layer.startswith(('intensity', 'vessels')):
+            suffix = '_det' if user else '_gen'
+            return '%s%s' % (layer, suffix)
+        return layer
+
+    def authorise_layer(layer):
+        """ Tests if the current user has access to the specified layer """
+        restricted_layers = [
+            'activity_commercial_fishing_polygon',
+            'activity_noncommercial_fishing_point',
+            'activity_noncommercial_fishing_polygon']
+        return layer not in restricted_layers or user
+
+    layers = [
+        update_layer(layer)
+        for layer in layers
+        if authorise_layer(layer)
+    ]
+
+    return layers
 
 
 if __name__ == '__main__':
