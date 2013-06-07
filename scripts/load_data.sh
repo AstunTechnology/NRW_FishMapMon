@@ -51,8 +51,8 @@ ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=
 # Ignore lines
 # FMM_Data/Outputs/Intensity_Lvls_Fixed_Pots_Lines.tab
 
-ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Intensity_Lvls_Foot_Access_General.tab" -nln intensity_lvls_foot_access_gen -s_srs "EPSG:27700" -a_srs "EPSG:27700"
-ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Intensity_Lvls_Foot_Access.tab" -nln intensity_lvls_foot_access_det -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -overwrite -skipfailures -sql "select *, 0 as '_overlaps' from Intensity_Lvls_Foot_Access_General" -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Intensity_Lvls_Foot_Access_General.tab" -nln intensity_lvls_foot_access_gen -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -overwrite -skipfailures -sql "select *, 0 as '_overlaps' from Intensity_Lvls_Foot_Access" -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Intensity_Lvls_Foot_Access.tab" -nln intensity_lvls_foot_access_det -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Intensity_Lvls_King_Scallops_General.tab" -nln intensity_lvls_king_scallops_gen -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Intensity_Lvls_King_Scallops.tab" -nln intensity_lvls_king_scallops_det -s_srs "EPSG:27700" -a_srs "EPSG:27700"
@@ -83,8 +83,8 @@ ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Intensity_Lvls_RSA_nonCharter_Generalised.tab" -nln intensity_lvls_rsa_noncharter_gen -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Intensity_Lvls_RSA_nonCharter.tab" -nln intensity_lvls_rsa_noncharter_det -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
-ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Intensity_Lvls_RSA_shore_Generalised.tab" -nln intensity_lvls_rsa_shore_gen -s_srs "EPSG:27700" -a_srs "EPSG:27700"
-ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Intensity_Lvls_RSA_shore.tab" -nln intensity_lvls_rsa_shore_det -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -overwrite -skipfailures -sql "select *, 0 as '_overlaps' from Intensity_Lvls_RSA_shore_Generalised" -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Intensity_Lvls_RSA_shore_Generalised.tab" -nln intensity_lvls_rsa_shore_gen -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -overwrite -skipfailures -sql "select *, 0 as '_overlaps' from Intensity_Lvls_RSA_shore" -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Intensity_Lvls_RSA_shore.tab" -nln intensity_lvls_rsa_shore_det -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
 # Sensitivity
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Sensitivity/SensitivityLvl_CasHandGather_Generalised.tab" -nln sensitivity_lvls_cas_hand_gath -s_srs "EPSG:27700" -a_srs "EPSG:27700"

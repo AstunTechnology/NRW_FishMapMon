@@ -4,6 +4,23 @@
         <Name>name</Name>
         <FeatureTypeStyle>
             <Rule>
+                <Name>0 (n/a)</Name>
+                <Filter>
+                    <PropertyIsEqualTo>
+                        <PropertyName>_overlaps</PropertyName>
+                        <Literal>0</Literal>
+                    </PropertyIsEqualTo>
+                </Filter>
+                <PolygonSymbolizer>
+                    <Fill>
+                        <SvgParameter name="fill">#aaaaaa</SvgParameter>
+                    </Fill>
+                    <Stroke>
+                        <SvgParameter name="stroke">#666666</SvgParameter>
+                    </Stroke>
+                </PolygonSymbolizer>
+            </Rule>
+            <Rule>
                 <Name>1</Name>
                 <Filter>
                     <PropertyIsEqualTo>
