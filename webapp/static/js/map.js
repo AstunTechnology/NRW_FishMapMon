@@ -42,7 +42,7 @@
         new OpenLayers.Control.PanZoomBar()
     ];
 
-    map = new OpenLayers.Map('map', {
+    var map = new OpenLayers.Map('map', {
         projection: "EPSG:27700",
         units: "m",
         resolutions: [2.5, 5, 10, 25, 50, 100, 150],
@@ -239,11 +239,9 @@
                 layers.layers[lyr.id] = lyr;
 
                 // Add the toString function
-                jQuery.extend(lyr, {
-                    toString: function() {
-                        return this.id;
-                    }
-                });
+                lyr.toString = function() {
+                    return this.id;
+                }
 
             }
         }

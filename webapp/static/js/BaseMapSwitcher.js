@@ -32,11 +32,12 @@ OpenLayers.Control.BaseMapSwitcher = OpenLayers.Class(OpenLayers.Control, {
             }
         }
 
+        var that = this;
         jQuery('a', this.div).click(function() {
             jQuery(this)
                 .addClass('active')
                 .siblings().removeClass('active');
-            map.setBaseLayer(map.getLayer(this.id));
+            that.map.setBaseLayer(that.map.getLayer(this.id));
             return false;
         });
 
