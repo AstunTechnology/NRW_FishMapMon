@@ -51,36 +51,22 @@ def wms():
     except (InvalidWmsArgs) as ex:
         return (ex.message, 500)
 
-    r = requests.get(
-        '%s%s.map' % (app.config['WMS_URL'], request.args.get('map')),
-        params=args
-    )
+    layers = args.get('LAYERS') or args.get('LAYER')
+    sld = render_sld(layers.split(','))
+    args['SLD_BODY'] = sld
 
-    app.logger.debug('WMS Request: %s' % r.url)
+    # Set the MapServer map parameter specifiying a path relative the this app
+    args['map'] = \
+        '%s/../config/mapserver/%s.map' % (app.root_path, args.get('map'))
+
+    r = requests.post(
+        app.config['WMS_URL'],
+        data=args
+    )
 
     resp = make_response(r.content)
     resp.headers['Content-Type'] = r.headers['Content-Type']
 
-    return resp
-
-
-@fm.route('/sld')
-def sld():
-    resp = ''
-    layers = request.args.get('layers')
-    if layers:
-        layer_info = []
-        common_slds = ['intensity', 'vessels', 'sensitivity']
-        for layer in layers.split(','):
-            template = '%s.sld' % layer
-            split_layer = layer.split('_')
-            if split_layer[0] in common_slds:
-                template = '%s.sld' % split_layer[0]
-            layer_info.append({'template': template, 'name': layer})
-        resp = make_response(
-            render_template('base.sld', layer_info=layer_info)
-        )
-        resp.headers['Content-Type'] = 'text/xml'
     return resp
 
 
@@ -89,8 +75,7 @@ app.register_blueprint(fm)
 babel = Babel(app)
 
 # Set basic config
-app.config['WMS_URL'] = 'http://127.0.0.1:5001/cgi-bin/mapserv?' \
-                        'map=%s/../config/mapserver/' % app.root_path
+app.config['WMS_URL'] = 'http://127.0.0.1:5001/cgi-bin/mapserv?'
 
 
 @babel.localeselector
@@ -136,14 +121,6 @@ def update_wms_args(args, user):
     if 'QUERY_LAYERS' in args:
         args['QUERY_LAYERS'] = layers
 
-    # Add SLD parameter for all layers passed. A single LAYER parameter will be
-    # passed for GetLegendInfo while LAYERS is passed with GetMap
-    args['SLD'] = url_for(
-        '.sld',
-        layers='%s' % layers,
-        _external=True
-    )
-
     return args
 
 
@@ -176,6 +153,20 @@ def update_wms_layers(layers, user):
     ]
 
     return layers
+
+
+def render_sld(layers):
+    """ Render an SLD document as a string for the list of layers passed """
+    if layers:
+        layer_info = []
+        common_slds = ['intensity', 'vessels', 'sensitivity']
+        for layer in layers:
+            template = '%s.sld' % layer
+            split_layer = layer.split('_')
+            if split_layer[0] in common_slds:
+                template = '%s.sld' % split_layer[0]
+            layer_info.append({'template': template, 'name': layer})
+        return render_template('base.sld', layer_info=layer_info)
 
 
 if __name__ == '__main__':
