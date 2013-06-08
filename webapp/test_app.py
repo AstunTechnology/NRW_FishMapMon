@@ -1,4 +1,4 @@
-from app import update_wms_layers
+from app import app, update_wms_layers, render_sld
 from nose.tools import eq_
 
 
@@ -72,3 +72,57 @@ class TestUpdateWmsLayers():
                 "sensitivity_lvls_foot_access"
             ]
         )
+
+
+class TestRenderSld():
+    """ Test render_sld function which """
+
+    def test_single(self):
+        """ Single layer results in a single NamedLayer """
+        with app.test_client() as c:
+            c.get("/")
+            sld = render_sld(["subtidal_habitats"])
+            assert "subtidal_habitats" in sld
+            assert sld.count('<NamedLayer>') == 1
+
+    def test_multiple(self):
+        """ A NamedLayer per layer """
+        with app.test_client() as c:
+            c.get("/")
+            sld = render_sld([
+                "subtidal_habitats",
+                "intensity_lvls_cas_hand_gath"
+            ])
+            assert "intensity_lvls_cas_hand_gath" in sld
+            assert "subtidal_habitats" in sld
+            assert sld.count('<NamedLayer>') == 2
+
+    def test_output_layers(self):
+        """ Output layers uses a common sld one per type """
+        with app.test_client() as c:
+            c.get("/")
+            sld = render_sld([
+                "intensity_lvls_cas_hand_gath_gen",
+                "vessels_lvls_fixed_pots_gen",
+                "sensitivity_lvls_foot_access_gen"
+            ])
+            assert "intensity_lvls_cas_hand_gath_gen" in sld
+            assert "vessels_lvls_fixed_pots_gen" in sld
+            assert "sensitivity_lvls_foot_access_gen" in sld
+            assert "<Name>intensity</Name>" in sld
+            assert "<Name>vessels</Name>" in sld
+            assert "<Name>sensitivity</Name>" in sld
+
+    def test_layer_with_no_template_ignored(self):
+        """ Layers without a template are just ignored """
+        with app.test_client() as c:
+            c.get("/")
+            sld = render_sld([
+                "subtidal_habitats",
+                "intensity_lvls_cas_hand_gath",
+                "this_layer_does_not_have_a_template"
+            ])
+            assert "intensity_lvls_cas_hand_gath" in sld
+            assert "subtidal_habitats" in sld
+            assert "this_layer_does_not_have_a_template" not in sld
+            assert sld.count('<NamedLayer>') == 2

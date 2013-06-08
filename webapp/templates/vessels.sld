@@ -1,7 +1,7 @@
 <NamedLayer>
     <Name>{{info['name']}}</Name>
     <UserStyle>
-        <Name>name</Name>
+        <Name>vessels</Name>
         <FeatureTypeStyle>
             <Rule>
                 <Name>0 (n/a)</Name>

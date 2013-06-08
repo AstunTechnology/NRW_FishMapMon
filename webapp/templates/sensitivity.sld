@@ -1,7 +1,7 @@
 <NamedLayer>
     <Name>{{info['name']}}</Name>
     <UserStyle>
-        <Name>name</Name>
+        <Name>sensitivity</Name>
         <FeatureTypeStyle>
             <Rule>
                 <Name>{{ _('Low (1)') }}</Name>
