@@ -17,7 +17,7 @@
 <body>
 
     <div id="main">
-        <div id="toolbar"><p><a href="#">{{ _('Sign in') }}</a> | 
+        <div id="toolbar"><p><a href="{{ url_for('security.logout') if g.user else url_for('security.login') }}">{{ _('Sign in') }}</a> | 
             {% for locale in g.other_locales %}
             <a href="{{ g.locale_uris[locale] if g.locale_uris and g.locale_uris[locale] else url_for('home', locale=locale) }}">
                 {{ g.other_locales[locale] }}
