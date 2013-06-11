@@ -14,21 +14,28 @@ LOCALES = {
     'cy': 'Cymraeg',
 }
 
-fm = Blueprint('fishmap', __name__, url_prefix='/<locale>')
+
+app = Flask(__name__)
+babel = Babel(app)
+
+# Set basic config
+app.config['WMS_URL'] = 'http://127.0.0.1:5001/cgi-bin/mapserv?'
 
 
-@fm.url_defaults
-def add_language_code(endpoint, values):
-    values.setdefault('locale', g.locale)
+@babel.localeselector
+def get_locale():
+    return g.locale
 
 
-@fm.url_value_preprocessor
-def pull_locale(endpoint, values):
-    g.locale = values.pop('locale')
+@app.before_request
+def before_request():
+    if not hasattr(g, 'locale'):
+        g.locale = request.accept_languages.best_match(LOCALES.keys())
+        if('locale' in request.args):
+            l = request.args.get('locale')
+            if l in LOCALES.keys():
+                g.locale = l
 
-
-@fm.before_request
-def before_request_fm():
     if not hasattr(g, 'other_locales') or g.locale in g.other_locales:
         g.other_locales = dict()
         for locale in LOCALES:
@@ -38,12 +45,17 @@ def before_request_fm():
     g.user = False
 
 
-@fm.route('/')
+@app.url_defaults
+def add_language_code(endpoint, values):
+    values.setdefault('locale', g.locale)
+
+
+@app.route('/')
 def home():
     return render_template('index.html', user=g.user)
 
 
-@fm.route('/wms')
+@app.route('/wms')
 def wms():
 
     try:
@@ -68,30 +80,6 @@ def wms():
     resp.headers['Content-Type'] = r.headers['Content-Type']
 
     return resp
-
-
-app = Flask(__name__)
-app.register_blueprint(fm)
-babel = Babel(app)
-
-# Set basic config
-app.config['WMS_URL'] = 'http://127.0.0.1:5001/cgi-bin/mapserv?'
-
-
-@babel.localeselector
-def get_locale():
-    return g.locale
-
-
-@app.before_request
-def before_request():
-    if not hasattr(g, 'locale'):
-        g.locale = request.accept_languages.best_match(LOCALES.keys())
-
-
-@app.route('/')
-def redirect_to_home():
-    return redirect(url_for('fishmap.home', locale=g.locale))
 
 
 class InvalidWmsArgs(Exception):
