@@ -1,3 +1,6 @@
+import os
+import requests
+
 from flask import Blueprint
 from flask import Flask
 from flask import g
@@ -7,7 +10,6 @@ from flask import render_template
 from flask import request
 from flask import url_for
 from flaskext.babel import Babel
-import requests
 
 LOCALES = {
     'en': 'English',
@@ -20,6 +22,9 @@ babel = Babel(app)
 
 # Set basic config
 app.config['WMS_URL'] = 'http://127.0.0.1:5001/cgi-bin/mapserv?'
+# Import local settings
+if os.environ.get('FISHMAP_CONFIG_FILE'):
+    app.config.from_envvar('FISHMAP_CONFIG_FILE')
 
 
 @babel.localeselector
@@ -36,6 +41,13 @@ def before_request():
             if l in LOCALES.keys():
                 g.locale = l
 
+    if not hasattr(g, 'locale_uris') and 'LOCALE_HOSTS' in app.config:
+        g.locale_uris = dict()
+        for locale in app.config['LOCALE_HOSTS']:
+            if locale in LOCALES and app.config['LOCALE_HOSTS'][locale]:
+                g.locale_uris[locale] = app.config['LOCALE_HOSTS'][locale]
+
+
     if not hasattr(g, 'other_locales') or g.locale in g.other_locales:
         g.other_locales = dict()
         for locale in LOCALES:
@@ -43,11 +55,6 @@ def before_request():
                 g.other_locales[locale] = LOCALES[locale]
     # Mock user
     g.user = False
-
-
-@app.url_defaults
-def add_language_code(endpoint, values):
-    values.setdefault('locale', g.locale)
 
 
 @app.route('/')
