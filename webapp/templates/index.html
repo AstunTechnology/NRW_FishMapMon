@@ -52,7 +52,7 @@
                 "rsa_sites_grp": "{{ _('Recreational Sea Anglers Sites') }}",
                 "rsa_standing_areas": "{{ _('RSA Standing Areas') }}",
                 "rsa_casting_sites": "{{ _('RSA Casting Areas') }}",
-                "contextual_grp": "{{ _('Contextual') }}",
+                "contextual_grp": "{{ _('Reference Data') }}",
                 "national_limits": "{{ _('National Limits') }}",
                 "wrecks_polygon": "{{ _('Wrecks') }}",
                 "cas_hand_gath": "{{ _('Casual Hand Gather') }}",
@@ -158,6 +158,7 @@
         FISH_MAP.WMS_ROOT_URL = FISH_MAP.ROOT_URL + 'wms?map=';
         FISH_MAP.WMS_OVERLAY_URL = FISH_MAP.WMS_ROOT_URL + 'fishmap';
         FISH_MAP.WMS_OS_URL = FISH_MAP.WMS_ROOT_URL + 'os';
+        FISH_MAP.WMS_NOMAP_URL = FISH_MAP.WMS_ROOT_URL + 'nomap';
         FISH_MAP.WMS_CHARTS_URL = FISH_MAP.WMS_ROOT_URL + 'charts';
     </script>
     <script src="{{ url_for('static', filename='js/jquery-1.9.1.min.js') }}"></script>
