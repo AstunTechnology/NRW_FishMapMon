@@ -50,6 +50,20 @@
         controls: controls
     });
 
+    var nomap = wmsLayer(
+        FISH_MAP.getText('no_map'),
+        FISH_MAP.WMS_NOMAP_URL,
+        {
+            layers: 'nomap',
+            transparent: false
+        },
+        {
+            singleTile: false,
+            tileSize: new OpenLayers.Size(512, 512)
+        }
+    );
+    map.addLayer(nomap);
+
     var os = wmsLayer(
         FISH_MAP.getText('os_map'),
         FISH_MAP.WMS_OS_URL,
@@ -65,20 +79,6 @@
     );
     map.addLayer(os);
 
-    var nomap = wmsLayer(
-        FISH_MAP.getText('no_map'),
-        FISH_MAP.WMS_NOMAP_URL,
-        {
-            layers: 'nomap',
-            transparent: false
-        },
-        {
-            singleTile: false,
-            tileSize: new OpenLayers.Size(512, 512)
-        }
-    );
-    map.addLayer(nomap);
-
     var charts = wmsLayer(
         FISH_MAP.getText('admiralty_chart'),
         FISH_MAP.WMS_CHARTS_URL,
@@ -87,7 +87,7 @@
             transparent: false
         },
         {
-            attribution: "&copy; SeaZone",
+            attribution: "&copy; UK Hydrographic Office",
             singleTile: false,
             tileSize: new OpenLayers.Size(512, 512)
         }

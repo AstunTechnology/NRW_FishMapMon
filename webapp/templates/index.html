@@ -138,21 +138,21 @@
             },
             overlayLayers: {% include "overlay_layers.json" %},
             outputActivities: [
-                "cas_hand_gath",
-                "fixed_pots",
-                "foot_access",
                 "king_scallops",
-                "lot",
-                "mussels",
-                "nets",
-                "pro_hand_gath",
                 "queen_scallops",
+                "mussels",
+                "lot",
+                "nets",
+                "fixed_pots",
                 "rsa_charterboats",
                 "rsa_commercial",
                 "rsa_noncharter",
-                "rsa_shore"
+                "rsa_shore",
+                "cas_hand_gath",
+                "pro_hand_gath",
+                "foot_access"
             ],
-            outputTypes: ['intensity', 'vessels', 'sensitivity']
+            outputTypes: ['vessels', 'intensity', 'sensitivity']
         };
         FISH_MAP.ROOT_URL = window.location.protocol + '//' + window.location.host + window.location.pathname;
         FISH_MAP.WMS_ROOT_URL = FISH_MAP.ROOT_URL + 'wms?map=';
