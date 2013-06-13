@@ -52,7 +52,7 @@ if os.environ.get('FISHMAP_CONFIG_FILE'):
     app.config.from_envvar('FISHMAP_CONFIG_FILE')
 
 # Settings derived from those above
-app.config['SQL_ALCHEMY_DATABASE_URI'] = \
+app.config['SQLALCHEMY_DATABASE_URI'] = \
     'postgresql+psycopg2://{}:{}@/{}'.format(app.config['AUTH_USER'], PASSWORD,
                                              app.config['AUTH_DB'])
 app.config['SECURITY_PASSWORD_SALT'] = SALT
