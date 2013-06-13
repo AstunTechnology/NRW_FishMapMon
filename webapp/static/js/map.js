@@ -64,8 +64,19 @@
     );
     map.addLayer(os);
 
-    var blank = new OpenLayers.Layer(FISH_MAP.getText('no_map'), {isBaseLayer: true});
-    map.addLayer(blank);
+    var nomap = wmsLayer(
+        FISH_MAP.getText('no_map'),
+        FISH_MAP.WMS_NOMAP_URL,
+        {
+            layers: 'nomap',
+            transparent: false
+        },
+        {
+            singleTile: false,
+            tileSize: new OpenLayers.Size(512, 512)
+        }
+    );
+    map.addLayer(nomap);
 
     var charts = wmsLayer(
         FISH_MAP.getText('admiralty_chart'),
@@ -178,8 +189,7 @@
     map.addControl(info);
     info.activate();
 
-    map.setCenter(new OpenLayers.LonLat(260050, 371700), 3);
-    // map.setCenter(new OpenLayers.LonLat(241500, 379000), 10);
+    map.setCenter(new OpenLayers.LonLat(243725, 380125), 0);
 
     function wmsLayer(name, path, wms_options, layer_options) {
         var urls = path;

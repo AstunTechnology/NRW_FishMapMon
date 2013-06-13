@@ -9,6 +9,9 @@ set -o verbose
 # Project Area
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' Project_Area/Project_Area_Boundaryline.TAB -nln project_area -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
+# High Water (used with No Map base map)
+ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' BaseMapping/high_water_wales.TAB -nln high_water_wales -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+
 # Habitat
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "HabitatLayers/Intertidal/INTERTIDAL Fisheries Habitats.TAB" -nln intertidal_habitats -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
