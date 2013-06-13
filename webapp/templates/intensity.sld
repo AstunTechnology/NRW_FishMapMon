@@ -16,7 +16,7 @@
                         <SvgParameter name="fill">#ffff71</SvgParameter>
                     </Fill>
                     <Stroke>
-                        <SvgParameter name="stroke">#666666</SvgParameter>
+                        <SvgParameter name="stroke">#ffff71</SvgParameter>
                     </Stroke>
                 </PolygonSymbolizer>
             </Rule>
@@ -33,7 +33,7 @@
                         <SvgParameter name="fill">#ffa84f</SvgParameter>
                     </Fill>
                     <Stroke>
-                        <SvgParameter name="stroke">#666666</SvgParameter>
+                        <SvgParameter name="stroke">#ffa84f</SvgParameter>
                     </Stroke>
                 </PolygonSymbolizer>
             </Rule>
@@ -50,7 +50,7 @@
                         <SvgParameter name="fill">#a15001</SvgParameter>
                     </Fill>
                     <Stroke>
-                        <SvgParameter name="stroke">#666666</SvgParameter>
+                        <SvgParameter name="stroke">#a15001</SvgParameter>
                     </Stroke>
                 </PolygonSymbolizer>
             </Rule>
