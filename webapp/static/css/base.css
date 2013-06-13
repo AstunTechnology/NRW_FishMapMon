@@ -125,7 +125,7 @@ ul.tree li h3.collapsed {
 /* Legend Panel */
 
 .olControlLegendPanel {
-    left: 5px;
+    right: 5px;
     bottom: 5px;
     width: 400px;
     background-color: white;
@@ -205,4 +205,17 @@ ul.tree li h3.collapsed {
     max-width: 450px;
     overflow-x: hidden;
     overflow-y: auto;
+}
+
+div.olControlScale {
+    left: 3px;
+}
+
+div.olControlMousePosition {
+    left: 3px;
+}
+
+div.olControlAttribution {
+    left: 3px;
+    bottom: 1.5em;
 }

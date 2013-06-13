@@ -58,6 +58,7 @@
             transparent: false
         },
         {
+            attribution: "&copy; Ordnance Survey",
             singleTile: false,
             tileSize: new OpenLayers.Size(512, 512)
         }
@@ -86,6 +87,7 @@
             transparent: false
         },
         {
+            attribution: "&copy; SeaZone",
             singleTile: false,
             tileSize: new OpenLayers.Size(512, 512)
         }
