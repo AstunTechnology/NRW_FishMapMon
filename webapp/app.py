@@ -1,3 +1,6 @@
+import os
+import requests
+
 from flask import Blueprint
 from flask import Flask
 from flask import g
@@ -6,29 +9,113 @@ from flask import redirect
 from flask import render_template
 from flask import request
 from flask import url_for
+from flask.ext.security import RoleMixin
+from flask.ext.security import Security
+from flask.ext.security import SQLAlchemyUserDatastore
+from flask.ext.security import UserMixin
+from flask.ext.security import login_required
+from flask.ext.sqlalchemy import SQLAlchemy
 from flaskext.babel import Babel
-import requests
 
 LOCALES = {
     'en': 'English',
     'cy': 'Cymraeg',
 }
 
-fm = Blueprint('fishmap', __name__, url_prefix='/<locale>')
+SALT = os.environ.get('FISHMAP_SALT')
+PASSWORD = os.environ.get('FISHMAP_PASSWORD')
+
+assert SALT
+assert PASSWORD
+
+app = Flask(__name__)
+babel = Babel(app)
+
+# Set basic config
+app.config['SECRET_KEY'] = 'it-would-be-a-good-idea-to-override-this!'
+
+# Flask-Security settings
+app.config['SECURITY_PASSWORD_HASH'] = 'bcrypt'
+app.config['SECURITY_RECOVERABLE'] = True
+app.config['SEND_REGISTER_EMAIL'] = False
+
+# Flask-Security string overrides
+app.config.from_object('security_strings')
+
+# Own settings
+app.config['WMS_URL'] = 'http://127.0.0.1:5001/cgi-bin/mapserv?'
+app.config['AUTH_USER'] = 'fishmap_webapp'
+app.config['AUTH_DB'] = 'fishmap_auth'
+
+# Import local overrides
+if os.environ.get('FISHMAP_CONFIG_FILE'):
+    app.config.from_envvar('FISHMAP_CONFIG_FILE')
+
+# Settings derived from those above
+app.config['SQLALCHEMY_DATABASE_URI'] = \
+    'postgresql+psycopg2://{}:{}@/{}'.format(app.config['AUTH_USER'], PASSWORD,
+                                             app.config['AUTH_DB'])
+app.config['SECURITY_PASSWORD_SALT'] = SALT
+
+auth_db = SQLAlchemy(app)
+
+users_roles = auth_db.Table('users_roles',
+                            auth_db.Column('user_id', auth_db.Integer(),
+                                           auth_db.ForeignKey('user.id')),
+                            auth_db.Column('role_id', auth_db.Integer(),
+                                           auth_db.ForeignKey('role.id')))
 
 
-@fm.url_defaults
-def add_language_code(endpoint, values):
-    values.setdefault('locale', g.locale)
+class Role(auth_db.Model, RoleMixin):
+    id = auth_db.Column(auth_db.Integer(), primary_key=True)
+    name = auth_db.Column(auth_db.String(80), unique=True)
+    description = auth_db.Column(auth_db.String())
 
 
-@fm.url_value_preprocessor
-def pull_locale(endpoint, values):
-    g.locale = values.pop('locale')
+class User(auth_db.Model, UserMixin):
+        id = auth_db.Column(auth_db.Integer(), primary_key=True)
+        email = auth_db.Column(auth_db.String(), unique=True)
+        password = auth_db.Column(auth_db.String())
+        active = auth_db.Column(auth_db.Boolean())
+        confirmed_at = auth_db.Column(auth_db.DateTime())
+        last_login_at = auth_db.Column(auth_db.DateTime())
+        current_login_at = auth_db.Column(auth_db.DateTime())
+        last_login_ip = auth_db.Column(auth_db.String(15))
+        current_login_ip = auth_db.Column(auth_db.String(15))
+        login_count = auth_db.Column(auth_db.Integer())
+        roles = auth_db.relationship('Role', secondary=users_roles,
+                                     backref=auth_db.backref('users',
+                                     lazy='dynamic'))
+
+auth_datastore = SQLAlchemyUserDatastore(auth_db, User, Role)
+security = Security(app, auth_datastore)
 
 
-@fm.before_request
-def before_request_fm():
+@babel.localeselector
+def get_locale():
+    return g.locale
+
+
+@app.before_first_request
+def before_first_request():
+    auth_db.create_all()
+
+
+@app.before_request
+def before_request():
+    if not hasattr(g, 'locale'):
+        g.locale = request.accept_languages.best_match(LOCALES.keys())
+        if('locale' in request.args):
+            l = request.args.get('locale')
+            if l in LOCALES.keys():
+                g.locale = l
+
+    if not hasattr(g, 'locale_uris') and 'LOCALE_HOSTS' in app.config:
+        g.locale_uris = dict()
+        for locale in app.config['LOCALE_HOSTS']:
+            if locale in LOCALES and app.config['LOCALE_HOSTS'][locale]:
+                g.locale_uris[locale] = app.config['LOCALE_HOSTS'][locale]
+
     if not hasattr(g, 'other_locales') or g.locale in g.other_locales:
         g.other_locales = dict()
         for locale in LOCALES:
@@ -38,12 +125,12 @@ def before_request_fm():
     g.user = False
 
 
-@fm.route('/')
+@app.route('/')
 def home():
     return render_template('index.html', user=g.user)
 
 
-@fm.route('/wms')
+@app.route('/wms')
 def wms():
 
     try:
@@ -68,30 +155,6 @@ def wms():
     resp.headers['Content-Type'] = r.headers['Content-Type']
 
     return resp
-
-
-app = Flask(__name__)
-app.register_blueprint(fm)
-babel = Babel(app)
-
-# Set basic config
-app.config['WMS_URL'] = 'http://127.0.0.1:5001/cgi-bin/mapserv?'
-
-
-@babel.localeselector
-def get_locale():
-    return g.locale
-
-
-@app.before_request
-def before_request():
-    if not hasattr(g, 'locale'):
-        g.locale = request.accept_languages.best_match(LOCALES.keys())
-
-
-@app.route('/')
-def redirect_to_home():
-    return redirect(url_for('fishmap.home', locale=g.locale))
 
 
 class InvalidWmsArgs(Exception):
