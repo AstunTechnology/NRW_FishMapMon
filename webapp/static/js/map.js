@@ -306,21 +306,32 @@
     }
 
     function createOutputPanel(layers, activities, container, toggleCallback) {
+        var curType = null;
         var tmpl = jQuery('#outputTmpl').html();
         var model = {"layers": layers, "activities": activities};
         var treeElm = jQuery.mustache(tmpl, jQuery.extend(model, FISH_MAP.tmplView));
         var tree$ = jQuery(container).append(treeElm);
         tree$.find('input').change(function() {
+            // Ensure only one project output layer is visible at a time
+            if (this.checked) {
+                var that = this;
+                jQuery(tree$).find('input:checkbox').filter(function() {
+                    return (jQuery(this).val().match(curType) && this !== that);
+                }).each(function() {
+                    this.checked = false;
+                    toggleCallback(layers, this.value, this.checked);
+                });
+            }
             toggleCallback(layers, this.value, this.checked);
         });
         addLayerTreeToggle(tree$);
         var select = jQuery(container).find('select');
         select.change(function() {
-            var val = this.value;
+            curType = this.value;
             // Only show the intensity, vessels and sensitivity layers for the
             // selected activity
             jQuery('li.layer', container).hide().filter(function () {
-                return jQuery(this).find('input').val().match(val);
+                return jQuery(this).find('input').val().match(curType);
             }).show();
             // If the user is showing an intensity, vessels or sensitivity
             // layer then hide the old layer and show the one associated with
@@ -329,7 +340,7 @@
                 this.checked = false;
                 jQuery(this).change();
                 var prefix = this.value.match(/^\w+_lvls_/)[0];
-                jQuery('input#' + prefix + val).prop('checked', true).change();
+                jQuery('input#' + prefix + curType).prop('checked', true).change();
             });
         }).change();
     }
