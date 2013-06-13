@@ -171,6 +171,7 @@
         <ul class="tree">
         {{#groups}}
             {{#overlay}}
+            {{^hidden}}
             <li>
                 <h3>{{#_}}{{id}}{{/_}}</h3>
                 <ul>
@@ -179,6 +180,7 @@
                     {{/layers}}
                 </ul>
             </li>
+            {{/hidden}}
             {{/overlay}}
         {{/groups}}
         </ul>

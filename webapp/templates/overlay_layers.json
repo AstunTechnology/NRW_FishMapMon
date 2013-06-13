@@ -10,7 +10,8 @@
                     "visible": true
                 }
             ], 
-            "overlay": true
+            "overlay": true,
+            "hidden": true
         }, 
         {
             "id": "habitats_grp", 
