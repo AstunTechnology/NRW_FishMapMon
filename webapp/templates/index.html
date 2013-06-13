@@ -267,10 +267,16 @@
         <h2>{{#_}}restricted_closed_scalloping{{/_}}</h2>
         <table class="info">
             <tbody>
+                {{#features}}
+                <tr>
+                    <th>{{#_}}Area{{/_}}</th>
+                    <td>{{attributes.areaname}}</td>
+                </tr>
                 <tr>
                     <th>{{#_}}Description{{/_}}</th>
                     <td>{{#_}}Closed{{/_}}</td>
                 </tr>
+                {{/features}}
             </tbody>
         </table>
         {{/restricted_closed_scalloping}}
