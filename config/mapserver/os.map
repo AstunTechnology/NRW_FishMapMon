@@ -5,7 +5,7 @@ MAP
         "init=epsg:27700"
     END
     EXTENT -3276800 -3276800 3276800 3276800
-    IMAGECOLOR 237 244 254
+    IMAGECOLOR 233 242 254
     FONTSET "fonts/fonts.list"
     TEMPLATEPATTERN "."
     SYMBOLSET "symbols/symbols.sym"
