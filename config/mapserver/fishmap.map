@@ -70,6 +70,8 @@ MAP
             ows_title "Project Area"
         END
         STATUS DEFAULT
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
         TYPE LINE
         UNITS METERS
         CLASS

@@ -110,6 +110,9 @@
                 "sensitivity_lvls_rsa_commercial": "{{ _('RSA Commercial Sensitivity') }}",
                 "sensitivity_lvls_rsa_noncharter": "{{ _('RSA Non Charter Boats Sensitivity') }}",
                 "sensitivity_lvls_rsa_shore": "{{ _('RSA Shore Fishing Sensitivity') }}",
+                "sensitivity_1": "{{ _('Low') }}",
+                "sensitivity_2": "{{ _('Medium') }}",
+                "sensitivity_3": "{{ _('High') }}",
                 "admiralty_chart": "{{ _('Admiralty Chart') }}",
                 "os_map": "{{ _('OS Map') }}",
                 "no_map": "{{ _('No Map') }}",
@@ -938,7 +941,7 @@
                 </tr>
                 <tr>
                     <th>{{#_}}Sensitivity level{{/_}}</th>
-                    <td>{{attributes.sensitivity_level}}</td>
+                    <td>{{#_}}sensitivity_{{attributes.sensitivity_level}}{{/_}}</td>
                 </tr>
                 {{/features}}
             </tbody>
