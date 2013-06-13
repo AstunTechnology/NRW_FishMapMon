@@ -1,4 +1,5 @@
 syntax: glob
 **/.ropeproject/
+**/**.pyc
 data/
 syntax: regexp
