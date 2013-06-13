@@ -1,7 +1,6 @@
 import os
 import requests
 
-from flask import Blueprint
 from flask import Flask
 from flask import g
 from flask import make_response
@@ -13,9 +12,12 @@ from flask.ext.security import RoleMixin
 from flask.ext.security import Security
 from flask.ext.security import SQLAlchemyUserDatastore
 from flask.ext.security import UserMixin
+from flask.ext.security import current_user
 from flask.ext.security import login_required
+from flask.ext.security.utils import encrypt_password
 from flask.ext.sqlalchemy import SQLAlchemy
 from flaskext.babel import Babel
+from sqlalchemy.exc import IntegrityError
 
 LOCALES = {
     'en': 'English',
@@ -52,7 +54,7 @@ if os.environ.get('FISHMAP_CONFIG_FILE'):
     app.config.from_envvar('FISHMAP_CONFIG_FILE')
 
 # Settings derived from those above
-app.config['SQL_ALCHEMY_DATABASE_URI'] = \
+app.config['SQLALCHEMY_DATABASE_URI'] = \
     'postgresql+psycopg2://{}:{}@/{}'.format(app.config['AUTH_USER'], PASSWORD,
                                              app.config['AUTH_DB'])
 app.config['SECURITY_PASSWORD_SALT'] = SALT
@@ -73,22 +75,34 @@ class Role(auth_db.Model, RoleMixin):
 
 
 class User(auth_db.Model, UserMixin):
-        id = auth_db.Column(auth_db.Integer(), primary_key=True)
-        email = auth_db.Column(auth_db.String(), unique=True)
-        password = auth_db.Column(auth_db.String())
-        active = auth_db.Column(auth_db.Boolean())
-        confirmed_at = auth_db.Column(auth_db.DateTime())
-        last_login_at = auth_db.Column(auth_db.DateTime())
-        current_login_at = auth_db.Column(auth_db.DateTime())
-        last_login_ip = auth_db.Column(auth_db.String(15))
-        current_login_ip = auth_db.Column(auth_db.String(15))
-        login_count = auth_db.Column(auth_db.Integer())
-        roles = auth_db.relationship('Role', secondary=users_roles,
-                                     backref=auth_db.backref('users',
-                                     lazy='dynamic'))
+    id = auth_db.Column(auth_db.Integer(), primary_key=True)
+    email = auth_db.Column(auth_db.String(), unique=True)
+    password = auth_db.Column(auth_db.String())
+    active = auth_db.Column(auth_db.Boolean())
+    confirmed_at = auth_db.Column(auth_db.DateTime())
+    last_login_at = auth_db.Column(auth_db.DateTime())
+    current_login_at = auth_db.Column(auth_db.DateTime())
+    last_login_ip = auth_db.Column(auth_db.String(15))
+    current_login_ip = auth_db.Column(auth_db.String(15))
+    login_count = auth_db.Column(auth_db.Integer())
+    roles = auth_db.relationship('Role', secondary=users_roles,
+                                 backref=auth_db.backref('users',
+                                 lazy='dynamic'))
 
 auth_datastore = SQLAlchemyUserDatastore(auth_db, User, Role)
 security = Security(app, auth_datastore)
+
+auth_db.create_all()  # create tables if don't already exist
+
+auth_datastore.find_or_create_role(
+    'user', description=
+    'User authorised to view information denied to the public')
+auth_datastore.find_or_create_role(
+    'admin', description='Administrator of Users')
+auth_datastore.find_or_create_role(
+    'dev', description='Developer of entire system')
+
+auth_datastore.commit()
 
 
 @babel.localeselector
@@ -98,7 +112,15 @@ def get_locale():
 
 @app.before_first_request
 def before_first_request():
-    auth_db.create_all()
+    try:
+        default_dev = auth_datastore.create_user(
+            email='fmm@astuntechnology.com',
+            password=encrypt_password('<password>'))
+        default_dev.roles = [auth_datastore.find_role('dev')]
+
+        auth_datastore.commit()
+    except IntegrityError:
+        auth_db.session.rollback()  # user exists
 
 
 @app.before_request
@@ -121,8 +143,8 @@ def before_request():
         for locale in LOCALES:
             if locale != g.locale:
                 g.other_locales[locale] = LOCALES[locale]
-    # Mock user
-    g.user = False
+
+    g.user = current_user
 
 
 @app.route('/')
@@ -233,4 +255,4 @@ def render_sld(layers):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, processes=8)
+    app.run(debug=True, processes=1)
