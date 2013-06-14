@@ -55,24 +55,6 @@
             ], 
             "overlay": true
         }, 
-        {
-            "id": "rsa_sites_grp", 
-            "layers": [
-                {
-                    "id": "rsa_standing_areas", 
-                    "info": true, 
-                    "legend": true, 
-                    "visible": false
-                }, 
-                {
-                    "id": "rsa_casting_sites", 
-                    "info": true, 
-                    "legend": true, 
-                    "visible": false
-                }
-            ], 
-            "overlay": true
-        }, 
         {% if g.user.is_authenticated() %}
         {
             "id": "detailed_activity_grp", 
@@ -117,5 +99,25 @@
             ], 
             "overlay": true
         }
+        {% if g.user.is_authenticated() %}
+        ,{
+            "id": "rsa_sites_grp", 
+            "layers": [
+                {
+                    "id": "rsa_standing_areas", 
+                    "info": true, 
+                    "legend": true, 
+                    "visible": false
+                }, 
+                {
+                    "id": "rsa_casting_sites", 
+                    "info": true, 
+                    "legend": true, 
+                    "visible": false
+                }
+            ], 
+            "output": true
+        }
+        {% endif %}
     ]
 }

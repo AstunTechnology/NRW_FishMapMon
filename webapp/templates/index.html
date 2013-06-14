@@ -192,15 +192,36 @@
     </script>
     <script id="outputTmpl" type="text/template">
     {% raw %}
-        <select>
-        {{#activities}}
-            <option value="{{.}}">{{#_}}{{.}}{{/_}}</option>
-        {{/activities}}
-        </select>
+        <div class="activity">
+            <select>
+            {{#activities}}
+                <option value="{{.}}">{{#_}}{{.}}{{/_}}</option>
+            {{/activities}}
+            </select>
+            <ul class="tree">
+            {{#layers}}
+                {{#groups}}
+                    {{#output}}
+                    {{#activity}}
+                    <li>
+                        <h3>{{#_}}{{id}}{{/_}}</h3>
+                        <ul>
+                            {{#layers}}
+                            <li class="layer"><input type="checkbox" value="{{id}}" id="{{id}}" {{#visible}}checked="checked"{{/visible}} /> <label for="{{id}}">{{#_}}{{id}}{{/_}}</label></li>
+                            {{/layers}}
+                        </ul>
+                    </li>
+                    {{/activity}}
+                    {{/output}}
+                {{/groups}}
+            {{/layers}}
+            </ul>
+        </div>
         <ul class="tree">
         {{#layers}}
             {{#groups}}
                 {{#output}}
+                {{^activity}}
                 <li>
                     <h3>{{#_}}{{id}}{{/_}}</h3>
                     <ul>
@@ -209,6 +230,7 @@
                         {{/layers}}
                     </ul>
                 </li>
+                {{/activity}}
                 {{/output}}
             {{/groups}}
         {{/layers}}

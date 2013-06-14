@@ -6,15 +6,25 @@
     var outputTypes = FISH_MAP.outputTypes;
 
     // Add the project output layers to the overlayLayers model, one per type /
-    // activity
+    // activity before any other output groups
+    var outputGrpIdx = overlayLayers.groups.length - 1;
+    for (var m = 0, grp; m < overlayLayers.groups.length; m++) {
+        grp = overlayLayers.groups[m];
+        if (grp.output) {
+            outputGrpIdx = m;
+            break;
+        }
+    }
     for (var m = 0, type, grp; m < outputTypes.length; m++) {
         type = outputTypes[m];
         grp = {
             "id": type + "_grp",
-            output: true,
-            layers:[]
+            "output": true,
+            "activity": true,
+            "layers":[]
         };
-        overlayLayers.groups.push(grp);
+        overlayLayers.groups.splice(outputGrpIdx, 0, grp);
+        outputGrpIdx += 1;
         for (var n = 0, activity, lyr; n < outputActivities.length; n++) {
             activity = outputActivities[n];
             lyr = {
@@ -312,10 +322,10 @@
         var treeElm = jQuery.mustache(tmpl, jQuery.extend(model, FISH_MAP.tmplView));
         var tree$ = jQuery(container).append(treeElm);
         tree$.find('input').change(function() {
-            // Ensure only one project output layer is visible at a time
-            if (this.checked) {
+            // Ensure only one activity layer is visible at a time
+            if (jQuery(this).parents().hasClass('activity') && this.checked) {
                 var that = this;
-                jQuery(tree$).find('input:checkbox').filter(function() {
+                jQuery(tree$).find('.activity input:checkbox').filter(function() {
                     return (jQuery(this).val().match(curType) && this !== that);
                 }).each(function() {
                     this.checked = false;
@@ -330,13 +340,14 @@
             curType = this.value;
             // Only show the intensity, vessels and sensitivity layers for the
             // selected activity
-            jQuery('li.layer', container).hide().filter(function () {
-                return jQuery(this).find('input').val().match(curType);
+            jQuery('.activity li.layer', container).hide().filter(function () {
+                var val = jQuery(this).find('input').val();
+                return val.match(curType);
             }).show();
             // If the user is showing an intensity, vessels or sensitivity
             // layer then hide the old layer and show the one associated with
             // the current activity
-            jQuery('li.layer input:checked').each(function() {
+            jQuery('.activity li.layer input:checked').each(function() {
                 this.checked = false;
                 jQuery(this).change();
                 var prefix = this.value.match(/^\w+_lvls_/)[0];

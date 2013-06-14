@@ -122,6 +122,12 @@ ul.tree li h3.collapsed {
     padding-left: 10px;
 }
 
+.outputs div.activity {
+    border: 1px solid lightgray;
+    margin-right: 10px;
+    padding: 5px;
+}
+
 /* Legend Panel */
 
 .olControlLegendPanel {
