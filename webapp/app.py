@@ -169,7 +169,7 @@ def home():
 def wms():
 
     try:
-        args = update_wms_args(request.args.copy(), g.user)
+        args = update_wms_args(request.args.copy(), g.user.is_authenticated())
     except (InvalidWmsArgs) as ex:
         return (ex.message, 500)
 
@@ -197,7 +197,7 @@ class InvalidWmsArgs(Exception):
         Exception.__init__(self, message)
 
 
-def update_wms_args(args, user):
+def update_wms_args(args, auth):
     """ Update the WMS request parameters before they are passed to the back
     end. Raises InvalidWmsArgs if the args to be returned are invalid such as
     the LAYER or LAYERS arg does not have a value """
@@ -206,7 +206,7 @@ def update_wms_args(args, user):
     layers = None
     layer_arg = next((a for a in ['LAYERS', 'LAYER'] if a in args), None)
     if layer_arg:
-        layers = update_wms_layers(args[layer_arg].split(','), user)
+        layers = update_wms_layers(args[layer_arg].split(','), auth)
 
     if layers:
         layers = ','.join(layers)
@@ -222,7 +222,7 @@ def update_wms_args(args, user):
     return args
 
 
-def update_wms_layers(layers, user):
+def update_wms_layers(layers, auth):
     """ Updates a list of layers to remove restricted layers if the user is not
     logged in and add the appropriate suffix to project output layers depending
     no whether a user is logged in or not """
@@ -232,7 +232,7 @@ def update_wms_layers(layers, user):
         based on whether the user is logged in or not. All other layers just
         pass through with the same name """
         if layer.startswith(('intensity', 'vessels')):
-            suffix = '_det' if user else '_gen'
+            suffix = '_det' if auth else '_gen'
             return '%s%s' % (layer, suffix)
         return layer
 
@@ -242,7 +242,7 @@ def update_wms_layers(layers, user):
             'activity_commercial_fishing_polygon',
             'activity_noncommercial_fishing_point',
             'activity_noncommercial_fishing_polygon']
-        return layer not in restricted_layers or user
+        return layer not in restricted_layers or auth
 
     layers = [
         update_layer(layer)

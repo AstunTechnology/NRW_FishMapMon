@@ -73,7 +73,7 @@
             ], 
             "overlay": true
         }, 
-        {% if user %}
+        {% if g.user.is_authenticated() %}
         {
             "id": "detailed_activity_grp", 
             "layers": [
