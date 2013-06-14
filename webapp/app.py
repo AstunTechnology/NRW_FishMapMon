@@ -15,9 +15,11 @@ from flask.ext.security import SQLAlchemyUserDatastore
 from flask.ext.security import UserMixin
 from flask.ext.security import current_user
 from flask.ext.security import login_required
+from flask.ext.security.utils import encrypt_password
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask_mail import Mail
 from flaskext.babel import Babel
+from sqlalchemy.exc import IntegrityError
 
 LOCALES = {
     'en': 'English',
@@ -93,6 +95,18 @@ class User(auth_db.Model, UserMixin):
 auth_datastore = SQLAlchemyUserDatastore(auth_db, User, Role)
 security = Security(app, auth_datastore)
 
+auth_db.create_all()  # create tables if don't already exist
+
+auth_datastore.find_or_create_role(
+        'user', description=
+        'User authorised to view information denied to the public')
+auth_datastore.find_or_create_role(
+        'admin', description='Administrator of Users')
+auth_datastore.find_or_create_role(
+        'dev', description='Developer of entire system')
+
+auth_datastore.commit()
+
 
 def set_locale():
     if('locale' in request.args):
@@ -134,7 +148,14 @@ def get_locale():
 
 @app.before_first_request
 def before_first_request():
-    auth_db.create_all()
+    try:
+        default_dev = auth_datastore.create_user(
+            email='fmm@astuntechnology.com',
+            password=encrypt_password('<password>'))
+        default_dev.roles = [auth_datastore.find_role('dev')]
+        auth_datastore.commit()
+    except IntegrityError:
+        auth_db.session.rollback()  # user exists
 
 
 @app.before_request
