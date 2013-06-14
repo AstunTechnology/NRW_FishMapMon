@@ -41,7 +41,7 @@ app.config['SECRET_KEY'] = 'it-would-be-a-good-idea-to-override-this!'
 
 # Flask-Security settings
 app.config['SECURITY_PASSWORD_HASH'] = 'bcrypt'
-app.config['SECURITY_RECOVERABLE'] = True
+app.config['SECURITY_RECOVERABLE'] = False
 app.config['SEND_REGISTER_EMAIL'] = False
 
 # Flask-Security string overrides
