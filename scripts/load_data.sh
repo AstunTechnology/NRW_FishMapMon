@@ -9,6 +9,9 @@ set -o verbose
 # Project Area
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' Project_Area/Project_Area_Boundaryline.TAB -nln project_area -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
+# High Water (used with No Map base map)
+ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' BaseMapping/high_water_wales.TAB -nln high_water_wales -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+
 # Habitat
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "HabitatLayers/Intertidal/INTERTIDAL Fisheries Habitats.TAB" -nln intertidal_habitats -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
@@ -16,11 +19,11 @@ ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=
 
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "HabitatLayers/Subtidal/confidencelayer.tab" -nln subtidal_habitats_confidence -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
-ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "RestrictedZones/ClosedAreas_WG_Scallop.TAB" -nln restricted_closed_scalloping -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "RestrictedZones/Closed_Scallop_Fishing.TAB" -nln restricted_closed_scalloping -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
 # Explicitly set the characher encoding to match the TAB file due to symbols outside ASCII range
 export PGCLIENTENCODING=LATIN1
-ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "RestrictedZones/Sev_and_ reg_orders_Wales_polyv_3_region.tab" -nln several_and_regulatory_orders -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "RestrictedZones/Sev_and_ reg_orders_Wales.TAB" -nln several_and_regulatory_orders -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 export PGCLIENTENCODING=UTF-8
 
 # Restricted Zones
@@ -50,9 +53,6 @@ ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Intensity_Lvls_Fixed_Pots.tab" -nln intensity_lvls_fixed_pots_det -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 # Ignore lines
 # FMM_Data/Outputs/Intensity_Lvls_Fixed_Pots_Lines.tab
-
-ogr2ogr -overwrite -skipfailures -sql "select *, 0 as '_overlaps' from Intensity_Lvls_Foot_Access_General" -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Intensity_Lvls_Foot_Access_General.tab" -nln intensity_lvls_foot_access_gen -s_srs "EPSG:27700" -a_srs "EPSG:27700"
-ogr2ogr -overwrite -skipfailures -sql "select *, 0 as '_overlaps' from Intensity_Lvls_Foot_Access" -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Intensity_Lvls_Foot_Access.tab" -nln intensity_lvls_foot_access_det -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Intensity_Lvls_King_Scallops_General.tab" -nln intensity_lvls_king_scallops_gen -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Intensity_Lvls_King_Scallops.tab" -nln intensity_lvls_king_scallops_det -s_srs "EPSG:27700" -a_srs "EPSG:27700"
@@ -89,7 +89,6 @@ ogr2ogr -overwrite -skipfailures -sql "select *, 0 as '_overlaps' from Intensity
 # Sensitivity
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Sensitivity/SensitivityLvl_CasHandGather_Generalised.tab" -nln sensitivity_lvls_cas_hand_gath -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Sensitivity/SensitivityLvll_Potting_Generalised.tab" -nln sensitivity_lvls_fixed_pots -s_srs "EPSG:27700" -a_srs "EPSG:27700"
-ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Sensitivity/SensitivityLvl_FootAccess_Generalised.tab" -nln sensitivity_lvls_foot_access -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Sensitivity/SensitivityLvll_Scallops_Generalised.tab" -nln sensitivity_lvls_king_scallops -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Sensitivity/SensitivityLvll_LOT_Generalised.tab" -nln sensitivity_lvls_lot -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Sensitivity/SensitivityLvll_Mussels_Generalised.tab" -nln sensitivity_lvls_mussels -s_srs "EPSG:27700" -a_srs "EPSG:27700"

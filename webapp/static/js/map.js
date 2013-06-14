@@ -50,6 +50,20 @@
         controls: controls
     });
 
+    var nomap = wmsLayer(
+        FISH_MAP.getText('no_map'),
+        FISH_MAP.WMS_NOMAP_URL,
+        {
+            layers: 'nomap',
+            transparent: false
+        },
+        {
+            singleTile: false,
+            tileSize: new OpenLayers.Size(512, 512)
+        }
+    );
+    map.addLayer(nomap);
+
     var os = wmsLayer(
         FISH_MAP.getText('os_map'),
         FISH_MAP.WMS_OS_URL,
@@ -58,14 +72,12 @@
             transparent: false
         },
         {
+            attribution: "&copy; Ordnance Survey",
             singleTile: false,
             tileSize: new OpenLayers.Size(512, 512)
         }
     );
     map.addLayer(os);
-
-    var blank = new OpenLayers.Layer(FISH_MAP.getText('no_map'), {isBaseLayer: true});
-    map.addLayer(blank);
 
     var charts = wmsLayer(
         FISH_MAP.getText('admiralty_chart'),
@@ -75,6 +87,7 @@
             transparent: false
         },
         {
+            attribution: "&copy; UK Hydrographic Office",
             singleTile: false,
             tileSize: new OpenLayers.Size(512, 512)
         }
@@ -178,8 +191,7 @@
     map.addControl(info);
     info.activate();
 
-    map.setCenter(new OpenLayers.LonLat(260050, 371700), 3);
-    // map.setCenter(new OpenLayers.LonLat(241500, 379000), 10);
+    map.setCenter(new OpenLayers.LonLat(243725, 380125), 0);
 
     function wmsLayer(name, path, wms_options, layer_options) {
         var urls = path;
@@ -294,21 +306,32 @@
     }
 
     function createOutputPanel(layers, activities, container, toggleCallback) {
+        var curType = null;
         var tmpl = jQuery('#outputTmpl').html();
         var model = {"layers": layers, "activities": activities};
         var treeElm = jQuery.mustache(tmpl, jQuery.extend(model, FISH_MAP.tmplView));
         var tree$ = jQuery(container).append(treeElm);
         tree$.find('input').change(function() {
+            // Ensure only one project output layer is visible at a time
+            if (this.checked) {
+                var that = this;
+                jQuery(tree$).find('input:checkbox').filter(function() {
+                    return (jQuery(this).val().match(curType) && this !== that);
+                }).each(function() {
+                    this.checked = false;
+                    toggleCallback(layers, this.value, this.checked);
+                });
+            }
             toggleCallback(layers, this.value, this.checked);
         });
         addLayerTreeToggle(tree$);
         var select = jQuery(container).find('select');
         select.change(function() {
-            var val = this.value;
+            curType = this.value;
             // Only show the intensity, vessels and sensitivity layers for the
             // selected activity
             jQuery('li.layer', container).hide().filter(function () {
-                return jQuery(this).find('input').val().match(val);
+                return jQuery(this).find('input').val().match(curType);
             }).show();
             // If the user is showing an intensity, vessels or sensitivity
             // layer then hide the old layer and show the one associated with
@@ -317,7 +340,7 @@
                 this.checked = false;
                 jQuery(this).change();
                 var prefix = this.value.match(/^\w+_lvls_/)[0];
-                jQuery('input#' + prefix + val).prop('checked', true).change();
+                jQuery('input#' + prefix + curType).prop('checked', true).change();
             });
         }).change();
     }

@@ -69,21 +69,15 @@ MAP
         METADATA
             ows_title "Project Area"
         END
-        TOLERANCEUNITS pixels
+        STATUS DEFAULT
         TOLERANCE 2
         TEMPLATE 'id.tmpl'
-        STATUS OFF
-        TYPE POLYGON
+        TYPE LINE
         UNITS METERS
-        OPACITY 50
         CLASS
-            NAME "Project Area"
             STYLE
-                OUTLINECOLOR 255 0 0
-            END
-            STYLE
-                COLOR 255 0 0
-                OPACITY 0
+                COLOR 0 0 95
+                WIDTH 2
             END
         END
     END

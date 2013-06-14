@@ -58,12 +58,11 @@
                 "rsa_sites_grp": "{{ _('Recreational Sea Anglers Sites') }}",
                 "rsa_standing_areas": "{{ _('RSA Standing Areas') }}",
                 "rsa_casting_sites": "{{ _('RSA Casting Areas') }}",
-                "contextual_grp": "{{ _('Contextual') }}",
+                "contextual_grp": "{{ _('Reference Data') }}",
                 "national_limits": "{{ _('National Limits') }}",
                 "wrecks_polygon": "{{ _('Wrecks') }}",
                 "cas_hand_gath": "{{ _('Casual Hand Gather') }}",
                 "fixed_pots": "{{ _('Potting') }}",
-                "foot_access": "{{ _('Foot Access') }}",
                 "king_scallops": "{{ _('King Scallops') }}",
                 "lot": "{{ _('Light Otter Trawl') }}",
                 "mussels": "{{ _('Mussels') }}",
@@ -83,7 +82,6 @@
                 "sensitivity_grp": "{{ _('Sensitivity') }}",
                 "intensity_lvls_cas_hand_gath": "{{ _('Casual Hand Gather Intensity') }}",
                 "intensity_lvls_fixed_pots": "{{ _('Potting Intensity') }}",
-                "intensity_lvls_foot_access": "{{ _('Foot Access Intensity') }}",
                 "intensity_lvls_king_scallops": "{{ _('King Scallops Intensity') }}",
                 "intensity_lvls_lot": "{{ _('Light Otter Trawl Intensity') }}",
                 "intensity_lvls_mussels": "{{ _('Mussels Intensity') }}",
@@ -96,7 +94,6 @@
                 "intensity_lvls_rsa_shore": "{{ _('RSA Shore Fishing Intensity') }}",
                 "vessels_lvls_cas_hand_gath": "{{ _('Casual Hand Gather Vessels') }}",
                 "vessels_lvls_fixed_pots": "{{ _('Potting Vessels') }}",
-                "vessels_lvls_foot_access": "{{ _('Foot Access Vessels') }}",
                 "vessels_lvls_king_scallops": "{{ _('King Scallops Vessels') }}",
                 "vessels_lvls_lot": "{{ _('Light Otter Trawl Vessels') }}",
                 "vessels_lvls_mussels": "{{ _('Mussels Vessels') }}",
@@ -109,7 +106,6 @@
                 "vessels_lvls_rsa_shore": "{{ _('RSA Shore Fishing Vessels') }}",
                 "sensitivity_lvls_cas_hand_gath": "{{ _('Casual Hand Gather Sensitivity') }}",
                 "sensitivity_lvls_fixed_pots": "{{ _('Potting Sensitivity') }}",
-                "sensitivity_lvls_foot_access": "{{ _('Foot Access Sensitivity') }}",
                 "sensitivity_lvls_king_scallops": "{{ _('King Scallops Sensitivity') }}",
                 "sensitivity_lvls_lot": "{{ _('Light Otter Trawl Sensitivity') }}",
                 "sensitivity_lvls_mussels": "{{ _('Mussels Sensitivity') }}",
@@ -120,6 +116,9 @@
                 "sensitivity_lvls_rsa_commercial": "{{ _('RSA Commercial Sensitivity') }}",
                 "sensitivity_lvls_rsa_noncharter": "{{ _('RSA Non Charter Boats Sensitivity') }}",
                 "sensitivity_lvls_rsa_shore": "{{ _('RSA Shore Fishing Sensitivity') }}",
+                "sensitivity_1": "{{ _('Low') }}",
+                "sensitivity_2": "{{ _('Medium') }}",
+                "sensitivity_3": "{{ _('High') }}",
                 "admiralty_chart": "{{ _('Admiralty Chart') }}",
                 "os_map": "{{ _('OS Map') }}",
                 "no_map": "{{ _('No Map') }}",
@@ -144,26 +143,26 @@
             },
             overlayLayers: {% include "overlay_layers.json" %},
             outputActivities: [
-                "cas_hand_gath",
-                "fixed_pots",
-                "foot_access",
                 "king_scallops",
-                "lot",
-                "mussels",
-                "nets",
-                "pro_hand_gath",
                 "queen_scallops",
+                "mussels",
+                "lot",
+                "nets",
+                "fixed_pots",
                 "rsa_charterboats",
                 "rsa_commercial",
                 "rsa_noncharter",
-                "rsa_shore"
+                "rsa_shore",
+                "cas_hand_gath",
+                "pro_hand_gath"
             ],
-            outputTypes: ['intensity', 'vessels', 'sensitivity']
+            outputTypes: ['vessels', 'intensity', 'sensitivity']
         };
         FISH_MAP.ROOT_URL = window.location.protocol + '//' + window.location.host + window.location.pathname;
         FISH_MAP.WMS_ROOT_URL = FISH_MAP.ROOT_URL + 'wms?map=';
         FISH_MAP.WMS_OVERLAY_URL = FISH_MAP.WMS_ROOT_URL + 'fishmap';
         FISH_MAP.WMS_OS_URL = FISH_MAP.WMS_ROOT_URL + 'os';
+        FISH_MAP.WMS_NOMAP_URL = FISH_MAP.WMS_ROOT_URL + 'nomap';
         FISH_MAP.WMS_CHARTS_URL = FISH_MAP.WMS_ROOT_URL + 'charts';
     </script>
     <script src="{{ url_for('static', filename='js/jquery-1.9.1.min.js') }}"></script>
@@ -176,6 +175,7 @@
         <ul class="tree">
         {{#groups}}
             {{#overlay}}
+            {{^hidden}}
             <li>
                 <h3>{{#_}}{{id}}{{/_}}</h3>
                 <ul>
@@ -184,6 +184,7 @@
                     {{/layers}}
                 </ul>
             </li>
+            {{/hidden}}
             {{/overlay}}
         {{/groups}}
         </ul>
@@ -273,10 +274,16 @@
         <h2>{{#_}}restricted_closed_scalloping{{/_}}</h2>
         <table class="info">
             <tbody>
+                {{#features}}
+                <tr>
+                    <th>{{#_}}Area{{/_}}</th>
+                    <td>{{attributes.areaname}}</td>
+                </tr>
                 <tr>
                     <th>{{#_}}Description{{/_}}</th>
                     <td>{{#_}}Closed{{/_}}</td>
                 </tr>
+                {{/features}}
             </tbody>
         </table>
         {{/restricted_closed_scalloping}}
@@ -940,7 +947,7 @@
                 </tr>
                 <tr>
                     <th>{{#_}}Sensitivity level{{/_}}</th>
-                    <td>{{attributes.sensitivity_level}}</td>
+                    <td>{{#_}}sensitivity_{{attributes.sensitivity_level}}{{/_}}</td>
                 </tr>
                 {{/features}}
             </tbody>

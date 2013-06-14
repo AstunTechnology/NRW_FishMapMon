@@ -44,7 +44,7 @@ class TestUpdateWmsLayers():
         layers_in = [
             "intensity_lvls_cas_hand_gath",
             "vessels_lvls_fixed_pots",
-            "sensitivity_lvls_foot_access"
+            "sensitivity_lvls_nets"
         ]
         layers_out = update_wms_layers(layers_in, False)
         eq_(
@@ -52,7 +52,7 @@ class TestUpdateWmsLayers():
             [
                 "intensity_lvls_cas_hand_gath_gen",
                 "vessels_lvls_fixed_pots_gen",
-                "sensitivity_lvls_foot_access"
+                "sensitivity_lvls_nets"
             ]
         )
 
@@ -61,7 +61,7 @@ class TestUpdateWmsLayers():
         layers_in = [
             "intensity_lvls_cas_hand_gath",
             "vessels_lvls_fixed_pots",
-            "sensitivity_lvls_foot_access"
+            "sensitivity_lvls_nets"
         ]
         layers_out = update_wms_layers(layers_in, True)
         eq_(
@@ -69,7 +69,7 @@ class TestUpdateWmsLayers():
             [
                 "intensity_lvls_cas_hand_gath_det",
                 "vessels_lvls_fixed_pots_det",
-                "sensitivity_lvls_foot_access"
+                "sensitivity_lvls_nets"
             ]
         )
 
@@ -104,11 +104,11 @@ class TestRenderSld():
             sld = render_sld([
                 "intensity_lvls_cas_hand_gath_gen",
                 "vessels_lvls_fixed_pots_gen",
-                "sensitivity_lvls_foot_access_gen"
+                "sensitivity_lvls_nets_gen"
             ])
             assert "intensity_lvls_cas_hand_gath_gen" in sld
             assert "vessels_lvls_fixed_pots_gen" in sld
-            assert "sensitivity_lvls_foot_access_gen" in sld
+            assert "sensitivity_lvls_nets_gen" in sld
             assert "<Name>intensity</Name>" in sld
             assert "<Name>vessels</Name>" in sld
             assert "<Name>sensitivity</Name>" in sld
