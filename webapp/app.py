@@ -1,20 +1,16 @@
 import os
 import requests
 
-from flask import Blueprint
 from flask import Flask
 from flask import g
 from flask import make_response
-from flask import redirect
 from flask import render_template
 from flask import request
-from flask import url_for
 from flask.ext.security import RoleMixin
 from flask.ext.security import Security
 from flask.ext.security import SQLAlchemyUserDatastore
 from flask.ext.security import UserMixin
 from flask.ext.security import current_user
-from flask.ext.security import login_required
 from flask.ext.security.utils import encrypt_password
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask_mail import Mail
@@ -98,12 +94,12 @@ security = Security(app, auth_datastore)
 auth_db.create_all()  # create tables if don't already exist
 
 auth_datastore.find_or_create_role(
-        'user', description=
-        'User authorised to view information denied to the public')
+    'user', description=
+    'User authorised to view information denied to the public')
 auth_datastore.find_or_create_role(
-        'admin', description='Administrator of Users')
+    'admin', description='Administrator of Users')
 auth_datastore.find_or_create_role(
-        'dev', description='Developer of entire system')
+    'dev', description='Developer of entire system')
 
 auth_datastore.commit()
 
