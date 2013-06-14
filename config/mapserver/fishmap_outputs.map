@@ -1558,3 +1558,242 @@
         END
     END
 
+    LAYER
+        NAME "extents_king_scallops"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from extents_king_scallops) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "extents_king_scallops"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+    LAYER
+        NAME "extents_lot"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from extents_lot) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "extents_lot"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+    LAYER
+        NAME "extents_mussels"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from extents_mussels) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "extents_mussels"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+    LAYER
+        NAME "extents_nets"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from extents_nets) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "extents_nets"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+    LAYER
+        NAME "extents_pots"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from extents_pots) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "extents_pots"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+    LAYER
+        NAME "extents_pro_hand_gath"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from extents_pro_hand_gath) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "extents_pro_hand_gath"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+    LAYER
+        NAME "extents_queen_scallops"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from extents_queen_scallops) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "extents_queen_scallops"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+    LAYER
+        NAME "extents_rsa_charterboats"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from extents_rsa_charterboats) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "extents_rsa_charterboats"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+    LAYER
+        NAME "extents_rsa_noncharter"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from extents_rsa_noncharter) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "extents_rsa_noncharter"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+    LAYER
+        NAME "extents_rsa_shore"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from extents_rsa_shore) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "extents_rsa_shore"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END

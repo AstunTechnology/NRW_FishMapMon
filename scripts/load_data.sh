@@ -44,6 +44,18 @@ ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=
 # Create a buffered polygon layer for wrecks so that info is reliably returned
 psql -h localhost -U fishmap_webapp -W -d fishmap -c "drop table if exists wrecks_polygon; create table wrecks_polygon as select st_buffer(st_transform(wkb_geometry, 27700), 100) as wkb_geometry, ogc_fid, classf, catwrk from wrecks where st_geometrytype(wkb_geometry) = 'ST_Point';"
 
+# Fishing Extents
+ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Extents/Extents_CasHandGath.TAB" -nln extents_cas_hand_gath -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Extents/Extents_KingScallops.TAB" -nln extents_king_scallops -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Extents/Extents_LOT.TAB" -nln extents_lot -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Extents/Extents Mussels.TAB" -nln extents_mussels -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Extents/Extents_Netting.TAB" -nln extents_nets -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Extents/Extents_Potting.TAB" -nln extents_pots -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Extents/Extents_ProHandGath.TAB" -nln extents_pro_hand_gath -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Extents/Extents_QueenScallops.TAB" -nln extents_queen_scallops -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Extents/Extents_RSA_CB.TAB" -nln extents_rsa_charterboats -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Extents/Extents_RSA_NCB.TAB" -nln extents_rsa_noncharter -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Extents/Extents_RSA_Shore.TAB" -nln extents_rsa_shore -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
 # Intensity
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Intensity_Lvls_Cas_Hand_Gath_General.tab" -nln intensity_lvls_cas_hand_gath_gen -s_srs "EPSG:27700" -a_srs "EPSG:27700"

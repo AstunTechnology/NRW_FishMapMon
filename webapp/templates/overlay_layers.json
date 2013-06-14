@@ -98,6 +98,72 @@
                 }
             ], 
             "overlay": true
+        },
+        {
+            "id": "extents_grp", 
+            "layers": [
+                {
+                    "id": "extents_king_scallops",
+                    "info": false,
+                    "legend": true,
+                    "visible": false
+                },
+                {
+                    "id": "extents_queen_scallops",
+                    "info": false,
+                    "legend": true,
+                    "visible": false
+                },
+                {
+                    "id": "extents_mussels",
+                    "info": false,
+                    "legend": true,
+                    "visible": false
+                },
+                {
+                    "id": "extents_lot",
+                    "info": false,
+                    "legend": true,
+                    "visible": false
+                },
+                {
+                    "id": "extents_nets",
+                    "info": false,
+                    "legend": true,
+                    "visible": false
+                },
+                {
+                    "id": "extents_pots",
+                    "info": false,
+                    "legend": true,
+                    "visible": false
+                },
+                {
+                    "id": "extents_rsa_charterboats",
+                    "info": false,
+                    "legend": true,
+                    "visible": false
+                },
+                {
+                    "id": "extents_rsa_noncharter",
+                    "info": false,
+                    "legend": true,
+                    "visible": false
+                },
+                {
+                    "id": "extents_rsa_shore",
+                    "info": false,
+                    "legend": true,
+                    "visible": false
+                },
+                {
+                    "id": "extents_pro_hand_gath",
+                    "info": false,
+                    "legend": true,
+                    "visible": false
+                }
+            ],
+            "output": true
         }
         {% if g.user.is_authenticated() %}
         ,{
