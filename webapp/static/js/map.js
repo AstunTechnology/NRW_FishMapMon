@@ -143,6 +143,7 @@
             },
             getfeatureinfo: function(event) {
 
+                // Build a list of features that we want to display info for
                 var features = [];
                 for (var i = 0, feature; i < event.features.length; i++) {
                     feature = event.features[i];
@@ -167,10 +168,15 @@
                         var key = feature.type;
                         // Determine if the feature is from an output layer and
                         // if it is just use the output type as the key
-                        // ('intensity', 'vessels' or 'sensitivity')
+                        // ('intensity', 'vessels', 'sensitivity' or 'extents')
                         var prefix = key.match(/^(\w+)_lvls_/);
                         if (prefix && prefix.length === 2) {
                             key = prefix[1];
+                        } else {
+                            prefix = key.match(/^(extents)_/);
+                            if (prefix && prefix.length === 2) {
+                                key = prefix[1];
+                            }
                         }
                         if (!model[key]) {
                             model[key] = {

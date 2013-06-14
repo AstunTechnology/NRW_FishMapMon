@@ -986,6 +986,19 @@
             </tbody>
         </table>
         {{/sensitivity}}
+        {{#extents}}
+        <h2>{{#_}}Extents{{/_}}</h2>
+        <table class="info">
+            <tbody>
+                {{#features}}
+                <tr>
+                    <th>{{#_}}Name{{/_}}</th>
+                    <td>{{#_}}{{type}}{{/_}}</td>
+                </tr>
+                {{/features}}
+            </tbody>
+        </table>
+        {{/extents}}
     {% endraw %}
     </script>
 

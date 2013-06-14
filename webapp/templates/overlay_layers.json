@@ -104,61 +104,61 @@
             "layers": [
                 {
                     "id": "extents_king_scallops",
-                    "info": false,
+                    "info": true,
                     "legend": true,
                     "visible": false
                 },
                 {
                     "id": "extents_queen_scallops",
-                    "info": false,
+                    "info": true,
                     "legend": true,
                     "visible": false
                 },
                 {
                     "id": "extents_mussels",
-                    "info": false,
+                    "info": true,
                     "legend": true,
                     "visible": false
                 },
                 {
                     "id": "extents_lot",
-                    "info": false,
+                    "info": true,
                     "legend": true,
                     "visible": false
                 },
                 {
                     "id": "extents_nets",
-                    "info": false,
+                    "info": true,
                     "legend": true,
                     "visible": false
                 },
                 {
                     "id": "extents_pots",
-                    "info": false,
+                    "info": true,
                     "legend": true,
                     "visible": false
                 },
                 {
                     "id": "extents_rsa_charterboats",
-                    "info": false,
+                    "info": true,
                     "legend": true,
                     "visible": false
                 },
                 {
                     "id": "extents_rsa_noncharter",
-                    "info": false,
+                    "info": true,
                     "legend": true,
                     "visible": false
                 },
                 {
                     "id": "extents_rsa_shore",
-                    "info": false,
+                    "info": true,
                     "legend": true,
                     "visible": false
                 },
                 {
                     "id": "extents_pro_hand_gath",
-                    "info": false,
+                    "info": true,
                     "legend": true,
                     "visible": false
                 }
