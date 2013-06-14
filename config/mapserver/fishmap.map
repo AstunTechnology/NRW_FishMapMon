@@ -99,11 +99,9 @@ MAP
         STATUS OFF
         TYPE POLYGON
         UNITS METERS
-        OPACITY 50
         CLASS
             STYLE
                 COLOR 0 255 0
-                OPACITY 50
             END
         END
     END
@@ -125,11 +123,9 @@ MAP
         STATUS OFF
         TYPE POLYGON
         UNITS METERS
-        OPACITY 50
         CLASS
             STYLE
                 COLOR 255 0 0
-                OPACITY 50
             END
         END
     END
@@ -151,11 +147,9 @@ MAP
         STATUS OFF
         TYPE POLYGON
         UNITS METERS
-        OPACITY 50
         CLASS
             STYLE
                 COLOR 255 0 0
-                OPACITY 50
             END
         END
     END
@@ -310,11 +304,9 @@ MAP
         STATUS OFF
         TYPE POLYGON
         UNITS METERS
-        OPACITY 50
         CLASS
             STYLE
                 COLOR 255 0 0
-                OPACITY 50
             END
         END
     END
@@ -336,11 +328,9 @@ MAP
         STATUS OFF
         TYPE POLYGON
         UNITS METERS
-        OPACITY 50
         CLASS
             STYLE
                 COLOR 255 0 0
-                OPACITY 50
             END
         END
     END
@@ -391,7 +381,6 @@ MAP
         REQUIRES "[wrecks_polygon]"
         TYPE POINT
         UNITS METERS
-        # OPACITY 50
         CLASS
             SYMBOL "wreck"
             COLOR 0 0 0
