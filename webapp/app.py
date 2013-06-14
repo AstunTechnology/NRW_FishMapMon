@@ -13,8 +13,10 @@ from flask.ext.security import RoleMixin
 from flask.ext.security import Security
 from flask.ext.security import SQLAlchemyUserDatastore
 from flask.ext.security import UserMixin
+from flask.ext.security import current_user
 from flask.ext.security import login_required
 from flask.ext.sqlalchemy import SQLAlchemy
+from flask_mail import Mail
 from flaskext.babel import Babel
 
 LOCALES = {
@@ -30,6 +32,7 @@ assert PASSWORD
 
 app = Flask(__name__)
 babel = Babel(app)
+mail = Mail()  # config initialized with locale
 
 # Set basic config
 app.config['SECRET_KEY'] = 'it-would-be-a-good-idea-to-override-this!'
@@ -73,22 +76,55 @@ class Role(auth_db.Model, RoleMixin):
 
 
 class User(auth_db.Model, UserMixin):
-        id = auth_db.Column(auth_db.Integer(), primary_key=True)
-        email = auth_db.Column(auth_db.String(), unique=True)
-        password = auth_db.Column(auth_db.String())
-        active = auth_db.Column(auth_db.Boolean())
-        confirmed_at = auth_db.Column(auth_db.DateTime())
-        last_login_at = auth_db.Column(auth_db.DateTime())
-        current_login_at = auth_db.Column(auth_db.DateTime())
-        last_login_ip = auth_db.Column(auth_db.String(15))
-        current_login_ip = auth_db.Column(auth_db.String(15))
-        login_count = auth_db.Column(auth_db.Integer())
-        roles = auth_db.relationship('Role', secondary=users_roles,
-                                     backref=auth_db.backref('users',
-                                     lazy='dynamic'))
+    id = auth_db.Column(auth_db.Integer(), primary_key=True)
+    email = auth_db.Column(auth_db.String(), unique=True)
+    password = auth_db.Column(auth_db.String())
+    active = auth_db.Column(auth_db.Boolean())
+    confirmed_at = auth_db.Column(auth_db.DateTime())
+    last_login_at = auth_db.Column(auth_db.DateTime())
+    current_login_at = auth_db.Column(auth_db.DateTime())
+    last_login_ip = auth_db.Column(auth_db.String(15))
+    current_login_ip = auth_db.Column(auth_db.String(15))
+    login_count = auth_db.Column(auth_db.Integer())
+    roles = auth_db.relationship('Role', secondary=users_roles,
+                                 backref=auth_db.backref('users',
+                                 lazy='dynamic'))
 
 auth_datastore = SQLAlchemyUserDatastore(auth_db, User, Role)
 security = Security(app, auth_datastore)
+
+
+def set_locale():
+    if('locale' in request.args):
+        l = request.args.get('locale')
+    else:
+        l = request.accept_languages.best_match(LOCALES.keys())
+
+    if not hasattr(g, 'locale') or l != g.locale and l in LOCALES.keys():
+        g.locale = l
+        if not hasattr(g, 'other_locales') or g.locale in g.other_locales:
+            g.other_locales = dict()
+            for locale in LOCALES:
+                if locale != g.locale:
+                    g.other_locales[locale] = LOCALES[locale]
+        if ('LOCALE_SMTP' in app.config
+                and g.locale in app.config['LOCALE_SMTP']):
+            smtp = app.config['LOCALE_SMTP']
+            app.config['MAIL_SERVER'] = smtp.get('server', 'localhost')
+            app.config['MAIL_PORT'] = smtp.get('port', 25)
+            app.config['MAIL_USE_TLS'] = smtp.get('use_tls', False)
+            app.config['MAIL_USE_SSL'] = smtp.get('use_ssl', False)
+            app.config['MAIL_USERNAME'] = smtp.get('username', None)
+            app.config['MAIL_PASSWORD'] = smtp.get('password', None)
+            app.config['MAIL_DEFAULT_SENDER'] = smtp.get('sender', None)
+            app.config['MAIL_MAX_EMAILS'] = smtp.get('max_emails', None)
+            mail.init_app(app)
+
+    if not hasattr(g, 'locale_uris') and 'LOCALE_HOSTS' in app.config:
+        g.locale_uris = dict()
+        for locale in app.config['LOCALE_HOSTS']:
+            if locale in LOCALES and app.config['LOCALE_HOSTS'][locale]:
+                g.locale_uris[locale] = app.config['LOCALE_HOSTS'][locale]
 
 
 @babel.localeselector
@@ -103,26 +139,8 @@ def before_first_request():
 
 @app.before_request
 def before_request():
-    if not hasattr(g, 'locale'):
-        g.locale = request.accept_languages.best_match(LOCALES.keys())
-        if('locale' in request.args):
-            l = request.args.get('locale')
-            if l in LOCALES.keys():
-                g.locale = l
-
-    if not hasattr(g, 'locale_uris') and 'LOCALE_HOSTS' in app.config:
-        g.locale_uris = dict()
-        for locale in app.config['LOCALE_HOSTS']:
-            if locale in LOCALES and app.config['LOCALE_HOSTS'][locale]:
-                g.locale_uris[locale] = app.config['LOCALE_HOSTS'][locale]
-
-    if not hasattr(g, 'other_locales') or g.locale in g.other_locales:
-        g.other_locales = dict()
-        for locale in LOCALES:
-            if locale != g.locale:
-                g.other_locales[locale] = LOCALES[locale]
-    # Mock user
-    g.user = False
+    set_locale()
+    g.user = current_user
 
 
 @app.route('/')
@@ -233,4 +251,4 @@ def render_sld(layers):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, processes=8)
+    app.run(debug=True, processes=1)

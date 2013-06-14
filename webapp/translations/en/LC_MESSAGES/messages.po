@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-06-11 16:56+0100\n"
+"POT-Creation-Date: 2013-06-14 08:40+0100\n"
 "PO-Revision-Date: 2013-05-23 16:26+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -186,331 +186,335 @@ msgstr ""
 msgid "Fish Map Môn"
 msgstr ""
 
-#: webapp/templates/index.html:20 webapp/templates/security/_menu.html:4
+#: webapp/templates/index.html:23
+msgid "Sign out"
+msgstr ""
+
+#: webapp/templates/index.html:25 webapp/templates/security/_menu.html:4
 #: webapp/templates/security/login_user.html:3
 #: webapp/templates/security/login_user.html:15
 msgid "Sign in"
 msgstr ""
 
-#: webapp/templates/index.html:36
+#: webapp/templates/index.html:42
 msgid "Project Outputs"
 msgstr ""
 
-#: webapp/templates/index.html:43 webapp/templates/index.html:44
+#: webapp/templates/index.html:49 webapp/templates/index.html:50
 #: webapp/templates/project_area.sld:7
 msgid "Project Area"
 msgstr ""
 
-#: webapp/templates/index.html:45
+#: webapp/templates/index.html:51
 msgid "Habitats"
 msgstr ""
 
-#: webapp/templates/index.html:46
+#: webapp/templates/index.html:52
 msgid "Intertidal Habitats"
 msgstr ""
 
-#: webapp/templates/index.html:47
+#: webapp/templates/index.html:53
 msgid "Subtidal Habitats"
 msgstr ""
 
-#: webapp/templates/index.html:48
+#: webapp/templates/index.html:54
 msgid "Subtidal Habitats Confidence"
 msgstr ""
 
-#: webapp/templates/index.html:49
+#: webapp/templates/index.html:55
 msgid "Restricted Zones"
 msgstr ""
 
-#: webapp/templates/index.html:50
+#: webapp/templates/index.html:56
 msgid "Areas Closed to Scalloping"
 msgstr ""
 
-#: webapp/templates/index.html:51
+#: webapp/templates/index.html:57
 #: webapp/templates/several_and_regulatory_orders.sld:7
 msgid "Several and Regulatory Orders"
 msgstr ""
 
-#: webapp/templates/index.html:52
+#: webapp/templates/index.html:58
 msgid "Recreational Sea Anglers Sites"
 msgstr ""
 
-#: webapp/templates/index.html:53 webapp/templates/rsa_standing_areas.sld:7
+#: webapp/templates/index.html:59 webapp/templates/rsa_standing_areas.sld:7
 msgid "RSA Standing Areas"
 msgstr ""
 
-#: webapp/templates/index.html:54 webapp/templates/rsa_casting_sites.sld:7
+#: webapp/templates/index.html:60 webapp/templates/rsa_casting_sites.sld:7
 msgid "RSA Casting Areas"
 msgstr ""
 
-#: webapp/templates/index.html:55
+#: webapp/templates/index.html:61
 msgid "Contextual"
 msgstr ""
 
-#: webapp/templates/index.html:56 webapp/templates/national_limits.sld:7
+#: webapp/templates/index.html:62 webapp/templates/national_limits.sld:7
 msgid "National Limits"
 msgstr ""
 
-#: webapp/templates/index.html:57
+#: webapp/templates/index.html:63
 msgid "Wrecks"
 msgstr ""
 
-#: webapp/templates/index.html:58
+#: webapp/templates/index.html:64
 msgid "Casual Hand Gather"
 msgstr ""
 
-#: webapp/templates/index.html:59
+#: webapp/templates/index.html:65
 msgid "Potting"
 msgstr ""
 
-#: webapp/templates/index.html:60
+#: webapp/templates/index.html:66
 msgid "Foot Access"
 msgstr ""
 
-#: webapp/templates/index.html:61
+#: webapp/templates/index.html:67
 msgid "King Scallops"
 msgstr ""
 
-#: webapp/templates/index.html:62
+#: webapp/templates/index.html:68
 msgid "Light Otter Trawl"
 msgstr ""
 
-#: webapp/templates/index.html:63
+#: webapp/templates/index.html:69
 msgid "Mussels"
 msgstr ""
 
-#: webapp/templates/index.html:64
+#: webapp/templates/index.html:70
 msgid "Netting"
 msgstr ""
 
-#: webapp/templates/index.html:65
+#: webapp/templates/index.html:71
 msgid "Professional Hand Gather"
 msgstr ""
 
-#: webapp/templates/index.html:66
+#: webapp/templates/index.html:72
 msgid "Queen Scallops"
 msgstr ""
 
-#: webapp/templates/index.html:67
+#: webapp/templates/index.html:73
 msgid "RSA Charter Boats"
 msgstr ""
 
-#: webapp/templates/index.html:68
+#: webapp/templates/index.html:74
 msgid "RSA Commercial"
 msgstr ""
 
-#: webapp/templates/index.html:69
+#: webapp/templates/index.html:75
 msgid "RSA Non Charter Boats"
 msgstr ""
 
-#: webapp/templates/index.html:70
+#: webapp/templates/index.html:76
 msgid "RSA Shore Fishing"
 msgstr ""
 
-#: webapp/templates/index.html:71
+#: webapp/templates/index.html:77
 msgid "Detailed Fishing Activity"
 msgstr ""
 
-#: webapp/templates/index.html:72
+#: webapp/templates/index.html:78
 msgid "Commercial Activity"
 msgstr ""
 
-#: webapp/templates/index.html:73
+#: webapp/templates/index.html:79
 msgid "Non-Commercial Locations"
 msgstr ""
 
-#: webapp/templates/index.html:74
+#: webapp/templates/index.html:80
 msgid "Non-Commercial Areas"
 msgstr ""
 
-#: webapp/templates/index.html:75
+#: webapp/templates/index.html:81
 msgid "Fishing Intensity"
 msgstr ""
 
-#: webapp/templates/index.html:76
+#: webapp/templates/index.html:82
 msgid "Number of Vessels"
 msgstr ""
 
-#: webapp/templates/index.html:77
+#: webapp/templates/index.html:83
 msgid "Sensitivity"
 msgstr ""
 
-#: webapp/templates/index.html:78
+#: webapp/templates/index.html:84
 msgid "Casual Hand Gather Intensity"
 msgstr ""
 
-#: webapp/templates/index.html:79
+#: webapp/templates/index.html:85
 msgid "Potting Intensity"
 msgstr ""
 
-#: webapp/templates/index.html:80
+#: webapp/templates/index.html:86
 msgid "Foot Access Intensity"
 msgstr ""
 
-#: webapp/templates/index.html:81
+#: webapp/templates/index.html:87
 msgid "King Scallops Intensity"
 msgstr ""
 
-#: webapp/templates/index.html:82
+#: webapp/templates/index.html:88
 msgid "Light Otter Trawl Intensity"
 msgstr ""
 
-#: webapp/templates/index.html:83
+#: webapp/templates/index.html:89
 msgid "Mussels Intensity"
 msgstr ""
 
-#: webapp/templates/index.html:84
+#: webapp/templates/index.html:90
 msgid "Netting Intensity"
 msgstr ""
 
-#: webapp/templates/index.html:85
+#: webapp/templates/index.html:91
 msgid "Professional Hand Gather Intensity"
 msgstr ""
 
-#: webapp/templates/index.html:86
+#: webapp/templates/index.html:92
 msgid "Queen Scallops Intensity"
 msgstr ""
 
-#: webapp/templates/index.html:87
+#: webapp/templates/index.html:93
 msgid "RSA Charter Boats Intensity"
 msgstr ""
 
-#: webapp/templates/index.html:88
+#: webapp/templates/index.html:94
 msgid "RSA Commercial Intensity"
 msgstr ""
 
-#: webapp/templates/index.html:89
+#: webapp/templates/index.html:95
 msgid "RSA Non Charter Boats Intensity"
 msgstr ""
 
-#: webapp/templates/index.html:90
+#: webapp/templates/index.html:96
 msgid "RSA Shore Fishing Intensity"
 msgstr ""
 
-#: webapp/templates/index.html:91
+#: webapp/templates/index.html:97
 msgid "Casual Hand Gather Vessels"
 msgstr ""
 
-#: webapp/templates/index.html:92
+#: webapp/templates/index.html:98
 msgid "Potting Vessels"
 msgstr ""
 
-#: webapp/templates/index.html:93
+#: webapp/templates/index.html:99
 msgid "Foot Access Vessels"
 msgstr ""
 
-#: webapp/templates/index.html:94
+#: webapp/templates/index.html:100
 msgid "King Scallops Vessels"
 msgstr ""
 
-#: webapp/templates/index.html:95
+#: webapp/templates/index.html:101
 msgid "Light Otter Trawl Vessels"
 msgstr ""
 
-#: webapp/templates/index.html:96
+#: webapp/templates/index.html:102
 msgid "Mussels Vessels"
 msgstr ""
 
-#: webapp/templates/index.html:97
+#: webapp/templates/index.html:103
 msgid "Netting Vessels"
 msgstr ""
 
-#: webapp/templates/index.html:98
+#: webapp/templates/index.html:104
 msgid "Professional Hand Gather Vessels"
 msgstr ""
 
-#: webapp/templates/index.html:99
+#: webapp/templates/index.html:105
 msgid "Queen Scallops Vessels"
 msgstr ""
 
-#: webapp/templates/index.html:100
+#: webapp/templates/index.html:106
 msgid "RSA Charter Boats Vessels"
 msgstr ""
 
-#: webapp/templates/index.html:101
+#: webapp/templates/index.html:107
 msgid "RSA Commercial Vessels"
 msgstr ""
 
-#: webapp/templates/index.html:102
+#: webapp/templates/index.html:108
 msgid "RSA Non Charter Boats Vessels"
 msgstr ""
 
-#: webapp/templates/index.html:103
+#: webapp/templates/index.html:109
 msgid "RSA Shore Fishing Vessels"
 msgstr ""
 
-#: webapp/templates/index.html:104
+#: webapp/templates/index.html:110
 msgid "Casual Hand Gather Sensitivity"
 msgstr ""
 
-#: webapp/templates/index.html:105
+#: webapp/templates/index.html:111
 msgid "Potting Sensitivity"
 msgstr ""
 
-#: webapp/templates/index.html:106
+#: webapp/templates/index.html:112
 msgid "Foot Access Sensitivity"
 msgstr ""
 
-#: webapp/templates/index.html:107
+#: webapp/templates/index.html:113
 msgid "King Scallops Sensitivity"
 msgstr ""
 
-#: webapp/templates/index.html:108
+#: webapp/templates/index.html:114
 msgid "Light Otter Trawl Sensitivity"
 msgstr ""
 
-#: webapp/templates/index.html:109
+#: webapp/templates/index.html:115
 msgid "Mussels Sensitivity"
 msgstr ""
 
-#: webapp/templates/index.html:110
+#: webapp/templates/index.html:116
 msgid "Netting Sensitivity"
 msgstr ""
 
-#: webapp/templates/index.html:111
+#: webapp/templates/index.html:117
 msgid "Professional Hand Gather Sensitivity"
 msgstr ""
 
-#: webapp/templates/index.html:112
+#: webapp/templates/index.html:118
 msgid "Queen Scallops Sensitivity"
 msgstr ""
 
-#: webapp/templates/index.html:113
+#: webapp/templates/index.html:119
 msgid "RSA Charter Boats Sensitivity"
 msgstr ""
 
-#: webapp/templates/index.html:114
+#: webapp/templates/index.html:120
 msgid "RSA Commercial Sensitivity"
 msgstr ""
 
-#: webapp/templates/index.html:115
+#: webapp/templates/index.html:121
 msgid "RSA Non Charter Boats Sensitivity"
 msgstr ""
 
-#: webapp/templates/index.html:116
+#: webapp/templates/index.html:122
 msgid "RSA Shore Fishing Sensitivity"
 msgstr ""
 
-#: webapp/templates/index.html:117
+#: webapp/templates/index.html:123
 msgid "Admiralty Chart"
 msgstr ""
 
-#: webapp/templates/index.html:118
+#: webapp/templates/index.html:124
 msgid "OS Map"
 msgstr ""
 
-#: webapp/templates/index.html:119
+#: webapp/templates/index.html:125
 msgid "No Map"
 msgstr ""
 
-#: webapp/templates/index.html:121
+#: webapp/templates/index.html:127
 msgid "Name"
 msgstr ""
 
-#: webapp/templates/index.html:122
+#: webapp/templates/index.html:128
 msgid "Habitat"
 msgstr ""
 
-#: webapp/templates/index.html:123
+#: webapp/templates/index.html:129
 msgid "Confidence"
 msgstr ""
 
