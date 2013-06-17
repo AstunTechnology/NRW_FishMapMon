@@ -165,6 +165,32 @@ def home():
     return render_template('index.html', user=g.user)
 
 
+@app.route('/gaz')
+def gaz():
+
+    args = {
+        "qstr": request.args.get('q'),
+        "SERVICE": "WFS",
+        "VERSION": "1.0.0",
+        "REQUEST": "getfeature",
+        "TYPENAME": "gaz",
+        "MAXFEATURES": "20"
+    }
+
+    # Set the MapServer map parameter specifiying a path relative the this app
+    args['map'] = get_mapserver_map_arg('gaz')
+
+    r = requests.get(
+        app.config['WMS_URL'],
+        params=args
+    )
+
+    resp = make_response(r.content)
+    resp.headers['Content-Type'] = r.headers['Content-Type']
+
+    return resp
+
+
 @app.route('/wms')
 def wms():
 
@@ -177,9 +203,7 @@ def wms():
     sld = render_sld(layers.split(','))
     args['SLD_BODY'] = sld
 
-    # Set the MapServer map parameter specifiying a path relative the this app
-    args['map'] = \
-        '%s/../config/mapserver/%s.map' % (app.root_path, args.get('map'))
+    args['map'] = get_mapserver_map_arg(args.get('map'))
 
     r = requests.post(
         app.config['WMS_URL'],
@@ -266,6 +290,11 @@ def render_sld(layers):
             layer_info.append({'template': template, 'name': layer})
         return render_template('base.sld', layer_info=layer_info)
 
+
+def get_mapserver_map_arg(map_name):
+    """ Set the MapServer map parameter specifiying a path relative the this
+    app """
+    return '%s/../config/mapserver/%s.map' % (app.root_path, map_name)
 
 if __name__ == '__main__':
     app.run(debug=True, processes=1)

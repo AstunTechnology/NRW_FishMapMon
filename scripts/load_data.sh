@@ -111,3 +111,9 @@ ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Sensitivity/SensitivityLvll_RSA_Generalised.tab" -nln sensitivity_lvls_rsa_commercial -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Sensitivity/SensitivityLvll_RSA_nonCharterBoat_Gen.tab" -nln sensitivity_lvls_rsa_noncharter -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/Sensitivity/SensitivityLvll_RSA_Generalised.tab" -nln sensitivity_lvls_rsa_shore -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+
+
+# Search
+export PGCLIENTENCODING=LATIN1
+ogr2ogr -overwrite -skipfailures -sql "select Definitive_Name + ' - ' + County_Name as name  from os50kgaz_wales" -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=postgres password=postgres' "Search/OS_50kGaz/os50kgaz_wales.TAB" -nln gaz -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -append -skipfailures -sql "select Post_code as name from CodePoint_Wales_points" -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=postgres password=postgres' "Search/OS_CodePoints/CodePoint_Wales_points.TAB" -nln gaz -s_srs "EPSG:27700" -a_srs "EPSG:27700"

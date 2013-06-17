@@ -1,0 +1,47 @@
+MAP
+
+    CONFIG PROJ_LIB "/usr/share/proj"
+    PROJECTION
+        "init=epsg:27700"
+    END
+    EXTENT -3276800 -3276800 3276800 3276800
+    UNITS METERS
+    CONFIG MS_ERRORFILE "/var/log/mapserver/gaz.log"
+    NAME "FishMap Gazetter"
+
+    WEB
+        METADATA
+            AUTHOR "Astun Technology Ltd - www.astuntechnology.com"
+            "wfs_title"          "FishMap Gazetter"
+            "wfs_srs"            "EPSG:27700"
+            "wfs_enable_request" "*"
+            "wfs_encoding" "UTF-8"
+        END
+        IMAGEPATH "/tmp/"
+        IMAGEURL ""
+        LOG "/var/log/mapserver/gaz-web.log"
+    END
+
+    LAYER
+        NAME "gaz"
+        INCLUDE "pgconnection.inc"
+        VALIDATION
+            "qstr" "[A-Za-z0-9 ]+"
+        END
+        DATA "wkb_geometry from (SELECT * FROM gaz WHERE name % $$%qstr%$$ ORDER BY similarity(name, $$%qstr%$$) DESC) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "wfs_title" "Gazetteer"
+            "wfs_srs" "EPSG:27700"
+            "wfs_enable_request" "*"
+            "gml_include_items" "all"
+            "gml_featureid" "ogc_fid"
+        END
+        STATUS ON
+        TYPE POINT
+        UNITS METERS
+    END
+
+END
