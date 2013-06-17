@@ -13,14 +13,21 @@ GRANT SELECT ON ALL TABLES IN SCHEMA public TO fishmap_webapp;
 ALTER DEFAULT PRIVILEGES IN SCHEMA public
    GRANT SELECT ON TABLES TO fishmap_webapp;
 
-DROP FUNCTION set_intensity_lvls(fishingtype int, rangeboundaries decimal[]);
-CREATE OR REPLACE FUNCTION set_intensity_lvls(fishingtype int, rangeboundaries decimal[])
+
+CREATE SCHEMA fishmap
+  AUTHORIZATION postgres;
+
+GRANT ALL ON SCHEMA fishmap TO postgres;
+GRANT ALL ON SCHEMA fishmap TO fishmap_webapp;
+
+
+CREATE OR REPLACE FUNCTION fishmap.set_intensity_lvls(fishingtype int, rangeboundaries decimal[])
   RETURNS int AS
 $BODY$
 DECLARE
 BEGIN
 
-	CREATE TABLE IF NOT EXISTS intensity_lvls (fishingtype int PRIMARY KEY, rangeboundaries decimal[]);
+	CREATE TABLE IF NOT EXISTS fishmap.intensity_lvls (fishingtype int PRIMARY KEY, rangeboundaries decimal[]);
 	WITH vals (fishingtype, rangeboundaries ) AS (
 		VALUES (fishingtype, rangeboundaries)
 	),
@@ -44,8 +51,8 @@ $BODY$
   LANGUAGE plpgsql VOLATILE
   ;
   
-CREATE TABLE IF NOT EXISTS intensity_lvls (fishingtype int PRIMARY KEY, rangeboundaries decimal[]);
-INSERT INTO intensity_lvls VALUES 
+CREATE TABLE IF NOT EXISTS fishmap.intensity_lvls (fishingtype int PRIMARY KEY, rangeboundaries decimal[]);
+INSERT INTO fishmap.intensity_lvls VALUES 
 	(1, '{0.8, 3.0}'),
 	(2, '{1.35, 10.2}'),
 	(3, '{0.04, 3.0}'),
