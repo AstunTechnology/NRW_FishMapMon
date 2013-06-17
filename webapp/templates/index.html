@@ -9,6 +9,7 @@
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
+    <link href="{{ url_for('static', filename='css/ui-darkness/jquery-ui-1.10.3.custom.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='js/OpenLayers-2.12/theme/default/style.css') }}" rel="stylesheet" />
     <link href="{{ url_for('static', filename='css/base.css') }}" rel="stylesheet" />
 
@@ -178,8 +179,10 @@
     </script>
     <script src="{{ url_for('static', filename='js/jquery-1.9.1.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery.mustache.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery-ui-1.10.3.custom.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/OpenLayers-2.12/OpenLayers.js') }}"></script>
     <script src="{{ url_for('static', filename='js/LegendPanel.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/MapSearch.js') }}"></script>
     <script src="{{ url_for('static', filename='js/BaseMapSwitcher.js') }}"></script>
     <script id="treeTmpl" type="text/template">
     {% raw %}

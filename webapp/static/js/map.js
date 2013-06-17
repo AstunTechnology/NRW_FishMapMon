@@ -119,6 +119,9 @@
     map.addControl(legendPanel);
     legendPanel.showLayers(jQuery.grep(visibleOverlays, function(item) {return item.legend}));
 
+    var mapSearch = new OpenLayers.Control.MapSearch();
+    map.addControl(mapSearch);
+
     var baseMapSwitcher = new OpenLayers.Control.BaseMapSwitcher();
     map.addControl(baseMapSwitcher);
 

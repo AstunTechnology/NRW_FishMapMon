@@ -196,6 +196,33 @@ ul.tree li h3.collapsed {
     font-weight: bold;
 }
 
+/* Map Search */
+
+.olControlMapSearch {
+    right: 259px;
+    top: 8px;
+}
+
+.olControlMapSearch input {
+    font-size: 1.2em;
+    border: 2px solid #3F3F3F;
+    padding: 2px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    border-radius: 5px;
+}
+
+.olControlMapSearch input.ui-autocomplete-loading {
+    background-image: url('../img/loading.gif');
+    background-position: right 4px center;
+    background-repeat: no-repeat;
+}
+
+.olControlMapSearch .msg {
+    font-size: 1.2em;
+    padding: 0.5em;
+}
+
 /* OpenLayer overrides */
 
 .olControlLayerSwitcher .layersDiv {
