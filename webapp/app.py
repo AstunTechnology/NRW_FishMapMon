@@ -1,4 +1,5 @@
 import os
+import re
 import requests
 
 from flask import Flask
@@ -284,10 +285,13 @@ def render_sld(layers):
         common_slds = ['intensity', 'vessels', 'sensitivity', 'sensvtyconf']
         for layer in layers:
             template = '%s.sld' % layer
+            info = {'template': template, 'name': layer}
             split_layer = layer.split('_')
             if split_layer[0] in common_slds:
-                template = '%s.sld' % split_layer[0]
-            layer_info.append({'template': template, 'name': layer})
+                info['template'] = '%s.sld' % split_layer[0]
+            info.update(get_extra_sld_info(layer))
+            layer_info.append(info)
+
         return render_template('base.sld', layer_info=layer_info)
 
 
@@ -295,6 +299,37 @@ def get_mapserver_map_arg(map_name):
     """ Set the MapServer map parameter specifiying a path relative the this
     app """
     return '%s/../config/mapserver/%s.map' % (app.root_path, map_name)
+
+
+def get_extra_sld_info(layer):
+    data = {}
+    split_layer = layer.split('_')
+    if split_layer[0] == 'intensity':
+        layer = re.sub(r'(_gen|_det)$', '', layer)
+        intensity_bands = {
+            "intensity_lvls_king_scallops": ["&lt;0.8", "0.8 - 3", "&gt;3"],
+            "intensity_lvls_queen_scallops": ["&lt;0.8", "0.8 - 3", "&gt;3"],
+            "intensity_lvls_mussels": ["&lt;0.4", "0.4 - 3", "&gt;3"],
+            "intensity_lvls_lot": ["&lt;0.93", "0.93 - 6.95", "&gt;6.95"],
+            "intensity_lvls_nets": ["&lt;33.9", "33.9 - 254.6", "&gt;254.6"],
+            "intensity_lvls_fixed_pots": ["&lt;2", "2 - 5", "&gt;5"],
+            "intensity_lvls_rsa_charterboats": ["&lt;5", "6 - 20", "&gt;20"],
+            "intensity_lvls_rsa_commercial": ["&lt;5", "6 - 20", "&gt;20"],
+            "intensity_lvls_rsa_noncharter": ["&lt;5", "6 - 20", "&gt;20"],
+            "intensity_lvls_rsa_shore": ["&lt;5", "6 - 20", "&gt;20"],
+            "intensity_lvls_cas_hand_gath": ["&lt;3", "3 - 10", "&gt;10"],
+            "intensity_lvls_pro_hand_gath": ["&lt;3", "3 - 10", "&gt;10"],
+        }
+        intensity_colors = ['#ffff71',  '#ffa84f', '#a15001']
+        bands = []
+        for idx, item in enumerate(intensity_bands[layer]):
+            bands.append({
+                'name': '%s (%s)' % (idx, item),
+                'value': idx,
+                'color': intensity_colors[idx]
+            })
+        data['bands'] = bands
+    return data
 
 if __name__ == '__main__':
     app.run(debug=True, processes=1)
