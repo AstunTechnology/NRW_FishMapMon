@@ -80,7 +80,7 @@ DECLARE
                                     ELSIF fishingname = 'pro_hand_gath' OR fishingname = 'cas_hand_gath' THEN
                                                 countfield = 'numgatherers';
                                                     ELSE
-                                                                countfield = ''|| quote_ident(countfield) ||'';
+                                                                countfield = '_overlaps';
                                                                     END IF;
                                                                         
                                                                         RETURN QUERY EXECUTE '
