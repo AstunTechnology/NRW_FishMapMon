@@ -71,55 +71,115 @@ CREATE OR REPLACE FUNCTION fishmap.vessels_project_det(IN fishingname text, IN v
   RETURNS TABLE(ogc_fid integer, num integer, wkb_geometry geometry) AS
 $BODY$
 DECLARE
-    tablename text;
-        countfield text;
-        BEGIN
-                tablename := 'intensity_lvls_'|| fishingname ||'_det';
-                    IF fishingname = 'rsa_shore' THEN
-                                countfield = 'num_fisherman';
-                                    ELSIF fishingname = 'pro_hand_gath' OR fishingname = 'cas_hand_gath' THEN
-                                                countfield = 'numgatherers';
-                                                    ELSE
-                                                                countfield = '_overlaps';
-                                                                    END IF;
-                                                                        
-                                                                        RETURN QUERY EXECUTE '
-                                                                            WITH project AS (
-                                                                                        SELECT 
-                                                                                                    '|| vesselcount::text ||' AS '|| quote_ident(countfield) ||',
-                                                                                                                ST_GeomFromText('|| quote_literal(wkt) ||', 27700) AS wkb_geometry
-                                                                                                                    ), 
-                                                                                                                        overlapping AS (
-                                                                                                                                    SELECT 
-                                                                                                                                                ogc_fid,
-                                                                                                                                                            '|| quote_ident(countfield) ||' + (SELECT '|| quote_ident(countfield) ||' FROM project) AS '|| quote_ident(countfield) ||', 
-                                                                                                                                                                        wkb_geometry
-                                                                                                                                                                                FROM '|| quote_ident(tablename) ||' AS existing
-                                                                                                                                                                                        WHERE ST_Intersects(wkb_geometry, (SELECT wkb_geometry FROM project))
-                                                                                                                                                                                            )
-                                                                                                                                                                                                SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, '|| quote_ident(countfield) ||', wkb_geometry FROM (
-                                                                                                                                                                                                            -- non-overlapping parts of existing polygons
-        SELECT '|| quote_ident(countfield) ||'::int, wkb_geometry
-                FROM '|| quote_ident(tablename) ||'
-                        WHERE ogc_fid NOT IN (SELECT ogc_fid FROM overlapping)
-                                UNION 
-                                        -- non-overlapping parts of project polygon
-        SELECT '|| quote_ident(countfield) ||'::int, (ST_Dump(ST_Difference(
-                                wkb_geometry,
-                                            (SELECT ST_Multi(ST_Union(wkb_geometry)) FROM overlapping)
-                                                    ))).geom AS wkb_geometry
-                                                    FROM project
-                                                            UNION 
-                                                                    --overlapping parts of project polygon and existing polygons
-        SELECT '|| quote_ident(countfield) ||'::int, wkb_geometry FROM overlapping
-            ) AS a;';
-        END;
-        $BODY$
-          LANGUAGE plpgsql VOLATILE
-          COST 100
-          ROWS 1000;
-        ALTER FUNCTION fishmap.vessels_project_det(text, integer, text)
-          OWNER TO fishmap_webapp;
+	tablename text;
+	countfield text;
+BEGIN
+	tablename := 'intensity_lvls_'|| fishingname ||'_det';
+	IF fishingname = 'rsa_shore' THEN
+                countfield = 'num_fisherman';
+        ELSIF fishingname = 'pro_hand_gath' OR fishingname = 'cas_hand_gath' THEN
+        	countfield = 'numgatherers';
+        ELSE
+        	countfield = '_overlaps';
+        END IF;
+                                                        
+        RETURN QUERY EXECUTE '
+WITH project AS (
+	SELECT 
+		'|| vesselcount::text ||' AS '|| quote_ident(countfield) ||',
+		ST_GeomFromText('|| quote_literal(wkt) ||', 27700) AS wkb_geometry
+	), 
+overlapping AS (
+	SELECT
+		ogc_fid,
+     		'|| quote_ident(countfield) ||' + (SELECT '|| quote_ident(countfield) ||' FROM project) AS '|| quote_ident(countfield) ||', 
+		wkb_geometry
+	FROM '|| quote_ident(tablename) ||' AS existing
+	WHERE ST_Intersects(wkb_geometry, (SELECT wkb_geometry FROM project))
+)
+SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, '|| quote_ident(countfield) ||', wkb_geometry FROM (
+	-- non-overlapping parts of existing polygons
+	SELECT '|| quote_ident(countfield) ||'::int, wkb_geometry
+	FROM '|| quote_ident(tablename) ||'
+	WHERE ogc_fid NOT IN (SELECT ogc_fid FROM overlapping)
+	UNION 
+	-- non-overlapping parts of project polygon
+	SELECT '|| quote_ident(countfield) ||'::int, (ST_Dump(ST_Difference(
+		wkb_geometry,
+		(SELECT ST_Multi(ST_Union(wkb_geometry)) FROM overlapping)
+	))).geom AS wkb_geometry
+		FROM project
+	UNION 
+	--overlapping parts of project polygon and existing polygons
+	SELECT '|| quote_ident(countfield) ||'::int, wkb_geometry FROM overlapping
+) AS a;';
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100
+  ROWS 1000;
+ALTER FUNCTION fishmap.vessels_project_det(text, integer, text)
+  OWNER TO fishmap_webapp;
+
+
+CREATE OR REPLACE FUNCTION fishmap.vessels_project_gen(IN fishingname text, IN vesselcount integer, IN wkt text)
+  RETURNS TABLE(ogc_fid integer, num integer, wkb_geometry geometry) AS
+$BODY$
+DECLARE
+	tablename text;
+	countfield text;
+BEGIN
+	tablename := 'intensity_lvls_'|| fishingname ||'_gen';
+	IF fishingname = 'rsa_shore' THEN
+		countfield = 'num_fisherman';
+	ELSIF fishingname = 'pro_hand_gath' OR fishingname = 'cas_hand_gath' THEN
+		countfield = 'numgatherers';
+	ELSE
+		countfield = '_overlaps';
+	END IF;
+	
+	RETURN QUERY EXECUTE '
+WITH project AS (
+	SELECT 
+		'|| vesselcount::text ||' AS '|| quote_ident(countfield) ||',
+		ST_GeomFromText('|| quote_literal(wkt) ||', 27700) AS wkb_geometry
+), 
+overlapping AS (
+	SELECT 
+		ogc_fid,
+		'|| quote_ident(countfield) ||' + (SELECT '|| quote_ident(countfield) ||' FROM project) AS '|| quote_ident(countfield) ||', 
+		wkb_geometry
+	FROM '|| quote_ident(tablename) ||' AS existing
+	WHERE ST_Intersects(wkb_geometry, (SELECT wkb_geometry FROM project))
+),
+leftovers AS (
+	SELECT '|| quote_ident(countfield) ||'::int, (ST_Dump(ST_Difference(
+		wkb_geometry,
+		(SELECT ST_Multi(ST_Union(wkb_geometry)) FROM overlapping)
+	))).geom AS wkb_geometry
+	FROM project
+)
+SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, '|| quote_ident(countfield) ||', wkb_geometry FROM (
+	-- non-overlapping parts of existing grid squares
+	SELECT '|| quote_ident(countfield) ||'::int, wkb_geometry
+	FROM '|| quote_ident(tablename) ||'
+	WHERE ogc_fid NOT IN (SELECT ogc_fid FROM overlapping)
+	UNION 
+	-- non-overlapping grid squares of project polygon
+	SELECT l.'|| quote_ident(countfield) ||', g.wkb_geometry 
+	FROM leftovers l, grid g
+	WHERE ST_Intersects(l.wkb_geometry, g.wkb_geometry) AND NOT ST_Touches(l.wkb_geometry, g.wkb_geometry)
+	UNION 
+	--overlapping parts of project polygon and existing polygons
+	SELECT '|| quote_ident(countfield) ||'::int, wkb_geometry FROM overlapping
+) AS a;';
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100
+  ROWS 1000;
+ALTER FUNCTION fishmap.vessels_project_gen(text, integer, text)
+  OWNER TO fishmap_webapp;
 
 
 CREATE DATABASE fishmap_auth
