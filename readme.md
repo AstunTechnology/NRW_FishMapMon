@@ -68,6 +68,15 @@ Ultimately this is Mapserver, but runs behind MapProxy to provide layer security
 Mapfiles: [project_root]/config/mapserver
 Basemap data: [project_root]/data/BaseMapping
 
+##### Custom parameters
+
+For requests made to show impact of project area selection the following custom parameters are used:
+* Vessels (vessels_lvl_project_det and vessels_lvl_project_gen)
+    * FISHING (name of type of fishing as used in other layers and underlying tables)
+    * COUNT (number of vessels in custom area(s))
+    * WKT (WKT representation of project area(s))
+
+
 ##### Example URLs
 
 * SLD
@@ -80,6 +89,8 @@ Basemap data: [project_root]/data/BaseMapping
 
 * Map
     * http://localhost/en/wms/map=fishmap?LAYERS=subtidal_habitats&VERSION=1.1.1&FORMAT=image%2Fpng&TRANSPARENT=TRUE&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS=EPSG%3A27700&BBOX=221800,352075,275000,385125&WIDTH=1064&HEIGHT=661&SLD=http%3A//localhost%3A5000/en/sld%3Flayers%3Dsubtidal_habitats
+    * Calling with custom parameters for project - http://localhost/wms?map=fishmap&LAYERS=project_area%2Cvessels_lvls_project&VERSION=1.1.1&FORMAT=image%2Fpng&TRANSPARENT=TRUE&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS=EPSG%3A27700&BBOX=170375,315250,317075,445000&WIDTH=978&HEIGHT=865&FISHING=king_scallops&WKT=POLYGON((257765%20399710,%20271127%20408059,%20266732%20401588,%20260503%20396375,%20257765%20399710))&COUNT=1
+
 
 * GetFeatureInfo
     * GML: localhost/en/wms/map=fishmap?LAYERS=intertidal_habitats&QUERY_LAYERS=intertidal_habitats&STYLES=&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&BBOX=246750%2C368462.5%2C273350%2C374937.5&FEATURE_COUNT=10&HEIGHT=259&WIDTH=1064&FORMAT=image%2Fpng&INFO_FORMAT=application/vnd.ogc.gml&SRS=EPSG%3A27700&X=603&Y=47

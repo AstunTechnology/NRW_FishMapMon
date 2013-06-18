@@ -64,8 +64,8 @@ INSERT INTO fishmap.intensity_lvls VALUES
 	(15, '{2.0, 10.0}')
 ;
 
-CREATE OR REPLACE FUNCTION fishmap.vessels_project_det(fishingname text, vesselcount int, wkt text)
-  RETURNS TABLE (_overlaps int, wkb_geometry geometry) AS
+CREATE OR REPLACE FUNCTION fishmap.vessels_project_det(IN fishingname text, IN vesselcount integer, IN wkt text)
+  RETURNS TABLE(ogc_fid integer, _overlaps integer, wkb_geometry geometry) AS
 $BODY$
 DECLARE
     tablename text;
@@ -77,39 +77,37 @@ DECLARE
                                             '|| vesselcount::text ||' AS _overlaps,
                                                         ST_GeomFromText('|| quote_literal(wkt) ||', 27700) AS wkb_geometry
                                                             ), 
-                                                                project_overlaps AS (
+                                                                overlapping AS (
                                                                             SELECT 
-                                                                                        _overlaps + (SELECT _overlaps FROM project) AS _overlaps, 
-                                                                                                    (
-                                                                                                                        ST_Dump(
-                                                                                                                                                ST_Intersection(
-                                                                                                                                                                            old.wkb_geometry,
-                                                                                                                                                                                                    (SELECT wkb_geometry FROM project)
-                                                                                                                                                                                                                        )
-                                                                                                                                                                                                                                        )
-                                                                                                                                                                                                                                                    ).geom AS wkb_geometry
-                                                                                                                                                                                                                                                            FROM '|| quote_ident(tablename) ||' AS old
-                                                                                                                                                                                                                                                                )
-                                                                                                                                                                                                                                                                    -- non-overlapping parts of existing polygons
-    SELECT _overlaps::int, ST_Difference(
-                wkb_geometry,
-                        (SELECT wkb_geometry FROM project)
-                            ) AS wkb_geometry
-                                FROM '|| quote_ident(tablename) ||'
-                                    UNION 
+                                                                                        ogc_fid,
+                                                                                                    _overlaps + (SELECT _overlaps FROM project) AS _overlaps, 
+                                                                                                                wkb_geometry
+                                                                                                                        FROM '|| quote_ident(tablename) ||' AS existing
+                                                                                                                                WHERE ST_Intersects(wkb_geometry, (SELECT wkb_geometry FROM project))
+                                                                                                                                    )
+                                                                                                                                        SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, _overlaps, wkb_geometry FROM (
+                                                                                                                                                    -- non-overlapping parts of existing polygons
+        SELECT _overlaps::int, wkb_geometry
+                FROM '|| quote_ident(tablename) ||'
+                        WHERE ogc_fid NOT IN (SELECT ogc_fid FROM overlapping)
+                                UNION 
                                         -- non-overlapping parts of project polygon
-    SELECT _overlaps::int, ST_Difference(
-                wkb_geometry,
-                        (SELECT ST_Multi(ST_Union(wkb_geometry)) FROM project_overlaps)
-                            ) AS wkb_geometry
-                                FROM project
-                                    UNION 
-                                        --overlapping parts of project polygon and existing polygons
-    SELECT _overlaps::int, wkb_geometry FROM project_overlaps;
-        ';
-    END;
-    $BODY$
-    LANGUAGE plpgsql ;
+        SELECT _overlaps::int, (ST_Dump(ST_Difference(
+                                wkb_geometry,
+                                            (SELECT ST_Multi(ST_Union(wkb_geometry)) FROM overlapping)
+                                                    ))).geom AS wkb_geometry
+                                                    FROM project
+                                                            UNION 
+                                                                    --overlapping parts of project polygon and existing polygons
+        SELECT _overlaps::int, wkb_geometry FROM overlapping
+            ) AS a;';
+        END;
+        $BODY$
+          LANGUAGE plpgsql VOLATILE
+          COST 100
+          ROWS 1000;
+        ALTER FUNCTION fishmap.vessels_project_det(text, integer, text)
+          OWNER TO fishmap_webapp;
 
 
 CREATE DATABASE fishmap_auth
