@@ -13,9 +13,9 @@ ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' BaseMapping/high_water_wales.TAB -nln high_water_wales -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
 # Habitat
-ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "HabitatLayers/Intertidal/INTERTIDAL Fisheries Habitats.TAB" -nln intertidal_habitats -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "HabitatLayers/Intertidal/Intertidal_Habitat_Dissolved.tab" -nln intertidal_habitats -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
-ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "HabitatLayers/Subtidal/SUBTIDAL Fisheries Habitats.tab" -nln subtidal_habitats -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "HabitatLayers/Subtidal/Subtidal_Habitat_Dissolved.tab" -nln subtidal_habitats -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "HabitatLayers/Subtidal/confidencelayer.tab" -nln subtidal_habitats_confidence -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
