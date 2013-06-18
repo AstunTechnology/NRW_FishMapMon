@@ -1797,3 +1797,220 @@
             END
         END
     END
+
+    LAYER
+        NAME "sensvtyconf_lvls_cas_hand_gath"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from sensvtyconf_lvls_cas_hand_gath) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "sensvtyconf_lvls_cas_hand_gath"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+    LAYER
+        NAME "sensvtyconf_lvls_lot"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from sensvtyconf_lvls_lot) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "sensvtyconf_lvls_lot"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+    LAYER
+        NAME "sensvtyconf_lvls_mussels"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from sensvtyconf_lvls_mussels) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "sensvtyconf_lvls_mussels"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+    LAYER
+        NAME "sensvtyconf_lvls_nets"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from sensvtyconf_lvls_nets) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "sensvtyconf_lvls_nets"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+    LAYER
+        NAME "sensvtyconf_lvls_pro_hand_gath"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from sensvtyconf_lvls_pro_hand_gath) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "sensvtyconf_lvls_pro_hand_gath"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+    LAYER
+        NAME "sensvtyconf_lvls_rsa_charterboats"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from sensvtyconf_lvls_rsa_charterboats) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "sensvtyconf_lvls_rsa_charterboats"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+    LAYER
+        NAME "sensvtyconf_lvls_rsa_noncharter"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from sensvtyconf_lvls_rsa_noncharter) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "sensvtyconf_lvls_rsa_noncharter"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+    LAYER
+        NAME "sensvtyconf_lvls_rsa_shore"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from sensvtyconf_lvls_rsa_shore) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "sensvtyconf_lvls_rsa_shore"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+    LAYER
+        NAME "sensvtyconf_lvls_scallops"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from sensvtyconf_lvls_scallops) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "sensvtyconf_lvls_scallops"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+

@@ -281,7 +281,7 @@ def render_sld(layers):
     """ Render an SLD document as a string for the list of layers passed """
     if layers:
         layer_info = []
-        common_slds = ['intensity', 'vessels', 'sensitivity']
+        common_slds = ['intensity', 'vessels', 'sensitivity', 'sensvtyconf']
         for layer in layers:
             template = '%s.sld' % layer
             split_layer = layer.split('_')

@@ -120,6 +120,19 @@
                 "sensitivity_1": "{{ _('Low') }}",
                 "sensitivity_2": "{{ _('Medium') }}",
                 "sensitivity_3": "{{ _('High') }}",
+                "sensvtyconf_grp": "{{ _('Sensitivity Confidence') }}",
+                "sensvtyconf_lvls_cas_hand_gath": "{{ _('Casual Hand Gather Confidence') }}",
+                "sensvtyconf_lvls_fixed_pots": "{{ _('Potting Confidence') }}",
+                "sensvtyconf_lvls_king_scallops": "{{ _('King Scallops Confidence') }}",
+                "sensvtyconf_lvls_lot": "{{ _('Light Otter Trawl Confidence') }}",
+                "sensvtyconf_lvls_mussels": "{{ _('Mussels Confidence') }}",
+                "sensvtyconf_lvls_nets": "{{ _('Netting Confidence') }}",
+                "sensvtyconf_lvls_pro_hand_gath": "{{ _('Professional Hand Gather Confidence') }}",
+                "sensvtyconf_lvls_queen_scallops": "{{ _('Queen Scallops Confidence') }}",
+                "sensvtyconf_lvls_rsa_charterboats": "{{ _('RSA Charter Boats Confidence') }}",
+                "sensvtyconf_lvls_rsa_commercial": "{{ _('RSA Commercial Confidence') }}",
+                "sensvtyconf_lvls_rsa_noncharter": "{{ _('RSA Non Charter Boats Confidence') }}",
+                "sensvtyconf_lvls_rsa_shore": "{{ _('RSA Shore Fishing Confidence') }}",
                 "extents_grp": "{{ _('Fishing Activity Extents') }}",
                 "extents_king_scallops": "{{ _('King Scallops Extents') }}",
                 "extents_lot": "{{ _('Light Otter Trawl Extents') }}",
@@ -168,7 +181,7 @@
                 "cas_hand_gath",
                 "pro_hand_gath"
             ],
-            outputTypes: ['vessels', 'intensity', 'sensitivity']
+            outputTypes: ['vessels', 'intensity', 'sensitivity', 'sensvtyconf']
         };
         FISH_MAP.ROOT_URL = window.location.protocol + '//' + window.location.host + window.location.pathname;
         FISH_MAP.WMS_ROOT_URL = FISH_MAP.ROOT_URL + 'wms?map=';
@@ -989,6 +1002,19 @@
             </tbody>
         </table>
         {{/sensitivity}}
+        {{#sensvtyconf}}
+        <h2>{{#_}}{{id}}{{/_}}</h2>
+        <table class="info">
+            <tbody>
+                {{#features}}
+                <tr>
+                    <th>{{#_}}Sensitivity Confidence{{/_}}</th>
+                    <td>{{#_}}sensitivity_{{attributes.sensitivityconfidence}}{{/_}}</td>
+                </tr>
+                {{/features}}
+            </tbody>
+        </table>
+        {{/sensvtyconf}}
         {{#extents}}
         <h2>{{#_}}Extents{{/_}}</h2>
         <table class="info">
