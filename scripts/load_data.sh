@@ -12,6 +12,9 @@ ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=
 # High Water (used with No Map base map)
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' BaseMapping/high_water_wales.TAB -nln high_water_wales -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
+#1km Grid
+ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' 1km_Grid/1km_Sea_Grid.TAB -nln grid -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+
 # Habitat
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "HabitatLayers/Intertidal/Intertidal_Habitat_Dissolved.tab" -nln intertidal_habitats -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
