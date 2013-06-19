@@ -73,6 +73,8 @@
         }
     );
     map.addLayer(nomap);
+    // var blank = new OpenLayers.Layer(FISH_MAP.getText('no_map'), {isBaseLayer: true});
+    // map.addLayer(blank);
 
     var os = wmsLayer(
         FISH_MAP.getText('os_map'),
@@ -237,20 +239,54 @@
     function layer_toggle(layers, id, visible) {
         // Update the model
         layers.getLayerById(id).visible = visible;
+        refreshOverlayLayer();
+    }
+
+    function refreshOverlayLayer() {
         // Refresh the overlay WMS layer
-        var visibleLayers = layers.getVisibleLayers();
+        var visibleLayers = overlayLayers.getVisibleLayers();
         // Hide the layer if there are no visible layers to avoid an invalid
         // WMS request being generated
         overlays.setVisibility(visibleLayers.length);
-        overlays.mergeNewParams({
+        var params = {
             'LAYERS': visibleLayers.join(',')
-        });
+        };
+        if (FISH_MAP.scenario && FISH_MAP.scenario.feature) {
+            params['FISHING'] = outputPanel.getActivity();
+            params['COUNT'] = 1;
+            params['WKT'] = FISH_MAP.scenario.feature.geometry.toString();
+        }
+        overlays.mergeNewParams(params);
         legendPanel.showLayers(jQuery.grep(visibleLayers, function(item) {return item.legend}));
     }
 
     createLayerTree(overlayLayers, jQuery('.overlays'), layer_toggle);
 
-    createOutputPanel(overlayLayers, outputActivities, jQuery('.outputs'), layer_toggle);
+    var outputPanel = new OutputPanel({
+        layers: overlayLayers,
+        activities: outputActivities,
+        div: jQuery('.outputs').get(0)
+    });
+
+    outputPanel.events.on({
+        'layerchange': function(e) {
+            layer_toggle(outputPanel.layers, e.layer, e.state);
+        },
+        'activitychange': function(e) {
+            clearScenario();
+        },
+        'newscenario': function(e) {
+            newScenario();
+        },
+        'clearscenario': function(e) {
+            clearScenario();
+        },
+        'showscenario': function(e) {
+            showScenario();
+        }
+    });
+
+    outputPanel.draw();
 
     function layersCollection(layers) {
 
@@ -263,17 +299,15 @@
 
         for (var m = 0, grp; m < layers.groups.length; m++) {
             grp = layers.groups[m];
+            grp.addLayer = function(lyr) {
+                return addLayer(this, lyr);
+            };
+            grp.removeLayer = function(lyr) {
+                return removeLayer(lyr);
+            };
             for (var n = 0, lyr; n < grp.layers.length; n++) {
                 lyr = grp.layers[n];
-
-                // Add the layer to the lookup
-                layers.layers[lyr.id] = lyr;
-
-                // Add the toString function
-                lyr.toString = function() {
-                    return this.id;
-                }
-
+                decorateLyr(lyr, grp);
             }
         }
 
@@ -287,6 +321,51 @@
         layers.getVisibleLayers = function() {
             return getLayersByProperty(this, 'visible', true);
         };
+
+        layers.getGroupsByProperty = function(name, val) {
+            return getGroupsByProperty(this, name, val);
+        };
+
+        // Private functions
+
+        function _toString() {
+            return this.id;
+        }
+
+        function decorateLyr(lyr, grp) {
+            // Add the layer to the lookup
+            layers.layers[lyr.id] = lyr;
+            // Add the toString function
+            lyr.toString = _toString
+            // Allow us to get the group from the layer
+            lyr._group = grp;
+            return lyr;
+        }
+
+        function addLayer(grp, lyr) {
+            removeLayer(lyr);
+            decorateLyr(lyr, grp);
+            grp.layers.push(lyr);
+        }
+
+        function removeLayer(lyr) {
+            if (lyr) {
+                delete layers.layers[lyr.id];
+                // Find the items index in the grp.layers array
+                if (lyr._group) {
+                    var idx = null;
+                    for (var i = 0, l; i < lyr._group.layers.length; i++) {
+                        l = lyr._group.layers[i];
+                        if (l.id === lyr.id) {
+                            idx = i;
+                            break;
+                        }
+                    }
+                    lyr._group.layers.splice(idx, 1);
+                }
+            }
+            return lyr;
+        }
 
         function getLayersByProperty(layers, name, val) {
             var matched = [];
@@ -302,67 +381,97 @@
             return matched;
         }
 
+        function getGroupsByProperty(layers, name, val) {
+            var matched = [];
+            for (var m = 0, grp; m < layers.groups.length; m++) {
+                grp = layers.groups[m];
+                if (grp[name] === val) {
+                    matched.push(grp);
+                }
+            }
+            return matched;
+        }
+
         return layers;
     }
 
     function createLayerTree(layers, container, toggleCallback) {
         var tmpl = jQuery('#treeTmpl').html();
         var treeElm = jQuery.mustache(tmpl, jQuery.extend(layers, FISH_MAP.tmplView));
-        var tree$ = jQuery(container).append(treeElm);
-        tree$.find('input').change(function() {
+        var panel = jQuery(container).append(treeElm);
+        panel.find('input').change(function() {
             toggleCallback(layers, this.value, this.checked);
         });
-        addLayerTreeToggle(tree$);
-    }
-
-    /**
-     * Adds toggle behaviour to a tree of layers
-     */
-    function addLayerTreeToggle(tree$) {
-        tree$.find('h3').click(function() {
+        panel.find('h3').click(function() {
             jQuery(this).toggleClass('collapsed').siblings().toggle();
         }).click().first().click();
     }
 
-    function createOutputPanel(layers, activities, container, toggleCallback) {
-        var curType = null;
-        var tmpl = jQuery('#outputTmpl').html();
-        var model = {"layers": layers, "activities": activities};
-        var treeElm = jQuery.mustache(tmpl, jQuery.extend(model, FISH_MAP.tmplView));
-        var tree$ = jQuery(container).append(treeElm);
-        tree$.find('input').change(function() {
-            // Ensure only one activity layer is visible at a time
-            if (jQuery(this).parents().hasClass('activity') && this.checked) {
-                var that = this;
-                jQuery(tree$).find('.activity input:checkbox').filter(function() {
-                    return (jQuery(this).val().match(curType) && this !== that);
-                }).each(function() {
-                    this.checked = false;
-                    toggleCallback(layers, this.value, this.checked);
-                });
-            }
-            toggleCallback(layers, this.value, this.checked);
-        });
-        addLayerTreeToggle(tree$);
-        var select = jQuery(container).find('select');
-        select.change(function() {
-            curType = this.value;
-            // Only show the intensity, vessels and sensitivity layers for the
-            // selected activity
-            jQuery('.activity li.layer', container).hide().filter(function () {
-                var val = jQuery(this).find('input').val();
-                return val.match(curType);
-            }).show();
-            // If the user is showing an intensity, vessels or sensitivity
-            // layer then hide the old layer and show the one associated with
-            // the current activity
-            jQuery('.activity li.layer input:checked').each(function() {
-                this.checked = false;
-                jQuery(this).change();
-                var prefix = this.value.match(/^\w+_lvls_/)[0];
-                jQuery('input#' + prefix + curType).prop('checked', true).change();
-            });
-        }).change();
+    var scenarioLayer = new OpenLayers.Layer.Vector("scenario");
+    map.addLayer(scenarioLayer);
+
+    var drawCtrl = new OpenLayers.Control.DrawFeature(scenarioLayer, OpenLayers.Handler.Polygon);
+    map.addControl(drawCtrl);
+
+    drawCtrl.events.register("featureadded", drawCtrl, function(e) {
+        drawCtrl.deactivate();
+        scenarioAddFeature(e.feature);
+    });
+
+    FISH_MAP.scenario = null;
+    function newScenario() {
+        console.log('newScenario');
+        clearScenario();
+        FISH_MAP.scenario = {};
+        drawCtrl.activate();
+    }
+
+    function clearScenario() {
+        console.log('clearScenario');
+        FISH_MAP.scenario = null;
+        var layer = map.getLayersByName("scenario")[0];
+        if (layer) {
+            layer.removeAllFeatures();
+        }
+        outputPanel.hideScenarioForm();
+        // Remove scenario layers
+        var types = ['vessels', 'intensity'];
+        for (var i = 0, type, grp, lyr; i < types.length; i++) {
+            type = types[i];
+            grp = overlayLayers.getGroupsByProperty('id', type + '_grp')[0];
+            lyr = overlayLayers.getLayerById(type + "_lvls_project");
+            grp.removeLayer(lyr);
+        }
+        // Update the layer tree
+        outputPanel.drawActivityLayers();
+        // Refresh the map state
+        refreshOverlayLayer();
+    }
+
+    function scenarioAddFeature(feature) {
+        console.log('scenarioAddFeature');
+        FISH_MAP.scenario.feature = feature;
+        outputPanel.showScenarioForm();
+    }
+
+    function showScenario() {
+        console.log('showScenario');
+        // Add the additional layers to the activiy groups
+        // var types = ['vessels', 'intensity'];
+        var types = ['vessels'];
+        for (var i = 0, type, grp, lyr; i < types.length; i++) {
+            type = types[i];
+            grp = overlayLayers.getGroupsByProperty('id', type + '_grp')[0];
+            lyr = {
+                "id": type + "_lvls_project",
+                "info": true,
+                "legend": true,
+                "visible": false
+            };
+            grp.addLayer(lyr);
+        }
+        // Update the layer tree
+        outputPanel.drawActivityLayers();
     }
 
 })();

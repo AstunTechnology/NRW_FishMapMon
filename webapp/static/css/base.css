@@ -128,6 +128,20 @@ ul.tree li h3.collapsed {
     padding: 5px;
 }
 
+.outputs .scenario-form {
+    display: none;
+}
+
+.outputs .scenario-form fieldset legend {
+    font-weight: bold;
+}
+
+.outputs .scenario-form .dpm label {
+    display: inline-block;
+    text-align: right;
+    width: 65px;
+}
+
 /* Legend Panel */
 
 .olControlLegendPanel {
