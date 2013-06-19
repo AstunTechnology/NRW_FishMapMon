@@ -4,7 +4,7 @@
         <Name>sensitivity</Name>
         <FeatureTypeStyle>
             <Rule>
-                <Name>{{ _('Low (1)') }}</Name>
+                <Name>{{ _('Low') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>sensitivity_level</PropertyName>
@@ -21,7 +21,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Medium (2)') }}</Name>
+                <Name>{{ _('Medium') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>sensitivity_level</PropertyName>
@@ -38,7 +38,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('High (2)') }}</Name>
+                <Name>{{ _('High') }}</Name>
                 <Filter>
                     <PropertyIsLike escape="\" singleChar="_" wildCard="%">
                         <PropertyName>sensitivity_level</PropertyName>
