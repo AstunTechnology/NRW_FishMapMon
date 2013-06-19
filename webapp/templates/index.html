@@ -194,6 +194,7 @@
     <script src="{{ url_for('static', filename='js/jquery.mustache.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery-ui-1.10.3.custom.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/OpenLayers-2.12/OpenLayers.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/OutputPanel.js') }}"></script>
     <script src="{{ url_for('static', filename='js/LegendPanel.js') }}"></script>
     <script src="{{ url_for('static', filename='js/MapSearch.js') }}"></script>
     <script src="{{ url_for('static', filename='js/BaseMapSwitcher.js') }}"></script>
@@ -225,11 +226,42 @@
                 <option value="{{.}}">{{#_}}{{.}}{{/_}}</option>
             {{/activities}}
             </select>
+            <form class="scenario-form">
+                <fieldset class="dpm">
+                    <legend>Days per month</legend>
+                    <p><label for="dpm_0">January</label> <input type="text" id="dpm_0" name="dpm_0" value="0" size="2" /></p>
+                    <p><label for="dpm_1">February</label> <input type="text" id="dpm_1" name="dpm_1" value="0" size="2" /></p>
+                    <p><label for="dpm_2">March</label> <input type="text" id="dpm_2" name="dpm_2" value="0" size="2" /></p>
+                    <p><label for="dpm_3">April</label> <input type="text" id="dpm_3" name="dpm_3" value="0" size="2" /></p>
+                    <p><label for="dpm_4">May</label> <input type="text" id="dpm_4" name="dpm_4" value="0" size="2" /></p>
+                    <p><label for="dpm_5">June</label> <input type="text" id="dpm_5" name="dpm_5" value="0" size="2" /></p>
+                    <p><label for="dpm_6">July</label> <input type="text" id="dpm_6" name="dpm_6" value="0" size="2" /></p>
+                    <p><label for="dpm_7">August</label> <input type="text" id="dpm_7" name="dpm_7" value="0" size="2" /></p>
+                    <p><label for="dpm_8">September</label> <input type="text" id="dpm_8" name="dpm_8" value="0" size="2" /></p>
+                    <p><label for="dpm_9">October</label> <input type="text" id="dpm_9" name="dpm_9" value="0" size="2" /></p>
+                    <p><label for="dpm_10">November</label> <input type="text" id="dpm_10" name="dpm_10" value="0" size="2" /></p>
+                    <p><label for="dpm_11">December</label> <input type="text" id="dpm_11" name="dpm_11" value="0" size="2" /></p>
+                </fieldset>
+                <fieldset class="net_len">
+                    <legend>Net Length (metres)</legend>
+                    <p><input type="text" id="net_len" name="net_len" value="0" size="4" /></p>
+                </fieldset>
+                <fieldset class="num_nets">
+                    <legend>Number of Nets</legend>
+                    <p><input type="text" id="num_nets" name="num_nets" value="0" size="4" /></p>
+                </fieldset>
+                <p><input type="button" name="show_scenario" value="Show Scenario" /> <input type="button" name="clear_scenario" value="Clear Scenario" /></p>
+            </form>
+            <div class="activity-tree">
+            </div>
+            <p><a href="#" class="button new_scenario">New Scenario</a></p>
+        </div>
+        <div class="std-tree">
             <ul class="tree">
             {{#layers}}
                 {{#groups}}
                     {{#output}}
-                    {{#activity}}
+                    {{^activity}}
                     <li>
                         <h3>{{#_}}{{id}}{{/_}}</h3>
                         <ul>
@@ -244,14 +276,18 @@
             {{/layers}}
             </ul>
         </div>
+    {% endraw %}
+    </script>
+    <script id="activityLayersTmpl" type="text/template">
+        {% raw %}
         <ul class="tree">
         {{#layers}}
             {{#groups}}
                 {{#output}}
-                {{^activity}}
+                {{#activity}}
                 <li>
                     <h3>{{#_}}{{id}}{{/_}}</h3>
-                    <ul>
+                    <ul class="group {{id}}">
                         {{#layers}}
                         <li class="layer"><input type="checkbox" value="{{id}}" id="{{id}}" {{#visible}}checked="checked"{{/visible}} /> <label for="{{id}}">{{#_}}{{id}}{{/_}}</label></li>
                         {{/layers}}
@@ -262,7 +298,7 @@
             {{/groups}}
         {{/layers}}
         </ul>
-    {% endraw %}
+        {% endraw %}
     </script>
     <script id="legendTmpl" type="text/template">
     {% raw %}
