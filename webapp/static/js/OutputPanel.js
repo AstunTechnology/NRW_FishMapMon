@@ -113,17 +113,17 @@ OutputPanel = OpenLayers.Class({
     },
 
     showScenarioForm: function() {
-        jQuery('.scenario-form fieldset', this.div).hide();
+        jQuery('form fieldset', this.div).hide();
         var fields = this.scenarioFields[this.getActivity()];
         for (var i = 0, fld; i < fields.length; i++) {
             fld = fields[i];
-            jQuery('.scenario-form fieldset.' + fld, this.div).show();
+            jQuery('form fieldset.' + fld, this.div).show();
         }
-        jQuery('.scenario-form').show();
+        jQuery('form').show();
     },
 
     hideScenarioForm: function() {
-        jQuery('.scenario-form', this.div).hide();
+        jQuery('form', this.div).hide();
     },
 
     /**

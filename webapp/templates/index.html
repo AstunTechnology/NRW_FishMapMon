@@ -226,7 +226,7 @@
                 <option value="{{.}}">{{#_}}{{.}}{{/_}}</option>
             {{/activities}}
             </select>
-            <form class="scenario-form">
+            <form>
                 <fieldset class="dpm">
                     <legend>Days per month</legend>
                     <p><label for="dpm_0">January</label> <input type="text" id="dpm_0" name="dpm_0" value="0" size="2" /></p>
@@ -242,6 +242,22 @@
                     <p><label for="dpm_10">November</label> <input type="text" id="dpm_10" name="dpm_10" value="0" size="2" /></p>
                     <p><label for="dpm_11">December</label> <input type="text" id="dpm_11" name="dpm_11" value="0" size="2" /></p>
                 </fieldset>
+                <fieldset class="gear_speed">
+                    <legend>Gear Speed (km/h)</legend>
+                    <p><input type="text" id="gear_speed" name="gear_speed" value="0" size="4" /></p>
+                </fieldset>
+                <fieldset class="gear_time">
+                    <legend>Gear Speed (km/h)</legend>
+                    <p><input type="text" id="gear_time" name="gear_time" value="0" size="4" /></p>
+                </fieldset>
+                <fieldset class="gear_width">
+                    <legend>Gear Width (meters)</legend>
+                    <p><input type="text" id="gear_width" name="gear_width" value="0" size="4" /></p>
+                </fieldset>
+                <fieldset class="num_dredges">
+                    <legend>Number of Dredges</legend>
+                    <p><input type="text" id="num_dredges" name="num_dredges" value="0" size="4" /></p>
+                </fieldset>
                 <fieldset class="net_len">
                     <legend>Net Length (metres)</legend>
                     <p><input type="text" id="net_len" name="net_len" value="0" size="4" /></p>
@@ -250,7 +266,27 @@
                     <legend>Number of Nets</legend>
                     <p><input type="text" id="num_nets" name="num_nets" value="0" size="4" /></p>
                 </fieldset>
-                <p><input type="button" name="show_scenario" value="Show Scenario" /> <input type="button" name="clear_scenario" value="Clear Scenario" /></p>
+                <fieldset class="num_pots">
+                    <legend>Number of Pots</legend>
+                    <p><input type="text" id="num_pots" name="num_pots" value="0" size="4" /></p>
+                </fieldset>
+                <fieldset class="num_anchors">
+                    <legend>Number of Anchors</legend>
+                    <p><input type="text" id="num_anchors" name="num_anchors" value="0" size="4" /></p>
+                </fieldset>
+                <fieldset class="num_rods">
+                    <legend>Number of Fishermen/ Rods</legend>
+                    <p><input type="text" id="num_rods" name="num_rods" value="0" size="4" /></p>
+                </fieldset>
+                <fieldset class="avg_hours">
+                    <legend>Average Hours</legend>
+                    <p><input type="text" id="avg_hours" name="avg_hours" value="0" size="4" /></p>
+                </fieldset>
+                <fieldset class="num_gath">
+                    <legend>Number of Gatherers</legend>
+                    <p><input type="text" id="num_gath" name="num_gath" value="0" size="4" /></p>
+                </fieldset>
+                <p class="buttons"><input type="button" name="show_scenario" value="Show Scenario" /> <input type="button" name="clear_scenario" value="Clear Scenario" /></p>
             </form>
             <div class="activity-tree">
             </div>
