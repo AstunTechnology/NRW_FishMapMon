@@ -100,7 +100,13 @@ OutputPanel = OpenLayers.Class({
             this.checked = false;
             jQuery(this).change();
             var prefix = this.value.match(/^\w+_lvls_/)[0];
-            jQuery('input#' + prefix + panel.getActivity()).prop('checked', true).change();
+            // If there is a scenario layer then enable it otherwise fallback
+            // to the regular layer
+            var lyr = jQuery('input#' + prefix + 'project');
+            if (lyr.length === 0) {
+                lyr = jQuery('input#' + prefix + panel.getActivity());
+            }
+            lyr.prop('checked', true).change();
         });
     },
 
