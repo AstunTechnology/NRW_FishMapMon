@@ -160,7 +160,7 @@ overlapping AS (
 leftovers AS (
 	SELECT '|| quote_ident(countfield) ||'::int, (ST_Dump(ST_Difference(
 		wkb_geometry,
-		(SELECT ST_Multi(ST_Union(wkb_geometry)) FROM overlapping)
+		(SELECT ST_Multi(ST_Union(wkb_geometry)) FROM '|| quote_ident(tablename) ||')
 	))).geom AS wkb_geometry
 	FROM project
 )
