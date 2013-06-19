@@ -22,6 +22,11 @@ CREATE SCHEMA fishmap
 GRANT ALL ON SCHEMA fishmap TO postgres;
 GRANT ALL ON SCHEMA fishmap TO fishmap_webapp;
 
+ALTER DEFAULT PRIVILEGES IN SCHEMA fishmap
+    GRANT SELECT ON TABLES
+    TO fishmap_webapp;
+
+
 
 CREATE OR REPLACE FUNCTION fishmap.set_intensity_lvls(fishingtype int, rangeboundaries decimal[])
   RETURNS int AS
@@ -181,6 +186,7 @@ $BODY$
 ALTER FUNCTION fishmap.vessels_project_gen(text, integer, text)
   OWNER TO fishmap_webapp;
 
+GRANT SELECT ON ALL TABLES IN SCHEMA fishmap TO fishmap_webapp;
 
 CREATE DATABASE fishmap_auth
 WITH ENCODING='UTF8'
