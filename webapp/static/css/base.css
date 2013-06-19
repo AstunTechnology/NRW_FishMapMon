@@ -122,6 +122,10 @@ ul.tree li h3.collapsed {
     padding-left: 10px;
 }
 
+.outputs select {
+    width: 100%;
+}
+
 .outputs div.activity {
     border: 1px solid lightgray;
     margin-right: 10px;
@@ -146,8 +150,8 @@ ul.tree li h3.collapsed {
     width: 65px;
 }
 
-.outputs form p.buttons {
-    padding: 0.5em;
+.outputs p.buttons {
+    padding-top: 0.5em;
     text-align: right;
 }
 

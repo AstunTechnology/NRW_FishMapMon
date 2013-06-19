@@ -120,10 +120,12 @@ OutputPanel = OpenLayers.Class({
             jQuery('form fieldset.' + fld, this.div).show();
         }
         jQuery('form').show();
+        jQuery('.new_scenario').parent().hide();
     },
 
     hideScenarioForm: function() {
         jQuery('form', this.div).hide();
+        jQuery('.new_scenario').parent().show();
     },
 
     /**
