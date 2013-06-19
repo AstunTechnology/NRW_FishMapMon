@@ -186,6 +186,150 @@ $BODY$
 ALTER FUNCTION fishmap.vessels_project_gen(text, integer, text)
   OWNER TO fishmap_webapp;
 
+CREATE OR REPLACE FUNCTION fishmap.calculate_intensity_cas_hand_gath(days numeric, avghours numeric, people numeric, area numeric)
+  RETURNS numeric AS
+$BODY$
+	SELECT * FROM fishmap.calculate_intensity_hand_gath($1, $2 * 2.5, $3, $4);
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100;
+ALTER FUNCTION fishmap.calculate_intensity_cas_hand_gath(numeric, numeric, numeric, numeric)
+  OWNER TO fishmap_webapp;
+
+CREATE OR REPLACE FUNCTION fishmap.calculate_intensity_dredges(days numeric, speed numeric, hours numeric, width numeric, num numeric, area numeric)
+  RETURNS numeric AS
+$BODY$
+	SELECT ( $2 * $3 * $4 * $5 * $1 * 1000) / $6 ;
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100;
+ALTER FUNCTION fishmap.calculate_intensity_dredges(numeric, numeric, numeric, numeric, numeric, numeric)
+  OWNER TO fishmap_webapp;
+
+CREATE OR REPLACE FUNCTION fishmap.calculate_intensity_fixed_pots(days numeric, anchors numeric, pots numeric, area numeric)
+  RETURNS numeric AS
+$BODY$
+	SELECT ( ($2 + $3) * $1 / ( $4 / 10000 ) ) / 10000;
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100;
+ALTER FUNCTION fishmap.calculate_intensity_fixed_pots(numeric, numeric, numeric, numeric)
+  OWNER TO fishmap_webapp;
+
+
+CREATE OR REPLACE FUNCTION fishmap.calculate_intensity_hand_gath(days numeric, avghours numeric, people numeric, area numeric)
+  RETURNS numeric AS
+$BODY$
+	SELECT ( $1 * $2 * $3 * 40 ) / ( $4 / 10000 );
+	--SELECT $3/($4/10000)/($1/365);
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100;
+ALTER FUNCTION fishmap.calculate_intensity_hand_gath(numeric, numeric, numeric, numeric)
+  OWNER TO fishmap_webapp;
+
+
+CREATE OR REPLACE FUNCTION fishmap.calculate_intensity_king_scallops(days numeric, speed numeric, hours numeric, width numeric, num numeric, area numeric)
+  RETURNS numeric AS
+$BODY$
+	SELECT * FROM fishmap.calculate_intensity_dredges( $1, $2, $3, $4, $5, $6);
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100;
+ALTER FUNCTION fishmap.calculate_intensity_king_scallops(numeric, numeric, numeric, numeric, numeric, numeric)
+  OWNER TO fishmap_webapp;
+
+CREATE OR REPLACE FUNCTION fishmap.calculate_intensity_lot(days numeric, speed numeric, hours numeric, width numeric, area numeric)
+  RETURNS numeric AS
+$BODY$
+	SELECT ( $2 * $3 * $4 * $1 * 1000) / $5 ;
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100;
+ALTER FUNCTION fishmap.calculate_intensity_lot(numeric, numeric, numeric, numeric, numeric)
+  OWNER TO fishmap_webapp;
+
+CREATE OR REPLACE FUNCTION fishmap.calculate_intensity_mussels(days numeric, speed numeric, hours numeric, width numeric, num numeric, area numeric)
+  RETURNS numeric AS
+$BODY$
+	SELECT * FROM fishmap.calculate_intensity_dredges( $1, $2, $3, $4, $5, $6);
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100;
+ALTER FUNCTION fishmap.calculate_intensity_mussels(numeric, numeric, numeric, numeric, numeric, numeric)
+  OWNER TO fishmap_webapp;
+
+CREATE OR REPLACE FUNCTION fishmap.calculate_intensity_nets(days numeric, length numeric, nets numeric, area numeric)
+  RETURNS numeric AS
+$BODY$
+	SELECT (( $2 * $3 * $1 ) / 100 ) / ( $4 / 1000000 );
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100;
+ALTER FUNCTION fishmap.calculate_intensity_nets(numeric, numeric, numeric, numeric)
+  OWNER TO fishmap_webapp;
+
+CREATE OR REPLACE FUNCTION fishmap.calculate_intensity_pro_hand_gath(days numeric, avghours numeric, people numeric, area numeric)
+  RETURNS numeric AS
+$BODY$
+	SELECT * FROM fishmap.calculate_intensity_hand_gath($1, $2, $3, $4);
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100;
+ALTER FUNCTION fishmap.calculate_intensity_pro_hand_gath(numeric, numeric, numeric, numeric)
+  OWNER TO fishmap_webapp;
+
+CREATE OR REPLACE FUNCTION fishmap.calculate_intensity_queen_scallops(days numeric, speed numeric, hours numeric, width numeric, num numeric, area numeric)
+  RETURNS numeric AS
+$BODY$
+	SELECT * FROM fishmap.calculate_intensity_dredges( $1, $2, $3, $4, $5, $6);
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100;
+ALTER FUNCTION fishmap.calculate_intensity_queen_scallops(numeric, numeric, numeric, numeric, numeric, numeric)
+  OWNER TO fishmap_webapp;
+
+CREATE OR REPLACE FUNCTION fishmap.calculate_intensity_rsa_charterboats(days numeric, avghours numeric, people numeric, area numeric)
+  RETURNS numeric AS
+$BODY$
+	SELECT ( $1 * $3 * 1.5 ) / $4;
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100;
+ALTER FUNCTION fishmap.calculate_intensity_rsa_charterboats(numeric, numeric, numeric, numeric)
+  OWNER TO fishmap_webapp;
+
+CREATE OR REPLACE FUNCTION fishmap.calculate_intensity_rsa_commercial(days numeric, avghours numeric, rods numeric, area numeric)
+  RETURNS numeric AS
+$BODY$
+	SELECT ( $1 * $3 * 1.5 ) / $4;
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100;
+ALTER FUNCTION fishmap.calculate_intensity_rsa_commercial(numeric, numeric, numeric, numeric)
+  OWNER TO fishmap_webapp;
+
+CREATE OR REPLACE FUNCTION fishmap.calculate_intensity_rsa_noncharter(days numeric, avghours numeric, num numeric, area numeric)
+  RETURNS numeric AS
+$BODY$
+	SELECT ( $1 * $3 * ( $2 / 4 ) ) / $4;
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100;
+ALTER FUNCTION fishmap.calculate_intensity_rsa_noncharter(numeric, numeric, numeric, numeric)
+  OWNER TO fishmap_webapp;
+
+CREATE OR REPLACE FUNCTION fishmap.calculate_intensity_rsa_shore(days numeric, avghours numeric, people numeric, area numeric)
+  RETURNS numeric AS
+$BODY$
+	SELECT ( $1 * $3 * ($2 / 4) ) / $4;
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100;
+ALTER FUNCTION fishmap.calculate_intensity_rsa_shore(numeric, numeric, numeric, numeric)
+  OWNER TO fishmap_webapp;
+
+
 GRANT SELECT ON ALL TABLES IN SCHEMA fishmap TO fishmap_webapp;
 
 CREATE DATABASE fishmap_auth
