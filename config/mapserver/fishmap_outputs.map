@@ -193,72 +193,6 @@
 
 
     LAYER
-        NAME "project_intensity_lvls_king_scallops_det"
-        INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (select * FROM fishmap.project_intensity_king_scallops(%DAYS%, %SPEED%, %HOURS%, %NETWIDTH%, %NUM%, '%WKT%', false)) as foo using unique ogc_fid using srid=27700"
-	VALIDATION
-            'DAYS' '^[0-9]+(\.[0-9]+)?$'
-            'SPEED' '^[0-9]+(\.[0-9]+)?$'
-            'HOURS' '^[0-9]+(\.[0-9]+)?$'
-            'NETWIDTH' '^[0-9]+(\.[0-9]+)?$'
-            'NUM' '^[0-9]+$'
-            'WKT' '.*'
-        END
-        PROJECTION
-            "init=epsg:27700"
-        END
-        METADATA
-            "ows_title" "intensity_lvls_king_scallops_det"
-            "gml_include_items" "all"
-        END
-        TOLERANCEUNITS pixels
-        TOLERANCE 2
-        TEMPLATE 'id.tmpl'
-        STATUS OFF
-        TYPE POLYGON
-        UNITS METERS
-        CLASS
-            STYLE
-                COLOR 255 0 0
-            END
-        END
-    END
-
-
-    LAYER
-        NAME "project_intensity_lvls_king_scallops_gen"
-        INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (select * FROM fishmap.project_intensity_king_scallops(%DAYS%, %SPEED%, %HOURS%, %NETWIDTH%, %NUM%, '%WKT%', true)) as foo using unique ogc_fid using srid=27700"
-	VALIDATION
-            'DAYS' '^[0-9]+(\.[0-9]+)?$'
-            'SPEED' '^[0-9]+(\.[0-9]+)?$'
-            'HOURS' '^[0-9]+(\.[0-9]+)?$'
-            'NETWIDTH' '^[0-9]+(\.[0-9]+)?$'
-            'NUM' '^[0-9]+$'
-            'WKT' '.*'
-        END
-        PROJECTION
-            "init=epsg:27700"
-        END
-        METADATA
-            "ows_title" "intensity_lvls_king_scallops_det"
-            "gml_include_items" "all"
-        END
-        TOLERANCEUNITS pixels
-        TOLERANCE 2
-        TEMPLATE 'id.tmpl'
-        STATUS OFF
-        TYPE POLYGON
-        UNITS METERS
-        CLASS
-            STYLE
-                COLOR 255 0 0
-            END
-        END
-    END
-
-
-    LAYER
         NAME "intensity_lvls_lot_gen"
         INCLUDE "pgconnection.inc"
         DATA "wkb_geometry from (select * from intensity_lvls_lot_gen) as foo using unique ogc_fid using srid=27700"
@@ -2139,3 +2073,71 @@
             END
         END
     END
+
+
+    LAYER
+        NAME "project_intensity_lvls_king_scallops_det"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * FROM fishmap.project_intensity_king_scallops(%DAYS%, %SPEED%, %HOURS%, %NETWIDTH%, %NUM%, '%WKT%', false)) as foo using unique ogc_fid using srid=27700"
+	VALIDATION
+            'DAYS' '^[0-9]+(\.[0-9]+)?$'
+            'SPEED' '^[0-9]+(\.[0-9]+)?$'
+            'HOURS' '^[0-9]+(\.[0-9]+)?$'
+            'NETWIDTH' '^[0-9]+(\.[0-9]+)?$'
+            'NUM' '^[0-9]+$'
+            'WKT' '.*'
+        END
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "intensity_lvls_king_scallops_det"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+
+    LAYER
+        NAME "project_intensity_lvls_king_scallops_gen"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * FROM fishmap.project_intensity_king_scallops(%DAYS%, %SPEED%, %HOURS%, %NETWIDTH%, %NUM%, '%WKT%', true)) as foo using unique ogc_fid using srid=27700"
+	VALIDATION
+            'DAYS' '^[0-9]+(\.[0-9]+)?$'
+            'SPEED' '^[0-9]+(\.[0-9]+)?$'
+            'HOURS' '^[0-9]+(\.[0-9]+)?$'
+            'NETWIDTH' '^[0-9]+(\.[0-9]+)?$'
+            'NUM' '^[0-9]+$'
+            'WKT' '.*'
+        END
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "intensity_lvls_king_scallops_det"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+

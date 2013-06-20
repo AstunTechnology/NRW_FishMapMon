@@ -186,6 +186,17 @@ $BODY$
 ALTER FUNCTION fishmap.vessels_project_gen(text, integer, text)
   OWNER TO fishmap_webapp;
 
+CREATE OR REPLACE FUNCTION fishmap.calculate_intensity_hand_gath(days numeric, avghours numeric, people numeric, area numeric)
+  RETURNS numeric AS
+$BODY$
+	SELECT ( $1 * $2 * $3 * 40 ) / ( $4 / 10000 );
+	--SELECT $3/($4/10000)/($1/365);
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100;
+ALTER FUNCTION fishmap.calculate_intensity_hand_gath(numeric, numeric, numeric, numeric)
+  OWNER TO fishmap_webapp;
+
 CREATE OR REPLACE FUNCTION fishmap.calculate_intensity_cas_hand_gath(days numeric, avghours numeric, people numeric, area numeric)
   RETURNS numeric AS
 $BODY$
@@ -215,19 +226,6 @@ $BODY$
   COST 100;
 ALTER FUNCTION fishmap.calculate_intensity_fixed_pots(numeric, numeric, numeric, numeric)
   OWNER TO fishmap_webapp;
-
-
-CREATE OR REPLACE FUNCTION fishmap.calculate_intensity_hand_gath(days numeric, avghours numeric, people numeric, area numeric)
-  RETURNS numeric AS
-$BODY$
-	SELECT ( $1 * $2 * $3 * 40 ) / ( $4 / 10000 );
-	--SELECT $3/($4/10000)/($1/365);
-$BODY$
-  LANGUAGE sql VOLATILE
-  COST 100;
-ALTER FUNCTION fishmap.calculate_intensity_hand_gath(numeric, numeric, numeric, numeric)
-  OWNER TO fishmap_webapp;
-
 
 CREATE OR REPLACE FUNCTION fishmap.calculate_intensity_king_scallops(days numeric, speed numeric, hours numeric, width numeric, num numeric, area numeric)
   RETURNS numeric AS
@@ -421,6 +419,213 @@ $BODY$
 ALTER FUNCTION fishmap.project_intensity_king_scallops(numeric, numeric, numeric, numeric, numeric, text, boolean)
   OWNER TO fishmap_webapp;
 
+
+CREATE OR REPLACE FUNCTION fishmap.project_intensity_cas_hand_gath(IN days numeric, IN avghours numeric, IN people numeric, IN wkt text, IN generalize boolean)
+  RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry geometry) AS
+$BODY$
+	SELECT * FROM fishmap.project_intensity(
+		'cas_hand_gath'::text, 
+		'sum_footprint'::text, 
+		11, 
+		fishmap.calculate_intensity_cas_hand_gath( $1, $2, $3, ST_Area(ST_GeomFromText($4))::numeric),
+		$4,
+		$5		
+	);
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100
+  ROWS 1000;
+ALTER FUNCTION fishmap.project_intensity_cas_hand_gath(numeric, numeric, numeric, text, boolean)
+  OWNER TO fishmap_webapp;
+
+
+CREATE OR REPLACE FUNCTION fishmap.project_intensity_fixed_pots(IN days numeric, IN anchors numeric, IN pots numeric, IN wkt text, IN generalize boolean)
+  RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry geometry) AS
+$BODY$
+	SELECT * FROM fishmap.project_intensity(
+		'fixed_pots'::text, 
+		'sum_footprint'::text, 
+		9, 
+		fishmap.calculate_intensity_fixed_pots( $1, $2, $3, ST_Area(ST_GeomFromText($4))::numeric),
+		$4,
+		$5		
+	);
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100
+  ROWS 1000;
+ALTER FUNCTION fishmap.project_intensity_fixed_pots(numeric, numeric, numeric, text, boolean)
+  OWNER TO fishmap_webapp;
+
+
+CREATE OR REPLACE FUNCTION fishmap.project_intensity_lot(IN days numeric, IN speed numeric, IN hours numeric, IN width numeric, IN wkt text, IN generalize boolean)
+  RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry geometry) AS
+$BODY$
+	SELECT * FROM fishmap.project_intensity(
+		'lot'::text, 
+		'sum_footprint'::text, 
+		5, 
+		fishmap.calculate_intensity_lot( $1, $2, $3, $4, ST_Area(ST_GeomFromText($5))::numeric),
+		$5,
+		$6		
+	);
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100
+  ROWS 1000;
+ALTER FUNCTION fishmap.project_intensity_lot(numeric, numeric, numeric, numeric, text, boolean)
+  OWNER TO fishmap_webapp;
+
+
+CREATE OR REPLACE FUNCTION fishmap.project_intensity_mussels(IN days numeric, IN speed numeric, IN hours numeric, IN width numeric, IN num numeric, IN wkt text, IN generalize boolean)
+  RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry geometry) AS
+$BODY$
+	SELECT * FROM fishmap.project_intensity(
+		'mussels'::text, 
+		'sum_footprint'::text, 
+		3, 
+		fishmap.calculate_intensity_mussels( $1, $2, $3, $4, $5, ST_Area(ST_GeomFromText($6))::numeric),
+		$6,
+		$7		
+	);
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100
+  ROWS 1000;
+ALTER FUNCTION fishmap.project_intensity_mussels(numeric, numeric, numeric, numeric, numeric, text, boolean)
+  OWNER TO fishmap_webapp;
+
+
+CREATE OR REPLACE FUNCTION fishmap.project_intensity_nets(IN days numeric, IN length numeric, IN nets numeric, IN wkt text, IN generalize boolean)
+  RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry geometry) AS
+$BODY$
+	SELECT * FROM fishmap.project_intensity(
+		'nets'::text, 
+		'sum_footprint'::text, 
+		8, 
+		fishmap.calculate_intensity_nets( $1, $2, $3, ST_Area(ST_GeomFromText($4))::numeric),
+		$4,
+		$5		
+	);
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100
+  ROWS 1000;
+ALTER FUNCTION fishmap.project_intensity_nets(numeric, numeric, numeric, text, boolean)
+  OWNER TO fishmap_webapp;
+
+
+CREATE OR REPLACE FUNCTION fishmap.project_intensity_pro_hand_gath(IN days numeric, IN avghours numeric, IN people numeric, IN wkt text, IN generalize boolean)
+  RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry geometry) AS
+$BODY$
+	SELECT * FROM fishmap.project_intensity(
+		'pro_hand_gath'::text, 
+		'sum_footprint'::text, 
+		12, 
+		fishmap.calculate_intensity_pro_hand_gath( $1, $2, $3, ST_Area(ST_GeomFromText($4))::numeric),
+		$4,
+		$5		
+	);
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100
+  ROWS 1000;
+ALTER FUNCTION fishmap.project_intensity_pro_hand_gath(numeric, numeric, numeric, text, boolean)
+  OWNER TO fishmap_webapp;
+
+CREATE OR REPLACE FUNCTION fishmap.project_intensity_queen_scallops(IN days numeric, IN speed numeric, IN hours numeric, IN width numeric, IN num numeric, IN wkt text, IN generalize boolean)
+  RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry geometry) AS
+$BODY$
+	SELECT * FROM fishmap.project_intensity(
+		'queen_scallops'::text, 
+		'sum_footprint'::text, 
+		2, 
+		fishmap.calculate_intensity_queen_scallops( $1, $2, $3, $4, $5, ST_Area(ST_GeomFromText($6))::numeric),
+		$6,
+		$7		
+	);
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100
+  ROWS 1000;
+ALTER FUNCTION fishmap.project_intensity_queen_scallops(numeric, numeric, numeric, numeric, numeric, text, boolean)
+  OWNER TO fishmap_webapp;
+
+
+CREATE OR REPLACE FUNCTION fishmap.project_intensity_rsa_charterboats(IN days numeric, IN avghours numeric, IN people numeric, IN wkt text, IN generalize boolean)
+  RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry geometry) AS
+$BODY$
+	SELECT * FROM fishmap.project_intensity(
+		'rsa_charterboats'::text, 
+		'sum_footprint'::text, 
+		10, 
+		fishmap.calculate_intensity_rsa_charterboats( $1, $2, $3, ST_Area(ST_GeomFromText($4))::numeric),
+		$4,
+		$5		
+	);
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100
+  ROWS 1000;
+ALTER FUNCTION fishmap.project_intensity_rsa_charterboats(numeric, numeric, numeric, text, boolean)
+  OWNER TO fishmap_webapp;
+
+
+CREATE OR REPLACE FUNCTION fishmap.project_intensity_rsa_commercial(IN days numeric, IN avghours numeric, IN rods numeric, IN wkt text, IN generalize boolean)
+  RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry geometry) AS
+$BODY$
+	SELECT * FROM fishmap.project_intensity(
+		'rsa_commercial'::text, 
+		'sum_footprint'::text, 
+		10, 
+		fishmap.calculate_intensity_rsa_commercial( $1, $2, $3, ST_Area(ST_GeomFromText($4))::numeric),
+		$4,
+		$5		
+	);
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100
+  ROWS 1000;
+ALTER FUNCTION fishmap.project_intensity_rsa_commercial(numeric, numeric, numeric, text, boolean)
+  OWNER TO fishmap_webapp;
+
+
+CREATE OR REPLACE FUNCTION fishmap.project_intensity_rsa_noncharter(IN days numeric, IN avghours numeric, IN num numeric, IN wkt text, IN generalize boolean)
+  RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry geometry) AS
+$BODY$
+	SELECT * FROM fishmap.project_intensity(
+		'rsa_noncharter'::text, 
+		'sum_footprint'::text, 
+		10, 
+		fishmap.calculate_intensity_rsa_noncharter( $1, $2, $3, ST_Area(ST_GeomFromText($4))::numeric),
+		$4,
+		$5		
+	);
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100
+  ROWS 1000;
+ALTER FUNCTION fishmap.project_intensity_rsa_noncharter(numeric, numeric, numeric, text, boolean)
+  OWNER TO fishmap_webapp;
+
+
+CREATE OR REPLACE FUNCTION fishmap.project_intensity_rsa_shore(IN days numeric, IN avghours numeric, IN people numeric, IN wkt text, IN generalize boolean)
+  RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry geometry) AS
+$BODY$
+	SELECT * FROM fishmap.project_intensity(
+		'rsa_shore'::text, 
+		'sum_footprint'::text, 
+		10, 
+		fishmap.calculate_intensity_rsa_shore( $1, $2, $3, ST_Area(ST_GeomFromText($4))::numeric),
+		$4,
+		$5		
+	);
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100
+  ROWS 1000;
+ALTER FUNCTION fishmap.project_intensity_rsa_shore(numeric, numeric, numeric, text, boolean)
+  OWNER TO fishmap_webapp;
 
 
 GRANT SELECT ON ALL TABLES IN SCHEMA fishmap TO fishmap_webapp;
