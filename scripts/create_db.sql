@@ -330,6 +330,99 @@ ALTER FUNCTION fishmap.calculate_intensity_rsa_shore(numeric, numeric, numeric, 
   OWNER TO fishmap_webapp;
 
 
+CREATE OR REPLACE FUNCTION fishmap.project_intensity(IN fishingname text, IN intensityfield text, IN intensitylookup integer, IN intensity numeric, IN wkt text, IN generalize boolean)
+  RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry geometry) AS
+$BODY$
+DECLARE
+	tablename text;
+	bounds numeric[];
+	lvlcase text;
+	newdata text;
+	olddata text;
+	sql text;
+BEGIN
+	tablename := 'intensity_lvls_'|| fishingname;
+	SELECT rangeboundaries INTO bounds FROM fishmap.intensity_lvls;
+	lvlcase = 'CASE 
+	WHEN '|| quote_ident(intensityfield) ||' < '|| bounds[1] ||' THEN 1 
+	WHEN '|| quote_ident(intensityfield) ||' > '|| bounds[2] ||' THEN 3 
+	ELSE 2 
+END';
+
+	IF generalize THEN
+		newdata := 'SELECT '|| intensity::text ||' AS '|| quote_ident(intensityfield) ||', wkb_geometry
+FROM grid
+WHERE 
+	ST_Intersects(wkb_geometry, ST_GeomFromText('|| quote_literal(wkt) ||', 27700)) 
+	AND NOT ST_Touches(wkb_geometry, ST_GeomFromText('|| quote_literal(wkt) ||', 27700))';
+		olddata := quote_ident(tablename) || '_gen';
+	ELSE
+		newdata := 'SELECT 
+			'|| intensity::text ||' AS '|| quote_ident(intensityfield) ||',
+			ST_GeomFromText('|| quote_literal(wkt) ||', 27700) AS wkb_geometry';
+		olddata := quote_ident(tablename) || '_det';
+	END IF;
+
+	sql := '
+WITH project AS (
+		'|| newdata ||'
+), 
+overlapping AS (
+	SELECT
+		ogc_fid,
+     		'|| quote_ident(intensityfield) ||' + '|| intensity::text ||' AS '|| quote_ident(intensityfield) ||', 
+		wkb_geometry
+	FROM '|| olddata ||' AS existing
+	WHERE ST_Intersects(wkb_geometry, ST_GeomFromText('|| quote_literal(wkt) ||', 27700) )
+)
+SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, intensity_level, '|| quote_ident(intensityfield) ||', wkb_geometry FROM (
+	-- non-overlapping parts of existing polygons
+	SELECT intensity_level::int, '|| quote_ident(intensityfield) ||', wkb_geometry
+	FROM '|| olddata ||'
+	WHERE ogc_fid NOT IN (SELECT ogc_fid FROM overlapping)
+	UNION 
+	-- non-overlapping parts of project polygon
+	SELECT '|| lvlcase ||' AS intensity_level, '|| quote_ident(intensityfield) ||', (ST_Dump(ST_Difference(
+		wkb_geometry,
+		(SELECT ST_Multi(ST_Union(wkb_geometry)) FROM overlapping)
+	))).geom AS wkb_geometry
+		FROM project
+	UNION 
+	--overlapping parts of project polygon and existing polygons
+	SELECT '|| lvlcase ||' AS intensity_level, '|| quote_ident(intensityfield) ||', wkb_geometry FROM overlapping
+) AS intensities
+WHERE '|| quote_ident(intensityfield) ||' > 0;';
+	                                                        
+        RETURN QUERY EXECUTE sql;
+END;
+$BODY$
+  LANGUAGE plpgsql VOLATILE
+  COST 100
+  ROWS 1000;
+ALTER FUNCTION fishmap.project_intensity(text, text, integer, numeric, text, boolean)
+  OWNER TO fishmap_webapp;
+
+
+CREATE OR REPLACE FUNCTION fishmap.project_intensity_king_scallops(IN days numeric, IN speed numeric, IN hours numeric, IN width numeric, IN num numeric, IN wkt text, IN generalize boolean)
+  RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry geometry) AS
+$BODY$
+	SELECT * FROM fishmap.project_intensity(
+		'king_scallops'::text, 
+		'sum_footprint'::text, 
+		1, 
+		fishmap.calculate_intensity_king_scallops( $1, $2, $3, $4, $5, ST_Area(ST_GeomFromText($6))::numeric),
+		$6,
+		$7		
+	);
+$BODY$
+  LANGUAGE sql VOLATILE
+  COST 100
+  ROWS 1000;
+ALTER FUNCTION fishmap.project_intensity_king_scallops(numeric, numeric, numeric, numeric, numeric, text, boolean)
+  OWNER TO fishmap_webapp;
+
+
+
 GRANT SELECT ON ALL TABLES IN SCHEMA fishmap TO fishmap_webapp;
 
 CREATE DATABASE fishmap_auth
