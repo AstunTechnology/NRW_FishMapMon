@@ -71,13 +71,14 @@ INSERT INTO fishmap.intensity_lvls VALUES
 	(15, '{2.0, 10.0}')
 ;
 
-
-CREATE OR REPLACE FUNCTION fishmap.vessels_project_det(IN fishingname text, IN vesselcount integer, IN wkt text)
+CREATE OR REPLACE FUNCTION fishmap.vessels_project_det(IN fishingname text, IN vesselcount integer, IN wkt text, IN combined boolean)
   RETURNS TABLE(ogc_fid integer, num integer, wkb_geometry geometry) AS
 $BODY$
 DECLARE
 	tablename text;
 	countfield text;
+	newdata text;
+	sql text;
 BEGIN
 	tablename := 'intensity_lvls_'|| fishingname ||'_det';
 	IF fishingname = 'rsa_shore' THEN
@@ -87,12 +88,14 @@ BEGIN
         ELSE
         	countfield = '_overlaps';
         END IF;
-                                                        
-        RETURN QUERY EXECUTE '
+
+        newdata := vesselcount::text ||' AS '|| quote_ident(countfield) ||',
+		ST_GeomFromText('|| quote_literal(wkt) ||', 27700) AS wkb_geometry';
+	
+        IF combined THEN                                        
+		sql := '
 WITH project AS (
-	SELECT 
-		'|| vesselcount::text ||' AS '|| quote_ident(countfield) ||',
-		ST_GeomFromText('|| quote_literal(wkt) ||', 27700) AS wkb_geometry
+	SELECT '|| newdata ||'
 	), 
 overlapping AS (
 	SELECT
@@ -118,21 +121,27 @@ SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, '|| quote_iden
 	--overlapping parts of project polygon and existing polygons
 	SELECT '|| quote_ident(countfield) ||'::int, wkb_geometry FROM overlapping
 ) AS a;';
+	ELSE
+		sql := 'SELECT 1, '|| newdata ||';';
+	END IF;
+
+	RETURN QUERY EXECUTE sql;
 END;
 $BODY$
   LANGUAGE plpgsql VOLATILE
   COST 100
   ROWS 1000;
-ALTER FUNCTION fishmap.vessels_project_det(text, integer, text)
+ALTER FUNCTION fishmap.vessels_project_det(text, integer, text, boolean)
   OWNER TO fishmap_webapp;
 
 
-CREATE OR REPLACE FUNCTION fishmap.vessels_project_gen(IN fishingname text, IN vesselcount integer, IN wkt text)
+CREATE OR REPLACE FUNCTION fishmap.vessels_project_gen(IN fishingname text, IN vesselcount integer, IN wkt text, IN combine boolean)
   RETURNS TABLE(ogc_fid integer, num integer, wkb_geometry geometry) AS
 $BODY$
 DECLARE
 	tablename text;
 	countfield text;
+	sql text;
 BEGIN
 	tablename := 'intensity_lvls_'|| fishingname ||'_gen';
 	IF fishingname = 'rsa_shore' THEN
@@ -142,11 +151,11 @@ BEGIN
 	ELSE
 		countfield = '_overlaps';
 	END IF;
-	
-	RETURN QUERY EXECUTE '
+		
+	IF combine THEN
+		sql := '
 WITH project AS (
-	SELECT 
-		'|| vesselcount::text ||' AS '|| quote_ident(countfield) ||',
+	SELECT '|| vesselcount::text ||' AS '|| quote_ident(countfield) ||',
 		ST_GeomFromText('|| quote_literal(wkt) ||', 27700) AS wkb_geometry
 ), 
 overlapping AS (
@@ -178,13 +187,21 @@ SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, '|| quote_iden
 	--overlapping parts of project polygon and existing polygons
 	SELECT '|| quote_ident(countfield) ||'::int, wkb_geometry FROM overlapping
 ) AS a;';
+	ELSE
+		sql := 'SELECT ogc_fid, '|| vesselcount::text ||'::int, wkb_geometry
+		FROM grid
+		WHERE ST_Intersects(wkb_geometry, ST_GeomFromText('|| quote_literal(wkt) ||', 27700));';
+	END IF;
+
+	RETURN QUERY EXECUTE sql;
 END;
 $BODY$
   LANGUAGE plpgsql VOLATILE
   COST 100
   ROWS 1000;
-ALTER FUNCTION fishmap.vessels_project_gen(text, integer, text)
+ALTER FUNCTION fishmap.vessels_project_gen(text, integer, text, boolean)
   OWNER TO fishmap_webapp;
+
 
 CREATE OR REPLACE FUNCTION fishmap.calculate_intensity_hand_gath(days numeric, avghours numeric, people numeric, area numeric)
   RETURNS numeric AS

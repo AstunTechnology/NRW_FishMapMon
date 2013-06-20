@@ -2019,7 +2019,7 @@
     LAYER
         NAME "vessels_lvls_project_gen"
         INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (select *, num AS _overlaps from fishmap.vessels_project_gen('%FISHING%', %COUNT%, '%WKT%')) as foo using unique ogc_fid using srid=27700"
+        DATA "wkb_geometry from (select *, num AS _overlaps from fishmap.vessels_project_gen('%FISHING%', %COUNT%, '%WKT%', false)) as foo using unique ogc_fid using srid=27700"
         VALIDATION
             'FISHING' '^[a-z_]+$'
             'COUNT' '^[0-9]+$'
@@ -2046,9 +2046,39 @@
     END
     
     LAYER
+        NAME "vessels_lvls_project_combined_gen"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select *, num AS _overlaps from fishmap.vessels_project_gen('%FISHING%', %COUNT%, '%WKT%', true)) as foo using unique ogc_fid using srid=27700"
+        VALIDATION
+            'FISHING' '^[a-z_]+$'
+            'COUNT' '^[0-9]+$'
+            'WKT' '.*'
+        END
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "vessels_lvls_project_combined_gen"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+
+    LAYER
         NAME "vessels_lvls_project_det"
         INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (select *, num AS _overlaps from fishmap.vessels_project_det('%FISHING%', %COUNT%, '%WKT%')) as foo using unique ogc_fid using srid=27700"
+        DATA "wkb_geometry from (select *, num AS _overlaps from fishmap.vessels_project_det('%FISHING%', %COUNT%, '%WKT%', false)) as foo using unique ogc_fid using srid=27700"
         VALIDATION
             'FISHING' '^[a-z_]+$'
             'COUNT' '^[0-9]+$'
@@ -2073,6 +2103,37 @@
             END
         END
     END
+
+    LAYER
+        NAME "vessels_lvls_project_combined_det"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select *, num AS _overlaps from fishmap.vessels_project_det('%FISHING%', %COUNT%, '%WKT%', true)) as foo using unique ogc_fid using srid=27700"
+        VALIDATION
+            'FISHING' '^[a-z_]+$'
+            'COUNT' '^[0-9]+$'
+            'WKT' '.*'
+        END
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "vessels_lvls_project_combined_det"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+
 
 
     LAYER
