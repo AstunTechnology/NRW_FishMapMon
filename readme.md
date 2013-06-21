@@ -68,14 +68,12 @@ Ultimately this is Mapserver, but runs behind MapProxy to provide layer security
 *TODO*: Replace **lighttpd** config with MapProxy.
 
 
-#### MapServer
-
-##### Paths
+#### MapServer Paths
 
 Mapfiles: [project_root]/config/mapserver
 Basemap data: [project_root]/data/BaseMapping
 
-##### Custom parameters
+#### Mapserver Custom parameters
 
 For requests made to show impact of project area selection the following custom parameters are used:
 * Vessels (vessels_lvl_project_det and vessels_lvl_project_gen)
@@ -107,7 +105,7 @@ For requests made to show impact of project area selection the following custom 
 
 
 
-##### Example URLs
+#### Mapserver Example URLs
 
 * SLD
     * Single layer (English): http://localhost/en/sld?layers=intertidal_habitats
