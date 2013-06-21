@@ -68,7 +68,9 @@ Ultimately this is Mapserver, but runs behind MapProxy to provide layer security
 *TODO*: Replace **lighttpd** config with MapProxy.
 
 
-#### MapServer Paths
+### MapServer 
+
+#### Paths
 
 Mapfiles: [project_root]/config/mapserver
 Basemap data: [project_root]/data/BaseMapping
