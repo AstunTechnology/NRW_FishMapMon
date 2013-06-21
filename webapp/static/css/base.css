@@ -122,6 +122,21 @@ ul.tree li h3.collapsed {
     padding-left: 10px;
 }
 
+.outputs .info {
+    color: white;
+    background-color: #009EAD;
+    background-image: url("../img/silk/information.png");
+    background-position: 0.5em 0.5em;
+    background-repeat: no-repeat;
+    border: 1px solid lightgray;
+    margin: 0.5em;
+    padding: 0.5em 0.5em 0.5em 2.5em;
+}
+
+.outputs .info > p {
+    padding-bottom: 0.25em;
+}
+
 .outputs select {
     width: 100%;
 }
@@ -153,6 +168,22 @@ ul.tree li h3.collapsed {
 .outputs p.buttons {
     padding-top: 0.5em;
     text-align: right;
+}
+
+.outputs .button {
+    background-color: #009EAD;
+    background-position: 0.5em center;
+    background-repeat: no-repeat;
+    border: 1px solid lightgray;
+    border-radius: 5px 5px 5px 5px;
+    color: white;
+    display: inline-block;
+    padding: 0.5em 1em 0.5em 2em;
+    text-decoration: none;
+}
+
+.outputs .button.new_scenario {
+    background-image: url("../img/silk/add.png");
 }
 
 /* Legend Panel */

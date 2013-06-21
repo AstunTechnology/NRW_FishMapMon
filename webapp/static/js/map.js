@@ -262,10 +262,13 @@
 
     createLayerTree(overlayLayers, jQuery('.overlays'), layer_toggle);
 
+    var events = new OpenLayers.Events(this, jQuery('#map').get(0), null, true);
+
     var outputPanel = new OutputPanel({
         layers: overlayLayers,
         activities: outputActivities,
-        div: jQuery('.outputs').get(0)
+        div: jQuery('.outputs').get(0),
+        controller: events
     });
 
     outputPanel.events.on({
@@ -425,12 +428,14 @@
         scenarioAddFeature(e.feature);
     });
 
+
     FISH_MAP.scenario = null;
     function newScenario() {
         console.log('newScenario');
         clearScenario();
         FISH_MAP.scenario = {};
         drawCtrl.activate();
+        events.triggerEvent("predrawpolygon");
     }
 
     function clearScenario() {
@@ -440,32 +445,17 @@
         if (layer) {
             layer.removeAllFeatures();
         }
-        outputPanel.hideScenarioForm();
-        // Remove scenario layers
-        var types = ['vessels', 'intensity'];
-        for (var i = 0, type, grp, lyr; i < types.length; i++) {
-            type = types[i];
-            grp = overlayLayers.getGroupsByProperty('id', type + '_grp')[0];
-            lyr = overlayLayers.getLayerById(type + "_lvls_project");
-            grp.removeLayer(lyr);
-        }
-        // Update the layer tree
-        outputPanel.drawActivityLayers();
+        removeScenarioLayers();
+        events.triggerEvent('clearscenario');
         // Refresh the map state
         refreshOverlayLayer();
     }
 
-    function scenarioAddFeature(feature) {
-        console.log('scenarioAddFeature');
-        FISH_MAP.scenario.feature = feature;
-        outputPanel.showScenarioForm();
-    }
-
-    function showScenario() {
-        console.log('showScenario');
+    function addScenarioLayers() {
+        // Remove any existing layers
+        removeScenarioLayers();
         // Add the additional layers to the activiy groups
-        // var types = ['vessels', 'intensity'];
-        var types = ['vessels'];
+        var types = ['vessels', 'intensity'];
         for (var i = 0, type, grp, lyr; i < types.length; i++) {
             type = types[i];
             grp = overlayLayers.getGroupsByProperty('id', type + '_grp')[0];
@@ -477,8 +467,29 @@
             };
             grp.addLayer(lyr);
         }
-        // Update the layer tree
-        outputPanel.drawActivityLayers();
+    }
+    function removeScenarioLayers() {
+        // Remove scenario layers
+        var types = ['vessels', 'intensity'];
+        for (var i = 0, type, grp, lyr; i < types.length; i++) {
+            type = types[i];
+            grp = overlayLayers.getGroupsByProperty('id', type + '_grp')[0];
+            lyr = overlayLayers.getLayerById(type + "_lvls_project");
+            grp.removeLayer(lyr);
+        }
+    }
+
+    function scenarioAddFeature(feature) {
+        console.log('scenarioAddFeature');
+        FISH_MAP.scenario.feature = feature;
+        // outputPanel.showScenarioForm();
+        events.triggerEvent('polygondrawn');
+    }
+
+    function showScenario() {
+        console.log('showScenario');
+        addScenarioLayers();
+        events.triggerEvent('scenariocalculated');
     }
 
 })();

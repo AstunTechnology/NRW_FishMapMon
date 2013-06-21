@@ -10,7 +10,29 @@ OutputPanel = OpenLayers.Class({
         this.layers = options.layers;
         this.activities = options.activities;
         this.div = jQuery(options.div);
+        this.controller = options.controller;
         this.events = new OpenLayers.Events(this, this.div.get(0), null, true);
+        var that = this;
+        this.controller.on({
+            'predrawpolygon': function(e) {
+                that.showInfo('predrawpolygon');
+                jQuery('.new_scenario').parent().hide();
+            },
+            'polygondrawn': function(e) {
+                that.showInfo('polygondrawn');
+                that.showScenarioForm();
+            },
+            'scenariocalculated': function(e) {
+                that.showInfo('scenariocalculated');
+                that.drawActivityLayers();
+            },
+            'clearscenario': function(e) {
+                that.showInfo('clearscenario');
+                that.hideScenarioForm();
+                that.drawActivityLayers();
+                jQuery('.new_scenario').parent().show();
+            }
+        });
     },
 
     getActivity: function() {
@@ -37,6 +59,8 @@ OutputPanel = OpenLayers.Class({
         var model = {"layers": this.layers, "activities": this.activities};
         var panelHtml = jQuery.mustache(tmpl, jQuery.extend(model, FISH_MAP.tmplView));
         this.div.append(panelHtml);
+
+        this.showInfo('none');
 
         this.drawActivityLayers();
 
@@ -118,6 +142,11 @@ OutputPanel = OpenLayers.Class({
         this.syncActivityLayers();
     },
 
+    showInfo: function(state) {
+        this.div.find('.info').hide();
+        this.div.find('.info.' + state).show();
+    },
+
     showScenarioForm: function() {
         jQuery('form fieldset', this.div).hide();
         var fields = this.scenarioFields[this.getActivity()];
@@ -126,12 +155,10 @@ OutputPanel = OpenLayers.Class({
             jQuery('form fieldset.' + fld, this.div).show();
         }
         jQuery('form').show();
-        jQuery('.new_scenario').parent().hide();
     },
 
     hideScenarioForm: function() {
         jQuery('form', this.div).hide();
-        jQuery('.new_scenario').parent().show();
     },
 
     /**

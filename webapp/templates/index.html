@@ -227,6 +227,8 @@
             {{/activities}}
             </select>
             <p class="buttons"><a href="#" class="button new_scenario">New Scenario</a></p>
+            <div class="info predrawpolygon"><p>Please draw an area on the map.</p><p>Click to add a point and double click to finish drawing.</p></div>
+            <div class="info polygondrawn">Please provide details of the fishing activity and click "Calculate Scenario".</div>
             <form>
                 <fieldset class="dpm">
                     <legend>Days per month</legend>
@@ -248,7 +250,7 @@
                     <p><input type="text" id="gear_speed" name="gear_speed" value="0" size="4" /></p>
                 </fieldset>
                 <fieldset class="gear_time">
-                    <legend>Gear Speed (km/h)</legend>
+                    <legend>Gear Time (hours per day)</legend>
                     <p><input type="text" id="gear_time" name="gear_time" value="0" size="4" /></p>
                 </fieldset>
                 <fieldset class="gear_width">
@@ -289,6 +291,7 @@
                 </fieldset>
                 <p class="buttons"><input type="button" name="show_scenario" value="Calculate Scenario" /> <input type="button" name="clear_scenario" value="Clear Scenario" /></p>
             </form>
+            <div class="info scenariocalculated"><p>View the results of your scenario by enabling the scenario layers below.</p><p>If you change the criteria above click the "Calculate Scenario" button to see the changes on the map.</p></div>
             <div class="activity-tree">
             </div>
         </div>
