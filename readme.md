@@ -82,6 +82,28 @@ For requests made to show impact of project area selection the following custom 
     * FISHING (name of type of fishing as used in other layers and underlying tables)
     * COUNT (number of vessels in custom area(s))
     * WKT (WKT representation of project area(s))
+* Intensity
+    * FISHING (name of type of fishing as used in other layers and underlying tables)
+    * WKT (WKT representation of project area(s))
+    * ARGn (number of numeric arguments, see below as to what they refer to for each FISHING type)
+
+Arguments for each fishing activity in intensity calculations
+FISHING          | ARG1      | ARG2       | ARG3       | ARG4      | ARG5
+----------------:|:---------:|:----------:|:----------:|:---------:|:--------
+king_scallops    | days/year | speed      | avg. hours | net width | # boats
+queen_scallops   | days/year | speed      | avg. hours | net width | # boats
+mussels          | days/year | speed      | avg. hours | net width | # boats
+lot              | days/year | speed      | avg. hours | net width |
+nets             | days/year | net length | # nets     |           | 
+fixed_pots       | days/year | # anchors  | # pots     |           | 
+rsa_charterboats | days/year | avg. hours | # rods     |           | 
+rsa_commercial   | days/year | avg. hours | # rods     |           | 
+rsa_noncharter   | days/year | avg. hours | # rods     |           | 
+rsa_shore        | days/year | avg. hours | # rods     |           | 
+cas_hand_gath    | days/year | avg. hours | # people   |           | 
+pro_hand_gath    | days/year | avg. hours | # people   |           | 
+
+
 
 
 ##### Example URLs
