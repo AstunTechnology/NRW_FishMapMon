@@ -87,22 +87,23 @@ For requests made to show impact of project area selection the following custom 
     * WKT (WKT representation of project area(s))
     * ARGn (number of numeric arguments, see below as to what they refer to for each FISHING type)
 
-Arguments for each fishing activity in intensity calculations
-FISHING          | ARG1      | ARG2       | ARG3       | ARG4      | ARG5
-----------------:|:---------:|:----------:|:----------:|:---------:|:--------
-king_scallops    | days/year | speed      | avg. hours | net width | # boats
-queen_scallops   | days/year | speed      | avg. hours | net width | # boats
-mussels          | days/year | speed      | avg. hours | net width | # boats
-lot              | days/year | speed      | avg. hours | net width |
-nets             | days/year | net length | # nets     |           | 
-fixed_pots       | days/year | # anchors  | # pots     |           | 
-rsa_charterboats | days/year | avg. hours | # rods     |           | 
-rsa_commercial   | days/year | avg. hours | # rods     |           | 
-rsa_noncharter   | days/year | avg. hours | # rods     |           | 
-rsa_shore        | days/year | avg. hours | # rods     |           | 
-cas_hand_gath    | days/year | avg. hours | # people   |           | 
-pro_hand_gath    | days/year | avg. hours | # people   |           | 
+<table>
+<caption>Arguments for each fishing activity in intensity calculations</caption>
 
+<tr><th>FISHING</th><th>ARG1</th><th>ARG2</th><th>ARG3</th><th>ARG4</th><th>ARG5</th></tr>
+<tr><td>king_scallops    </td><td> days/year </td><td> speed      </td><td> avg. hours </td><td> net width </td><td> # boats</td></tr>
+<tr><td>queen_scallops   </td><td> days/year </td><td> speed      </td><td> avg. hours </td><td> net width </td><td> # boats</td></tr>
+<tr><td>mussels          </td><td> days/year </td><td> speed      </td><td> avg. hours </td><td> net width </td><td> # boats</td></tr>
+<tr><td>lot              </td><td> days/year </td><td> speed      </td><td> avg. hours </td><td> net width </td><td></td></tr>
+<tr><td>nets             </td><td> days/year </td><td> net length </td><td> # nets     </td><td>           </td><td> </td></tr>
+<tr><td>fixed_pots       </td><td> days/year </td><td> # anchors  </td><td> # pots     </td><td>           </td><td> </td></tr>
+<tr><td>rsa_charterboats </td><td> days/year </td><td> avg. hours </td><td> # rods     </td><td>           </td><td> </td></tr>
+<tr><td>rsa_commercial   </td><td> days/year </td><td> avg. hours </td><td> # rods     </td><td>           </td><td> </td></tr>
+<tr><td>rsa_noncharter   </td><td> days/year </td><td> avg. hours </td><td> # rods     </td><td>           </td><td> </td></tr>
+<tr><td>rsa_shore        </td><td> days/year </td><td> avg. hours </td><td> # rods     </td><td>           </td><td> </td></tr>
+<tr><td>cas_hand_gath    </td><td> days/year </td><td> avg. hours </td><td> # people   </td><td>           </td><td> </td></tr>
+<tr><td>pro_hand_gath    </td><td> days/year </td><td> avg. hours </td><td> # people   </td><td>           </td><td> </td></tr>
+</table>
 
 
 
