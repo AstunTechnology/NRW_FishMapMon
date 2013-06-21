@@ -3,13 +3,27 @@
 SET search_path = fishmap, public, pg_catalog;
 
 --
+-- Name: calculate_intensity__hand_gath(numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+--
+
+CREATE FUNCTION fishmap.calculate_intensity__hand_gath(days numeric, avghours numeric, people numeric, area numeric) RETURNS numeric
+    LANGUAGE sql
+    AS $_$
+	SELECT ( $1 * $2 * $3 * 40 ) / ( $4 / 10000 );
+	--SELECT $3/($4/10000)/($1/365);
+$_$;
+
+
+ALTER FUNCTION fishmap.calculate_intensity__hand_gath(days numeric, avghours numeric, people numeric, area numeric) OWNER TO fishmap_webapp;
+
+--
 -- Name: calculate_intensity_cas_hand_gath(numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION calculate_intensity_cas_hand_gath(days numeric, avghours numeric, people numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_cas_hand_gath(days numeric, avghours numeric, people numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
-	SELECT * FROM fishmap.calculate_intensity_hand_gath($1, $2 * 2.5, $3, $4);
+	SELECT * FROM fishmap.calculate_intensity__hand_gath($1, $2 * 2.5, $3, $4);
 $_$;
 
 
@@ -19,7 +33,7 @@ ALTER FUNCTION fishmap.calculate_intensity_cas_hand_gath(days numeric, avghours 
 -- Name: calculate_intensity_dredges(numeric, numeric, numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION calculate_intensity_dredges(days numeric, speed numeric, hours numeric, width numeric, num numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_dredges(days numeric, speed numeric, hours numeric, width numeric, num numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
 	SELECT ( $2 * $3 * $4 * $5 * $1 * 1000) / $6 ;
@@ -32,7 +46,7 @@ ALTER FUNCTION fishmap.calculate_intensity_dredges(days numeric, speed numeric, 
 -- Name: calculate_intensity_fixed_pots(numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION calculate_intensity_fixed_pots(days numeric, anchors numeric, pots numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_fixed_pots(days numeric, anchors numeric, pots numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
 	SELECT ( ($2 + $3) * $1 / ( $4 / 10000 ) ) / 10000;
@@ -42,24 +56,10 @@ $_$;
 ALTER FUNCTION fishmap.calculate_intensity_fixed_pots(days numeric, anchors numeric, pots numeric, area numeric) OWNER TO fishmap_webapp;
 
 --
--- Name: calculate_intensity_hand_gath(numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
---
-
-CREATE FUNCTION calculate_intensity_hand_gath(days numeric, avghours numeric, people numeric, area numeric) RETURNS numeric
-    LANGUAGE sql
-    AS $_$
-	SELECT ( $1 * $2 * $3 * 40 ) / ( $4 / 10000 );
-	--SELECT $3/($4/10000)/($1/365);
-$_$;
-
-
-ALTER FUNCTION fishmap.calculate_intensity_hand_gath(days numeric, avghours numeric, people numeric, area numeric) OWNER TO fishmap_webapp;
-
---
 -- Name: calculate_intensity_king_scallops(numeric, numeric, numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION calculate_intensity_king_scallops(days numeric, speed numeric, hours numeric, width numeric, num numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_king_scallops(days numeric, speed numeric, hours numeric, width numeric, num numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
 	SELECT * FROM fishmap.calculate_intensity_dredges( $1, $2, $3, $4, $5, $6);
@@ -72,7 +72,7 @@ ALTER FUNCTION fishmap.calculate_intensity_king_scallops(days numeric, speed num
 -- Name: calculate_intensity_lot(numeric, numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION calculate_intensity_lot(days numeric, speed numeric, hours numeric, width numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_lot(days numeric, speed numeric, hours numeric, width numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
 	SELECT ( $2 * $3 * $4 * $1 * 1000) / $5 ;
@@ -85,7 +85,7 @@ ALTER FUNCTION fishmap.calculate_intensity_lot(days numeric, speed numeric, hour
 -- Name: calculate_intensity_mussels(numeric, numeric, numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION calculate_intensity_mussels(days numeric, speed numeric, hours numeric, width numeric, num numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_mussels(days numeric, speed numeric, hours numeric, width numeric, num numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
 	SELECT * FROM fishmap.calculate_intensity_dredges( $1, $2, $3, $4, $5, $6);
@@ -98,7 +98,7 @@ ALTER FUNCTION fishmap.calculate_intensity_mussels(days numeric, speed numeric, 
 -- Name: calculate_intensity_nets(numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION calculate_intensity_nets(days numeric, length numeric, nets numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_nets(days numeric, length numeric, nets numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
 	SELECT (( $2 * $3 * $1 ) / 100 ) / ( $4 / 1000000 );
@@ -111,10 +111,10 @@ ALTER FUNCTION fishmap.calculate_intensity_nets(days numeric, length numeric, ne
 -- Name: calculate_intensity_pro_hand_gath(numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION calculate_intensity_pro_hand_gath(days numeric, avghours numeric, people numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_pro_hand_gath(days numeric, avghours numeric, people numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
-	SELECT * FROM fishmap.calculate_intensity_hand_gath($1, $2, $3, $4);
+	SELECT * FROM fishmap.calculate_intensity__hand_gath($1, $2, $3, $4);
 $_$;
 
 
@@ -124,7 +124,7 @@ ALTER FUNCTION fishmap.calculate_intensity_pro_hand_gath(days numeric, avghours 
 -- Name: calculate_intensity_queen_scallops(numeric, numeric, numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION calculate_intensity_queen_scallops(days numeric, speed numeric, hours numeric, width numeric, num numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_queen_scallops(days numeric, speed numeric, hours numeric, width numeric, num numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
 	SELECT * FROM fishmap.calculate_intensity_dredges( $1, $2, $3, $4, $5, $6);
@@ -137,7 +137,7 @@ ALTER FUNCTION fishmap.calculate_intensity_queen_scallops(days numeric, speed nu
 -- Name: calculate_intensity_rsa_charterboats(numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION calculate_intensity_rsa_charterboats(days numeric, avghours numeric, people numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_rsa_charterboats(days numeric, avghours numeric, people numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
 	SELECT ( $1 * $3 * 1.5 ) / $4;
@@ -150,7 +150,7 @@ ALTER FUNCTION fishmap.calculate_intensity_rsa_charterboats(days numeric, avghou
 -- Name: calculate_intensity_rsa_commercial(numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION calculate_intensity_rsa_commercial(days numeric, avghours numeric, rods numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_rsa_commercial(days numeric, avghours numeric, rods numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
 	SELECT ( $1 * $3 * 1.5 ) / $4;
@@ -163,7 +163,7 @@ ALTER FUNCTION fishmap.calculate_intensity_rsa_commercial(days numeric, avghours
 -- Name: calculate_intensity_rsa_noncharter(numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION calculate_intensity_rsa_noncharter(days numeric, avghours numeric, num numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_rsa_noncharter(days numeric, avghours numeric, num numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
 	SELECT ( $1 * $3 * ( $2 / 4 ) ) / $4;
@@ -176,7 +176,7 @@ ALTER FUNCTION fishmap.calculate_intensity_rsa_noncharter(days numeric, avghours
 -- Name: calculate_intensity_rsa_shore(numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION calculate_intensity_rsa_shore(days numeric, avghours numeric, people numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_rsa_shore(days numeric, avghours numeric, people numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
 	SELECT ( $1 * $3 * ($2 / 4) ) / $4;
@@ -189,7 +189,7 @@ ALTER FUNCTION fishmap.calculate_intensity_rsa_shore(days numeric, avghours nume
 -- Name: project_intensity(text, text, integer, numeric, text, boolean, boolean); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION project_intensity(fishingname text, intensityfield text, intensitylookup integer, intensity numeric, wkt text, generalize boolean, combine boolean) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
+CREATE FUNCTION fishmap.project_intensity(fishingname text, intensityfield text, intensitylookup integer, intensity numeric, wkt text, generalize boolean, combine boolean) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -267,262 +267,378 @@ $$;
 ALTER FUNCTION fishmap.project_intensity(fishingname text, intensityfield text, intensitylookup integer, intensity numeric, wkt text, generalize boolean, combine boolean) OWNER TO fishmap_webapp;
 
 --
--- Name: project_intensity_cas_hand_gath(numeric, numeric, numeric, text, boolean, boolean); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+-- Name: project_intensity_cas_hand_gath(text, boolean, boolean, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION project_intensity_cas_hand_gath(days numeric, avghours numeric, people numeric, wkt text, generalize boolean, combine boolean) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
+CREATE FUNCTION fishmap.project_intensity_cas_hand_gath(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
     LANGUAGE sql
     AS $_$
 	SELECT * FROM fishmap.project_intensity(
 		'cas_hand_gath'::text, 
 		'sum_footprint'::text, 
 		11, 
-		fishmap.calculate_intensity_cas_hand_gath( $1, $2, $3, ST_Area(ST_GeomFromText($4))::numeric),
-		$4,
-		$5,
-		$6	
+		fishmap.calculate_intensity_cas_hand_gath( $4[1], $4[2], $4[3], ST_Area(ST_GeomFromText($1))::numeric),
+		$1,
+		$2,
+		$3	
 	);
 $_$;
 
 
-ALTER FUNCTION fishmap.project_intensity_cas_hand_gath(days numeric, avghours numeric, people numeric, wkt text, generalize boolean, combine boolean) OWNER TO fishmap_webapp;
+ALTER FUNCTION fishmap.project_intensity_cas_hand_gath(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) OWNER TO fishmap_webapp;
 
 --
--- Name: project_intensity_fixed_pots(numeric, numeric, numeric, text, boolean, boolean); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+-- Name: project_intensity_lvls_combined_det(text, text, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION project_intensity_fixed_pots(days numeric, anchors numeric, pots numeric, wkt text, generalize boolean, combine boolean) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
+CREATE FUNCTION fishmap.project_intensity_lvls_combined_det(activity text, wkt text, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+	funcname text;
+	sql text;
+BEGIN
+	funcname := 'project_intensity_'|| activity;
+	sql := format(
+		'SELECT * FROM fishmap.%I(%s, false, true, %s);', 
+		funcname, 
+		quote_literal(wkt), 
+		(
+		      SELECT string_agg(arg::text, ', ') 
+		      FROM unnest(args) arg
+		)
+	);
+	RAISE INFO '%', sql;
+	RETURN QUERY EXECUTE sql;
+END;
+$$;
+
+
+ALTER FUNCTION fishmap.project_intensity_lvls_combined_det(activity text, wkt text, VARIADIC args numeric[]) OWNER TO fishmap_webapp;
+
+--
+-- Name: project_intensity_lvls_combined_gen(text, text, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+--
+
+CREATE FUNCTION fishmap.project_intensity_lvls_combined_gen(activity text, wkt text, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+	funcname text;
+	sql text;
+BEGIN
+	funcname := 'project_intensity_'|| activity;
+	sql := format(
+		'SELECT * FROM fishmap.%I(%s, true, true, %s);', 
+		funcname, 
+		quote_literal(wkt), 
+		(
+		      SELECT string_agg(arg::text, ', ') 
+		      FROM unnest(args) arg
+		)
+	);
+	RAISE INFO '%', sql;
+	RETURN QUERY EXECUTE sql;
+END;
+$$;
+
+
+ALTER FUNCTION fishmap.project_intensity_lvls_combined_gen(activity text, wkt text, VARIADIC args numeric[]) OWNER TO fishmap_webapp;
+
+--
+-- Name: project_intensity_fixed_pots(text, boolean, boolean, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+--
+
+CREATE FUNCTION fishmap.project_intensity_fixed_pots(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
     LANGUAGE sql
     AS $_$
 	SELECT * FROM fishmap.project_intensity(
 		'fixed_pots'::text, 
-		'sum_footprint'::text, 
+		'sum_intensity'::text, 
 		9, 
-		fishmap.calculate_intensity_fixed_pots( $1, $2, $3, ST_Area(ST_GeomFromText($4))::numeric),
-		$4,
-		$5,
-		$6		
+		fishmap.calculate_intensity_fixed_pots( $4[1], $4[2], $4[3], ST_Area(ST_GeomFromText($1))::numeric),
+		$1,
+		$2,
+		$3		
 	);
 $_$;
 
 
-ALTER FUNCTION fishmap.project_intensity_fixed_pots(days numeric, anchors numeric, pots numeric, wkt text, generalize boolean, combine boolean) OWNER TO fishmap_webapp;
+ALTER FUNCTION fishmap.project_intensity_fixed_pots(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) OWNER TO fishmap_webapp;
 
 --
--- Name: project_intensity_king_scallops(numeric, numeric, numeric, numeric, numeric, text, boolean, boolean); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+-- Name: project_intensity_king_scallops(text, boolean, boolean, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION project_intensity_king_scallops(days numeric, speed numeric, hours numeric, width numeric, num numeric, wkt text, generalize boolean, combine boolean) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
+CREATE FUNCTION fishmap.project_intensity_king_scallops(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
     LANGUAGE sql
     AS $_$
 	SELECT * FROM fishmap.project_intensity(
 		'king_scallops'::text, 
 		'sum_footprint'::text, 
 		1, 
-		fishmap.calculate_intensity_king_scallops( $1, $2, $3, $4, $5, ST_Area(ST_GeomFromText($6))::numeric),
-		$6,
-		$7,
-		$8		
+		fishmap.calculate_intensity_king_scallops( $4[1], $4[2], $4[3], $4[4], $4[5], ST_Area(ST_GeomFromText($1))::numeric),
+		$1,
+		$2,
+		$3		
 	);
 $_$;
 
 
-ALTER FUNCTION fishmap.project_intensity_king_scallops(days numeric, speed numeric, hours numeric, width numeric, num numeric, wkt text, generalize boolean, combine boolean) OWNER TO fishmap_webapp;
+ALTER FUNCTION fishmap.project_intensity_king_scallops(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) OWNER TO fishmap_webapp;
 
 --
--- Name: project_intensity_lot(numeric, numeric, numeric, numeric, text, boolean, boolean); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+-- Name: project_intensity_lot(text, boolean, boolean, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION project_intensity_lot(days numeric, speed numeric, hours numeric, width numeric, wkt text, generalize boolean, combine boolean) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
+CREATE FUNCTION fishmap.project_intensity_lot(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
     LANGUAGE sql
     AS $_$
 	SELECT * FROM fishmap.project_intensity(
 		'lot'::text, 
 		'sum_footprint'::text, 
 		5, 
-		fishmap.calculate_intensity_lot( $1, $2, $3, $4, ST_Area(ST_GeomFromText($5))::numeric),
-		$5,
-		$6,
-		$7			
+		fishmap.calculate_intensity_lot( $4[1], $4[2], $4[3], $4[4], ST_Area(ST_GeomFromText($1))::numeric),
+		$1,
+		$2,
+		$3			
 	);
 $_$;
 
 
-ALTER FUNCTION fishmap.project_intensity_lot(days numeric, speed numeric, hours numeric, width numeric, wkt text, generalize boolean, combine boolean) OWNER TO fishmap_webapp;
+ALTER FUNCTION fishmap.project_intensity_lot(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) OWNER TO fishmap_webapp;
 
 --
--- Name: project_intensity_mussels(numeric, numeric, numeric, numeric, numeric, text, boolean, boolean); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+-- Name: project_intensity_mussels(text, boolean, boolean, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION project_intensity_mussels(days numeric, speed numeric, hours numeric, width numeric, num numeric, wkt text, generalize boolean, combine boolean) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
+CREATE FUNCTION fishmap.project_intensity_mussels(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
     LANGUAGE sql
     AS $_$
 	SELECT * FROM fishmap.project_intensity(
 		'mussels'::text, 
 		'sum_footprint'::text, 
 		3, 
-		fishmap.calculate_intensity_mussels( $1, $2, $3, $4, $5, ST_Area(ST_GeomFromText($6))::numeric),
-		$6,
-		$7,
-		$8	
+		fishmap.calculate_intensity_mussels( $4[1], $4[2], $4[3], $4[4], $4[5], ST_Area(ST_GeomFromText($1))::numeric),
+		$1,
+		$2,
+		$3	
 	);
 $_$;
 
 
-ALTER FUNCTION fishmap.project_intensity_mussels(days numeric, speed numeric, hours numeric, width numeric, num numeric, wkt text, generalize boolean, combine boolean) OWNER TO fishmap_webapp;
+ALTER FUNCTION fishmap.project_intensity_mussels(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) OWNER TO fishmap_webapp;
 
 --
--- Name: project_intensity_nets(numeric, numeric, numeric, text, boolean, boolean); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+-- Name: project_intensity_nets(text, boolean, boolean, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION project_intensity_nets(days numeric, length numeric, nets numeric, wkt text, generalize boolean, combine boolean) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
+CREATE FUNCTION fishmap.project_intensity_nets(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
     LANGUAGE sql
     AS $_$
 	SELECT * FROM fishmap.project_intensity(
 		'nets'::text, 
 		'sum_footprint'::text, 
 		8, 
-		fishmap.calculate_intensity_nets( $1, $2, $3, ST_Area(ST_GeomFromText($4))::numeric),
-		$4,
-		$5,
-		$6	
+		fishmap.calculate_intensity_nets( $4[1], $4[2], $4[3], ST_Area(ST_GeomFromText($1))::numeric),
+		$1,
+		$2,
+		$3	
 	);
 $_$;
 
 
-ALTER FUNCTION fishmap.project_intensity_nets(days numeric, length numeric, nets numeric, wkt text, generalize boolean, combine boolean) OWNER TO fishmap_webapp;
+ALTER FUNCTION fishmap.project_intensity_nets(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) OWNER TO fishmap_webapp;
 
 --
--- Name: project_intensity_pro_hand_gath(numeric, numeric, numeric, text, boolean, boolean); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+-- Name: project_intensity_lvls_new_det(text, text, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION project_intensity_pro_hand_gath(days numeric, avghours numeric, people numeric, wkt text, generalize boolean, combine boolean) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
+CREATE FUNCTION fishmap.project_intensity_lvls_new_det(activity text, wkt text, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+	funcname text;
+	sql text;
+BEGIN
+	funcname := 'project_intensity_'|| activity;
+	sql := format(
+		'SELECT * FROM fishmap.%I(%s, false, false, %s);', 
+		funcname, 
+		quote_literal(wkt), 
+		(
+		      SELECT string_agg(arg::text, ', ') 
+		      FROM unnest(args) arg
+		)
+	);
+	RAISE INFO '%', sql;
+	RETURN QUERY EXECUTE sql;
+END;
+$$;
+
+
+ALTER FUNCTION fishmap.project_intensity_lvls_new_det(activity text, wkt text, VARIADIC args numeric[]) OWNER TO fishmap_webapp;
+
+--
+-- Name: project_intensity_lvls_new_gen(text, text, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+--
+
+CREATE FUNCTION fishmap.project_intensity_lvls_new_gen(activity text, wkt text, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+	funcname text;
+	sql text;
+BEGIN
+	funcname := 'project_intensity_'|| activity;
+	sql := format(
+		'SELECT * FROM fishmap.%I(%s, true, false, %s);', 
+		funcname, 
+		quote_literal(wkt), 
+		(
+		      SELECT string_agg(arg::text, ', ') 
+		      FROM unnest(args) arg
+		)
+	);
+	RAISE INFO '%', sql;
+	RETURN QUERY EXECUTE sql;
+END;
+$$;
+
+
+ALTER FUNCTION fishmap.project_intensity_lvls_new_gen(activity text, wkt text, VARIADIC args numeric[]) OWNER TO fishmap_webapp;
+
+--
+-- Name: project_intensity_pro_hand_gath(text, boolean, boolean, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+--
+
+CREATE FUNCTION fishmap.project_intensity_pro_hand_gath(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
     LANGUAGE sql
     AS $_$
 	SELECT * FROM fishmap.project_intensity(
 		'pro_hand_gath'::text, 
-		'sum_footprint'::text, 
+		'sum_intensity'::text, 
 		12, 
-		fishmap.calculate_intensity_pro_hand_gath( $1, $2, $3, ST_Area(ST_GeomFromText($4))::numeric),
-		$4,
-		$5,
-		$6	
+		fishmap.calculate_intensity_pro_hand_gath( $4[1], $4[2], $4[3], ST_Area(ST_GeomFromText($1))::numeric),
+		$1,
+		$2,
+		$3	
 	);
 $_$;
 
 
-ALTER FUNCTION fishmap.project_intensity_pro_hand_gath(days numeric, avghours numeric, people numeric, wkt text, generalize boolean, combine boolean) OWNER TO fishmap_webapp;
+ALTER FUNCTION fishmap.project_intensity_pro_hand_gath(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) OWNER TO fishmap_webapp;
 
 --
--- Name: project_intensity_queen_scallops(numeric, numeric, numeric, numeric, numeric, text, boolean, boolean); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+-- Name: project_intensity_queen_scallops(text, boolean, boolean, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION project_intensity_queen_scallops(days numeric, speed numeric, hours numeric, width numeric, num numeric, wkt text, generalize boolean, combine boolean) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
+CREATE FUNCTION fishmap.project_intensity_queen_scallops(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
     LANGUAGE sql
     AS $_$
 	SELECT * FROM fishmap.project_intensity(
 		'queen_scallops'::text, 
 		'sum_footprint'::text, 
 		2, 
-		fishmap.calculate_intensity_queen_scallops( $1, $2, $3, $4, $5, ST_Area(ST_GeomFromText($6))::numeric),
-		$6,
-		$7,
-		$8		
+		fishmap.calculate_intensity_queen_scallops( $4[1], $4[2], $4[3], $4[4], $4[5], ST_Area(ST_GeomFromText($1))::numeric),
+		$1,
+		$2,
+		$3		
 	);
 $_$;
 
 
-ALTER FUNCTION fishmap.project_intensity_queen_scallops(days numeric, speed numeric, hours numeric, width numeric, num numeric, wkt text, generalize boolean, combine boolean) OWNER TO fishmap_webapp;
+ALTER FUNCTION fishmap.project_intensity_queen_scallops(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) OWNER TO fishmap_webapp;
 
 --
--- Name: project_intensity_rsa_charterboats(numeric, numeric, numeric, text, boolean, boolean); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+-- Name: project_intensity_rsa_charterboats(text, boolean, boolean, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION project_intensity_rsa_charterboats(days numeric, avghours numeric, people numeric, wkt text, generalize boolean, combine boolean) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
+CREATE FUNCTION fishmap.project_intensity_rsa_charterboats(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
     LANGUAGE sql
     AS $_$
 	SELECT * FROM fishmap.project_intensity(
 		'rsa_charterboats'::text, 
-		'sum_footprint'::text, 
+		'sum_intensity'::text, 
 		10, 
-		fishmap.calculate_intensity_rsa_charterboats( $1, $2, $3, ST_Area(ST_GeomFromText($4))::numeric),
-		$4,
-		$5,
-		$6	
+		fishmap.calculate_intensity_rsa_charterboats( $4[1], $4[2], $4[3], ST_Area(ST_GeomFromText($1))::numeric),
+		$1,
+		$2,
+		$3	
 	);
 $_$;
 
 
-ALTER FUNCTION fishmap.project_intensity_rsa_charterboats(days numeric, avghours numeric, people numeric, wkt text, generalize boolean, combine boolean) OWNER TO fishmap_webapp;
+ALTER FUNCTION fishmap.project_intensity_rsa_charterboats(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) OWNER TO fishmap_webapp;
 
 --
--- Name: project_intensity_rsa_commercial(numeric, numeric, numeric, text, boolean, boolean); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+-- Name: project_intensity_rsa_commercial(text, boolean, boolean, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION project_intensity_rsa_commercial(days numeric, avghours numeric, rods numeric, wkt text, generalize boolean, combine boolean) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
+CREATE FUNCTION fishmap.project_intensity_rsa_commercial(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
     LANGUAGE sql
     AS $_$
 	SELECT * FROM fishmap.project_intensity(
 		'rsa_commercial'::text, 
-		'sum_footprint'::text, 
+		'sum_intensity'::text, 
 		10, 
-		fishmap.calculate_intensity_rsa_commercial( $1, $2, $3, ST_Area(ST_GeomFromText($4))::numeric),
-		$4,
-		$5,
-		$6		
+		fishmap.calculate_intensity_rsa_commercial( $4[1], $4[2], $4[3], ST_Area(ST_GeomFromText($1))::numeric),
+		$1,
+		$2,
+		$3		
 	);
 $_$;
 
 
-ALTER FUNCTION fishmap.project_intensity_rsa_commercial(days numeric, avghours numeric, rods numeric, wkt text, generalize boolean, combine boolean) OWNER TO fishmap_webapp;
+ALTER FUNCTION fishmap.project_intensity_rsa_commercial(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) OWNER TO fishmap_webapp;
 
 --
--- Name: project_intensity_rsa_noncharter(numeric, numeric, numeric, text, boolean, boolean); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+-- Name: project_intensity_rsa_noncharter(text, boolean, boolean, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION project_intensity_rsa_noncharter(days numeric, avghours numeric, num numeric, wkt text, generalize boolean, combine boolean) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
+CREATE FUNCTION fishmap.project_intensity_rsa_noncharter(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
     LANGUAGE sql
     AS $_$
 	SELECT * FROM fishmap.project_intensity(
 		'rsa_noncharter'::text, 
-		'sum_footprint'::text, 
+		'sum_intensity'::text, 
 		10, 
-		fishmap.calculate_intensity_rsa_noncharter( $1, $2, $3, ST_Area(ST_GeomFromText($4))::numeric),
-		$4,
-		$5,
-		$6		
+		fishmap.calculate_intensity_rsa_noncharter( $4[1], $4[2], $4[3], ST_Area(ST_GeomFromText($1))::numeric),
+		$1,
+		$2,
+		$3		
 	);
 $_$;
 
 
-ALTER FUNCTION fishmap.project_intensity_rsa_noncharter(days numeric, avghours numeric, num numeric, wkt text, generalize boolean, combine boolean) OWNER TO fishmap_webapp;
+ALTER FUNCTION fishmap.project_intensity_rsa_noncharter(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) OWNER TO fishmap_webapp;
 
 --
--- Name: project_intensity_rsa_shore(numeric, numeric, numeric, text, boolean, boolean); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+-- Name: project_intensity_rsa_shore(text, boolean, boolean, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION project_intensity_rsa_shore(days numeric, avghours numeric, people numeric, wkt text, generalize boolean, combine boolean) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
+CREATE FUNCTION fishmap.project_intensity_rsa_shore(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
     LANGUAGE sql
     AS $_$
 	SELECT * FROM fishmap.project_intensity(
 		'rsa_shore'::text, 
-		'sum_footprint'::text, 
+		'sum_intensity'::text, 
 		10, 
-		fishmap.calculate_intensity_rsa_shore( $1, $2, $3, ST_Area(ST_GeomFromText($4))::numeric),
-		$4,
-		$5,
-		$6		
+		fishmap.calculate_intensity_rsa_shore( $4[1], $4[2], $4[3], ST_Area(ST_GeomFromText($1))::numeric),
+		$1,
+		$2,
+		$3		
 	);
 $_$;
 
 
-ALTER FUNCTION fishmap.project_intensity_rsa_shore(days numeric, avghours numeric, people numeric, wkt text, generalize boolean, combine boolean) OWNER TO fishmap_webapp;
+ALTER FUNCTION fishmap.project_intensity_rsa_shore(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) OWNER TO fishmap_webapp;
 
 --
 -- Name: set_intensity_lvls(integer, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: postgres
 --
 
-CREATE FUNCTION set_intensity_lvls(fishingtype integer, rangeboundaries numeric[]) RETURNS integer
+CREATE FUNCTION fishmap.set_intensity_lvls(fishingtype integer, rangeboundaries numeric[]) RETURNS integer
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -557,7 +673,7 @@ ALTER FUNCTION fishmap.set_intensity_lvls(fishingtype integer, rangeboundaries n
 -- Name: vessels_project_det(text, integer, text, boolean); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION vessels_project_det(fishingname text, vesselcount integer, wkt text, combined boolean) RETURNS TABLE(ogc_fid integer, num integer, wkb_geometry public.geometry)
+CREATE FUNCTION fishmap.vessels_project_det(fishingname text, vesselcount integer, wkt text, combined boolean) RETURNS TABLE(ogc_fid integer, num integer, wkb_geometry public.geometry)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -622,7 +738,7 @@ ALTER FUNCTION fishmap.vessels_project_det(fishingname text, vesselcount integer
 -- Name: vessels_project_gen(text, integer, text, boolean); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION vessels_project_gen(fishingname text, vesselcount integer, wkt text, combine boolean) RETURNS TABLE(ogc_fid integer, num integer, wkb_geometry public.geometry)
+CREATE FUNCTION fishmap.vessels_project_gen(fishingname text, vesselcount integer, wkt text, combine boolean) RETURNS TABLE(ogc_fid integer, num integer, wkb_geometry public.geometry)
     LANGUAGE plpgsql
     AS $$
 DECLARE
