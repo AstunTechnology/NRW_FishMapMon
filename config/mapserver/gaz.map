@@ -28,7 +28,7 @@ MAP
         VALIDATION
             "qstr" "[A-Za-z0-9 ]+"
         END
-        DATA "wkb_geometry from (SELECT * FROM gaz WHERE name % $$%qstr%$$ ORDER BY similarity(name, $$%qstr%$$) DESC) as foo using unique ogc_fid using srid=27700"
+        DATA "wkb_geometry from (SELECT * FROM gaz WHERE similarity(name, $$%qstr%$$) > 0.1 ORDER BY similarity(name, $$%qstr%$$) DESC) as foo using unique ogc_fid using srid=27700"
         PROJECTION
             "init=epsg:27700"
         END
