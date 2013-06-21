@@ -115,7 +115,7 @@ OutputPanel = OpenLayers.Class({
         // selected activity
         jQuery('.activity li.layer', this.div).hide().filter(function () {
             var val = jQuery(this).find('input').val();
-            return val.match(panel.getActivity()) || val.match(/_project$/);
+            return val.match(panel.getActivity()) || val.match(/_project(_combined)?$/);
         }).show();
         // If the user is showing an intensity, vessels or sensitivity
         // layer then hide the old layer and show the one associated with

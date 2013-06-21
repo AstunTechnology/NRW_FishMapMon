@@ -5,6 +5,14 @@
     var outputActivities = FISH_MAP.outputActivities;
     var outputTypes = FISH_MAP.outputTypes;
 
+    var scenarioLayerNames = [
+        'vessels_lvls_project',
+        'vessels_lvls_project_combined'/*,
+        'intensity_lvls_project',
+        'intensity_lvls_project_combined'*/
+    ];
+
+
     // Add the project output layers to the overlayLayers model, one per type /
     // activity before any other output groups
     var outputGrpIdx = overlayLayers.groups.length - 1;
@@ -431,7 +439,6 @@
 
     FISH_MAP.scenario = null;
     function newScenario() {
-        console.log('newScenario');
         clearScenario();
         FISH_MAP.scenario = {};
         drawCtrl.activate();
@@ -439,7 +446,6 @@
     }
 
     function clearScenario() {
-        console.log('clearScenario');
         FISH_MAP.scenario = null;
         var layer = map.getLayersByName("scenario")[0];
         if (layer) {
@@ -455,12 +461,12 @@
         // Remove any existing layers
         removeScenarioLayers();
         // Add the additional layers to the activiy groups
-        var types = ['vessels', 'intensity'];
-        for (var i = 0, type, grp, lyr; i < types.length; i++) {
-            type = types[i];
+        for (var i = 0, type, grp, lyrId, lyr; i < scenarioLayerNames.length; i++) {
+            lyrId = scenarioLayerNames[i];
+            type = lyrId.split('_')[0];
             grp = overlayLayers.getGroupsByProperty('id', type + '_grp')[0];
             lyr = {
-                "id": type + "_lvls_project",
+                "id": lyrId,
                 "info": true,
                 "legend": true,
                 "visible": false
@@ -468,26 +474,25 @@
             grp.addLayer(lyr);
         }
     }
+
     function removeScenarioLayers() {
         // Remove scenario layers
-        var types = ['vessels', 'intensity'];
-        for (var i = 0, type, grp, lyr; i < types.length; i++) {
-            type = types[i];
+        for (var i = 0, type, grp, lyrId, lyr; i < scenarioLayerNames.length; i++) {
+            lyrId = scenarioLayerNames[i];
+            type = lyrId.split('_')[0];
             grp = overlayLayers.getGroupsByProperty('id', type + '_grp')[0];
-            lyr = overlayLayers.getLayerById(type + "_lvls_project");
+            lyr = overlayLayers.getLayerById(lyrId);
             grp.removeLayer(lyr);
         }
     }
 
     function scenarioAddFeature(feature) {
-        console.log('scenarioAddFeature');
         FISH_MAP.scenario.feature = feature;
         // outputPanel.showScenarioForm();
         events.triggerEvent('polygondrawn');
     }
 
     function showScenario() {
-        console.log('showScenario');
         addScenarioLayers();
         events.triggerEvent('scenariocalculated');
     }
