@@ -1,6 +1,6 @@
-\c fishmap
+﻿\c fishmap
 
-SET search_path = fishmap, pg_catalog;
+SET search_path = fishmap, public, pg_catalog;
 
 --
 -- Name: calculate_intensity_cas_hand_gath(numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
