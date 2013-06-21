@@ -323,9 +323,10 @@ def get_extra_sld_info(layer):
         intensity_colors = ['#ffff71',  '#ffa84f', '#a15001']
         bands = []
         for idx, item in enumerate(intensity_bands[layer]):
+            val = idx + 1
             bands.append({
-                'name': '%s (%s)' % (idx, item),
-                'value': idx,
+                'name': '%s (%s)' % (val, item),
+                'value': val,
                 'color': intensity_colors[idx]
             })
         data['bands'] = bands
