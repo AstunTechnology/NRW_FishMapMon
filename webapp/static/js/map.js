@@ -407,7 +407,14 @@
         }).click().first().click();
     }
 
-    var scenarioLayer = new OpenLayers.Layer.Vector("scenario");
+    var defaultStyle = OpenLayers.Util.applyDefaults({
+        strokeWidth: 3,
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        fillOpacity: 0.0,
+    }, OpenLayers.Feature.Vector.style["default"]);
+
+    var scenarioLayer = new OpenLayers.Layer.Vector("scenario", {style: defaultStyle});
     map.addLayer(scenarioLayer);
 
     var drawCtrl = new OpenLayers.Control.DrawFeature(scenarioLayer, OpenLayers.Handler.Polygon);
