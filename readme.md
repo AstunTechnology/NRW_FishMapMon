@@ -82,7 +82,7 @@ For requests made to show impact of project area selection the following custom 
     * FISHING (name of type of fishing as used in other layers and underlying tables)
     * COUNT (number of vessels in custom area(s))
     * WKT (WKT representation of project area(s))
-* Intensity
+* Intensity (project\_intensity\_lvls\_new\_det, project\_intensity\_lvls\_new\_gen, project\_intensity\_lvls\_combined\_det and project\_intensity\_lvls\_combined\_gen)
     * FISHING (name of type of fishing as used in other layers and underlying tables)
     * WKT (WKT representation of project area(s))
     * ARGn (number of numeric arguments, see below as to what they refer to for each FISHING type)
