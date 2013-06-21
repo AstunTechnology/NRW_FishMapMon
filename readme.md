@@ -31,8 +31,6 @@ To create the OS raster tile index:
 
 ### Translations
 
-#### Adding Translations
-
 From the webapp directory first scan templates and python files for strings to translate by running:
 
     pybabel extract -F babel.cfg -o strings.pot .
@@ -73,12 +71,14 @@ Ultimately this is Mapserver, but runs behind MapProxy to provide layer security
 #### Paths
 
 Mapfiles: [project_root]/config/mapserver
+
 Basemap data: [project_root]/data/BaseMapping
 
-#### Mapserver Custom parameters
+#### Custom parameters
 
 For requests made to show impact of project area selection the following custom parameters are used:
-* Vessels (vessels_lvl_project_det and vessels_lvl_project_gen)
+
+* Vessels (vessels\_lvl\_project\_det and vessels\_lvl\_project\_gen)
     * FISHING (name of type of fishing as used in other layers and underlying tables)
     * COUNT (number of vessels in custom area(s))
     * WKT (WKT representation of project area(s))
@@ -107,7 +107,7 @@ For requests made to show impact of project area selection the following custom 
 
 
 
-#### Mapserver Example URLs
+#### Example URLs
 
 * SLD
     * Single layer (English): http://localhost/en/sld?layers=intertidal_habitats
