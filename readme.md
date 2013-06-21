@@ -10,6 +10,13 @@ The dependencies for the Python web applicaion are defined in webapp/REQUIREMENT
     * cgi-mapserver
     * postgresql-9.1-postgis
 
+For fuzzy search:
+* postgresql-contrib
+
+For Python PostgreSQL driver
+* python-dev
+* libpq-dev
+
 Notes
 -----
 
