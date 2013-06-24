@@ -27,7 +27,7 @@ OpenLayers.Control.MapSearch = OpenLayers.Class(OpenLayers.Control, {
         var that = this;
         this.input.autocomplete({
             source: function(req, callback) {
-                jQuery.get('http://localhost:5000/gaz?q=' + req.term).done(function(self, status, resp) {
+                jQuery.get(FISH_MAP.GAZ_URL + req.term).done(function(self, status, resp) {
                     var gmlFormat = new OpenLayers.Format.GML();
                     var features = gmlFormat.read(resp.responseText);
                     var candidates = [];
@@ -81,6 +81,7 @@ OpenLayers.Control.MapSearch = OpenLayers.Class(OpenLayers.Control, {
     },
 
     flashMsg: function(msg) {
+        jQuery('.msg', this.div).hide();
         var markup = '<div class="msg">' + msg + '</div>';
         jQuery(markup).appendTo(this.div).delay(800).fadeOut(400);
 
