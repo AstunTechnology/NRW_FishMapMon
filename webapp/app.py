@@ -330,6 +330,82 @@ def get_extra_sld_info(layer, args):
                 'color': intensity_colors[idx]
             })
         data['bands'] = bands
+    if split_layer[0] == 'vessels':
+        layer = args.get('FISHING')
+        vessels_bands = {
+            "king_scallops": [
+                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0E0FF"},
+                {"name": "3", "type": "PropertyIsEqualTo", "value": 3, "color": "#60CBFF"},
+                {"name": "4 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 4, "color": "#508BFF"}
+            ],
+            "queen_scallops": [
+                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0E0FF"},
+                {"name": "3", "type": "PropertyIsEqualTo", "value": 3, "color": "#60CBFF"},
+                {"name": "4 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 4, "color": "#508BFF"}
+            ],
+            "mussels": [
+                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0E0FF"},
+                {"name": "3 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 3, "color": "#60CBFF"}
+            ],
+            "lot": [
+                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0E0FF"},
+                {"name": "3 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 3, "color": "#60CBFF"}
+            ],
+            "nets": [
+                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0E0FF"},
+                {"name": "3 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 3, "color": "#60CBFF"}
+            ],
+            "fixed_pots": [
+                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0E0FF"},
+                {"name": "3", "type": "PropertyIsEqualTo", "value": 3, "color": "#60CBFF"},
+                {"name": "4", "type": "PropertyIsEqualTo", "value": 4, "color": "#508BFF"},
+                {"name": "5", "type": "PropertyIsEqualTo", "value": 5, "color": "#2020FF"},
+                {"name": "6", "type": "PropertyIsEqualTo", "value": 6, "color": "#000040"},
+                {"name": "7 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 7, "color": "#380070"}
+            ],
+            "rsa_charterboats": [
+                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0E0FF"},
+                {"name": "3", "type": "PropertyIsEqualTo", "value": 3, "color": "#60CBFF"},
+                {"name": "4", "type": "PropertyIsEqualTo", "value": 4, "color": "#508BFF"},
+                {"name": "5", "type": "PropertyIsEqualTo", "value": 5, "color": "#2020FF"},
+                {"name": "6", "type": "PropertyIsEqualTo", "value": 6, "color": "#000040"},
+                {"name": "7 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 7, "color": "#380070"}
+            ],
+            "rsa_commercial": [
+                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0E0FF"},
+                {"name": "3", "type": "PropertyIsEqualTo", "value": 3, "color": "#60CBFF"},
+                {"name": "4", "type": "PropertyIsEqualTo", "value": 4, "color": "#508BFF"},
+                {"name": "5", "type": "PropertyIsEqualTo", "value": 5, "color": "#2020FF"},
+                {"name": "6 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 6, "color": "#000040"}
+            ],
+            "rsa_noncharter": [
+                {"name": "3 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 3, "color": "#A0E0FF"},
+                {"name": "4 - 7", "type": "PropertyIsBetween", "lower": 4, "upper": 7, "color": "#60CBFF"},
+                {"name": "8 - 9", "type": "PropertyIsBetween", "lower": 8, "upper": 9, "color": "#508BFF"},
+                {"name": "10 - 12", "type": "PropertyIsBetween", "lower": 10, "upper": 12, "color": "#2020FF"},
+                {"name": "13 - 16", "type": "PropertyIsBetween", "lower": 13, "upper": 16, "color": "#000040"},
+                {"name": "17 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 17, "color": "#380070"}
+            ],
+            "rsa_shore": [
+                {"name": "11 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 11, "color": "#A0E0FF"},
+                {"name": "12 - 21", "type": "PropertyIsBetween", "lower": 12, "upper": 21, "color": "#60CBFF"},
+                {"name": "22 - 31", "type": "PropertyIsBetween", "lower": 22, "upper": 31, "color": "#508BFF"},
+                {"name": "32 - 51", "type": "PropertyIsBetween", "lower": 32, "upper": 51, "color": "#2020FF"},
+                {"name": "52 - 118", "type": "PropertyIsBetween", "lower": 52, "upper": 118, "color": "#000040"},
+                {"name": "119 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 119, "color": "#380070"}
+            ],
+            "cas_hand_gath": [
+                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0E0FF"},
+                {"name": "3", "type": "PropertyIsEqualTo", "value": 3, "color": "#60CBFF"},
+                {"name": "4 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 4, "color": "#508BFF"}
+            ],
+            "pro_hand_gath": [
+                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0E0FF"},
+                {"name": "3", "type": "PropertyIsEqualTo", "value": 3, "color": "#60CBFF"},
+                {"name": "4 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 4, "color": "#508BFF"}
+            ],
+        }
+        data['bands'] = vessels_bands[layer]
     return data
 
 if __name__ == '__main__':

@@ -126,3 +126,16 @@ class TestRenderSld():
             assert "subtidal_habitats" in sld
             assert "this_layer_does_not_have_a_template" not in sld
             assert sld.count('<NamedLayer>') == 2
+
+    def test_vessels_bands(self):
+        """ The appropriate bands are present for vessels layers"""
+        with app.test_client() as c:
+            c.get("/")
+            sld = render_sld([
+                "vessels_lvls_official"
+            ], {"FISHING": "king_scallops"})
+            assert sld.count('<Rule>') == 3
+            sld = render_sld([
+                "vessels_lvls_official"
+            ], {"FISHING": "rsa_commercial"})
+            assert sld.count('<Rule>') == 5

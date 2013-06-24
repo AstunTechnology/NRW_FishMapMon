@@ -3,88 +3,43 @@
     <UserStyle>
         <Name>vessels</Name>
         <FeatureTypeStyle>
+            {% for band in info['bands'] %}
             <Rule>
-                <Name>0 (n/a)</Name>
+                <Name>{{band['name']}}</Name>
                 <Filter>
-                    <PropertyIsEqualTo>
+                    {% if band['type'] in [
+                        'PropertyIsLessThanOrEqualTo',
+                        'PropertyIsEqualTo',
+                        'PropertyIsGreaterThanOrEqualTo'] %}
+                    {# Use the band type as the element name as all of these
+                        filters have the same arguments #}
+                    <{{band['type']}}>
                         <PropertyName>_overlaps</PropertyName>
-                        <Literal>0</Literal>
-                    </PropertyIsEqualTo>
+                        <Literal>{{band['value']}}</Literal>
+                    </{{band['type']}}>
+                    {% endif %}
+                    {% if band['type'] == 'PropertyIsBetween' %}
+                    <PropertyIsBetween>
+                        <PropertyName>_overlaps</PropertyName>
+                        <ogc:LowerBoundary>
+                            <Literal>{{band['lower']}}</Literal>
+                        </ogc:LowerBoundary>
+                        <ogc:UpperBoundary>
+                            <Literal>{{band['upper']}}</Literal>
+                        </ogc:UpperBoundary>
+                    </PropertyIsBetween>
+                    {% endif %}
                 </Filter>
                 <PolygonSymbolizer>
                     <Fill>
-                        <SvgParameter name="fill">#aaaaaa</SvgParameter>
+                        <SvgParameter name="fill">{{band['color']}}</SvgParameter>
                     </Fill>
                     <Stroke>
-                        <SvgParameter name="stroke">#aaaaaa</SvgParameter>
+                        <SvgParameter name="stroke">{{band['color']}}</SvgParameter>
                     </Stroke>
                 </PolygonSymbolizer>
             </Rule>
-            <Rule>
-                <Name>1</Name>
-                <Filter>
-                    <PropertyIsEqualTo>
-                        <PropertyName>_overlaps</PropertyName>
-                        <Literal>1</Literal>
-                    </PropertyIsEqualTo>
-                </Filter>
-                <PolygonSymbolizer>
-                    <Fill>
-                        <SvgParameter name="fill">#a1e0ff</SvgParameter>
-                    </Fill>
-                    <Stroke>
-                        <SvgParameter name="stroke">#a1e0ff</SvgParameter>
-                    </Stroke>
-                </PolygonSymbolizer>
-            </Rule>
-            <Rule>
-                <Name>2</Name>
-                <Filter>
-                    <PropertyIsEqualTo>
-                        <PropertyName>_overlaps</PropertyName>
-                        <Literal>2</Literal>
-                    </PropertyIsEqualTo>
-                </Filter>
-                <PolygonSymbolizer>
-                    <Fill>
-                        <SvgParameter name="fill">#51c5ff</SvgParameter>
-                    </Fill>
-                    <Stroke>
-                        <SvgParameter name="stroke">#51c5ff</SvgParameter>
-                    </Stroke>
-                </PolygonSymbolizer>
-            </Rule>
-            <Rule>
-                <Name>3</Name>
-                <Filter>
-                    <PropertyIsEqualTo>
-                        <PropertyName>_overlaps</PropertyName>
-                        <Literal>3</Literal>
-                    </PropertyIsEqualTo>
-                </Filter>
-                <PolygonSymbolizer>
-                    <Fill>
-                        <SvgParameter name="fill">#3075ff</SvgParameter>
-                    </Fill>
-                    <Stroke>
-                        <SvgParameter name="stroke">#3075ff</SvgParameter>
-                    </Stroke>
-                </PolygonSymbolizer>
-            </Rule>
-            <Rule>
-                <Name>4</Name>
-                <Filter>
-                    <PropertyIsEqualTo>
-                        <PropertyName>_overlaps</PropertyName>
-                        <Literal>4</Literal>
-                    </PropertyIsEqualTo>
-                </Filter>
-                <PolygonSymbolizer>
-                    <Fill>
-                        <SvgParameter name="fill">#0000d0</SvgParameter>
-                    </Fill>
-                </PolygonSymbolizer>
-            </Rule>
+        {% endfor %}
         </FeatureTypeStyle>
     </UserStyle>
 </NamedLayer>
