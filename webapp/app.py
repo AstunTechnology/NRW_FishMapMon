@@ -201,7 +201,7 @@ def wms():
         return (ex.message, 500)
 
     layers = args.get('LAYERS') or args.get('LAYER')
-    sld = render_sld(layers.split(','))
+    sld = render_sld(layers.split(','), args)
     args['SLD_BODY'] = sld
 
     args['map'] = get_mapserver_map_arg(args.get('map'))
@@ -278,7 +278,7 @@ def update_wms_layers(layers, auth):
     return layers
 
 
-def render_sld(layers):
+def render_sld(layers, args):
     """ Render an SLD document as a string for the list of layers passed """
     if layers:
         layer_info = []
@@ -289,7 +289,7 @@ def render_sld(layers):
             split_layer = layer.split('_')
             if split_layer[0] in common_slds:
                 info['template'] = '%s.sld' % split_layer[0]
-            info.update(get_extra_sld_info(layer))
+            info.update(get_extra_sld_info(layer, args))
             layer_info.append(info)
 
         return render_template('base.sld', layer_info=layer_info)
@@ -301,24 +301,24 @@ def get_mapserver_map_arg(map_name):
     return '%s/../config/mapserver/%s.map' % (app.root_path, map_name)
 
 
-def get_extra_sld_info(layer):
+def get_extra_sld_info(layer, args):
     data = {}
     split_layer = layer.split('_')
     if split_layer[0] == 'intensity':
-        layer = re.sub(r'(_gen|_det)$', '', layer)
+        layer = args.get('FISHING')
         intensity_bands = {
-            "intensity_lvls_king_scallops": ["&lt;0.8", "0.8 - 3", "&gt;3"],
-            "intensity_lvls_queen_scallops": ["&lt;0.8", "0.8 - 3", "&gt;3"],
-            "intensity_lvls_mussels": ["&lt;0.4", "0.4 - 3", "&gt;3"],
-            "intensity_lvls_lot": ["&lt;0.93", "0.93 - 6.95", "&gt;6.95"],
-            "intensity_lvls_nets": ["&lt;33.9", "33.9 - 254.6", "&gt;254.6"],
-            "intensity_lvls_fixed_pots": ["&lt;2", "2 - 5", "&gt;5"],
-            "intensity_lvls_rsa_charterboats": ["&lt;5", "6 - 20", "&gt;20"],
-            "intensity_lvls_rsa_commercial": ["&lt;5", "6 - 20", "&gt;20"],
-            "intensity_lvls_rsa_noncharter": ["&lt;5", "6 - 20", "&gt;20"],
-            "intensity_lvls_rsa_shore": ["&lt;5", "6 - 20", "&gt;20"],
-            "intensity_lvls_cas_hand_gath": ["&lt;3", "3 - 10", "&gt;10"],
-            "intensity_lvls_pro_hand_gath": ["&lt;3", "3 - 10", "&gt;10"],
+            "king_scallops": ["&lt;0.8", "0.8 - 3", "&gt;3"],
+            "queen_scallops": ["&lt;0.8", "0.8 - 3", "&gt;3"],
+            "mussels": ["&lt;0.4", "0.4 - 3", "&gt;3"],
+            "lot": ["&lt;0.93", "0.93 - 6.95", "&gt;6.95"],
+            "nets": ["&lt;33.9", "33.9 - 254.6", "&gt;254.6"],
+            "fixed_pots": ["&lt;2", "2 - 5", "&gt;5"],
+            "rsa_charterboats": ["&lt;5", "6 - 20", "&gt;20"],
+            "rsa_commercial": ["&lt;5", "6 - 20", "&gt;20"],
+            "rsa_noncharter": ["&lt;5", "6 - 20", "&gt;20"],
+            "rsa_shore": ["&lt;5", "6 - 20", "&gt;20"],
+            "cas_hand_gath": ["&lt;3", "3 - 10", "&gt;10"],
+            "pro_hand_gath": ["&lt;3", "3 - 10", "&gt;10"],
         }
         intensity_colors = ['#ffff71',  '#ffa84f', '#a15001']
         bands = []

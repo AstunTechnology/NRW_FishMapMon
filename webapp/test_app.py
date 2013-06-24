@@ -81,7 +81,7 @@ class TestRenderSld():
         """ Single layer results in a single NamedLayer """
         with app.test_client() as c:
             c.get("/")
-            sld = render_sld(["subtidal_habitats"])
+            sld = render_sld(["subtidal_habitats"], {})
             assert "subtidal_habitats" in sld
             assert sld.count('<NamedLayer>') == 1
 
@@ -91,9 +91,9 @@ class TestRenderSld():
             c.get("/")
             sld = render_sld([
                 "subtidal_habitats",
-                "intensity_lvls_cas_hand_gath"
-            ])
-            assert "intensity_lvls_cas_hand_gath" in sld
+                "intensity_lvls_official_gen"
+            ], {"FISHING": "cas_hand_gath"})
+            assert "intensity_lvls_official_gen" in sld
             assert "subtidal_habitats" in sld
             assert sld.count('<NamedLayer>') == 2
 
@@ -102,13 +102,13 @@ class TestRenderSld():
         with app.test_client() as c:
             c.get("/")
             sld = render_sld([
-                "intensity_lvls_cas_hand_gath_gen",
-                "vessels_lvls_fixed_pots_gen",
-                "sensitivity_lvls_nets_gen"
-            ])
-            assert "intensity_lvls_cas_hand_gath_gen" in sld
-            assert "vessels_lvls_fixed_pots_gen" in sld
-            assert "sensitivity_lvls_nets_gen" in sld
+                "intensity_lvls_official_gen",
+                "vessels_lvls_official_gen",
+                "sensitivity_lvls_official_gen"
+            ], {"FISHING": "cas_hand_gath"})
+            assert "intensity_lvls_official_gen" in sld
+            assert "vessels_lvls_official_gen" in sld
+            assert "sensitivity_lvls_official_gen" in sld
             assert "<Name>intensity</Name>" in sld
             assert "<Name>vessels</Name>" in sld
             assert "<Name>sensitivity</Name>" in sld
@@ -119,10 +119,10 @@ class TestRenderSld():
             c.get("/")
             sld = render_sld([
                 "subtidal_habitats",
-                "intensity_lvls_cas_hand_gath",
+                "intensity_lvls_official_gen",
                 "this_layer_does_not_have_a_template"
-            ])
-            assert "intensity_lvls_cas_hand_gath" in sld
+            ], {"FISHING": "cas_hand_gath"})
+            assert "intensity_lvls_official" in sld
             assert "subtidal_habitats" in sld
             assert "this_layer_does_not_have_a_template" not in sld
             assert sld.count('<NamedLayer>') == 2

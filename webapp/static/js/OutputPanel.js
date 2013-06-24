@@ -111,27 +111,6 @@ OutputPanel = OpenLayers.Class({
 
     syncActivityLayers: function() {
         var panel = this;
-        // Only show the intensity, vessels and sensitivity layers for the
-        // selected activity
-        jQuery('.activity li.layer', this.div).hide().filter(function () {
-            var val = jQuery(this).find('input').val();
-            return val.match(panel.getActivity()) || val.match(/_project(_combined)?$/);
-        }).show();
-        // If the user is showing an intensity, vessels or sensitivity
-        // layer then hide the old layer and show the one associated with
-        // the current activity
-        jQuery('.activity li.layer input:checked').each(function() {
-            this.checked = false;
-            jQuery(this).change();
-            var prefix = this.value.match(/^\w+_lvls_/)[0];
-            // If there is a scenario layer then enable it otherwise fallback
-            // to the regular layer
-            var lyr = jQuery('input#' + prefix + 'project');
-            if (lyr.length === 0) {
-                lyr = jQuery('input#' + prefix + panel.getActivity());
-            }
-            lyr.prop('checked', true).change();
-        });
     },
 
     drawActivityLayers: function() {

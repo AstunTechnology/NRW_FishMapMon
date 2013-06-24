@@ -6,10 +6,10 @@
     var outputTypes = FISH_MAP.outputTypes;
 
     var scenarioLayerNames = [
-        'vessels_lvls_project',
-        'vessels_lvls_project_combined'/*,
-        'intensity_lvls_project',
-        'intensity_lvls_project_combined'*/
+        'vessels_lvls_scenario',
+        'vessels_lvls_combined'/*,
+        'intensity_lvls_scenario',
+        'intensity_lvls_combined'*/
     ];
 
 
@@ -33,16 +33,13 @@
         };
         overlayLayers.groups.splice(outputGrpIdx, 0, grp);
         outputGrpIdx += 1;
-        for (var n = 0, activity, lyr; n < outputActivities.length; n++) {
-            activity = outputActivities[n];
-            lyr = {
-                "id": type + "_lvls_" + activity,
-                "info": true,
-                "legend": true,
-                "visible": false
-            };
-            grp.layers.push(lyr);
-        }
+        lyr = {
+            "id": type + "_lvls_official",
+            "info": true,
+            "legend": true,
+            "visible": false
+        };
+        grp.layers.push(lyr);
     }
 
     overlayLayers = layersCollection(overlayLayers);
@@ -143,6 +140,13 @@
         eventListeners: {
             beforegetfeatureinfo: function(event) {
 
+                this.vendorParams = {}
+                this.vendorParams['FISHING'] = FISH_MAP.fishingactivity;
+                if (FISH_MAP.scenario && FISH_MAP.scenario.feature) {
+                    this.vendorParams['COUNT'] = 1;
+                    this.vendorParams['WKT'] = FISH_MAP.scenario.feature.geometry.toString();
+                }
+
                 this.popup = new OpenLayers.Popup.FramedCloud(
                     'info',
                     map.getLonLatFromPixel(event.xy),
@@ -180,16 +184,20 @@
                         feature = features[i];
                         var key = feature.type;
                         // Determine if the feature is from an output layer and
-                        // if it is just use the output type as the key
+                        // if it is use the output type as the key and add
+                        // properties to allow it's name to be determined and
+                        // column names to be looked up
                         // ('intensity', 'vessels', 'sensitivity' or 'extents')
-                        var prefix = key.match(/^(\w+)_lvls_/);
+                        var layerInfo = FISH_MAP.getLayerInfo(feature.type);
+                        if (layerInfo.outputType) {
+                            key = layerInfo.outputType;
+                            feature.type = layerInfo.fullName;
+                            feature.fishingactivity = layerInfo.activity;
+                        }
+                        // Special case for extent layers
+                        var prefix = key.match(/^(extents)_/);
                         if (prefix && prefix.length === 2) {
                             key = prefix[1];
-                        } else {
-                            prefix = key.match(/^(extents)_/);
-                            if (prefix && prefix.length === 2) {
-                                key = prefix[1];
-                            }
                         }
                         if (!model[key]) {
                             model[key] = {
@@ -259,8 +267,8 @@
         var params = {
             'LAYERS': visibleLayers.join(',')
         };
+        params['FISHING'] = FISH_MAP.fishingactivity;
         if (FISH_MAP.scenario && FISH_MAP.scenario.feature) {
-            params['FISHING'] = outputPanel.getActivity();
             params['COUNT'] = 1;
             params['WKT'] = FISH_MAP.scenario.feature.geometry.toString();
         }
@@ -284,6 +292,18 @@
             layer_toggle(outputPanel.layers, e.layer, e.state);
         },
         'activitychange': function(e) {
+            FISH_MAP.fishingactivity = outputPanel.getActivity();
+            // Add a _fullName property to all activity layers which
+            // can be used in templates etc.
+            var grps = overlayLayers.getGroupsByProperty('activity', true);
+            for (var m = 0, grp; m < grps.length; m++) {
+                grp = grps[m];
+                for (var n = 0, lyr; n < grp.layers.length; n++) {
+                    lyr = grp.layers[n];
+                    var layerInfo = FISH_MAP.getLayerInfo(lyr.id);
+                    lyr._fullName = layerInfo.fullName;
+                }
+            }
             clearScenario();
         },
         'newscenario': function(e) {
@@ -441,6 +461,7 @@
     function newScenario() {
         clearScenario();
         FISH_MAP.scenario = {};
+        FISH_MAP.scenario.fishing = outputPanel.getActivity();
         drawCtrl.activate();
         events.triggerEvent("predrawpolygon");
     }
@@ -471,6 +492,8 @@
                 "legend": true,
                 "visible": false
             };
+            var layerInfo = FISH_MAP.getLayerInfo(lyr.id);
+            lyr._fullName = layerInfo.fullName;
             grp.addLayer(lyr);
         }
     }
