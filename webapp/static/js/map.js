@@ -9,7 +9,9 @@
         'vessels_lvls_scenario',
         'vessels_lvls_combined',
         'intensity_lvls_scenario',
-        'intensity_lvls_combined'
+        'intensity_lvls_combined',
+        'sensitivity_lvls_scenario',
+        'sensitivity_lvls_combined'
     ];
 
 
@@ -491,22 +493,23 @@
     }
 
     function addScenarioLayers() {
-        // Remove any existing layers
-        removeScenarioLayers();
-        // Add the additional layers to the activiy groups
+        // Add the additional layers to the activiy groups if they dont'
+        // already exist
         for (var i = 0, type, grp, lyrId, lyr; i < scenarioLayerNames.length; i++) {
             lyrId = scenarioLayerNames[i];
-            type = lyrId.split('_')[0];
-            grp = overlayLayers.getGroupsByProperty('id', type + '_grp')[0];
-            lyr = {
-                "id": lyrId,
-                "info": true,
-                "legend": true,
-                "visible": false
-            };
-            var layerInfo = FISH_MAP.getLayerInfo(lyr.id);
-            lyr._fullName = layerInfo.fullName;
-            grp.addLayer(lyr);
+            if (!overlayLayers.getLayerById(lyrId)) {
+                type = lyrId.split('_')[0];
+                grp = overlayLayers.getGroupsByProperty('id', type + '_grp')[0];
+                lyr = {
+                    "id": lyrId,
+                    "info": true,
+                    "legend": true,
+                    "visible": false
+                };
+                var layerInfo = FISH_MAP.getLayerInfo(lyr.id);
+                lyr._fullName = layerInfo.fullName;
+                grp.addLayer(lyr);
+            }
         }
     }
 
@@ -531,6 +534,8 @@
         FISH_MAP.scenario.args = args
         addScenarioLayers();
         events.triggerEvent('scenariocalculated');
+        // Refresh the map state
+        refreshOverlayLayer();
     }
 
 })();
