@@ -70,7 +70,7 @@ OutputPanel = OpenLayers.Class({
 
         this.div.find('h3').click().first().click();
 
-        this.div.delegate('input', 'change', function() {
+        this.div.delegate('input:checkbox', 'change', function() {
             // Ensure only one activity layer is visible at a time
             if (jQuery(this).parents().hasClass('activity') && this.checked) {
                 var that = this;
@@ -101,7 +101,15 @@ OutputPanel = OpenLayers.Class({
         });
 
         jQuery('input[name=show_scenario]', panel.div).click(function() {
-            panel.events.triggerEvent("showscenario");
+            var args = [];
+            jQuery('form fieldset:visible').each(function() {
+                var val = 0;
+                jQuery(this).find('input:text').each(function() {
+                    val += parseInt(this.value, 10);
+                })
+                args.push(val);
+            });
+            panel.events.triggerEvent("showscenario", {args: args});
             return false;
         });
 

@@ -7,9 +7,9 @@
 
     var scenarioLayerNames = [
         'vessels_lvls_scenario',
-        'vessels_lvls_combined'/*,
+        'vessels_lvls_combined',
         'intensity_lvls_scenario',
-        'intensity_lvls_combined'*/
+        'intensity_lvls_combined'
     ];
 
 
@@ -146,6 +146,12 @@
                     this.vendorParams['COUNT'] = 1;
                     this.vendorParams['WKT'] = FISH_MAP.scenario.feature.geometry.toString();
                 }
+                if (FISH_MAP.scenario && FISH_MAP.scenario.args) {
+                    for (var i = 0, arg; i < FISH_MAP.scenario.args.length; i++) {
+                        arg = FISH_MAP.scenario.args[i];
+                        this.vendorParams['ARG' + (i + 1)] = arg;
+                    }
+                }
 
                 this.popup = new OpenLayers.Popup.FramedCloud(
                     'info',
@@ -272,6 +278,12 @@
             params['COUNT'] = 1;
             params['WKT'] = FISH_MAP.scenario.feature.geometry.toString();
         }
+        if (FISH_MAP.scenario && FISH_MAP.scenario.args) {
+            for (var i = 0, arg; i < FISH_MAP.scenario.args.length; i++) {
+                arg = FISH_MAP.scenario.args[i];
+                params['ARG' + (i + 1)] = arg;
+            }
+        }
         overlays.mergeNewParams(params);
         legendPanel.showLayers(jQuery.grep(visibleLayers, function(item) {return item.legend}));
     }
@@ -313,7 +325,7 @@
             clearScenario();
         },
         'showscenario': function(e) {
-            showScenario();
+            showScenario(e.args);
         }
     });
 
@@ -515,7 +527,8 @@
         events.triggerEvent('polygondrawn');
     }
 
-    function showScenario() {
+    function showScenario(args) {
+        FISH_MAP.scenario.args = args
         addScenarioLayers();
         events.triggerEvent('scenariocalculated');
     }

@@ -89,12 +89,11 @@ For requests made to show impact of project area selection the following custom 
 
 <table>
 <caption>Arguments for each fishing activity in intensity calculations</caption>
-
-<tr><th>FISHING</th><th>ARG1</th><th>ARG2</th><th>ARG3</th><th>ARG4</th><th>ARG5</th></tr>
+<tr><th>FISHING          </th><th> ARG1      </th><th> ARG2       </th><th> ARG3       </th><th> ARG4      </th><th> ARG5</th></tr>
 <tr><td>king_scallops    </td><td> days/year </td><td> speed      </td><td> avg. hours </td><td> net width </td><td> # boats</td></tr>
 <tr><td>queen_scallops   </td><td> days/year </td><td> speed      </td><td> avg. hours </td><td> net width </td><td> # boats</td></tr>
 <tr><td>mussels          </td><td> days/year </td><td> speed      </td><td> avg. hours </td><td> net width </td><td> # boats</td></tr>
-<tr><td>lot              </td><td> days/year </td><td> speed      </td><td> avg. hours </td><td> net width </td><td></td></tr>
+<tr><td>lot              </td><td> days/year </td><td> speed      </td><td> avg. hours </td><td> net width </td><td> </td></tr>
 <tr><td>nets             </td><td> days/year </td><td> net length </td><td> # nets     </td><td>           </td><td> </td></tr>
 <tr><td>fixed_pots       </td><td> days/year </td><td> # anchors  </td><td> # pots     </td><td>           </td><td> </td></tr>
 <tr><td>rsa_charterboats </td><td> days/year </td><td> avg. hours </td><td> # rods     </td><td>           </td><td> </td></tr>
@@ -124,3 +123,4 @@ For requests made to show impact of project area selection the following custom 
 
 * GetFeatureInfo
     * GML: localhost/en/wms/map=fishmap?LAYERS=intertidal_habitats&QUERY_LAYERS=intertidal_habitats&STYLES=&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&BBOX=246750%2C368462.5%2C273350%2C374937.5&FEATURE_COUNT=10&HEIGHT=259&WIDTH=1064&FORMAT=image%2Fpng&INFO_FORMAT=application/vnd.ogc.gml&SRS=EPSG%3A27700&X=603&Y=47
+
