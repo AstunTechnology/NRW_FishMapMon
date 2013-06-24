@@ -198,7 +198,7 @@ ul.tree li h3.collapsed {
 
 .olControlLegendPanel h2 {
     background-image: url(../img/plus.png);
-    background-position: right 6px center;
+    background-position: right center;
     background-repeat: no-repeat;
 }
 
@@ -269,13 +269,12 @@ ul.tree li h3.collapsed {
     -moz-border-radius-topleft: 5px;
     border-radius: 5px;
     background-image: url('../img/silk/magnifier.png');
-    background-position: right 4px center;
+    background-position: right center;
     background-repeat: no-repeat;
 }
 
 .olControlMapSearch input.ui-autocomplete-loading {
     background-image: url('../img/loading.gif');
-    background-position: right 4px center;
 }
 
 .olControlMapSearch .msg {
