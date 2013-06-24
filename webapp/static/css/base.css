@@ -268,12 +268,14 @@ ul.tree li h3.collapsed {
     -webkit-border-radius: 5px;
     -moz-border-radius-topleft: 5px;
     border-radius: 5px;
+    background-image: url('../img/silk/magnifier.png');
+    background-position: right 4px center;
+    background-repeat: no-repeat;
 }
 
 .olControlMapSearch input.ui-autocomplete-loading {
     background-image: url('../img/loading.gif');
     background-position: right 4px center;
-    background-repeat: no-repeat;
 }
 
 .olControlMapSearch .msg {
