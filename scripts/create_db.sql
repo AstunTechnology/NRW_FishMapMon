@@ -42,7 +42,7 @@ INSERT INTO fishmap.intensity_lvls VALUES
 	(15, '{2.0, 10.0}')
 ;
 
-CREATE TABLE activities (
+CREATE TABLE fishmap.activities (
     id integer NOT NULL,
     fishingtype integer NOT NULL,
     geartype text,
@@ -54,7 +54,7 @@ CREATE TABLE activities (
 
 ALTER TABLE fishmap.activities OWNER TO fishmap_webapp;
 
-CREATE SEQUENCE activities_id_seq
+CREATE SEQUENCE fishmap.activities_id_seq
     START WITH 987
     INCREMENT BY 1
     MINVALUE 987
@@ -64,11 +64,11 @@ CREATE SEQUENCE activities_id_seq
 
 ALTER TABLE fishmap.activities_id_seq OWNER TO fishmap_webapp;
 
-ALTER SEQUENCE activities_id_seq OWNED BY activities.id;
+ALTER SEQUENCE fishmap.activities_id_seq OWNED BY fishmap.activities.id;
 
-ALTER TABLE ONLY activities ALTER COLUMN id SET DEFAULT nextval('activities_id_seq'::regclass);
+ALTER TABLE ONLY fishmap.activities ALTER COLUMN id SET DEFAULT nextval('fishmap.activities_id_seq'::regclass);
 
-INSERT INTO activities  
+INSERT INTO fishmap.activities  
 VALUES 
 	(987, 1, NULL, NULL, 'king scallops', 'king_scallops'),
 	(988, 1, NULL, NULL, 'queen scallop', 'queen_scallops'),
@@ -83,7 +83,7 @@ VALUES
 	(997, 11, NULL, NULL, NULL, 'cas_hand_gath'),
 	(998, 12, NULL, NULL, NULL, 'pro_hand_gath');
 
-ALTER TABLE ONLY activities
+ALTER TABLE ONLY fishmap.activities
     ADD CONSTRAINT activities_pkey PRIMARY KEY (id);
 
 CREATE TABLE fishmap.sensitivity_matrix
@@ -108,7 +108,7 @@ WITH (
 ALTER TABLE fishmap.sensitivity_matrix
   OWNER TO fishmap_webapp;
 
-INSERT INTO sensitivity_matrix VALUES 
+INSERT INTO fishmap.sensitivity_matrix VALUES 
 	(1, 5, 987, 3, 3), 
 	(2, 5, 987, 2, 3), 
 	(3, 5, 987, 1, 3), 
