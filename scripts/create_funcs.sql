@@ -903,6 +903,46 @@ SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, '|| quote_iden
 END;
 $$;
 
-
 ALTER FUNCTION fishmap.vessels_project_gen(fishingname text, vesselcount integer, wkt text, combine boolean) OWNER TO fishmap_webapp;
+
+CREATE FUNCTION fishmap.project_sensitivity_lvls_new_det(IN activity text, IN wkt text, VARIADIC args numeric[])
+  RETURNS TABLE(ogc_fid integer, habitat_code integer, habitat_name text, sensitivity_lvl integer, intensity_lvl integer, wkb_geometry geometry) 
+    LANGUAGE plpgsql
+AS
+$$
+DECLARE
+	sql text;
+BEGIN
+	
+	sql := format(
+		'
+WITH levels AS (
+	SELECT habitat_id, intensity_lvl, sensitivity_lvl
+	FROM fishmap.sensitivity_matrix
+	WHERE activity_id = (SELECT id FROM fishmap.activities WHERE fishmap_name = %1$L)
+)
+SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, habitat_code, habitat_name, sensitivity_lvl, intensity_lvl, wkb_geometry FROM (
+	SELECT h.habitat_code, h.habitat_name::text, l.sensitivity_lvl, i.lvl AS intensity_lvl, ST_Intersection(i.wkb_geometry, h.wkb_geometry) AS wkb_geometry
+	FROM fishmap.project_intensity_lvls_new_det(%1$L, %2$L, %3$s) i,
+		habitats h,
+		levels l
+	WHERE ST_Intersects(i.wkb_geometry, h.wkb_geometry)
+		AND  l.habitat_id = h.habitat_code AND l.intensity_lvl = i.lvl
+) AS sensitivities;', 
+		activity,
+		wkt, 
+		(
+		      SELECT string_agg(arg::text, ', ') 
+		      FROM unnest(args) arg
+		)
+	);
+	RAISE INFO '%', sql;
+	RETURN QUERY EXECUTE sql;
+END;
+$$;
+
+ALTER FUNCTION fishmap.project_sensitivity_lvls_new_det(text, text, numeric[])
+  OWNER TO fishmap_webapp;
+
+
 
