@@ -683,13 +683,7 @@ DECLARE
 	sql text;
 BEGIN
 	tablename := 'intensity_lvls_'|| fishingname ||'_det';
-	IF fishingname = 'rsa_shore' THEN
-                countfield = 'num_fisherman';
-        ELSIF fishingname = 'pro_hand_gath' OR fishingname = 'cas_hand_gath' THEN
-        	countfield = 'numgatherers';
-        ELSE
-        	countfield = '_overlaps';
-        END IF;
+	countfield := '_overlaps';
 
         newdata := vesselcount::text ||' AS '|| quote_ident(countfield) ||',
 		ST_GeomFromText('|| quote_literal(wkt) ||', 27700) AS wkb_geometry';
@@ -702,16 +696,23 @@ WITH project AS (
 overlapping AS (
 	SELECT
 		ogc_fid,
-     		'|| quote_ident(countfield) ||' + (SELECT '|| quote_ident(countfield) ||' FROM project) AS '|| quote_ident(countfield) ||', 
+     		'|| quote_ident(countfield) ||', 
 		wkb_geometry
 	FROM '|| quote_ident(tablename) ||' AS existing
 	WHERE ST_Intersects(wkb_geometry, (SELECT wkb_geometry FROM project))
 )
 SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, '|| quote_ident(countfield) ||', wkb_geometry FROM (
-	-- non-overlapping parts of existing polygons
+	-- non-overlapping existing polygons
 	SELECT '|| quote_ident(countfield) ||'::int, wkb_geometry
 	FROM '|| quote_ident(tablename) ||'
 	WHERE ogc_fid NOT IN (SELECT ogc_fid FROM overlapping)
+	UNION 
+	-- non-overlapping parts of overlapping existing polygon
+	SELECT '|| quote_ident(countfield) ||'::int, (ST_Dump(ST_Difference(
+		wkb_geometry,
+		(SELECT wkb_geometry FROM project)
+	))).geom AS wkb_geometry
+		FROM overlapping
 	UNION 
 	-- non-overlapping parts of project polygon
 	SELECT '|| quote_ident(countfield) ||'::int, (ST_Dump(ST_Difference(
@@ -721,12 +722,12 @@ SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, '|| quote_iden
 		FROM project
 	UNION 
 	--overlapping parts of project polygon and existing polygons
-	SELECT '|| quote_ident(countfield) ||'::int, wkb_geometry FROM overlapping
+	SELECT ('|| quote_ident(countfield) ||' + (SELECT '|| quote_ident(countfield) ||' FROM project))::int AS '|| quote_ident(countfield) ||', ST_Intersection(wkb_geometry, (SELECT wkb_geometry FROM project)) FROM overlapping
 ) AS a;';
 	ELSE
 		sql := 'SELECT 1, '|| newdata ||';';
 	END IF;
-
+	RAISE INFO 'statement: %', sql;
 	RETURN QUERY EXECUTE sql;
 END;
 $$;
