@@ -210,6 +210,7 @@ def wms():
         app.config['WMS_URL'],
         data=args
     )
+    print(args)
 
     resp = make_response(r.content)
     resp.headers['Content-Type'] = r.headers['Content-Type']

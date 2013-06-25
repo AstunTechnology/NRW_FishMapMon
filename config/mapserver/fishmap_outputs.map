@@ -670,9 +670,9 @@
     END
 
     LAYER
-        NAME "sensitivity_lvls_scenario_det"
+        NAME "sensitivity_lvls_scenario"
         INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (SELECT * FROM fishmap.project_sensitivity_lvls_new_det('%FISHING%'::text, '%WKT%'::text, %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric)) AS levels USING unique ogc_fid USING srid=27700"
+        DATA "wkb_geometry from (SELECT *, sensitivity_lvl AS sensitivity_level FROM fishmap.project_sensitivity_lvls_new_det('%FISHING%'::text, '%WKT%'::text, %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric)) AS levels USING unique ogc_fid USING srid=27700"
     VALIDATION
             'FISHING' '^[a-z_]+$'
             'WKT' '.*'
@@ -691,7 +691,7 @@
             "init=epsg:27700"
         END
         METADATA
-            "ows_title" "sensitivity_lvls_scenario_det"
+            "ows_title" "sensitivity_lvls_scenario"
             "gml_include_items" "all"
         END
         TOLERANCEUNITS pixels
@@ -707,4 +707,41 @@
         END
     END
 
+    LAYER
+        NAME "sensitivity_lvls_combined"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (SELECT *, sensitivity_lvl AS sensitivity_level FROM fishmap.project_sensitivity_lvls_combined_det('%FISHING%'::text, '%WKT%'::text, %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric)) AS levels USING unique ogc_fid USING srid=27700"
+    VALIDATION
+            'FISHING' '^[a-z_]+$'
+            'WKT' '.*'
+            'ARG1' '^[0-9]+(\.[0-9]+)?$'
+            'default_ARG1' 'null'
+            'ARG2' '^[0-9]+(\.[0-9]+)?$'
+            'default_ARG2' 'null'
+            'ARG3' '^[0-9]+(\.[0-9]+)?$'
+            'default_ARG3' 'null'
+            'ARG4' '^[0-9]+(\.[0-9]+)?$'
+            'default_ARG4' 'null'
+            'ARG5' '^[0-9]+(\.[0-9]+)?$'
+            'default_ARG5' 'null'
+        END
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "sensitivity_lvls_combined"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
 
