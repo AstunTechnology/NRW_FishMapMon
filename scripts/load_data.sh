@@ -16,6 +16,11 @@ ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' 1km_Grid/1km_Sea_Grid.TAB -nln grid -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
 # Habitat
+ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "HabitatLayers/Combined_Seabed_Habitat.TAB" -nln habitats -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+
+# Crude way of fixing self-intersecting polygon
+psql -h localhost -U fishmap_webapp -W -d fishmap -c "UPDATE habitats SET wkb_geometry = ST_Multi(ST_BuildArea(ST_Union(ST_Multi(ST_Boundary(wkb_geometry)),ST_PointN(ST_Boundary(wkb_geometry),1)))) WHERE ST_IsValid(wkb_geometry) = false;"
+
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "HabitatLayers/Intertidal/Intertidal_Habitat_Dissolved.tab" -nln intertidal_habitats -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "HabitatLayers/Subtidal/Subtidal_Habitat_Dissolved.tab" -nln subtidal_habitats -s_srs "EPSG:27700" -a_srs "EPSG:27700"
