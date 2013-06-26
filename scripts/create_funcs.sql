@@ -240,7 +240,7 @@ DECLARE
 	sql text;
 BEGIN
 	tablename := 'intensity_lvls_'|| fishingname;
-	SELECT rangeboundaries INTO bounds FROM fishmap.intensity_lvls;
+	SELECT rangeboundaries INTO bounds FROM fishmap.intensity_lvls WHERE fishingtype = intensitylookup;
 	lvlcase = 'CASE 
 	WHEN '|| quote_ident(intensityfield) ||' < '|| bounds[1] ||' THEN 1 
 	WHEN '|| quote_ident(intensityfield) ||' > '|| bounds[2] ||' THEN 3 
@@ -352,7 +352,7 @@ DECLARE
 	sql text;
 BEGIN
 	tablename := 'intensity_lvls_'|| fishingname;
-	SELECT rangeboundaries INTO bounds FROM fishmap.intensity_lvls;
+	SELECT rangeboundaries INTO bounds FROM fishmap.intensity_lvls WHERE fishingtype = intensitylookup;
 	lvlcase = 'CASE 
 	WHEN '|| quote_ident(intensityfield) ||' < '|| bounds[1] ||' THEN 1 
 	WHEN '|| quote_ident(intensityfield) ||' > '|| bounds[2] ||' THEN 3 
