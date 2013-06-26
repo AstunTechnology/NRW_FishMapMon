@@ -300,8 +300,7 @@ SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, intensity_leve
 	UNION 
 	--overlapping parts of project polygon and existing polygons
 	SELECT '|| lvlcase ||' AS intensity_level, '|| quote_ident(intensityfield) ||', wkb_geometry FROM intersections
-) AS intensities
-WHERE '|| quote_ident(intensityfield) ||' > 0;';
+) AS intensities;';
 	ELSE
 		sql := 'SELECT ogc_fid, '|| lvlcase ||' AS intensity_level, '|| quote_ident(intensityfield) ||', wkb_geometry FROM ( 
 	'|| newdata ||'
@@ -401,8 +400,7 @@ SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, intensity_leve
 	UNION 
 	--overlapping parts of project polygon and existing polygons
 	SELECT '|| lvlcase ||' AS intensity_level, '|| quote_ident(intensityfield) ||', wkb_geometry FROM overlapping
-) AS intensities
-WHERE '|| quote_ident(intensityfield) ||' > 0;';
+) AS intensities;';
 	ELSE
 		sql := 'SELECT ogc_fid, '|| lvlcase ||' AS intensity_level, '|| quote_ident(intensityfield) ||', wkb_geometry FROM ( 
 	'|| newdata ||'
