@@ -17,13 +17,7 @@
             "id": "habitats_grp", 
             "layers": [
                 {
-                    "id": "intertidal_habitats", 
-                    "info": true, 
-                    "legend": true, 
-                    "visible": false
-                }, 
-                {
-                    "id": "subtidal_habitats", 
+                    "id": "habitats", 
                     "info": true, 
                     "legend": true, 
                     "visible": false

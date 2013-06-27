@@ -52,8 +52,7 @@
                 "project_area_grp": "{{ _('Project Area') }}",
                 "project_area": "{{ _('Project Area') }}",
                 "habitats_grp": "{{ _('Habitats') }}",
-                "intertidal_habitats": "{{ _('Intertidal Habitats') }}",
-                "subtidal_habitats": "{{ _('Subtidal Habitats') }}",
+                "habitats": "{{ _('Habitats') }}",
                 "subtidal_habitats_confidence": "{{ _('Subtidal Habitats Confidence') }}",
                 "restricted_grp": "{{ _('Restricted Zones') }}",
                 "restricted_closed_scalloping": "{{ _('Areas Closed to Scalloping') }}",
@@ -465,40 +464,19 @@
     </script>
     <script id="infoTmpl" type="text/template">
     {% raw %}
-        {{#intertidal_habitats}}
-        <h2>{{#_}}intertidal_habitats{{/_}}</h2>
+        {{#habitats}}
+        <h2>{{#_}}habitats{{/_}}</h2>
         <table class="info">
             <tbody>
                 {{#features}}
                 <tr>
-                    <th>{{#_}}name{{/_}}</th>
-                    <td>{{attributes.biotope}}</td>
-                </tr>
-                <tr>
-                    <th>{{#_}}habitat{{/_}}</th>
-                    <td>{{attributes.type}}</td>
+                    <th>{{#_}}Habitat{{/_}}</th>
+                    <td>{{attributes.habitat_name}} ({{attributes.habitat_code}})</td>
                 </tr>
                 {{/features}}
             </tbody>
         </table>
-        {{/intertidal_habitats}}
-        {{#subtidal_habitats}}
-        <h2>{{#_}}subtidal_habitats{{/_}}</h2>
-        <table class="info">
-            <tbody>
-                {{#features}}
-                <tr>
-                    <th>{{#_}}name{{/_}}</th>
-                    <td>{{attributes.name}}</td>
-                </tr>
-                <tr>
-                    <th>{{#_}}habitat{{/_}}</th>
-                    <td>{{attributes.summary}}</td>
-                </tr>
-                {{/features}}
-            </tbody>
-        </table>
-        {{/subtidal_habitats}}
+        {{/habitats}}
         {{#subtidal_habitats_confidence}}
         <h2>{{#_}}subtidal_habitats_confidence{{/_}}</h2>
         <table class="info">
