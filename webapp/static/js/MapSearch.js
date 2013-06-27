@@ -61,6 +61,10 @@ OpenLayers.Control.MapSearch = OpenLayers.Class(OpenLayers.Control, {
             jQuery(this).autocomplete("search");
         });
 
+        jQuery('body').click(function() {
+            jQuery(that.input).autocomplete("close");
+        });
+
         this.events = new OpenLayers.Events(this, this.div, null, true);
 
         var stopEvt = function(evt) {
