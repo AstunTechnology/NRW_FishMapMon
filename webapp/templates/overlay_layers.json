@@ -100,6 +100,58 @@
             "overlay": true
         },
         {
+            "activity": true, 
+            "id": "vessels_grp", 
+            "layers": [
+                {
+                    "id": "vessels_lvls_official", 
+                    "info": true, 
+                    "legend": true, 
+                    "visible": false
+                }
+            ], 
+            "output": true
+        }, 
+        {
+            "activity": true, 
+            "id": "intensity_grp", 
+            "layers": [
+                {
+                    "id": "intensity_lvls_official", 
+                    "info": true, 
+                    "legend": true, 
+                    "visible": false
+                }
+            ], 
+            "output": true
+        }, 
+        {
+            "activity": true, 
+            "id": "sensitivity_grp", 
+            "layers": [
+                {
+                    "id": "sensitivity_lvls_official", 
+                    "info": true, 
+                    "legend": true, 
+                    "visible": false
+                }
+            ], 
+            "output": true
+        }, 
+        {
+            "activity": true, 
+            "id": "sensvtyconf_grp", 
+            "layers": [
+                {
+                    "id": "sensvtyconf_lvls_official", 
+                    "info": true, 
+                    "legend": true, 
+                    "visible": false
+                }
+            ], 
+            "output": true
+        },
+        {
             "id": "extents_grp", 
             "layers": [
                 {

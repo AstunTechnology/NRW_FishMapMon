@@ -5,35 +5,6 @@
     var outputActivities = FISH_MAP.outputActivities;
     var outputTypes = FISH_MAP.outputTypes;
 
-    // Add the project output layers to the overlayLayers model, one per type /
-    // activity before any other output groups
-    var outputGrpIdx = overlayLayers.groups.length - 1;
-    for (var m = 0, grp; m < overlayLayers.groups.length; m++) {
-        grp = overlayLayers.groups[m];
-        if (grp.output) {
-            outputGrpIdx = m;
-            break;
-        }
-    }
-    for (var m = 0, type, grp; m < outputTypes.length; m++) {
-        type = outputTypes[m];
-        grp = {
-            "id": type + "_grp",
-            "output": true,
-            "activity": true,
-            "layers":[]
-        };
-        overlayLayers.groups.splice(outputGrpIdx, 0, grp);
-        outputGrpIdx += 1;
-        lyr = {
-            "id": type + "_lvls_official",
-            "info": true,
-            "legend": true,
-            "visible": false
-        };
-        grp.layers.push(lyr);
-    }
-
     overlayLayers = layersCollection(overlayLayers);
 
     var controls = [
