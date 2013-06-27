@@ -920,7 +920,7 @@ WITH levels AS (
 ),
 intensities AS (
 	SELECT lvl, wkb_geometry
-	FROM fishmap.project_intensity_lvls_combined_gen(%1$L, %2$L, %4$s)
+	FROM fishmap.project_intensity_lvls_new_gen(%1$L, %2$L, %4$s)
 	WHERE ST_Intersects(
 		wkb_geometry, 
 		ST_Intersection(
