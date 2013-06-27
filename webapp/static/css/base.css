@@ -191,9 +191,8 @@ ul.tree li h3.collapsed {
 .olControlLegendPanel {
     right: 5px;
     bottom: 5px;
-    width: 400px;
+    /* width: 400px; */
     background-color: white;
-    /* background-image: url("../img/transparent.gif"); */
 }
 
 .olControlLegendPanel h2 {
@@ -228,6 +227,7 @@ ul.tree li h3.collapsed {
     border: 1px solid grey;
     max-height: 300px;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 
 .olControlLegendPanel .content h3 {
