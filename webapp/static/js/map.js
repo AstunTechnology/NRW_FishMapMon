@@ -5,16 +5,6 @@
     var outputActivities = FISH_MAP.outputActivities;
     var outputTypes = FISH_MAP.outputTypes;
 
-    var scenarioLayerNames = [
-        'vessels_lvls_scenario',
-        'vessels_lvls_combined',
-        'intensity_lvls_scenario',
-        'intensity_lvls_combined',
-        'sensitivity_lvls_scenario',
-        'sensitivity_lvls_combined'
-    ];
-
-
     // Add the project output layers to the overlayLayers model, one per type /
     // activity before any other output groups
     var outputGrpIdx = overlayLayers.groups.length - 1;
@@ -495,8 +485,8 @@
     function addScenarioLayers() {
         // Add the additional layers to the activiy groups if they dont'
         // already exist
-        for (var i = 0, type, grp, lyrId, lyr; i < scenarioLayerNames.length; i++) {
-            lyrId = scenarioLayerNames[i];
+        for (var i = 0, type, grp, lyrId, lyr; i < FISH_MAP.scenarioLayerNames.length; i++) {
+            lyrId = FISH_MAP.scenarioLayerNames[i];
             if (!overlayLayers.getLayerById(lyrId)) {
                 type = lyrId.split('_')[0];
                 grp = overlayLayers.getGroupsByProperty('id', type + '_grp')[0];
@@ -515,8 +505,8 @@
 
     function removeScenarioLayers() {
         // Remove scenario layers
-        for (var i = 0, type, grp, lyrId, lyr; i < scenarioLayerNames.length; i++) {
-            lyrId = scenarioLayerNames[i];
+        for (var i = 0, type, grp, lyrId, lyr; i < FISH_MAP.scenarioLayerNames.length; i++) {
+            lyrId = FISH_MAP.scenarioLayerNames[i];
             type = lyrId.split('_')[0];
             grp = overlayLayers.getGroupsByProperty('id', type + '_grp')[0];
             lyr = overlayLayers.getLayerById(lyrId);

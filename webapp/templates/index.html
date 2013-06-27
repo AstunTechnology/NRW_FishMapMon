@@ -275,7 +275,15 @@
                 "cas_hand_gath",
                 "pro_hand_gath"
             ],
-            outputTypes: ['vessels', 'intensity', 'sensitivity', 'sensvtyconf']
+            outputTypes: ['vessels', 'intensity', 'sensitivity', 'sensvtyconf'],
+            scenarioLayerNames: [
+                'vessels_lvls_scenario',
+                'vessels_lvls_combined',
+                'intensity_lvls_scenario',
+                'intensity_lvls_combined',
+                'sensitivity_lvls_scenario',
+                'sensitivity_lvls_combined'
+            ]
         };
         FISH_MAP.ROOT_URL = window.location.protocol + '//' + window.location.host + window.location.pathname;
         FISH_MAP.GAZ_URL = FISH_MAP.ROOT_URL + 'gaz?q=';
