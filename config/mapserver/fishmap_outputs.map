@@ -254,6 +254,30 @@
     END
 
     LAYER
+        NAME "extents_cas_hand_gath"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from extents_cas_hand_gath) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "extents_cas_hand_gath"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+    LAYER
         NAME "extents_pro_hand_gath"
         INCLUDE "pgconnection.inc"
         DATA "wkb_geometry from (select * from extents_pro_hand_gath) as foo using unique ogc_fid using srid=27700"
@@ -672,6 +696,7 @@
     LAYER
         NAME "sensitivity_lvls_scenario"
         INCLUDE "pgconnection.inc"
+        # DEBUG 5
         DATA "wkb_geometry from (SELECT * FROM fishmap.project_sensitivity_lvls_new('%FISHING%'::text, '%WKT%'::text, %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric)) AS levels USING unique ogc_fid USING srid=27700"
     VALIDATION
             'FISHING' '^[a-z_]+$'

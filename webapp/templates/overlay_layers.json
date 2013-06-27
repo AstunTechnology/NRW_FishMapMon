@@ -157,6 +157,12 @@
                     "visible": false
                 },
                 {
+                    "id": "extents_cas_hand_gath",
+                    "info": true,
+                    "legend": true,
+                    "visible": false
+                },
+                {
                     "id": "extents_pro_hand_gath",
                     "info": true,
                     "legend": true,
