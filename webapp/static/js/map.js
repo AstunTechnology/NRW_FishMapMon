@@ -268,15 +268,25 @@
         },
         'activitychange': function(e) {
             FISH_MAP.fishingactivity = outputPanel.getActivity();
-            // Add a _fullName property to all activity layers which
+            // Add a _fullName property and desc to all activity layers which
             // can be used in templates etc.
             var grps = overlayLayers.getGroupsByProperty('activity', true);
             for (var m = 0, grp; m < grps.length; m++) {
                 grp = grps[m];
                 for (var n = 0, lyr; n < grp.layers.length; n++) {
                     lyr = grp.layers[n];
+                    // Lookup the full name for the layer which includes the
+                    // current fishing activity so it can be uniquely identified.
+                    // Example fullName: intensity_lvls_official_cas_hand_gath
                     var layerInfo = FISH_MAP.getLayerInfo(lyr.id);
                     lyr._fullName = layerInfo.fullName;
+                    // Look up description for this layer, getText return the
+                    // string used to lookup the description then set it to
+                    // false as there is no desciption defined.
+                    // Example id: intensity_cas_hand_gath_desc
+                    var descTextId = layerInfo.outputType + '_' + layerInfo.activity + '_desc';
+                    var descText = FISH_MAP.getText(descTextId);
+                    lyr.desc = (descText != descTextId) ? descText : false;
                 }
             }
             clearScenario();

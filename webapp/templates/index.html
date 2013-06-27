@@ -117,6 +117,18 @@
                 "intensity_lvls_combined_rsa_commercial": "{{ _('Combined RSA Commercial Intensity') }}",
                 "intensity_lvls_combined_rsa_noncharter": "{{ _('Combined RSA Non Charter Boats Intensity') }}",
                 "intensity_lvls_combined_rsa_shore": "{{ _('Combined RSA Shore Fishing Intensity') }}",
+                "intensity_king_scallops_desc": "{{ _('(# times mapped area fished / year)') }}",
+                "intensity_queen_scallops_desc": "{{ _('(# times mapped area fished / year)') }}",
+                "intensity_cas_hand_gath_desc": "{{ _('(Number of People /ha /day)') }}",
+                "intensity_fixed_pots_desc": "{{ _('(Number of Pots lifted & dropped / ha / day)') }}",
+                "intensity_lot_desc": "{{ _('(# times mapped area fished / year)') }}",
+                "intensity_mussels_desc": "{{ _('(# times mapped area fished / year)') }}",
+                "intensity_nets_desc": "{{ _('(Number of 100m net panels fished in a km2 / year)') }}",
+                "intensity_pro_hand_gath_desc": "{{ _('(Number of People /ha /day)') }}",
+                "intensity_rsa_charterboats_desc": "{{ _('(Number of People /ha /week)') }}",
+                "intensity_rsa_commercial_desc": "{{ _('(Number of People /ha /week)') }}",
+                "intensity_rsa_noncharter_desc": "{{ _('(Number of People /ha /week)') }}",
+                "intensity_rsa_shore_desc": "{{ _('(Number of People /ha /week)') }}",
                 "vessels_lvls_official_cas_hand_gath": "{{ _('Casual Hand Gatherers') }}",
                 "vessels_lvls_official_fixed_pots": "{{ _('Potting Vessels') }}",
                 "vessels_lvls_official_king_scallops": "{{ _('King Scallops Vessels') }}",
@@ -445,6 +457,7 @@
     <script id="legendTmpl" type="text/template">
     {% raw %}
         <h3>{{#_}}{{id}}{{/_}}</h3>
+        {{#desc}}<p class="desc">{{desc}}</p>{{/desc}}
         <img src="{{{url}}}" alt="legend" />
     {% endraw %}
     </script>

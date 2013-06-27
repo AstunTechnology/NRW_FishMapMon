@@ -21,6 +21,7 @@ OpenLayers.Control.LegendPanel = OpenLayers.Class(OpenLayers.Control, {
                 var legendElm = jQuery.mustache(tmpl, jQuery.extend({
                         "url": FISH_MAP.WMS_OVERLAY_URL + qsChar + "LAYER=" + lyr + "&FISHING=" + FISH_MAP.fishingactivity + "&VERSION=1.1.1&SERVICE=WMS&REQUEST=GetLegendGraphic&FORMAT=image/png",
                         "id": (lyr._fullName) ? lyr._fullName : lyr.id,
+                        "desc": lyr.desc
                     }, FISH_MAP.tmplView));
                 jQuery('.content', this.legendDiv).append(legendElm);
             }

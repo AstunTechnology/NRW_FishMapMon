@@ -206,13 +206,6 @@ ul.tree li h3.collapsed {
     background-image: url(../img/minus.png);
 }
 
-.olControlLegendPanel .content {
-    padding: 0 1em 1em 1em;
-    border: 1px solid grey;
-    max-height: 300px;
-    overflow-y: auto;
-}
-
 .olControlLegendPanel .legend h2 {
     padding: 6px;
     border-radius: 5px 5px 0 0;
@@ -228,6 +221,17 @@ ul.tree li h3.collapsed {
     -moz-border-radius-topright: 5px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+}
+
+.olControlLegendPanel .content {
+    padding: 0 1em 1em 1em;
+    border: 1px solid grey;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.olControlLegendPanel .content h3 {
+    margin-bottom: 0;
 }
 
 /* Base Map Switcher */
