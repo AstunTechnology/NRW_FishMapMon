@@ -110,6 +110,10 @@ sub vcl_fetch {
 # 		set beresp.ttl = 120 s;
 # 		return (hit_for_pass);
 #     }
+	if ( req.url ~ "^/wms\?map=fishmap" ) {
+		unset beresp.http.last-modified;
+		return (hit_for_pass);
+	}
 	if ( req.url ~ "^/wms" ) {
      		unset beresp.http.set-cookie;
 		unset beresp.http.expires;
