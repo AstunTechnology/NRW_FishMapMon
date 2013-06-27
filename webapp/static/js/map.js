@@ -52,7 +52,6 @@
             transparent: false
         },
         {
-            attribution: "&copy; Ordnance Survey",
             singleTile: false,
             tileSize: new OpenLayers.Size(512, 512)
         }
@@ -67,7 +66,7 @@
             transparent: false
         },
         {
-            attribution: "&copy; UK Hydrographic Office",
+            attribution: FISH_MAP.getText('chart_copy'),
             singleTile: false,
             tileSize: new OpenLayers.Size(512, 512)
         }
@@ -81,7 +80,9 @@
         {
             layers: visibleOverlays.join(',')
         },
-        {}
+        {
+            attribution: FISH_MAP.getText('os_copy')
+        }
     );
     map.addLayer(overlays);
 
