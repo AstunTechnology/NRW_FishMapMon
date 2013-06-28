@@ -1,6 +1,5 @@
 import datetime
 import os
-import re
 import requests
 
 from flask import Flask
@@ -188,7 +187,8 @@ def gaz():
     )
 
     resp = make_response(r.content)
-    resp.headers['Content-Type'] = r.headers['Content-Type']
+    resp.headers['Content-Type'] = r.headers.get('Content-Type')
+    resp.headers.add('Cache-Control', 'max-age=3600')
 
     return resp
 
@@ -204,6 +204,10 @@ def wms():
     layers = args.get('LAYERS') or args.get('LAYER')
     sld = render_sld(layers.split(','), args)
     args['SLD_BODY'] = sld
+    cache = True
+
+    if args.get('map') == 'fishmap':
+        cache = False
 
     args['map'] = get_mapserver_map_arg(args.get('map'))
 
@@ -214,9 +218,14 @@ def wms():
 
     resp = make_response(r.content)
     resp.headers['Content-Type'] = r.headers['Content-Type']
-    dt = datetime.datetime.utcnow()
-    modified = dt.strftime('%a, %d %b %Y %T GMT')
-    resp.headers.add('Last-Modified', modified)
+
+    if cache:
+        dt = datetime.datetime.utcnow()
+        modified = dt.strftime('%a, %d %b %Y %T GMT')
+        resp.headers.add('Last-Modified', modified)
+        resp.headers.add('Cache-Control', 'max-age=29030400')
+    else:
+        resp.headers.add('Cache-Control', 'no-cache, no-store, max-age=0')
 
     return resp
 
