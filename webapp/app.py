@@ -1,3 +1,4 @@
+import datetime
 import os
 import re
 import requests
@@ -210,10 +211,12 @@ def wms():
         app.config['WMS_URL'],
         data=args
     )
-    print(args)
 
     resp = make_response(r.content)
     resp.headers['Content-Type'] = r.headers['Content-Type']
+    dt = datetime.datetime.utcnow()
+    modified = dt.strftime('%a, %d %b %Y %T GMT')
+    resp.headers.add('Last-Modified', modified)
 
     return resp
 
