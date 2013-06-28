@@ -29,14 +29,12 @@ sub vcl_recv {
 		set req.backend = en;
 	}
 
-	if ( req.url ~ "^/wms\?map=fishmap" ) {
-		return (pass);
-	}
 
 	if ( req.url ~ "^/static/" ) {
-		return (lookup);
+		unset req.http.Cookie;
 	}
 	if ( req.url ~ "^/wms" ) {
+		# allow caching but rely on headers from backend
 		return (lookup);
 	}
 #     if (req.restarts == 0) {
@@ -110,15 +108,9 @@ sub vcl_fetch {
 # 		set beresp.ttl = 120 s;
 # 		return (hit_for_pass);
 #     }
-	if ( req.url ~ "^/wms\?map=fishmap" ) {
-		unset beresp.http.last-modified;
-		return (hit_for_pass);
-	}
 	if ( req.url ~ "^/wms" ) {
      		unset beresp.http.set-cookie;
 		unset beresp.http.expires;
-     		set beresp.ttl = 1w;
-	        set beresp.http.Cache-Control = "max-age=1900";
 	}		
      return (deliver);
 }
