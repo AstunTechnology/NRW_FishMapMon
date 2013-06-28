@@ -312,13 +312,26 @@ ul.tree li h3.collapsed {
 
 div.olControlScale {
     left: 3px;
+    bottom: 33px;
 }
 
 div.olControlMousePosition {
     left: 3px;
 }
 
+div.olControlMousePosition {
+    left: 3px;
+}
+
+div.olControlMousePosition.OSGB {
+    bottom: 22px;
+}
+
+div.olControlMousePosition.WGS84 {
+    bottom: 11px;
+}
+
 div.olControlAttribution {
     left: 3px;
-    bottom: 1.5em;
+    bottom: 0;
 }

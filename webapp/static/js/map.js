@@ -16,7 +16,16 @@
         new OpenLayers.Control.Attribution(),
         new OpenLayers.Control.Scale(),
         new OpenLayers.Control.Navigation(),
-        new OpenLayers.Control.MousePosition(),
+        new OpenLayers.Control.MousePosition({
+            prefix: 'OSGB: ',
+            displayClass: 'olControlMousePosition OSGB',
+            numDigits: 2
+        }),
+        new OpenLayers.Control.MousePosition({
+            prefix: 'WGS84: ',
+            displayClass: 'olControlMousePosition WGS84',
+            displayProjection: new OpenLayers.Projection("EPSG:4326"),
+        }),
         new OpenLayers.Control.PanZoomBar()
     ];
 
