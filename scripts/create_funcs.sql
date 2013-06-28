@@ -991,7 +991,7 @@ SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, summary, name,
 	-- non-overlapping existing polygons
 	SELECT nullif(summary, '''')::int AS summary, name::Text, sensitivity_level::int, clipper_intensity_level::int, wkb_geometry
 	FROM sensitivity_lvls_%1$s
-	WHERE ST_Disjoint(wkb_geometry, (SELECT wkb_geometry FROM intensity_area))
+	WHERE  Coalesce(ST_Disjoint(wkb_geometry,(SELECT wkb_geometry FROM intensity_area)), ST_Intersects(wkb_geometry,  ST_Buffer(ST_GeomFromText(%3$L, 27700), -1)))
 	UNION
 	-- new polygons
 	SELECT h.habitat_code::int AS summary, h.habitat_name::text AS name, l.sensitivity_lvl AS sensitivity_level, i.lvl AS clipper_intensity_level, ST_Intersection(i.wkb_geometry, h.wkb_geometry) AS wkb_geometry

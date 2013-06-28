@@ -91,7 +91,9 @@
             layers: visibleOverlays.join(',')
         },
         {
-            attribution: FISH_MAP.getText('os_copy')
+            attribution: FISH_MAP.getText('os_copy'),
+            singleTile: false,
+            tileSize: new OpenLayers.Size(512, 512)
         }
     );
     map.addLayer(overlays);
