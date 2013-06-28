@@ -193,6 +193,13 @@ ul.tree li h3.collapsed {
     bottom: 5px;
     /* width: 400px; */
     background-color: white;
+    border-radius: 5px 5px 0 0;
+    -webkit-border-top-left-radius: 5px;
+    -webkit-border-top-right-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    -moz-border-radius-topright: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 
 .olControlLegendPanel h2 {
@@ -206,14 +213,14 @@ ul.tree li h3.collapsed {
 }
 
 .olControlLegendPanel .legend h2 {
-    padding: 6px;
-    border-radius: 5px 5px 0 0;
+    padding: 6px 50px 6px 6px;
     margin: 0;
     font-size: 1.0em;
     font-weight: bold;
     color: white;
     background-color: #3f3f3f;
     vertical-align: middle;
+    border-radius: 5px 5px 0 0;
     -webkit-border-top-left-radius: 5px;
     -webkit-border-top-right-radius: 5px;
     -moz-border-radius-topleft: 5px;
