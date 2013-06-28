@@ -60,29 +60,6 @@ MAP
     END
 
     LAYER
-        NAME "project_area"
-        INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (select * from project_area) as foo using unique ogc_fid using srid=27700"
-        PROJECTION
-            "init=epsg:27700"
-        END
-        METADATA
-            ows_title "Project Area"
-        END
-        STATUS DEFAULT
-        TOLERANCE 2
-        TEMPLATE 'id.tmpl'
-        TYPE LINE
-        UNITS METERS
-        CLASS
-            STYLE
-                COLOR 0 0 95
-                WIDTH 2
-            END
-        END
-    END
-
-    LAYER
         NAME "habitats"
         INCLUDE "pgconnection.inc"
         DATA "wkb_geometry from (select * from habitats) as foo using unique ogc_fid using srid=27700"
@@ -392,5 +369,50 @@ MAP
 
     # ---- Project Outputs (Intensity, Vessels and Sensitivity Layers) ----
     INCLUDE "fishmap_outputs.map"
+
+    LAYER
+        NAME "mask"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from mask) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            ows_title "Mask"
+        END
+        STATUS OFF
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 255 255
+            END
+        END
+    END
+
+    LAYER
+        NAME "project_area"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from project_area) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            ows_title "Project Area"
+        END
+        STATUS OFF
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        TYPE LINE
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 0 0 95
+                WIDTH 2
+            END
+        END
+    END
 
 END
