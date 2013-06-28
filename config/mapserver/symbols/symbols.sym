@@ -3,8 +3,8 @@ SYMBOLSET
     SYMBOL
         NAME "wreck"
         TYPE TRUETYPE
-        FONT metoc_wrecks
-        CHARACTER "3"
+        FONT metoc_10
+        CHARACTER "y"
     END
 
     SYMBOL
