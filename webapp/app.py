@@ -197,17 +197,14 @@ def gaz():
 def wms():
 
     try:
-        args = update_wms_args(request.args.copy(), g.user.is_authenticated())
+        args, cacheable = update_wms_args(request.args.copy(),
+                                          g.user.is_authenticated())
     except (InvalidWmsArgs) as ex:
         return (ex.message, 500)
 
     layers = args.get('LAYERS') or args.get('LAYER')
     sld = render_sld(layers.split(','), args)
     args['SLD_BODY'] = sld
-    cache = True
-
-    if args.get('map') == 'fishmap':
-        cache = False
 
     args['map'] = get_mapserver_map_arg(args.get('map'))
 
@@ -219,7 +216,7 @@ def wms():
     resp = make_response(r.content)
     resp.headers['Content-Type'] = r.headers['Content-Type']
 
-    if cache:
+    if cacheable:
         dt = datetime.datetime.utcnow()
         modified = dt.strftime('%a, %d %b %Y %T GMT')
         resp.headers.add('Last-Modified', modified)
@@ -240,11 +237,15 @@ def update_wms_args(args, auth):
     end. Raises InvalidWmsArgs if the args to be returned are invalid such as
     the LAYER or LAYERS arg does not have a value """
 
+    cacheable = True
+
     # Update the LAYER of LAYERS parameter
     layers = None
     layer_arg = next((a for a in ['LAYERS', 'LAYER'] if a in args), None)
-    if layer_arg:
-        layers = update_wms_layers(args[layer_arg].split(','), auth)
+    if layer_arg and args.get('map') == 'fishmap':
+        layers, cacheable = update_wms_layers(args[layer_arg].split(','), auth)
+    else:
+        layers = args[layer_arg].split(',')
 
     if layers:
         layers = ','.join(layers)
@@ -257,7 +258,7 @@ def update_wms_args(args, auth):
     if 'QUERY_LAYERS' in args:
         args['QUERY_LAYERS'] = layers
 
-    return args
+    return args, cacheable
 
 
 def update_wms_layers(layers, auth):
@@ -265,21 +266,26 @@ def update_wms_layers(layers, auth):
     logged in and add the appropriate suffix to project output layers depending
     no whether a user is logged in or not """
 
+    cacheable = True
+
+    restricted_layers = [
+        'activity_commercial_fishing_polygon',
+        'activity_noncommercial_fishing_point',
+        'activity_noncommercial_fishing_polygon']
+
+    detailed_layers = ('intensity', 'vessels')
+
     def update_layer(layer):
         """ Updates project output layers to include the _det or _gen suffix
         based on whether the user is logged in or not. All other layers just
         pass through with the same name """
-        if layer.startswith(('intensity', 'vessels')):
+        if layer.startswith(detailed_layers):
             suffix = '_det' if auth else '_gen'
             return '%s%s' % (layer, suffix)
         return layer
 
     def authorise_layer(layer):
         """ Tests if the current user has access to the specified layer """
-        restricted_layers = [
-            'activity_commercial_fishing_polygon',
-            'activity_noncommercial_fishing_point',
-            'activity_noncommercial_fishing_polygon']
         return layer not in restricted_layers or auth
 
     layers = [
@@ -288,7 +294,12 @@ def update_wms_layers(layers, auth):
         if authorise_layer(layer)
     ]
 
-    return layers
+    for layer in layers:
+        if layer in restricted_layers or layer.startswith(detailed_layers):
+            cacheable = False
+            break
+
+    return layers, cacheable
 
 
 def render_sld(layers, args):
