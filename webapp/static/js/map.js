@@ -25,6 +25,7 @@
         units: "m",
         resolutions: [2.5, 5, 10, 25, 50, 100, 150],
         maxExtent: new OpenLayers.Bounds(-3276800,-3276800,3276800,3276800),
+        restrictedExtent: new OpenLayers.Bounds(120000, 298000, 364000, 445000),
         controls: controls
     });
 
