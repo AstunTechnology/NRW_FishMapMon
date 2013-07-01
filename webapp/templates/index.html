@@ -474,34 +474,34 @@
         {{#habitats}}
         <h2>{{#_}}habitats{{/_}}</h2>
         <table class="info">
+            {{#features}}
             <tbody>
-                {{#features}}
                 <tr>
                     <th>{{#_}}Habitat{{/_}}</th>
                     <td>{{attributes.habitat_name}} ({{attributes.habitat_code}})</td>
                 </tr>
-                {{/features}}
             </tbody>
+            {{/features}}
         </table>
         {{/habitats}}
         {{#subtidal_habitats_confidence}}
         <h2>{{#_}}subtidal_habitats_confidence{{/_}}</h2>
         <table class="info">
+            {{#features}}
             <tbody>
-                {{#features}}
                 <tr>
                     <th>{{#_}}confidence{{/_}}</th>
                     <td>{{attributes.confiden11}}</td>
                 </tr>
-                {{/features}}
             </tbody>
+            {{/features}}
         </table>
         {{/subtidal_habitats_confidence}}
         {{#restricted_closed_scalloping}}
         <h2>{{#_}}restricted_closed_scalloping{{/_}}</h2>
         <table class="info">
+            {{#features}}
             <tbody>
-                {{#features}}
                 <tr>
                     <th>{{#_}}Area{{/_}}</th>
                     <td>{{attributes.areaname}}</td>
@@ -510,15 +510,15 @@
                     <th>{{#_}}Description{{/_}}</th>
                     <td>{{#_}}Closed{{/_}}</td>
                 </tr>
-                {{/features}}
             </tbody>
+            {{/features}}
         </table>
         {{/restricted_closed_scalloping}}
         {{#several_and_regulatory_orders}}
         <h2>{{#_}}several_and_regulatory_orders{{/_}}</h2>
         <table class="info">
+            {{#features}}
             <tbody>
-                {{#features}}
                 <tr>
                     <th>{{#_}}Order Name{{/_}}</th>
                     <td>{{#_}}{{attributes.order_name}}{{/_}}</td>
@@ -527,41 +527,41 @@
                     <th>{{#_}}Order Type{{/_}}</th>
                     <td>{{attributes.order_type}}</td>
                 </tr>
-                {{/features}}
             </tbody>
+            {{/features}}
         </table>
         {{/several_and_regulatory_orders}}
         {{#rsa_standing_areas}}
         <h2>{{#_}}rsa_standing_areas{{/_}}</h2>
         <table class="info">
+            {{#features}}
             <tbody>
-                {{#features}}
                 <tr>
                     <th>{{#_}}Activity{{/_}}</th>
                     <td>{{attributes.activity}}</td>
                 </tr>
-                {{/features}}
             </tbody>
+            {{/features}}
         </table>
         {{/rsa_standing_areas}}
         {{#rsa_casting_sites}}
         <h2>{{#_}}rsa_casting_sites{{/_}}</h2>
         <table class="info">
+            {{#features}}
             <tbody>
-                {{#features}}
                 <tr>
                     <th>{{#_}}Activity{{/_}}</th>
                     <td>{{attributes.activity}}</td>
                 </tr>
-                {{/features}}
             </tbody>
+            {{/features}}
         </table>
         {{/rsa_casting_sites}}
         {{#activity_commercial_fishing_polygon}}
         <h2>{{#_}}activity_commercial_fishing_polygon{{/_}}</h2>
         <table class="info">
+            {{#features}}
             <tbody>
-                {{#features}}
                 <tr>
                    <th>{{#_}}geodb_oid{{/_}}</th>
                    <td>{{attributes.geodb_oid}}</td>
@@ -782,15 +782,15 @@
                    <th>{{#_}}shape_area{{/_}}</th>
                    <td>{{attributes.shape_area}}</td>
                </tr>
-                {{/features}}
             </tbody>
+            {{/features}}
         </table>
         {{/activity_commercial_fishing_polygon}}
         {{#activity_noncommercial_fishing_point}}
         <h2>{{#_}}activity_noncommercial_fishing_point{{/_}}</h2>
         <table class="info">
+            {{#features}}
             <tbody>
-                {{#features}}
                 <tr>
                     <th>{{#_}}geodb_oid{{/_}}</th>
                     <td>{{attributes.geodb_oid}}</td>
@@ -935,15 +935,15 @@
                     <th>{{#_}}rsa_site{{/_}}</th>
                     <td>{{attributes.rsa_site}}</td>
                 </tr>
-                {{/features}}
             </tbody>
+            {{/features}}
         </table>
         {{/activity_noncommercial_fishing_point}}
         {{#activity_noncommercial_fishing_polygon}}
         <h2>{{#_}}activity_noncommercial_fishing_polygon{{/_}}</h2>
         <table class="info">
+            {{#features}}
             <tbody>
-                {{#features}}
                 <tr>
                     <th>{{#_}}geodb_oid{{/_}}</th>
                     <td>{{attributes.geodb_oid}}</td>
@@ -1100,15 +1100,15 @@
                     <th>{{#_}}wreck_id{{/_}}</th>
                     <td>{{attributes.wreck_id}}</td>
                 </tr>
-                {{/features}}
             </tbody>
+            {{/features}}
         </table>
         {{/activity_noncommercial_fishing_polygon}}
         {{#wrecks_polygon}}
         <h2>{{#_}}wrecks_polygon{{/_}}</h2>
         <table class="info">
+            {{#features}}
             <tbody>
-                {{#features}}
                 <tr>
                     <th>{{#_}}Category{{/_}}</th>
                     <td>{{attributes.catwrk}}</td>
@@ -1117,15 +1117,15 @@
                     <th>{{#_}}Classification{{/_}}</th>
                     <td>{{attributes.classf}}</td>
                 </tr>
-                {{/features}}
             </tbody>
+            {{/features}}
         </table>
         {{/wrecks_polygon}}
         {{#intensity}}
         <h2>{{#_}}{{id}}{{/_}}</h2>
         <table class="info">
+            {{#features}}
             <tbody>
-                {{#features}}
                 <tr>
                     <th>{{#_}}Activity{{/_}}</th>
                     <td>{{attributes.activity}}</td>
@@ -1146,28 +1146,28 @@
                     <th>{{#_}}Intensity Level{{/_}}</th>
                     <td>{{attributes.intensity_level}}</td>
                 </tr>
-                {{/features}}
             </tbody>
+            {{/features}}
         </table>
         {{/intensity}}
         {{#vessels}}
         <h2>{{#_}}{{id}}{{/_}}</h2>
         <table class="info">
+            {{#features}}
             <tbody>
-                {{#features}}
                 <tr>
                     <th>{{#_}}no_vessels_{{fishingactivity}}{{/_}}</th>
                     <td>{{attributes._overlaps}}</td>
                 </tr>
-                {{/features}}
             </tbody>
+            {{/features}}
         </table>
         {{/vessels}}
         {{#sensitivity}}
         <h2>{{#_}}{{id}}{{/_}}</h2>
         <table class="info">
+            {{#features}}
             <tbody>
-                {{#features}}
                 <tr>
                     <th>{{#_}}Habitat{{/_}}</th>
                     <td>{{attributes.name}}</td>
@@ -1176,34 +1176,34 @@
                     <th>{{#_}}Sensitivity level{{/_}}</th>
                     <td>{{#_}}sensitivity_{{attributes.sensitivity_level}}{{/_}}</td>
                 </tr>
-                {{/features}}
             </tbody>
+            {{/features}}
         </table>
         {{/sensitivity}}
         {{#sensvtyconf}}
         <h2>{{#_}}{{id}}{{/_}}</h2>
         <table class="info">
+            {{#features}}
             <tbody>
-                {{#features}}
                 <tr>
                     <th>{{#_}}Sensitivity Confidence{{/_}}</th>
                     <td>{{#_}}{{attributes.sensitivityconfidence}}{{/_}}</td>
                 </tr>
-                {{/features}}
             </tbody>
+            {{/features}}
         </table>
         {{/sensvtyconf}}
         {{#extents}}
         <h2>{{#_}}Extents{{/_}}</h2>
         <table class="info">
+            {{#features}}
             <tbody>
-                {{#features}}
                 <tr>
                     <th>{{#_}}Name{{/_}}</th>
                     <td>{{#_}}{{type}}{{/_}}</td>
                 </tr>
-                {{/features}}
             </tbody>
+            {{/features}}
         </table>
         {{/extents}}
     {% endraw %}

@@ -194,8 +194,24 @@
                     jQuery('.loading', content).detach();
 
                     var tmpl = jQuery('#infoTmpl').html();
-                    var html = jQuery.mustache(tmpl, model);
                     content.append(jQuery.mustache(tmpl, model));
+
+                    // De-duplicate content
+                    content.find('tbody').each(function() {
+                        var cur = this;
+                        // Only check for duplicates if the current element has
+                        // a parent and hence has not been removed from the DOM
+                        // in a previous pass
+                        if (jQuery(cur).parent().length) {
+                            // Find all other tbody elements that have the same
+                            // content and remove them
+                            content.find('tbody').filter(function(idx) {
+                                return this != cur && this.innerHTML == cur.innerHTML;
+                            }).remove();
+                        }
+                    });
+
+                    // Force the popup to resize based on the content
                     this.popup.updateSize();
 
                 } else {
