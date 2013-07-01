@@ -203,8 +203,9 @@ def wms():
         return (ex.message, 500)
 
     layers = args.get('LAYERS') or args.get('LAYER')
-    sld = render_sld(layers.split(','), args)
-    args['SLD_BODY'] = sld
+    if 'GetFeatureInfo' not in args['REQUEST']:
+        sld = render_sld(layers.split(','), args)
+        args['SLD_BODY'] = sld
 
     args['map'] = get_mapserver_map_arg(args.get('map'))
 
