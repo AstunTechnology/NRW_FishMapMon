@@ -51,31 +51,23 @@
     // var blank = new OpenLayers.Layer(FISH_MAP.getText('no_map'), {isBaseLayer: true});
     // map.addLayer(blank);
 
-    var os = wmsLayer(
-        FISH_MAP.getText('os_map'),
-        FISH_MAP.WMS_OS_URL,
+    var os = new OpenLayers.Layer.TMS(
+        FISH_MAP.getText("os_map"),
+        FISH_MAP.TMS_ROOT_URL,
         {
-            layers: 'os',
-            transparent: false
-        },
-        {
-            singleTile: false,
-            tileSize: new OpenLayers.Size(512, 512)
+            layername: 'os',
+            type: 'png'
         }
     );
     map.addLayer(os);
 
-    var charts = wmsLayer(
-        FISH_MAP.getText('admiralty_chart'),
-        FISH_MAP.WMS_CHARTS_URL,
-        {
-            layers: 'charts',
-            transparent: false
-        },
+    var charts = new OpenLayers.Layer.TMS(
+        FISH_MAP.getText("admiralty_chart"),
+        FISH_MAP.TMS_ROOT_URL,
         {
             attribution: FISH_MAP.getText('chart_copy'),
-            singleTile: false,
-            tileSize: new OpenLayers.Size(512, 512)
+            layername: 'charts',
+            type: 'png'
         }
     );
     map.addLayer(charts);
