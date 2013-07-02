@@ -2,4 +2,5 @@ syntax: glob
 **/.ropeproject/
 **/**.pyc
 data/
+webapp/static/tiles/
 syntax: regexp

@@ -38,19 +38,30 @@
         controls: controls
     });
 
-    var nomap = wmsLayer(
-        FISH_MAP.getText('no_map'),
-        FISH_MAP.WMS_NOMAP_URL,
+    // var nomap = wmsLayer(
+    //     FISH_MAP.getText('no_map'),
+    //     FISH_MAP.WMS_NOMAP_URL,
+    //     {
+    //         layers: 'nomap',
+    //         transparent: false
+    //     },
+    //     {
+    //         singleTile: false,
+    //         tileSize: new OpenLayers.Size(512, 512)
+    //     }
+    // );
+    // map.addLayer(nomap);
+
+    var nomap = new OpenLayers.Layer.TMS(
+        "no_map",
+        "../static/tiles/",
         {
-            layers: 'nomap',
-            transparent: false
-        },
-        {
-            singleTile: false,
-            tileSize: new OpenLayers.Size(512, 512)
+            layername: 'nomap',
+            type: 'png'
         }
     );
     map.addLayer(nomap);
+
     // var blank = new OpenLayers.Layer(FISH_MAP.getText('no_map'), {isBaseLayer: true});
     // map.addLayer(blank);
 

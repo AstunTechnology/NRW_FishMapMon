@@ -1,3 +1,4 @@
 *.pyc
 data/
+webapp/static/tiles/
 gunicorn.conf
