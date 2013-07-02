@@ -38,7 +38,6 @@
         controls: controls
     });
 
-
     var nomap = new OpenLayers.Layer.TMS(
         FISH_MAP.getText("no_map"),
         FISH_MAP.TMS_ROOT_URL,
@@ -254,7 +253,29 @@
         refreshOverlayLayer();
     }
 
+    function deleteScenarioParams(params) {
+        var scenarioParams = {
+            "WKT": true,
+            "COUNT": true,
+            "ARG1": true,
+            "ARG2": true,
+            "ARG3": true,
+            "ARG4": true,
+            "ARG5": true,
+            "ARG6": true,
+            "ARG7": true,
+            "ARG8": true
+        };
+        for (var param in params) {
+            if (scenarioParams[param]) {
+                delete params[param];
+            }
+        }
+        return params;
+    }
+
     function refreshOverlayLayer() {
+        deleteScenarioParams(overlays.params);
         // Refresh the overlay WMS layer
         var visibleLayers = overlayLayers.getVisibleLayers();
         // Hide the layer if there are no visible layers to avoid an invalid
