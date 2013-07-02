@@ -38,22 +38,9 @@
         controls: controls
     });
 
-    // var nomap = wmsLayer(
-    //     FISH_MAP.getText('no_map'),
-    //     FISH_MAP.WMS_NOMAP_URL,
-    //     {
-    //         layers: 'nomap',
-    //         transparent: false
-    //     },
-    //     {
-    //         singleTile: false,
-    //         tileSize: new OpenLayers.Size(512, 512)
-    //     }
-    // );
-    // map.addLayer(nomap);
 
     var nomap = new OpenLayers.Layer.TMS(
-        "no_map",
+        FISH_MAP.getText("no_map"),
         "../static/tiles/",
         {
             layername: 'nomap',
