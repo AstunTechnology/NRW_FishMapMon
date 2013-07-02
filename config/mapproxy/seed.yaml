@@ -1,6 +1,6 @@
 seeds:
   fishmap_base:
-    caches: [nomap_cache, os_cache]
+    caches: [nomap_cache, os_cache, charts_cache]
     grids: [fishmap_grid]
     coverages: [fishmap]
 

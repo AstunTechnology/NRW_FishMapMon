@@ -12,6 +12,9 @@ layers:
   - name: os
     title: os
     sources: [os_cache]
+  - name: charts
+    title: charts
+    sources: [charts_cache]
 
 caches:
   nomap_cache:
@@ -30,6 +33,14 @@ caches:
       type: file
       directory_layout: tms
       directory: ../../webapp/static/tiles/1.0.0/os
+  charts_cache:
+    grids: [fishmap_grid]
+    sources: [charts_mapserv]
+    link_single_color_images: true
+    cache:
+      type: file
+      directory_layout: tms
+      directory: ../../webapp/static/tiles/1.0.0/charts
 
 sources:
   nomap_mapserv:
@@ -46,6 +57,14 @@ sources:
     req:
       layers: os
       map: ../mapserver/os.map
+      format: image/tiff
+    mapserver:
+      binary: /usr/lib/cgi-bin/mapserv
+  charts_mapserv:
+    type: mapserver
+    req:
+      layers: charts
+      map: ../mapserver/charts.map
       format: image/tiff
     mapserver:
       binary: /usr/lib/cgi-bin/mapserv
