@@ -41,7 +41,7 @@
 
     var nomap = new OpenLayers.Layer.TMS(
         FISH_MAP.getText("no_map"),
-        "../static/tiles/",
+        FISH_MAP.TMS_ROOT_URL,
         {
             layername: 'nomap',
             type: 'png'
