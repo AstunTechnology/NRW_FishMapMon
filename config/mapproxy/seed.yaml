@@ -1,0 +1,14 @@
+seeds:
+  fishmap_base:
+    caches: [nomap_cache, os_cache]
+    grids: [fishmap_grid]
+    coverages: [fishmap]
+
+coverages:
+  fishmap:
+    # Matching the restricted extents of the map
+    bbox: [120000, 298000, 364000, 445000]
+    bbox_srs: "EPSG:27700"
+
+# Run with:
+#   mapproxy-seed -f base.yaml -c 4 seed.yaml

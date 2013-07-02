@@ -1,0 +1,73 @@
+services:
+  demo:
+  tms:
+  wms:
+    srs: ['EPSG:27700']
+    image_formats: ['image/png']
+
+layers:
+  - name: nomap
+    title: nomap
+    sources: [nomap_cache]
+  - name: os
+    title: os
+    sources: [os_cache]
+
+caches:
+  nomap_cache:
+    grids: [fishmap_grid]
+    sources: [nomap_mapserv]
+    link_single_color_images: true
+    cache:
+      type: file
+      directory_layout: tms
+      directory: ../../webapp/static/tiles/1.0.0/nomap
+  os_cache:
+    grids: [fishmap_grid]
+    sources: [os_mapserv]
+    link_single_color_images: true
+    cache:
+      type: file
+      directory_layout: tms
+      directory: ../../webapp/static/tiles/1.0.0/os
+
+sources:
+  nomap_mapserv:
+    type: mapserver
+    req:
+      layers: nomap
+      map: ../mapserver/nomap.map
+      format: image/tiff
+      bgcolor: '0xFFFFFF'
+    mapserver:
+      binary: /usr/lib/cgi-bin/mapserv
+  os_mapserv:
+    type: mapserver
+    req:
+      layers: os
+      map: ../mapserver/os.map
+      format: image/tiff
+    mapserver:
+      binary: /usr/lib/cgi-bin/mapserv
+
+grids:
+  fishmap_grid:
+    srs: 'EPSG:27700'
+    bbox: [-3276800,-3276800,3276800,3276800]
+    bbox_srs: 'EPSG:27700'
+    res: [2.5, 5, 10, 25, 50, 100, 150]
+
+globals:
+  cache:
+    # where to store the cached images
+    base_dir: './cache_data'
+    # where to store lockfiles
+    lock_dir: './cache_data/locks'
+    # request x*y tiles in one step
+    meta_size: [4, 4]
+    # add a buffer on all sides (in pixel) when requesting
+    # new images
+    meta_buffer: 80
+  # image/transformation options
+  image:
+      resampling_method: nearest
