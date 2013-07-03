@@ -368,6 +368,156 @@ MAP
         END
     END
 
+    # ---- Protected Sites ----
+
+    LAYER
+        NAME "sac_features"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from sac_features) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "SAC Features"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 1
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+    # Line features from the sac_features layer end up here and are displayed
+    # via the REQUIRES clause
+    LAYER
+        NAME "sac_features_line"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from sac_features_line) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "sac_features_line"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 1
+        TEMPLATE 'id.tmpl'
+        STATUS DEFAULT
+        REQUIRES "[sac_features]"
+        TYPE LINE
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 255
+                WIDTH 2
+            END
+        END
+    END
+
+    LAYER
+        NAME "ramsar"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from ramsar) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "ramsar"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 1
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+    LAYER
+        NAME "sac"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from sac) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "sac"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 1
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+    LAYER
+        NAME "spa"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from spa) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "spa"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 1
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+    LAYER
+        NAME "sssi"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from sssi) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "sssi"
+            "gml_include_items" "all"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 1
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
     # ---- Project Outputs (Intensity, Vessels and Sensitivity Layers) ----
     INCLUDE "fishmap_outputs.map"
 

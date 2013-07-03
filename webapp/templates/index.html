@@ -51,9 +51,15 @@
                 // Layer and group names
                 "project_area_grp": "{{ _('Project Area') }}",
                 "project_area": "{{ _('Project Area') }}",
+                "protectedsites_grp": "{{ _('Protected Sites') }}",
+                "sac": "{{ _('SAC') }}",
+                "sac_features": "{{ _('SAC Features') }}",
+                "spa": "{{ _('SPA') }}",
+                "sssi": "{{ _('SSSI') }}",
+                "ramsar": "{{ _('RAMSAR') }}",
+                "subtidal_habitats_confidence": "{{ _('Subtidal Habitats Confidence') }}",
                 "habitats_grp": "{{ _('Habitats') }}",
                 "habitats": "{{ _('Habitats') }}",
-                "subtidal_habitats_confidence": "{{ _('Subtidal Habitats Confidence') }}",
                 "restricted_grp": "{{ _('Restricted Zones') }}",
                 "restricted_closed_scalloping": "{{ _('Areas Closed to Scalloping') }}",
                 "several_and_regulatory_orders": "{{ _('Several and Regulatory Orders') }}",
@@ -377,7 +383,7 @@
                     <p><input type="text" id="gear_time" name="gear_time" value="0" size="4" /></p>
                 </fieldset>
                 <fieldset class="gear_width">
-                    <legend>Gear Width (meters)</legend>
+                    <legend>Gear Width (metres)</legend>
                     <p><input type="text" id="gear_width" name="gear_width" value="0" size="4" /></p>
                 </fieldset>
                 <fieldset class="num_dredges">
@@ -490,13 +496,102 @@
             {{#features}}
             <tbody>
                 <tr>
-                    <th>{{#_}}confidence{{/_}}</th>
+                    <th>{{#_}}Confidence{{/_}}</th>
                     <td>{{attributes.confiden11}}</td>
                 </tr>
             </tbody>
             {{/features}}
         </table>
         {{/subtidal_habitats_confidence}}
+        {{#sac}}
+        <h2>{{#_}}sac{{/_}}</h2>
+        <table class="info">
+            {{#features}}
+            <tbody>
+                <tr>
+                    <th>{{#_}}Name{{/_}}</th>
+                    <td>{{attributes.sac_name}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}Code{{/_}}</th>
+                    <td>{{attributes.site_code}}</td>
+                </tr>
+            </tbody>
+            {{/features}}
+        </table>
+        {{/sac}}
+        {{#sac_features}}
+        <h2>{{#_}}sac_features{{/_}}</h2>
+        <table class="info">
+            {{#features}}
+            <tbody>
+                <tr>
+                    <th>{{#_}}Name{{/_}}</th>
+                    <td>{{attributes.sac_name}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}Code{{/_}}</th>
+                    <td>{{attributes.site_code}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}Description{{/_}}</th>
+                    <td>{{attributes.general_feature}}</td>
+                </tr>
+            </tbody>
+            {{/features}}
+        </table>
+        {{/sac_features}}
+        {{#spa}}
+        <h2>{{#_}}spa{{/_}}</h2>
+        <table class="info">
+            {{#features}}
+            <tbody>
+                <tr>
+                    <th>{{#_}}Name{{/_}}</th>
+                    <td>{{attributes.spa_name}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}Code{{/_}}</th>
+                    <td>{{attributes.spa_code}}</td>
+                </tr>
+            </tbody>
+            {{/features}}
+        </table>
+        {{/spa}}
+        {{#sssi}}
+        <h2>{{#_}}sssi{{/_}}</h2>
+        <table class="info">
+            {{#features}}
+            <tbody>
+                <tr>
+                    <th>{{#_}}Name{{/_}}</th>
+                    <td>{{attributes.sssi_name}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}Code{{/_}}</th>
+                    <td>{{attributes.sssi_code}}</td>
+                </tr>
+            </tbody>
+            {{/features}}
+        </table>
+        {{/sssi}}
+        {{#ramsar}}
+        <h2>{{#_}}ramsar{{/_}}</h2>
+        <table class="info">
+            {{#features}}
+            <tbody>
+                <tr>
+                    <th>{{#_}}Name{{/_}}</th>
+                    <td>{{attributes.ramsar_name}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}Code{{/_}}</th>
+                    <td>{{attributes.ramsar_code}}</td>
+                </tr>
+            </tbody>
+            {{/features}}
+        </table>
+        {{/ramsar}}
         {{#restricted_closed_scalloping}}
         <h2>{{#_}}restricted_closed_scalloping{{/_}}</h2>
         <table class="info">

@@ -19,6 +19,42 @@
             "overlay": true
         }, 
         {
+            "id": "protectedsites_grp", 
+            "layers": [
+                {
+                    "id": "sac", 
+                    "info": true, 
+                    "legend": true, 
+                    "visible": false
+                },
+                {
+                    "id": "sac_features", 
+                    "info": true, 
+                    "legend": true, 
+                    "visible": false
+                },
+                {
+                    "id": "spa", 
+                    "info": true, 
+                    "legend": true, 
+                    "visible": false
+                },
+                {
+                    "id": "sssi", 
+                    "info": true, 
+                    "legend": true, 
+                    "visible": false
+                },
+                {
+                    "id": "ramsar", 
+                    "info": true, 
+                    "legend": true, 
+                    "visible": false
+                }
+            ], 
+            "overlay": true
+        }, 
+        {
             "id": "restricted_grp", 
             "layers": [
                 {

@@ -4,7 +4,16 @@
 # containing FMM_Data, HabitatLayers directories etc.
 
 set -o errexit
+
+if [ ! -d "./FMM_Data" ]; then
+    echo "Looks like you're not in the data directory, aborting..."
+    exit 1
+fi
+
 set -o verbose
+
+# Assume LATIN1 Encoding for all input files
+export PGCLIENTENCODING=LATIN1
 
 # Project Area
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' Project_Area/PROJECT_AREA_Line.TAB -nln project_area -s_srs "EPSG:27700" -a_srs "EPSG:27700"
@@ -21,21 +30,6 @@ ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=
 # Habitat
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "HabitatLayers/Combined_Seabed_Habitat.TAB" -nln habitats_import -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
-# Manipulate habitats data
-psql -h localhost -U fishmap_webapp -W -d fishmap -c "
-DROP TABLE IF EXISTS habitats;
-CREATE TABLE habitats AS
-SELECT row_number() OVER (ORDER BY habitat_code, (ST_Dump(wkb_geometry)).geom)::int AS ogc_fid, habitat_code::int, habitat_name::text,  (ST_Dump(wkb_geometry)).geom AS wkb_geometry
-FROM habitats_import;
-CREATE INDEX habitats_habitat_code_idx
-ON habitats
-USING btree (habitat_code );
-CREATE INDEX habitats_wkb_geometry_idx
-ON habitats
-USING gist (wkb_geometry );
-ALTER TABLE habitats CLUSTER ON habitats_wkb_geometry_idx;
-UPDATE habitats SET wkb_geometry = ST_Multi(ST_BuildArea(ST_Union(ST_Multi(ST_Boundary(wkb_geometry)),ST_PointN(ST_Boundary(wkb_geometry),1)))) WHERE ST_IsValid(wkb_geometry) = false;"
-
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "HabitatLayers/Intertidal/Intertidal_Habitat_Dissolved.tab" -nln intertidal_habitats -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "HabitatLayers/Subtidal/Subtidal_Habitat_Dissolved.tab" -nln subtidal_habitats -s_srs "EPSG:27700" -a_srs "EPSG:27700"
@@ -45,9 +39,7 @@ ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "RestrictedZones/Closed_Scallop_Fishing.TAB" -nln restricted_closed_scalloping -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
 # Explicitly set the characher encoding to match the TAB file due to symbols outside ASCII range
-export PGCLIENTENCODING=LATIN1
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "RestrictedZones/Sev_and_ reg_orders_Wales.TAB" -nln several_and_regulatory_orders -s_srs "EPSG:27700" -a_srs "EPSG:27700"
-export PGCLIENTENCODING=UTF-8
 
 # Restricted Zones
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Combined_tranches/CF_Polygon_Combined.TAB" -nln activity_commercial_fishing_polygon -s_srs "EPSG:27700" -a_srs "EPSG:27700"
@@ -64,8 +56,6 @@ ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=
 
 # Generic GEOMETRY as points and polygons
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "BaseMapping/Hydrospatial/szSO_WRECKS.TAB" -sql "select *, OGR_STYLE from szSO_WRECKS" -nln wrecks -s_srs "EPSG:4326" -a_srs "EPSG:4326" -nlt GEOMETRY
-# Create a buffered polygon layer for wrecks so that info is reliably returned
-psql -h localhost -U fishmap_webapp -W -d fishmap -c "drop table if exists wrecks_polygon; create table wrecks_polygon as select st_buffer(st_transform(wkb_geometry, 27700), 100) as wkb_geometry, ogc_fid, classf, catwrk from wrecks where st_geometrytype(wkb_geometry) = 'ST_Point';"
 
 # Fishing Extents
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Extents/Extents_CasHandGath.TAB" -nln extents_cas_hand_gath -s_srs "EPSG:27700" -a_srs "EPSG:27700"
@@ -150,6 +140,15 @@ ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Outputs/SensitivityConfidence/FMM_Scallop_Habitats_SensvtyConf.tab" -nln sensvtyconf_lvls_king_scallops -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
 # Search
-export PGCLIENTENCODING=LATIN1
 ogr2ogr -overwrite -skipfailures -sql "select Definitive_Name + ' - ' + County_Name as name  from os50kgaz_wales" -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "Search/OS_50kGaz/os50kgaz_wales.TAB" -nln gaz -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 ogr2ogr -append -skipfailures -sql "select Post_code as name from CodePoint_Wales_points" -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "Search/OS_CodePoints/CodePoint_Wales_points.TAB" -nln gaz -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+
+# Protected Sites
+ogr2ogr -append -skipfailures  -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "ProtectedSites/SAC_Features/SAC_features.TAB" -nln sac_features -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -append -skipfailures  -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "ProtectedSites/SAC_TAB/sac.tab" -nln sac -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -append -skipfailures  -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "ProtectedSites/SPA_TAB/spa.tab" -nln spa -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -append -skipfailures  -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "ProtectedSites/SSSI_TAB/sssi.tab" -nln sssi -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+
+# NOTE: You probably need to run
+# 'psql -U fishmap_webapp -d fishmap -f prepare_data.sql'
+# from the scripts directory now to prepare the data you've just loaded
