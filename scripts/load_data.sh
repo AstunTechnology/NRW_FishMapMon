@@ -148,6 +148,7 @@ ogr2ogr -append -skipfailures  -f PostgreSQL PG:'dbname=fishmap active_schema=pu
 ogr2ogr -append -skipfailures  -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "ProtectedSites/SAC_TAB/sac.tab" -nln sac -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 ogr2ogr -append -skipfailures  -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "ProtectedSites/SPA_TAB/spa.tab" -nln spa -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 ogr2ogr -append -skipfailures  -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "ProtectedSites/SSSI_TAB/sssi.tab" -nln sssi -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -append -skipfailures  -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "ProtectedSites/Ramsar_TAB/ramsar.tab" -nln ramsar -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
 # NOTE: You probably need to run
 # 'psql -U fishmap_webapp -d fishmap -f prepare_data.sql'
