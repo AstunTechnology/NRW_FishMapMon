@@ -87,11 +87,17 @@
     );
     map.addLayer(overlays);
 
-    var legendPanel = new OpenLayers.Control.LegendPanel({layers: [overlays]});
+    var legendPanel = new OpenLayers.Control.LegendPanel({
+        layers: [overlays],
+        title: FISH_MAP.getText('legend')
+    });
     map.addControl(legendPanel);
     legendPanel.showLayers(jQuery.grep(visibleOverlays, function(item) {return item.legend}));
 
-    var mapSearch = new OpenLayers.Control.MapSearch();
+    var mapSearch = new OpenLayers.Control.MapSearch({
+        tooltip: FISH_MAP.getText('search_tooltip'),
+        noResultsMessage: FISH_MAP.getText('search_noresults')
+    });
     map.addControl(mapSearch);
 
     var baseMapSwitcher = new OpenLayers.Control.BaseMapSwitcher();

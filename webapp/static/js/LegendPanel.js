@@ -8,6 +8,7 @@ OpenLayers.Control.LegendPanel = OpenLayers.Class(OpenLayers.Control, {
     */
     initialize: function(options) {
         this.layer = options.layer;
+        this.title = (options.title) ? options.title : 'Legend';
         OpenLayers.Control.prototype.initialize.apply(this, arguments);
     },
 
@@ -43,7 +44,7 @@ OpenLayers.Control.LegendPanel = OpenLayers.Class(OpenLayers.Control, {
 
         this.legendDiv = document.createElement('div');
         jQuery(this.legendDiv).addClass("legend").addClass("open");
-        this.legendDiv.innerHTML = "<h2>Legend</h2><div class='content'></div>";
+        this.legendDiv.innerHTML = "<h2>" + this.title + "</h2><div class='content'></div>";
         this.div.appendChild(this.legendDiv);
 
         jQuery('.legend', this.div).children().prev().click(function(evt) {

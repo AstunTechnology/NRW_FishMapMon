@@ -7,6 +7,8 @@ OpenLayers.Control.MapSearch = OpenLayers.Class(OpenLayers.Control, {
     * options - {Object} Options for control.
     */
     initialize: function(options) {
+        this.tooltip = (options.tooltip) ? options.tooltip : 'Search for place name or postcode';
+        this.noResultsMessage = (options.noResultsMessage) ? options.noResultsMessage : 'No results found';
         OpenLayers.Control.prototype.initialize.apply(this, arguments);
     },
 
@@ -20,7 +22,7 @@ OpenLayers.Control.MapSearch = OpenLayers.Class(OpenLayers.Control, {
     draw: function() {
         OpenLayers.Control.prototype.draw.apply(this, arguments);
 
-        this.input = jQuery('<input title="Search for place name or postcode" />');
+        this.input = jQuery('<input title="' + this.tooltip + '" />');
 
         this.div.appendChild(this.input.get(0));
 
@@ -36,7 +38,7 @@ OpenLayers.Control.MapSearch = OpenLayers.Class(OpenLayers.Control, {
                         candidates.push({label: feat.attributes.name, value: feat});
                     }
                     if (candidates.length === 0) {
-                        that.flashMsg('No results found.');
+                        that.flashMsg(that.noResultsMessage);
                     }
                     callback(candidates);
                 });
