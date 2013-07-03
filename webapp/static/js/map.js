@@ -228,7 +228,6 @@
                         }),
                     OpenLayers.Util.applyDefaults(layer_options,
                         {
-                            // projection: 'EPSG:900913',
                             projection: 'EPSG:27700',
                             singleTile: true,
                             buffer: 0,
