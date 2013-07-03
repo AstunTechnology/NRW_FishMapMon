@@ -186,6 +186,17 @@ ul.tree li h3.collapsed {
     background-image: url("../img/silk/add.png");
 }
 
+/* Popup Content */
+
+#popup_content th {
+    text-align: right;
+    vertical-align: top;
+}
+
+#popup_content tbody tr:last-child td, #popup_content tbody tr:last-child th {
+    padding-bottom: 15px;
+}
+
 /* Legend Panel */
 
 .olControlLegendPanel {
