@@ -85,9 +85,17 @@ OutputPanel = OpenLayers.Class({
             panel.events.triggerEvent("layerchange", {layer: this.value, state: this.checked});
         });
 
+        // Add a 'clicked' class to checkboxes clicked by the user, used in the
+        // logic that ensures the associated extents are shown when the fishing
+        // activity changes. Checking the box via the keyboard should also
+        // trigger the click event which is what we want
+        this.div.delegate('input:checkbox', 'click', function() {
+            jQuery(this).addClass('clicked');
+        });
+
         this.div.find('select').change(function() {
             panel._setActivity(this.value);
-            panel.syncActivityLayers();
+            panel.syncLayers();
         }).change();
 
         jQuery('a.new_scenario', panel.div).click(function() {
@@ -117,8 +125,22 @@ OutputPanel = OpenLayers.Class({
 
     },
 
-    syncActivityLayers: function() {
+    syncLayers: function() {
+        // Ensure that the appropriate extent layer is enabled for the selected
+        // activity
         var panel = this;
+        jQuery('.extents_grp input:checkbox', this.div).each(function() {
+            var elm = jQuery(this);
+            // Uncheck all layers that the user has not selected themselves
+            if (elm.hasClass('clicked') === false) {
+                this.checked = false;
+            }
+            // Always check the layer that is assocaiated with the current
+            // activity
+            if (this.id.match(panel.getActivity())) {
+                this.checked = true;
+            }
+        }).change();
     },
 
     drawActivityLayers: function() {
@@ -126,7 +148,7 @@ OutputPanel = OpenLayers.Class({
         var activityHtml = jQuery.mustache(activityTmpl, {"layers": this.layers});
         // Clear the existing activity layer tree and append the new version
         this.div.find('.activity-tree').children().detach().end().append(activityHtml);
-        this.syncActivityLayers();
+        this.syncLayers();
     },
 
     showInfo: function(state) {
