@@ -206,6 +206,9 @@
                         }
                     });
 
+                    // Remove rows with empty values
+                    jQuery('td:empty()', content).parent().remove();
+
                     // Force the popup to resize based on the content
                     this.popup.updateSize();
 
