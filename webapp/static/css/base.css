@@ -194,7 +194,7 @@ ul.tree li h3.collapsed {
 }
 
 #popup_content tbody tr:last-child td, #popup_content tbody tr:last-child th {
-    padding-bottom: 15px;
+    padding-bottom: 5px;
 }
 
 /* Legend Panel */
@@ -319,6 +319,11 @@ ul.tree li h3.collapsed {
     max-width: 450px;
     overflow-x: hidden;
     overflow-y: auto;
+}
+
+.olFramedCloudPopupContent {
+    overflow: inherit;
+    padding: 5px 0 5px 0;
 }
 
 div.olControlScale {
