@@ -434,4 +434,4 @@ def get_extra_sld_info(layer, args):
     return data
 
 if __name__ == '__main__':
-    app.run(debug=True, processes=1)
+    app.run(debug=True, processes=1, host='0.0.0.0')
