@@ -71,7 +71,7 @@
                 "rsa_casting_sites": "{{ _('RSA Casting Areas') }}",
                 "contextual_grp": "{{ _('Reference Data') }}",
                 "national_limits": "{{ _('National Limits') }}",
-                "wrecks_polygon": "{{ _('Wrecks') }}",
+                "wrecks": "{{ _('Wrecks') }}",
                 "cas_hand_gath": "{{ _('Casual Hand Gather') }}",
                 "fixed_pots": "{{ _('Potting') }}",
                 "king_scallops": "{{ _('King Scallops') }}",
@@ -1204,8 +1204,8 @@
             {{/features}}
         </table>
         {{/activity_noncommercial_fishing_polygon}}
-        {{#wrecks_polygon}}
-        <h2>{{#_}}wrecks_polygon{{/_}}</h2>
+        {{#wrecks}}
+        <h2>{{#_}}wrecks{{/_}}</h2>
         <table class="info">
             {{#features}}
             <tbody>
@@ -1220,7 +1220,7 @@
             </tbody>
             {{/features}}
         </table>
-        {{/wrecks_polygon}}
+        {{/wrecks}}
         {{#intensity}}
         <h2>{{#_}}{{id}}{{/_}}</h2>
         <table class="info">
