@@ -205,7 +205,7 @@ msgid "Commercial Activity"
 msgstr ""
 
 #: templates/index.html:81
-msgid "Non-Commercial Locations"
+msgid "Shore Angling Locations"
 msgstr ""
 
 #: templates/index.html:82
