@@ -38,6 +38,7 @@ aside {
     background: white;
     overflow-x: hidden;
     overflow-y: auto;
+    font-size: 1.2em;
 }
 
 #main {
