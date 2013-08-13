@@ -26,7 +26,8 @@
             displayClass: 'olControlMousePosition WGS84',
             displayProjection: new OpenLayers.Projection("EPSG:4326"),
         }),
-        new OpenLayers.Control.PanZoomBar()
+        new OpenLayers.Control.PanZoomBar(),
+        new OpenLayers.Control.ScaleLine()
     ];
 
     var map = new OpenLayers.Map('map', {

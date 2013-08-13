@@ -351,3 +351,8 @@ div.olControlAttribution {
     left: 3px;
     bottom: 0;
 }
+
+div.olControlScaleLine {
+    bottom: 60px;
+    left: 5px;
+}
