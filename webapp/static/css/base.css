@@ -184,6 +184,8 @@ ul.tree li h3.collapsed {
 }
 
 .outputs .button.new_scenario {
+    display: block;
+    text-align: left;
     background-image: url("../img/silk/add.png");
 }
 
