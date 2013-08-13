@@ -209,7 +209,7 @@ msgid "Shore Angling Locations"
 msgstr ""
 
 #: templates/index.html:82
-msgid "Non-Commercial Areas"
+msgid "Combined Non-Commercial Activity"
 msgstr ""
 
 #: templates/index.html:83
