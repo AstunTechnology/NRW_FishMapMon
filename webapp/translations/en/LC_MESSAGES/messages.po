@@ -200,7 +200,7 @@ msgid "Detailed Fishing Activity"
 msgstr ""
 
 #: templates/index.html:80
-msgid "Commercial Activity"
+msgid "Combined Commercial Activity"
 msgstr ""
 
 #: templates/index.html:81
