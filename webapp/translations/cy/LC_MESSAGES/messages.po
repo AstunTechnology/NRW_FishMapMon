@@ -121,7 +121,7 @@ msgid "Areas Closed to Scalloping"
 msgstr ""
 
 #: templates/index.html:60 templates/several_and_regulatory_orders.sld:7
-msgid "Several and Regulatory Orders"
+msgid "Several and Regulating Orders"
 msgstr ""
 
 #: templates/index.html:61
