@@ -43,7 +43,7 @@ class TestUpdateWmsLayers():
         """ Project output layer has _gen suffix when user is not logged in """
         layers_in = [
             "intensity_lvls_cas_hand_gath",
-            "vessels_lvls_fixed_pots",
+            "vessels_lvls_pots_combined",
             "sensitivity_lvls_nets"
         ]
         layers_out = update_wms_layers(layers_in, False)
@@ -51,7 +51,7 @@ class TestUpdateWmsLayers():
             layers_out,
             [
                 "intensity_lvls_cas_hand_gath_gen",
-                "vessels_lvls_fixed_pots_gen",
+                "vessels_lvls_pots_combined_gen",
                 "sensitivity_lvls_nets"
             ]
         )
@@ -60,7 +60,7 @@ class TestUpdateWmsLayers():
         """ Project output layer has _det suffix when user is logged in """
         layers_in = [
             "intensity_lvls_cas_hand_gath",
-            "vessels_lvls_fixed_pots",
+            "vessels_lvls_pots_combined",
             "sensitivity_lvls_nets"
         ]
         layers_out = update_wms_layers(layers_in, True)
@@ -68,7 +68,7 @@ class TestUpdateWmsLayers():
             layers_out,
             [
                 "intensity_lvls_cas_hand_gath_det",
-                "vessels_lvls_fixed_pots_det",
+                "vessels_lvls_pots_combined_det",
                 "sensitivity_lvls_nets"
             ]
         )

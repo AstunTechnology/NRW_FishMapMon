@@ -358,7 +358,9 @@ def get_extra_sld_info(layer, args):
             "mussels": ["&lt;0.4", "0.4 - 3", "&gt;3"],
             "lot": ["&lt;0.93", "0.93 - 6.95", "&gt;6.95"],
             "nets": ["&lt;33.9", "33.9 - 254.6", "&gt;254.6"],
-            "fixed_pots": ["&lt;2", "2 - 5", "&gt;5"],
+            "pots_commercial": ["&lt;2", "2 - 5", "&gt;5"],
+            "pots_recreational": ["&lt;2", "2 - 5", "&gt;5"],
+            "pots_combined": ["&lt;2", "2 - 5", "&gt;5"],
             "rsa_charterboats": ["&lt;5", "6 - 20", "&gt;20"],
             "rsa_noncharter": ["&lt;5", "6 - 20", "&gt;20"],
             "rsa_combined": ["&lt;5", "6 - 20", "&gt;20"],
@@ -380,72 +382,85 @@ def get_extra_sld_info(layer, args):
         layer = args.get('FISHING')
         vessels_bands = {
             "king_scallops": [
-                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0E0FF"},
-                {"name": "3", "type": "PropertyIsEqualTo", "value": 3, "color": "#60CBFF"},
-                {"name": "4 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 4, "color": "#508BFF"}
+                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0FFFF"},
+                {"name": "3", "type": "PropertyIsEqualTo", "value": 3, "color": "#00ABFF"},
+                {"name": "4 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 4, "color": "#0000A0"}
             ],
             "queen_scallops": [
-                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0E0FF"},
-                {"name": "3", "type": "PropertyIsEqualTo", "value": 3, "color": "#60CBFF"},
-                {"name": "4 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 4, "color": "#508BFF"}
+                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0FFFF"},
+                {"name": "3", "type": "PropertyIsEqualTo", "value": 3, "color": "#00ABFF"},
+                {"name": "4 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 4, "color": "#0000A0"}
             ],
             "mussels": [
-                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0E0FF"},
-                {"name": "3 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 3, "color": "#60CBFF"}
+                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0FFFF"},
+                {"name": "3 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 3, "color": "#00ABFF"}
             ],
             "lot": [
-                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0E0FF"},
-                {"name": "3 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 3, "color": "#60CBFF"}
+                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0FFFF"},
+                {"name": "3 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 3, "color": "#00ABFF"}
             ],
             "nets": [
-                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0E0FF"},
-                {"name": "3 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 3, "color": "#60CBFF"}
+                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0FFFF"},
+                {"name": "3 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 3, "color": "#00ABFF"}
             ],
-            "fixed_pots": [
-                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0E0FF"},
-                {"name": "3", "type": "PropertyIsEqualTo", "value": 3, "color": "#60CBFF"},
-                {"name": "4", "type": "PropertyIsEqualTo", "value": 4, "color": "#508BFF"},
-                {"name": "5", "type": "PropertyIsEqualTo", "value": 5, "color": "#2020FF"},
-                {"name": "6", "type": "PropertyIsEqualTo", "value": 6, "color": "#000040"},
-                {"name": "7 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 7, "color": "#380070"}
+            "pots_commercial": [
+                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0FFFF"},
+                {"name": "3", "type": "PropertyIsEqualTo", "value": 3, "color": "#80D5FF"},
+                {"name": "4", "type": "PropertyIsEqualTo", "value": 4, "color": "#00ABFF"},
+                {"name": "5", "type": "PropertyIsEqualTo", "value": 5, "color": "#004BE0"},
+                {"name": "6 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 6, "color": "#0000A0"}
+            ],
+            "pots_recreational": [
+                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0FFFF"},
+                {"name": "3 - 4", "type": "PropertyIsBetween", "lower": 4, "upper": 7, "color": "#80D5FF"},
+                {"name": "5 - 6", "type": "PropertyIsBetween", "lower": 5, "upper": 6, "color": "#00ABFF"},
+                {"name": "7 - 8", "type": "PropertyIsBetween", "lower": 7, "upper": 9, "color": "#2020FF"},
+                {"name": "9 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 10, "color": "#0000A0"}
+            ],
+            "pots_combined": [
+                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0FFFF"},
+                {"name": "3 - 4", "type": "PropertyIsBetween", "lower": 4, "upper": 7, "color": "#80D5FF"},
+                {"name": "5 - 6", "type": "PropertyIsBetween", "lower": 5, "upper": 6, "color": "#00ABFF"},
+                {"name": "7 - 9", "type": "PropertyIsBetween", "lower": 7, "upper": 9, "color": "#2020FF"},
+                {"name": "10 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 10, "color": "#0000A0"}
             ],
             "rsa_charterboats": [
-                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0E0FF"},
-                {"name": "3 - 4", "type": "PropertyIsBetween", "lower": 4, "upper": 7, "color": "#60CBFF"},
-                {"name": "5 - 6", "type": "PropertyIsBetween", "lower": 5, "upper": 6, "color": "#508BFF"},
+                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0FFFF"},
+                {"name": "3 - 4", "type": "PropertyIsBetween", "lower": 4, "upper": 7, "color": "#80D5FF"},
+                {"name": "5 - 6", "type": "PropertyIsBetween", "lower": 5, "upper": 6, "color": "#00ABFF"},
                 {"name": "7 - 9", "type": "PropertyIsBetween", "lower": 7, "upper": 9, "color": "#2020FF"},
-                {"name": "10 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 10, "color": "#380070"}
+                {"name": "10 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 10, "color": "#0000A0"}
             ],
             "rsa_noncharter": [
-                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0E0FF"},
-                {"name": "3 - 4", "type": "PropertyIsBetween", "lower": 4, "upper": 7, "color": "#60CBFF"},
-                {"name": "5 - 6", "type": "PropertyIsBetween", "lower": 5, "upper": 6, "color": "#508BFF"},
+                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0FFFF"},
+                {"name": "3 - 4", "type": "PropertyIsBetween", "lower": 4, "upper": 7, "color": "#80D5FF"},
+                {"name": "5 - 6", "type": "PropertyIsBetween", "lower": 5, "upper": 6, "color": "#00ABFF"},
                 {"name": "7 - 9", "type": "PropertyIsBetween", "lower": 7, "upper": 9, "color": "#2020FF"},
-                {"name": "10 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 10, "color": "#380070"}
+                {"name": "10 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 10, "color": "#0000A0"}
             ],
             "rsa_combined": [
-                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0E0FF"},
-                {"name": "3 - 6", "type": "PropertyIsBetween", "lower": 3, "upper": 6, "color": "#60CBFF"},
-                {"name": "7 - 10", "type": "PropertyIsBetween", "lower": 7, "upper": 10, "color": "#508BFF"},
+                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0FFFF"},
+                {"name": "3 - 6", "type": "PropertyIsBetween", "lower": 3, "upper": 6, "color": "#80D5FF"},
+                {"name": "7 - 10", "type": "PropertyIsBetween", "lower": 7, "upper": 10, "color": "#00ABFF"},
                 {"name": "11 - 14", "type": "PropertyIsBetween", "lower": 11, "upper": 14, "color": "#2020FF"},
                 {"name": "15 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 15, "color": "#000040"}
             ],
             "rsa_shore": [
-                {"name": "9 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 9, "color": "#A0E0FF"},
-                {"name": "10 - 99", "type": "PropertyIsBetween", "lower": 10, "upper": 99, "color": "#60CBFF"},
-                {"name": "100 - 249", "type": "PropertyIsBetween", "lower": 100, "upper": 249, "color": "#508BFF"},
+                {"name": "9 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 9, "color": "#A0FFFF"},
+                {"name": "10 - 99", "type": "PropertyIsBetween", "lower": 10, "upper": 99, "color": "#80D5FF"},
+                {"name": "100 - 249", "type": "PropertyIsBetween", "lower": 100, "upper": 249, "color": "#00ABFF"},
                 {"name": "250 - 749", "type": "PropertyIsBetween", "lower": 250, "upper": 749, "color": "#2020FF"},
-                {"name": "750 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 750, "color": "#380070"}
+                {"name": "750 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 750, "color": "#0000A0"}
             ],
             "cas_hand_gath": [
-                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0E0FF"},
-                {"name": "3", "type": "PropertyIsEqualTo", "value": 3, "color": "#60CBFF"},
-                {"name": "4 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 4, "color": "#508BFF"}
+                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0FFFF"},
+                {"name": "3", "type": "PropertyIsEqualTo", "value": 3, "color": "#80D5FF"},
+                {"name": "4 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 4, "color": "#00ABFF"}
             ],
             "pro_hand_gath": [
-                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0E0FF"},
-                {"name": "3", "type": "PropertyIsEqualTo", "value": 3, "color": "#60CBFF"},
-                {"name": "4 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 4, "color": "#508BFF"}
+                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0FFFF"},
+                {"name": "3", "type": "PropertyIsEqualTo", "value": 3, "color": "#80D5FF"},
+                {"name": "4 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 4, "color": "#00ABFF"}
             ],
         }
         data['bands'] = vessels_bands[layer]

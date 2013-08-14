@@ -202,7 +202,7 @@
                     "visible": false
                 },
                 {
-                    "id": "extents_fixed_pots",
+                    "id": "extents_pots_combined",
                     "info": true,
                     "legend": true,
                     "visible": false

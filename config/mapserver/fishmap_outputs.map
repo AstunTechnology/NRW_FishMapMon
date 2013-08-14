@@ -258,14 +258,14 @@
     END
 
     LAYER
-        NAME "extents_fixed_pots"
+        NAME "extents_pots_combined"
         INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (select * from extents_fixed_pots) as foo using unique ogc_fid using srid=27700"
+        DATA "wkb_geometry from (select * from extents_pots) as foo using unique ogc_fid using srid=27700"
         PROJECTION
             "init=epsg:27700"
         END
         METADATA
-            "ows_title" "extents_fixed_pots"
+            "ows_title" "extents_pots_combined"
             "gml_include_items" "all"
         END
         TOLERANCEUNITS pixels
