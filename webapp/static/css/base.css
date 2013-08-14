@@ -215,6 +215,10 @@ ul.tree li h3.collapsed {
     padding-bottom: 5px;
 }
 
+#popup_content p.more-info {
+    text-align: right;
+}
+
 /* Legend Panel */
 
 .olControlLegendPanel {

@@ -505,6 +505,9 @@
             </tbody>
             {{/features}}
         </table>
+        {% endraw %}
+        <p class="more-info"><a href="{{ url_for('static', filename='docs/seabed_habitats.pdf') }}">{{ _('Further information on Seabed Habitats') }}</a></p>
+        {% raw %}
         {{/habitats}}
         {{#habitats_confidence}}
         <h2>{{#_}}habitats_confidence{{/_}}</h2>
@@ -522,6 +525,9 @@
             </tbody>
             {{/features}}
         </table>
+        {% endraw %}
+        <p class="more-info"><a href="{{ url_for('static', filename='docs/seabed_habitat_confidence.pdf') }}">{{ _('Further information on Seabed Habitat Confidence') }}</a></p>
+        {% raw %}
         {{/habitats_confidence}}
         {{#sac}}
         <h2>{{#_}}sac{{/_}}</h2>
