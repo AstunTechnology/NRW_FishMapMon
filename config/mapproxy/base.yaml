@@ -48,7 +48,7 @@ sources:
     req:
       layers: nomap
       map: ../mapserver/nomap.map
-      format: image/tiff
+      format: image/png
       bgcolor: '0xFFFFFF'
     mapserver:
       binary: /usr/lib/cgi-bin/mapserv
