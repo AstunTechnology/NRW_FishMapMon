@@ -102,6 +102,15 @@ ul.tree, ul.tree ul {
 ul.tree li {
     list-style-image: none;
     list-style-type: none;
+    display: table-row;
+}
+
+ul.tree li input, ul.tree li label {
+    display: table-cell;
+}
+
+ul.tree label {
+    padding-left: 5px;
 }
 
 ul.tree li h3 {
