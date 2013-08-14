@@ -294,7 +294,7 @@ def update_wms_layers(layers, auth):
         'activity_noncommercial_fishing_point',
         'activity_noncommercial_fishing_polygon']
 
-    detailed_layers = ('intensity', 'vessels')
+    detailed_layers = ('intensity', 'vessels', 'sensitivity')
 
     def update_layer(layer):
         """ Updates project output layers to include the _det or _gen suffix
@@ -320,6 +320,7 @@ def update_wms_layers(layers, auth):
             cacheable = False
             break
 
+    print(layers)
     return layers, cacheable
 
 
