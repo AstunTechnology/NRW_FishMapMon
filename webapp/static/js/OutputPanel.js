@@ -181,8 +181,8 @@ OutputPanel = OpenLayers.Class({
         "nets": ['dpm', 'net_len', 'num_nets'],
         "fixed_pots": ['dpm', 'num_pots', 'num_anchors'],
         "rsa_charterboats": ['dpm', 'num_rods', 'avg_hours'],
-        "rsa_commercial": ['dpm', 'num_rods', 'avg_hours'],
         "rsa_noncharter": ['dpm', 'num_rods', 'avg_hours'],
+        "rsa_combined": ['dpm', 'num_rods', 'avg_hours'],
         "rsa_shore": ['dpm', 'num_rods', 'avg_hours'],
         "cas_hand_gath": ['dpm', 'num_gath', 'avg_hours'],
         "pro_hand_gath": ['dpm', 'num_gath', 'avg_hours']

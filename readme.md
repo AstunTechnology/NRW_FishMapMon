@@ -97,7 +97,7 @@ For requests made to show impact of project area selection the following custom 
 <tr><td>nets             </td><td> days/year </td><td> net length </td><td> # nets     </td><td>           </td><td> </td></tr>
 <tr><td>fixed_pots       </td><td> days/year </td><td> # anchors  </td><td> # pots     </td><td>           </td><td> </td></tr>
 <tr><td>rsa_charterboats </td><td> days/year </td><td> avg. hours </td><td> # rods     </td><td>           </td><td> </td></tr>
-<tr><td>rsa_commercial   </td><td> days/year </td><td> avg. hours </td><td> # rods     </td><td>           </td><td> </td></tr>
+<tr><td>rsa_combined     </td><td> days/year </td><td> avg. hours </td><td> # rods     </td><td>           </td><td> </td></tr>
 <tr><td>rsa_noncharter   </td><td> days/year </td><td> avg. hours </td><td> # rods     </td><td>           </td><td> </td></tr>
 <tr><td>rsa_shore        </td><td> days/year </td><td> avg. hours </td><td> # rods     </td><td>           </td><td> </td></tr>
 <tr><td>cas_hand_gath    </td><td> days/year </td><td> avg. hours </td><td> # people   </td><td>           </td><td> </td></tr>

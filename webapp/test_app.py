@@ -137,5 +137,5 @@ class TestRenderSld():
             assert sld.count('<Rule>') == 3
             sld = render_sld([
                 "vessels_lvls_official"
-            ], {"FISHING": "rsa_commercial"})
+            ], {"FISHING": "rsa_combined"})
             assert sld.count('<Rule>') == 5
