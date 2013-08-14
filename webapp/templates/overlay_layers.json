@@ -119,6 +119,7 @@
         {
             "activity": true, 
             "id": "vessels_grp", 
+            "activity_name": true,
             "layers": [
                 {
                     "id": "vessels_lvls_official", 

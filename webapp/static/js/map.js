@@ -326,6 +326,7 @@
             var grps = overlayLayers.getGroupsByProperty('activity', true);
             for (var m = 0, grp; m < grps.length; m++) {
                 grp = grps[m];
+                grp.fishingactivity = FISH_MAP.fishingactivity;
                 for (var n = 0, lyr; n < grp.layers.length; n++) {
                     lyr = grp.layers[n];
                     // Lookup the full name for the layer which includes the
