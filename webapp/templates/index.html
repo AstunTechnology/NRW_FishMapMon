@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>{{ _('Natural Resources Wales') }}/ {{ _('Fish Map Môn') }}</title>
+    <title>{{ _('Natural Resources Wales') }}/ {{ _('FishMap Môn') }}</title>
     <link href="{{ url_for('static', filename='img/favicon.png') }}" type="image/png" rel="icon" />
 
     <!--[if lt IE 9]>
@@ -36,8 +36,8 @@
 
     <aside>
         <div class="heading">
-            <img src="{{ url_for('static', filename='img/nrw-logo.png') }}" alt="Natural Resources Wales" />
-            <h1 style="">Fish Map Môn</h1>
+            <img src="{{ url_for('static', filename='img/header-logos.png') }}" alt="Natural Resources Wales" />
+            <h1>{{ _('FishMap Môn') }}</h1>
         </div>
         <div class="overlays"></div>
         <div class="outputs"><h2>{{ _('Fish Map Môn Results') }}</h2></div>

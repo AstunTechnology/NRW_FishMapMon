@@ -75,23 +75,21 @@ aside {
 /* Sidebar */
 
 .heading {
-    height: 145px;
 }
 
 .heading h1 {
-    float: left;
-    border-left: 2px solid #bfbfbf;
-    padding-left: 10px;
-    margin-left: 10px;
-    padding-top: 25px;
-    padding-bottom: 25px;
-    margin-top: 46px;
+    display: block;
+    position: absolute;
+    left: 20px;
+    top: 20px;
     font-size: 1.2em;
+    /* Hide the heading by using a low z-index as demonstrated on the W3C
+       accessibility site */
+    z-index: -1;
 }
 
 .heading img {
-    width: 146px;
-    float: left;
+    padding: 0 10px;
 }
 
 .overlays {
