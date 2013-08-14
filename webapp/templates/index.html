@@ -270,13 +270,27 @@
                 return FISH_MAP.text[id] || id;
             },
             tmplView: {
-                // Convience object that can be extended for use as a Mustache
-                // template view that includes a _ function that will lookup a
-                // translated string either a property (expressed as {{name}})
-                // or literal string.
+                // Convenience object that can be extended for use as a Mustache
+                // template view that includes utility functions that can be
+                // used in templates
                 "_": function() {
+                    // Equivalent to the Python gettext function that will lookup a
+                    // translated string that is either a property (expressed as {{name}})
+                    // or literal string.
                     return function(text) {
                         return FISH_MAP.getText(Mustache.render(text, this));
+                    }
+                },
+                "unknown": function() {
+                    // If the content returned by rendering the template is an
+                    // empty string 'Unknown' will be returned instead
+                    return function(text) {
+                        var content = Mustache.render(text, this);
+                        console.log(content);
+                        if (content === '') {
+                            return 'Unknown';
+                        }
+                        return content;
                     }
                 }
             },
@@ -1231,12 +1245,20 @@
             {{#features}}
             <tbody>
                 <tr>
-                    <th>{{#_}}Category{{/_}}</th>
+                    <th>{{#_}}Name{{/_}}</th>
+                    <td>{{#unknown}}{{attributes.szlabel}}{{/unknown}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}Wreck Type{{/_}}</th>
+                    <td>{{attributes.typewk}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}Wreck Category{{/_}}</th>
                     <td>{{attributes.catwrk}}</td>
                 </tr>
                 <tr>
-                    <th>{{#_}}Classification{{/_}}</th>
-                    <td>{{attributes.classf}}</td>
+                    <th>{{#_}}Water Depth{{/_}}</th>
+                    <td>{{attributes.gendp}}</td>
                 </tr>
             </tbody>
             {{/features}}
