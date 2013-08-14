@@ -1,0 +1,7 @@
+#map {
+    /* IE7 and below require the absolutely positioned map to have a height
+       instead of relying on the top and bottom properties. Using an expression
+       would be more correct but the there is a performance overhead. */
+    height: 95%;
+}
+
