@@ -120,7 +120,7 @@ msgid "Areas Closed to Scalloping"
 msgstr ""
 
 #: templates/index.html:60 templates/several_and_regulatory_orders.sld:7
-msgid "Several and Regulatory Orders"
+msgid "Several and Regulating Orders"
 msgstr ""
 
 #: templates/index.html:61
@@ -200,15 +200,15 @@ msgid "Detailed Fishing Activity"
 msgstr ""
 
 #: templates/index.html:80
-msgid "Commercial Activity"
+msgid "Combined Commercial Activity"
 msgstr ""
 
 #: templates/index.html:81
-msgid "Non-Commercial Locations"
+msgid "Shore Angling Locations"
 msgstr ""
 
 #: templates/index.html:82
-msgid "Non-Commercial Areas"
+msgid "Combined Non-Commercial Activity"
 msgstr ""
 
 #: templates/index.html:83

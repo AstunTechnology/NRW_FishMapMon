@@ -292,7 +292,7 @@ MAP
     LAYER
         NAME "national_limits"
         INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (select * from national_limits) as foo using unique ogc_fid using srid=4326"
+        DATA "wkb_geometry from (select * from national_limits where lmtdis in (3, 6, 9, 12) and szfeatcode in (13500, 5400)) as foo using unique ogc_fid using srid=4326"
         PROJECTION
             "init=epsg:4326"
         END
@@ -307,18 +307,29 @@ MAP
         TYPE LINE
         UNITS METERS
         OPACITY 50
+        LABELITEM "szlabel"
         CLASS
             STYLE
-                OUTLINECOLOR 255 0 0
-                OPACITY 50
+                OUTLINECOLOR 128 128 204
+            END
+            LABEL
+                FONT "arial"
+                TYPE TRUETYPE
+                COLOR 128 128 204
+                OUTLINECOLOR 255 255 255
+                OUTLINEWIDTH 4
+                SIZE 8
+                POSITION CC
+                ANGLE FOLLOW
+                FORCE TRUE
+                TEXT "[lmtdis] NM"
+                REPEATDISTANCE 80
             END
         END
     END
 
-    # This layer is only used for displaying a wreck symbol, it's enabled via
-    # the REQUIRES clause
     LAYER
-        NAME "wrecks_point"
+        NAME "wrecks"
         INCLUDE "pgconnection.inc"
         DATA "wkb_geometry from (select * from wrecks where st_geometrytype(wkb_geometry) = 'ST_Point') as foo using unique ogc_fid using srid=4326"
         PROJECTION
@@ -329,10 +340,9 @@ MAP
             "gml_include_items" "all"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 6
         TEMPLATE 'id.tmpl'
-        STATUS DEFAULT
-        REQUIRES "[wrecks_polygon]"
+        STATUS OFF
         TYPE POINT
         UNITS METERS
         CLASS
@@ -342,32 +352,6 @@ MAP
         END
     END
  
-    # This is the layer that is actually enabled and info is returned from
-    LAYER
-        NAME "wrecks_polygon"
-        INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (select * from wrecks_polygon) as foo using unique ogc_fid using srid=27700"
-        PROJECTION
-            "init=epsg:27700"
-        END
-        METADATA
-            "ows_title" "Wrecks Areas"
-            "gml_include_items" "all"
-        END
-        TOLERANCEUNITS pixels
-        TOLERANCE 10
-        TEMPLATE 'id.tmpl'
-        STATUS OFF
-        TYPE POLYGON
-        UNITS METERS
-        CLASS
-            STYLE
-                COLOR 255 0 0
-                OPACITY 0
-            END
-        END
-    END
-
     # ---- Protected Sites ----
 
     LAYER

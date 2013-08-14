@@ -4,7 +4,7 @@
         <Name>name</Name>
         <FeatureTypeStyle>
             <Rule>
-                <Name>{{ _('Several and Regulatory Orders') }}</Name>
+                <Name>{{ _('Several and Regulating Orders') }}</Name>
                 <PolygonSymbolizer>
                     <Fill>
                         <SvgParameter name="fill">#a0a0ff</SvgParameter>

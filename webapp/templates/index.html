@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>{{ _('Natural Resources Wales') }}/ {{ _('Fish Map Môn') }}</title>
+    <title>{{ _('Natural Resources Wales') }}/ {{ _('FishMap Môn') }}</title>
     <link href="{{ url_for('static', filename='img/favicon.png') }}" type="image/png" rel="icon" />
 
     <!--[if lt IE 9]>
@@ -39,11 +39,11 @@
 
     <aside>
         <div class="heading">
-            <img src="{{ url_for('static', filename='img/nrw-logo.png') }}" alt="Natural Resources Wales" />
-            <h1 style="">Fish Map Môn</h1>
+            <img src="{{ url_for('static', filename='img/header-logos.png') }}" alt="{{ _('Natural Resources Wales, FishMap Môn, European Fisheries Fund and Welsh Government logos') }}" />
+            <h1>{{ _('FishMap Môn') }}</h1>
         </div>
         <div class="overlays"></div>
-        <div class="outputs"><h2>{{ _('Project Outputs') }}</h2></div>
+        <div class="outputs"><h2>{{ _('Fish Map Môn Results') }}</h2></div>
     </aside>
 
     <script type="text/javascript">
@@ -68,13 +68,13 @@
                 "habitats": "{{ _('Habitats') }}",
                 "restricted_grp": "{{ _('Restricted Zones') }}",
                 "restricted_closed_scalloping": "{{ _('Areas Closed to Scalloping') }}",
-                "several_and_regulatory_orders": "{{ _('Several and Regulatory Orders') }}",
+                "several_and_regulatory_orders": "{{ _('Several and Regulating Orders') }}",
                 "rsa_sites_grp": "{{ _('Recreational Sea Anglers Sites') }}",
                 "rsa_standing_areas": "{{ _('RSA Standing Areas') }}",
                 "rsa_casting_sites": "{{ _('RSA Casting Areas') }}",
                 "contextual_grp": "{{ _('Reference Data') }}",
                 "national_limits": "{{ _('National Limits') }}",
-                "wrecks_polygon": "{{ _('Wrecks') }}",
+                "wrecks": "{{ _('Wrecks') }}",
                 "cas_hand_gath": "{{ _('Casual Hand Gather') }}",
                 "fixed_pots": "{{ _('Potting') }}",
                 "king_scallops": "{{ _('King Scallops') }}",
@@ -88,48 +88,48 @@
                 "rsa_noncharter": "{{ _('RSA Non Charter Boats') }}",
                 "rsa_shore": "{{ _('RSA Shore Fishing') }}",
                 "detailed_activity_grp": "{{ _('Detailed Fishing Activity') }}",
-                "activity_commercial_fishing_polygon": "{{ _('Commercial Activity') }}",
-                "activity_noncommercial_fishing_point": "{{ _('Non-Commercial Locations') }}",
-                "activity_noncommercial_fishing_polygon": "{{ _('Non-Commercial Areas') }}",
+                "activity_commercial_fishing_polygon": "{{ _('Combined Commercial Activity') }}",
+                "activity_noncommercial_fishing_point": "{{ _('Shore Angling Locations') }}",
+                "activity_noncommercial_fishing_polygon": "{{ _('Combined Non-Commercial Activity') }}",
                 "intensity_grp": "{{ _('Fishing Intensity') }}",
                 "vessels_grp": "{{ _('Number of Vessels') }}",
                 "sensitivity_grp": "{{ _('Sensitivity') }}",
-                "intensity_lvls_official_cas_hand_gath": "{{ _('Casual Hand Gather Intensity') }}",
-                "intensity_lvls_official_fixed_pots": "{{ _('Potting Intensity') }}",
-                "intensity_lvls_official_king_scallops": "{{ _('King Scallops Intensity') }}",
-                "intensity_lvls_official_lot": "{{ _('Light Otter Trawl Intensity') }}",
-                "intensity_lvls_official_mussels": "{{ _('Mussels Intensity') }}",
-                "intensity_lvls_official_nets": "{{ _('Netting Intensity') }}",
-                "intensity_lvls_official_pro_hand_gath": "{{ _('Professional Hand Gather Intensity') }}",
-                "intensity_lvls_official_queen_scallops": "{{ _('Queen Scallops Intensity') }}",
-                "intensity_lvls_official_rsa_charterboats": "{{ _('RSA Charter Boats Intensity') }}",
-                "intensity_lvls_official_rsa_commercial": "{{ _('RSA Commercial Intensity') }}",
-                "intensity_lvls_official_rsa_noncharter": "{{ _('RSA Non Charter Boats Intensity') }}",
-                "intensity_lvls_official_rsa_shore": "{{ _('RSA Shore Fishing Intensity') }}",
-                "intensity_lvls_scenario_cas_hand_gath": "{{ _('Scenario Casual Hand Gather Intensity') }}",
-                "intensity_lvls_scenario_fixed_pots": "{{ _('Scenario Potting Intensity') }}",
-                "intensity_lvls_scenario_king_scallops": "{{ _('Scenario King Scallops Intensity') }}",
-                "intensity_lvls_scenario_lot": "{{ _('Scenario Light Otter Trawl Intensity') }}",
-                "intensity_lvls_scenario_mussels": "{{ _('Scenario Mussels Intensity') }}",
-                "intensity_lvls_scenario_nets": "{{ _('Scenario Netting Intensity') }}",
-                "intensity_lvls_scenario_pro_hand_gath": "{{ _('Scenario Professional Hand Gather Intensity') }}",
-                "intensity_lvls_scenario_queen_scallops": "{{ _('Scenario Queen Scallops Intensity') }}",
-                "intensity_lvls_scenario_rsa_charterboats": "{{ _('Scenario RSA Charter Boats Intensity') }}",
-                "intensity_lvls_scenario_rsa_commercial": "{{ _('Scenario RSA Commercial Intensity') }}",
-                "intensity_lvls_scenario_rsa_noncharter": "{{ _('Scenario RSA Non Charter Boats Intensity') }}",
-                "intensity_lvls_scenario_rsa_shore": "{{ _('Scenario RSA Shore Fishing Intensity') }}",
-                "intensity_lvls_combined_cas_hand_gath": "{{ _('Combined Casual Hand Gather Intensity') }}",
-                "intensity_lvls_combined_fixed_pots": "{{ _('Combined Potting Intensity') }}",
-                "intensity_lvls_combined_king_scallops": "{{ _('Combined King Scallops Intensity') }}",
-                "intensity_lvls_combined_lot": "{{ _('Combined Light Otter Trawl Intensity') }}",
-                "intensity_lvls_combined_mussels": "{{ _('Combined Mussels Intensity') }}",
-                "intensity_lvls_combined_nets": "{{ _('Combined Netting Intensity') }}",
-                "intensity_lvls_combined_pro_hand_gath": "{{ _('Combined Professional Hand Gather Intensity') }}",
-                "intensity_lvls_combined_queen_scallops": "{{ _('Combined Queen Scallops Intensity') }}",
-                "intensity_lvls_combined_rsa_charterboats": "{{ _('Combined RSA Charter Boats Intensity') }}",
-                "intensity_lvls_combined_rsa_commercial": "{{ _('Combined RSA Commercial Intensity') }}",
-                "intensity_lvls_combined_rsa_noncharter": "{{ _('Combined RSA Non Charter Boats Intensity') }}",
-                "intensity_lvls_combined_rsa_shore": "{{ _('Combined RSA Shore Fishing Intensity') }}",
+                "intensity_lvls_official_cas_hand_gath": "{{ _('Casual Hand Gather Intensity: FishMap Môn Results') }}",
+                "intensity_lvls_official_fixed_pots": "{{ _('Potting Intensity: FishMap Môn Results') }}",
+                "intensity_lvls_official_king_scallops": "{{ _('King Scallops Intensity: FishMap Môn Results') }}",
+                "intensity_lvls_official_lot": "{{ _('Light Otter Trawl Intensity: FishMap Môn Results') }}",
+                "intensity_lvls_official_mussels": "{{ _('Mussels Intensity: FishMap Môn Results') }}",
+                "intensity_lvls_official_nets": "{{ _('Netting Intensity: FishMap Môn Results') }}",
+                "intensity_lvls_official_pro_hand_gath": "{{ _('Professional Hand Gather Intensity: FishMap Môn Results') }}",
+                "intensity_lvls_official_queen_scallops": "{{ _('Queen Scallops Intensity: FishMap Môn Results') }}",
+                "intensity_lvls_official_rsa_charterboats": "{{ _('RSA Charter Boats Intensity: FishMap Môn Results') }}",
+                "intensity_lvls_official_rsa_commercial": "{{ _('RSA Commercial Intensity: FishMap Môn Results') }}",
+                "intensity_lvls_official_rsa_noncharter": "{{ _('RSA Non Charter Boats Intensity: FishMap Môn Results') }}",
+                "intensity_lvls_official_rsa_shore": "{{ _('RSA Shore Fishing Intensity: FishMap Môn Results') }}",
+                "intensity_lvls_scenario_cas_hand_gath": "{{ _('Casual Hand Gather Intensity: Scenario Results') }}",
+                "intensity_lvls_scenario_fixed_pots": "{{ _('Potting Intensity: Scenario Results') }}",
+                "intensity_lvls_scenario_king_scallops": "{{ _('King Scallops Intensity: Scenario Results') }}",
+                "intensity_lvls_scenario_lot": "{{ _('Light Otter Trawl Intensity: Scenario Results') }}",
+                "intensity_lvls_scenario_mussels": "{{ _('Mussels Intensity: Scenario Results') }}",
+                "intensity_lvls_scenario_nets": "{{ _('Netting Intensity: Scenario Results') }}",
+                "intensity_lvls_scenario_pro_hand_gath": "{{ _('Professional Hand Gather Intensity: Scenario Results') }}",
+                "intensity_lvls_scenario_queen_scallops": "{{ _('Queen Scallops Intensity: Scenario Results') }}",
+                "intensity_lvls_scenario_rsa_charterboats": "{{ _('RSA Charter Boats Intensity: Scenario Results') }}",
+                "intensity_lvls_scenario_rsa_commercial": "{{ _('RSA Commercial Intensity: Scenario Results') }}",
+                "intensity_lvls_scenario_rsa_noncharter": "{{ _('RSA Non Charter Boats Intensity: Scenario Results') }}",
+                "intensity_lvls_scenario_rsa_shore": "{{ _('RSA Shore Fishing Intensity: Scenario Results') }}",
+                "intensity_lvls_combined_cas_hand_gath": "{{ _('Casual Hand Gather Intensity: Combined Results') }}",
+                "intensity_lvls_combined_fixed_pots": "{{ _('Potting Intensity: Combined Results') }}",
+                "intensity_lvls_combined_king_scallops": "{{ _('King Scallops Intensity: Combined Results') }}",
+                "intensity_lvls_combined_lot": "{{ _('Light Otter Trawl Intensity: Combined Results') }}",
+                "intensity_lvls_combined_mussels": "{{ _('Mussels Intensity: Combined Results') }}",
+                "intensity_lvls_combined_nets": "{{ _('Netting Intensity: Combined Results') }}",
+                "intensity_lvls_combined_pro_hand_gath": "{{ _('Professional Hand Gather Intensity: Combined Results') }}",
+                "intensity_lvls_combined_queen_scallops": "{{ _('Queen Scallops Intensity: Combined Results') }}",
+                "intensity_lvls_combined_rsa_charterboats": "{{ _('RSA Charter Boats Intensity: Combined Results') }}",
+                "intensity_lvls_combined_rsa_commercial": "{{ _('RSA Commercial Intensity: Combined Results') }}",
+                "intensity_lvls_combined_rsa_noncharter": "{{ _('RSA Non Charter Boats Intensity: Combined Results') }}",
+                "intensity_lvls_combined_rsa_shore": "{{ _('RSA Shore Fishing Intensity: Combined Results') }}",
                 "intensity_king_scallops_desc": "{{ _('(# times mapped area fished / year)') }}",
                 "intensity_queen_scallops_desc": "{{ _('(# times mapped area fished / year)') }}",
                 "intensity_cas_hand_gath_desc": "{{ _('(Number of People /ha /day)') }}",
@@ -142,42 +142,42 @@
                 "intensity_rsa_commercial_desc": "{{ _('(Number of People /ha /week)') }}",
                 "intensity_rsa_noncharter_desc": "{{ _('(Number of People /ha /week)') }}",
                 "intensity_rsa_shore_desc": "{{ _('(Number of People /ha /week)') }}",
-                "vessels_lvls_official_cas_hand_gath": "{{ _('Casual Hand Gatherers') }}",
-                "vessels_lvls_official_fixed_pots": "{{ _('Potting Vessels') }}",
-                "vessels_lvls_official_king_scallops": "{{ _('King Scallops Vessels') }}",
-                "vessels_lvls_official_lot": "{{ _('Light Otter Trawl Vessels') }}",
-                "vessels_lvls_official_mussels": "{{ _('Mussels Vessels') }}",
-                "vessels_lvls_official_nets": "{{ _('Netting Fishers') }}",
-                "vessels_lvls_official_pro_hand_gath": "{{ _('Professional Hand Gatherers') }}",
-                "vessels_lvls_official_queen_scallops": "{{ _('Queen Scallops Vessels') }}",
-                "vessels_lvls_official_rsa_charterboats": "{{ _('RSA Charter Boats Vessels') }}",
-                "vessels_lvls_official_rsa_commercial": "{{ _('RSA Commercial Vessels') }}",
-                "vessels_lvls_official_rsa_noncharter": "{{ _('RSA Non Charter Boats Vessels') }}",
-                "vessels_lvls_official_rsa_shore": "{{ _('RSA Shore Fishermen') }}",
-                "vessels_lvls_scenario_cas_hand_gath": "{{ _('Scenario Casual Hand Gatherers') }}",
-                "vessels_lvls_scenario_fixed_pots": "{{ _('Scenario Potting Vessels') }}",
-                "vessels_lvls_scenario_king_scallops": "{{ _('Scenario King Scallops Vessels') }}",
-                "vessels_lvls_scenario_lot": "{{ _('Scenario Light Otter Trawl Vessels') }}",
-                "vessels_lvls_scenario_mussels": "{{ _('Scenario Mussels Vessels') }}",
-                "vessels_lvls_scenario_nets": "{{ _('Scenario Netting Fishers') }}",
-                "vessels_lvls_scenario_pro_hand_gath": "{{ _('Scenario Professional Hand Gatherers') }}",
-                "vessels_lvls_scenario_queen_scallops": "{{ _('Scenario Queen Scallops Vessels') }}",
-                "vessels_lvls_scenario_rsa_charterboats": "{{ _('Scenario RSA Charter Boats Vessels') }}",
-                "vessels_lvls_scenario_rsa_commercial": "{{ _('Scenario RSA Commercial Vessels') }}",
-                "vessels_lvls_scenario_rsa_noncharter": "{{ _('Scenario RSA Non Charter Boats Vessels') }}",
-                "vessels_lvls_scenario_rsa_shore": "{{ _('Scenario RSA Shore Fishermen') }}",
-                "vessels_lvls_combined_cas_hand_gath": "{{ _('Combined Casual Hand Gatherers') }}",
-                "vessels_lvls_combined_fixed_pots": "{{ _('Combined Potting Vessels') }}",
-                "vessels_lvls_combined_king_scallops": "{{ _('Combined King Scallops Vessels') }}",
-                "vessels_lvls_combined_lot": "{{ _('Combined Light Otter Trawl Vessels') }}",
-                "vessels_lvls_combined_mussels": "{{ _('Combined Mussels Vessels') }}",
-                "vessels_lvls_combined_nets": "{{ _('Combined Netting Fishers') }}",
-                "vessels_lvls_combined_pro_hand_gath": "{{ _('Combined Professional Hand Gatherers') }}",
-                "vessels_lvls_combined_queen_scallops": "{{ _('Combined Queen Scallops Vessels') }}",
-                "vessels_lvls_combined_rsa_charterboats": "{{ _('Combined RSA Charter Boats Vessels') }}",
-                "vessels_lvls_combined_rsa_commercial": "{{ _('Combined RSA Commercial Vessels') }}",
-                "vessels_lvls_combined_rsa_noncharter": "{{ _('Combined RSA Non Charter Boats Vessels') }}",
-                "vessels_lvls_combined_rsa_shore": "{{ _('Combined RSA Shore Fishermen') }}",
+                "vessels_lvls_official_cas_hand_gath": "{{ _('Casual Hand Gatherers Vessels: FishMap Môn Results') }}",
+                "vessels_lvls_official_fixed_pots": "{{ _('Potting Vessels: FishMap Môn Results') }}",
+                "vessels_lvls_official_king_scallops": "{{ _('King Scallops Vessels: FishMap Môn Results') }}",
+                "vessels_lvls_official_lot": "{{ _('Light Otter Trawl Vessels: FishMap Môn Results') }}",
+                "vessels_lvls_official_mussels": "{{ _('Mussels Vessels: FishMap Môn Results') }}",
+                "vessels_lvls_official_nets": "{{ _('Netting Fishers Vessels: FishMap Môn Results') }}",
+                "vessels_lvls_official_pro_hand_gath": "{{ _('Professional Hand Gatherers Vessels: FishMap Môn Results') }}",
+                "vessels_lvls_official_queen_scallops": "{{ _('Queen Scallops Vessels: FishMap Môn Results') }}",
+                "vessels_lvls_official_rsa_charterboats": "{{ _('RSA Charter Boats Vessels: FishMap Môn Results') }}",
+                "vessels_lvls_official_rsa_commercial": "{{ _('RSA Commercial Vessels: FishMap Môn Results') }}",
+                "vessels_lvls_official_rsa_noncharter": "{{ _('RSA Non Charter Boats Vessels: FishMap Môn Results') }}",
+                "vessels_lvls_official_rsa_shore": "{{ _('RSA Shore Fishermen Vessels: FishMap Môn Results') }}",
+                "vessels_lvls_scenario_cas_hand_gath": "{{ _('Casual Hand Gatherers Vessels: Scenario Results') }}",
+                "vessels_lvls_scenario_fixed_pots": "{{ _('Potting Vessels: Scenario Results') }}",
+                "vessels_lvls_scenario_king_scallops": "{{ _('King Scallops Vessels: Scenario Results') }}",
+                "vessels_lvls_scenario_lot": "{{ _('Light Otter Trawl Vessels: Scenario Results') }}",
+                "vessels_lvls_scenario_mussels": "{{ _('Mussels Vessels: Scenario Results') }}",
+                "vessels_lvls_scenario_nets": "{{ _('Netting Fishers Vessels: Scenario Results') }}",
+                "vessels_lvls_scenario_pro_hand_gath": "{{ _('Professional Hand Gatherers Vessels: Scenario Results') }}",
+                "vessels_lvls_scenario_queen_scallops": "{{ _('Queen Scallops Vessels: Scenario Results') }}",
+                "vessels_lvls_scenario_rsa_charterboats": "{{ _('RSA Charter Boats Vessels: Scenario Results') }}",
+                "vessels_lvls_scenario_rsa_commercial": "{{ _('RSA Commercial Vessels: Scenario Results') }}",
+                "vessels_lvls_scenario_rsa_noncharter": "{{ _('RSA Non Charter Boats Vessels: Scenario Results') }}",
+                "vessels_lvls_scenario_rsa_shore": "{{ _('RSA Shore Fishermen Vessels: Scenario Results') }}",
+                "vessels_lvls_combined_cas_hand_gath": "{{ _('Casual Hand Gatherers Vessels: Combined Results') }}",
+                "vessels_lvls_combined_fixed_pots": "{{ _('Potting Vessels: Combined Results') }}",
+                "vessels_lvls_combined_king_scallops": "{{ _('King Scallops Vessels: Combined Results') }}",
+                "vessels_lvls_combined_lot": "{{ _('Light Otter Trawl Vessels: Combined Results') }}",
+                "vessels_lvls_combined_mussels": "{{ _('Mussels Vessels: Combined Results') }}",
+                "vessels_lvls_combined_nets": "{{ _('Netting Fishers Vessels: Combined Results') }}",
+                "vessels_lvls_combined_pro_hand_gath": "{{ _('Professional Hand Gatherers Vessels: Combined Results') }}",
+                "vessels_lvls_combined_queen_scallops": "{{ _('Queen Scallops Vessels: Combined Results') }}",
+                "vessels_lvls_combined_rsa_charterboats": "{{ _('RSA Charter Boats Vessels: Combined Results') }}",
+                "vessels_lvls_combined_rsa_commercial": "{{ _('RSA Commercial Vessels: Combined Results') }}",
+                "vessels_lvls_combined_rsa_noncharter": "{{ _('RSA Non Charter Boats Vessels: Combined Results') }}",
+                "vessels_lvls_combined_rsa_shore": "{{ _('RSA Shore Fishermen Vessels: Combined Results') }}",
                 "no_vessels_cas_hand_gath": "{{ _('Number of Gatherers') }}",
                 "no_vessels_fixed_pots": "{{ _('Number of Vessels') }}",
                 "no_vessels_king_scallops": "{{ _('Number of Vessels') }}",
@@ -190,42 +190,42 @@
                 "no_vessels_rsa_commercial": "{{ _('Number of Vessels') }}",
                 "no_vessels_rsa_noncharter": "{{ _('Number of Vessels') }}",
                 "no_vessels_rsa_shore": "{{ _('Number of Fishermen') }}",
-                "sensitivity_lvls_official_cas_hand_gath": "{{ _('Casual Hand Gather Sensitivity') }}",
-                "sensitivity_lvls_official_fixed_pots": "{{ _('Potting Sensitivity') }}",
-                "sensitivity_lvls_official_king_scallops": "{{ _('King Scallops Sensitivity') }}",
-                "sensitivity_lvls_official_lot": "{{ _('Light Otter Trawl Sensitivity') }}",
-                "sensitivity_lvls_official_mussels": "{{ _('Mussels Sensitivity') }}",
-                "sensitivity_lvls_official_nets": "{{ _('Netting Sensitivity') }}",
-                "sensitivity_lvls_official_pro_hand_gath": "{{ _('Professional Hand Gather Sensitivity') }}",
-                "sensitivity_lvls_official_queen_scallops": "{{ _('Queen Scallops Sensitivity') }}",
-                "sensitivity_lvls_official_rsa_charterboats": "{{ _('RSA Charter Boats Sensitivity') }}",
-                "sensitivity_lvls_official_rsa_commercial": "{{ _('RSA Commercial Sensitivity') }}",
-                "sensitivity_lvls_official_rsa_noncharter": "{{ _('RSA Non Charter Boats Sensitivity') }}",
-                "sensitivity_lvls_official_rsa_shore": "{{ _('RSA Shore Fishing Sensitivity') }}",
-                "sensitivity_lvls_scenario_cas_hand_gath": "{{ _('Scenario Casual Hand Gather Sensitivity') }}",
-                "sensitivity_lvls_scenario_fixed_pots": "{{ _('Scenario Potting Sensitivity') }}",
-                "sensitivity_lvls_scenario_king_scallops": "{{ _('Scenario King Scallops Sensitivity') }}",
-                "sensitivity_lvls_scenario_lot": "{{ _('Scenario Light Otter Trawl Sensitivity') }}",
-                "sensitivity_lvls_scenario_mussels": "{{ _('Scenario Mussels Sensitivity') }}",
-                "sensitivity_lvls_scenario_nets": "{{ _('Scenario Netting Sensitivity') }}",
-                "sensitivity_lvls_scenario_pro_hand_gath": "{{ _('Scenario Professional Hand Gather Sensitivity') }}",
-                "sensitivity_lvls_scenario_queen_scallops": "{{ _('Scenario Queen Scallops Sensitivity') }}",
-                "sensitivity_lvls_scenario_rsa_charterboats": "{{ _('Scenario RSA Charter Boats Sensitivity') }}",
-                "sensitivity_lvls_scenario_rsa_commercial": "{{ _('Scenario RSA Commercial Sensitivity') }}",
-                "sensitivity_lvls_scenario_rsa_noncharter": "{{ _('Scenario RSA Non Charter Boats Sensitivity') }}",
-                "sensitivity_lvls_scenario_rsa_shore": "{{ _('Scenario RSA Shore Fishing Sensitivity') }}",
-                "sensitivity_lvls_combined_cas_hand_gath": "{{ _('Combined Casual Hand Gather Sensitivity') }}",
-                "sensitivity_lvls_combined_fixed_pots": "{{ _('Combined Potting Sensitivity') }}",
-                "sensitivity_lvls_combined_king_scallops": "{{ _('Combined King Scallops Sensitivity') }}",
-                "sensitivity_lvls_combined_lot": "{{ _('Combined Light Otter Trawl Sensitivity') }}",
-                "sensitivity_lvls_combined_mussels": "{{ _('Combined Mussels Sensitivity') }}",
-                "sensitivity_lvls_combined_nets": "{{ _('Combined Netting Sensitivity') }}",
-                "sensitivity_lvls_combined_pro_hand_gath": "{{ _('Combined Professional Hand Gather Sensitivity') }}",
-                "sensitivity_lvls_combined_queen_scallops": "{{ _('Combined Queen Scallops Sensitivity') }}",
-                "sensitivity_lvls_combined_rsa_charterboats": "{{ _('Combined RSA Charter Boats Sensitivity') }}",
-                "sensitivity_lvls_combined_rsa_commercial": "{{ _('Combined RSA Commercial Sensitivity') }}",
-                "sensitivity_lvls_combined_rsa_noncharter": "{{ _('Combined RSA Non Charter Boats Sensitivity') }}",
-                "sensitivity_lvls_combined_rsa_shore": "{{ _('Combined RSA Shore Fishing Sensitivity') }}",
+                "sensitivity_lvls_official_cas_hand_gath": "{{ _('Casual Hand Gather Sensitivity: FishMap Môn Results') }}",
+                "sensitivity_lvls_official_fixed_pots": "{{ _('Potting Sensitivity: FishMap Môn Results') }}",
+                "sensitivity_lvls_official_king_scallops": "{{ _('King Scallops Sensitivity: FishMap Môn Results') }}",
+                "sensitivity_lvls_official_lot": "{{ _('Light Otter Trawl Sensitivity: FishMap Môn Results') }}",
+                "sensitivity_lvls_official_mussels": "{{ _('Mussels Sensitivity: FishMap Môn Results') }}",
+                "sensitivity_lvls_official_nets": "{{ _('Netting Sensitivity: FishMap Môn Results') }}",
+                "sensitivity_lvls_official_pro_hand_gath": "{{ _('Professional Hand Gather Sensitivity: FishMap Môn Results') }}",
+                "sensitivity_lvls_official_queen_scallops": "{{ _('Queen Scallops Sensitivity: FishMap Môn Results') }}",
+                "sensitivity_lvls_official_rsa_charterboats": "{{ _('RSA Charter Boats Sensitivity: FishMap Môn Results') }}",
+                "sensitivity_lvls_official_rsa_commercial": "{{ _('RSA Commercial Sensitivity: FishMap Môn Results') }}",
+                "sensitivity_lvls_official_rsa_noncharter": "{{ _('RSA Non Charter Boats Sensitivity: FishMap Môn Results') }}",
+                "sensitivity_lvls_official_rsa_shore": "{{ _('RSA Shore Fishing Sensitivity: FishMap Môn Results') }}",
+                "sensitivity_lvls_scenario_cas_hand_gath": "{{ _('Casual Hand Gather Sensitivity') }}",
+                "sensitivity_lvls_scenario_fixed_pots": "{{ _('Potting Sensitivity: Scenario Results') }}",
+                "sensitivity_lvls_scenario_king_scallops": "{{ _('King Scallops Sensitivity: Scenario Results') }}",
+                "sensitivity_lvls_scenario_lot": "{{ _('Light Otter Trawl Sensitivity: Scenario Results') }}",
+                "sensitivity_lvls_scenario_mussels": "{{ _('Mussels Sensitivity: Scenario Results') }}",
+                "sensitivity_lvls_scenario_nets": "{{ _('Netting Sensitivity: Scenario Results') }}",
+                "sensitivity_lvls_scenario_pro_hand_gath": "{{ _('Professional Hand Gather Sensitivity: Scenario Results') }}",
+                "sensitivity_lvls_scenario_queen_scallops": "{{ _('Queen Scallops Sensitivity: Scenario Results') }}",
+                "sensitivity_lvls_scenario_rsa_charterboats": "{{ _('RSA Charter Boats Sensitivity: Scenario Results') }}",
+                "sensitivity_lvls_scenario_rsa_commercial": "{{ _('RSA Commercial Sensitivity: Scenario Results') }}",
+                "sensitivity_lvls_scenario_rsa_noncharter": "{{ _('RSA Non Charter Boats Sensitivity: Scenario Results') }}",
+                "sensitivity_lvls_scenario_rsa_shore": "{{ _('RSA Shore Fishing Sensitivity: Scenario Results') }}",
+                "sensitivity_lvls_combined_cas_hand_gath": "{{ _('Casual Hand Gather Sensitivity: Combined Results') }}",
+                "sensitivity_lvls_combined_fixed_pots": "{{ _('Potting Sensitivity: Combined Results') }}",
+                "sensitivity_lvls_combined_king_scallops": "{{ _('King Scallops Sensitivity: Combined Results') }}",
+                "sensitivity_lvls_combined_lot": "{{ _('Light Otter Trawl Sensitivity: Combined Results') }}",
+                "sensitivity_lvls_combined_mussels": "{{ _('Mussels Sensitivity: Combined Results') }}",
+                "sensitivity_lvls_combined_nets": "{{ _('Netting Sensitivity: Combined Results') }}",
+                "sensitivity_lvls_combined_pro_hand_gath": "{{ _('Professional Hand Gather Sensitivity: Combined Results') }}",
+                "sensitivity_lvls_combined_queen_scallops": "{{ _('Queen Scallops Sensitivity: Combined Results') }}",
+                "sensitivity_lvls_combined_rsa_charterboats": "{{ _('RSA Charter Boats Sensitivity: Combined Results') }}",
+                "sensitivity_lvls_combined_rsa_commercial": "{{ _('RSA Commercial Sensitivity: Combined Results') }}",
+                "sensitivity_lvls_combined_rsa_noncharter": "{{ _('RSA Non Charter Boats Sensitivity: Combined Results') }}",
+                "sensitivity_lvls_combined_rsa_shore": "{{ _('RSA Shore Fishing Sensitivity: Combined Results') }}",
                 "sensitivity_1": "{{ _('Low') }}",
                 "sensitivity_2": "{{ _('Medium') }}",
                 "sensitivity_3": "{{ _('High') }}",
@@ -362,7 +362,6 @@
             {{/activities}}
     {% endraw %}
             </select>
-            <p class="buttons"><a href="#" class="button new_scenario">{{ _('New Scenario') }}</a></p>
             <div class="info predrawpolygon"><p>{{ _('Please draw an area on the map.') }}</p><p>{{ _('Click to add a point and double click to finish drawing.') }}</p></div>
             <div class="info polygondrawn">{{ _('Please provide details of the fishing activity and click "Calculate Scenario".') }}</div>
             <form>
@@ -430,6 +429,7 @@
             <div class="info scenariocalculated"><p>{{ _('View the results of your scenario by enabling the scenario layers below.') }}</p><p>{{ _('If you change the criteria above click the "Calculate Scenario" button to see the changes on the map.') }}</p></div>
             <div class="activity-tree">
             </div>
+            <p class="buttons"><a href="#" class="button new_scenario">{{ _('Create Fishing Scenario') }}</a></p>
         </div>
     {% raw %}
         <div class="std-tree">
@@ -1207,8 +1207,8 @@
             {{/features}}
         </table>
         {{/activity_noncommercial_fishing_polygon}}
-        {{#wrecks_polygon}}
-        <h2>{{#_}}wrecks_polygon{{/_}}</h2>
+        {{#wrecks}}
+        <h2>{{#_}}wrecks{{/_}}</h2>
         <table class="info">
             {{#features}}
             <tbody>
@@ -1223,7 +1223,7 @@
             </tbody>
             {{/features}}
         </table>
-        {{/wrecks_polygon}}
+        {{/wrecks}}
         {{#intensity}}
         <h2>{{#_}}{{id}}{{/_}}</h2>
         <table class="info">
