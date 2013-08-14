@@ -136,6 +136,10 @@ ul.tree li h3.collapsed {
     padding-bottom: 0.25em;
 }
 
+.outputs select, .outputs input {
+    font-size: inherit;
+}
+
 .outputs select {
     width: 100%;
 }
@@ -167,6 +171,10 @@ ul.tree li h3.collapsed {
 .outputs p.buttons {
     padding-top: 0.5em;
     text-align: right;
+}
+
+.outputs .buttons input {
+    margin-bottom: 5px;
 }
 
 .outputs .button {
