@@ -185,7 +185,7 @@ OutputPanel = OpenLayers.Class({
         "rsa_noncharter": ['dpm', 'num_rods', 'avg_hours'],
         "rsa_shore": ['dpm', 'num_rods', 'avg_hours'],
         "cas_hand_gath": ['dpm', 'num_gath', 'avg_hours'],
-        "pro_hand_gath": ['dpm', 'num_gath', 'avg_hours'],
+        "pro_hand_gath": ['dpm', 'num_gath', 'avg_hours']
     }
 
 });

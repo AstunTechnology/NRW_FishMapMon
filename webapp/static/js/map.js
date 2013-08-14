@@ -24,7 +24,7 @@
         new OpenLayers.Control.MousePosition({
             prefix: 'WGS84: ',
             displayClass: 'olControlMousePosition WGS84',
-            displayProjection: new OpenLayers.Projection("EPSG:4326"),
+            displayProjection: new OpenLayers.Projection("EPSG:4326")
         }),
         new OpenLayers.Control.PanZoomBar(),
         new OpenLayers.Control.ScaleLine()
@@ -476,7 +476,7 @@
         strokeWidth: 3,
         strokeColor: '#FF0000',
         strokeOpacity: 0.8,
-        fillOpacity: 0.0,
+        fillOpacity: 0.0
     }, OpenLayers.Feature.Vector.style["default"]);
 
     var scenarioLayer = new OpenLayers.Layer.Vector("scenario", {style: defaultStyle});
