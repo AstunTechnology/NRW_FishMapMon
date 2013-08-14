@@ -4,7 +4,7 @@
         <Name>habitats</Name>
         <FeatureTypeStyle>
             <Rule>
-                <Name>{{ _('Upper Shore Stable Rock with Lichens and Algal Crusts') }} (1)</Name>
+                <Name>1 {{ _('Upper Shore Stable Rock with Lichens and Algal Crusts') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -18,7 +18,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Wave Exposed Intertidal Stable Rock') }} (2)</Name>
+                <Name>2 {{ _('Wave Exposed Intertidal Stable Rock') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -32,7 +32,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Moderately Exposed Intertidal Rock') }} (3)</Name>
+                <Name>3 {{ _('Moderately Exposed Intertidal Rock') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -46,7 +46,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Seaweeds and Mussels on Moderately Exposed Rock') }} (4)</Name>
+                <Name>4 {{ _('Seaweeds and Mussels on Moderately Exposed Rock') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -60,7 +60,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Mussels and Piddocks on Intertidal Clay and Peat') }} (5)</Name>
+                <Name>5 {{ _('Mussels and Piddocks on Intertidal Clay and Peat') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -74,7 +74,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Honeycomb Worm Reefs') }} (6)</Name>
+                <Name>6 {{ _('Honeycomb Worm Reefs') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -88,7 +88,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Sheltered Bedrock, Boulders and Cobbles') }} (7)</Name>
+                <Name>7 {{ _('Sheltered Bedrock, Boulders and Cobbles') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -102,7 +102,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Rockpools and Overhangs') }} (8)</Name>
+                <Name>8 {{ _('Rockpools and Overhangs') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -116,7 +116,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Brown Seaweeds, Barnacles and Fucoids') }} (9)</Name>
+                <Name>9 {{ _('Brown Seaweeds, Barnacles and Fucoids') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -130,7 +130,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Muddy Sands - Excluding Gaper Clams') }} (10)</Name>
+                <Name>10 {{ _('Muddy Sands - Excluding Gaper Clams') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -144,7 +144,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Muds and Sands - Including Gaper Clams') }} (11)</Name>
+                <Name>11 {{ _('Muds and Sands - Including Gaper Clams') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -158,7 +158,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Intertidal Muds') }} (12)</Name>
+                <Name>12 {{ _('Intertidal Muds') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -172,7 +172,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Saltmarshes') }} (13)</Name>
+                <Name>13 {{ _('Saltmarshes') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -186,7 +186,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Vertical Subtidal Rock with Associated Community') }} (14)</Name>
+                <Name>14 {{ _('Vertical Subtidal Rock with Associated Community') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -200,7 +200,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Erect and Branching Species That are Very Slow Growing') }} (15)</Name>
+                <Name>15 {{ _('Erect and Branching Species That are Very Slow Growing') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -214,7 +214,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Sand and Gravels with Long Lived Bivalves') }} (16)</Name>
+                <Name>16 {{ _('Sand and Gravels with Long Lived Bivalves') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -228,7 +228,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Maerl Beds') }} (17)</Name>
+                <Name>17 {{ _('Maerl Beds') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -242,7 +242,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Stable Subtidal Fine Sands') }} (18)</Name>
+                <Name>18 {{ _('Stable Subtidal Fine Sands') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -256,7 +256,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Stable Muddy Sands, Sandy Muds and Muds') }} (19)</Name>
+                <Name>19 {{ _('Stable Muddy Sands, Sandy Muds and Muds') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -270,7 +270,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Rockwith Low-lying Fast Growing Faunal Turf') }} (20)</Name>
+                <Name>20 {{ _('Rockwith Low-lying Fast Growing Faunal Turf') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -284,7 +284,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Rock with Erect and Branching Species') }} (21)</Name>
+                <Name>21 {{ _('Rock with Erect and Branching Species') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -298,7 +298,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Shallow Subtidal Rock with Kelp') }} (22)</Name>
+                <Name>22 {{ _('Shallow Subtidal Rock with Kelp') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -312,7 +312,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Kelp and Seaweeds on Sand Scoured Rock') }} (23)</Name>
+                <Name>23 {{ _('Kelp and Seaweeds on Sand Scoured Rock') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -326,7 +326,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Dynamic, Shallow Water Fine Sands') }} (24)</Name>
+                <Name>24 {{ _('Dynamic, Shallow Water Fine Sands') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -340,7 +340,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Oyster Beds') }} (25)</Name>
+                <Name>25 {{ _('Oyster Beds') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -354,7 +354,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Underboulder and Cobbles Shallow Subtidal Community ') }} (26)</Name>
+                <Name>26 {{ _('Underboulder and Cobbles Shallow Subtidal Community ') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -368,7 +368,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Biogenic Reef on Sediment') }} (27)</Name>
+                <Name>27 {{ _('Biogenic Reef on Sediment') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -382,7 +382,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Stable, Species Rich Mixed Sediments') }} (28)</Name>
+                <Name>28 {{ _('Stable, Species Rich Mixed Sediments') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -396,7 +396,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Unstable Coarse Sediments - Robust Fauna') }} (29)</Name>
+                <Name>29 {{ _('Unstable Coarse Sediments - Robust Fauna') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -410,7 +410,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Seagrass Beds') }} (30)</Name>
+                <Name>30 {{ _('Seagrass Beds') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -424,7 +424,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Stable but Tidal Swept Cobbles, Pebbles and Gravel') }} (31)</Name>
+                <Name>31 {{ _('Stable but Tidal Swept Cobbles, Pebbles and Gravel') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -438,7 +438,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Mosaic of Rock and Sediment') }} (32 / 101)</Name>
+                <Name>32 / 101 {{ _('Mosaic of Rock and Sediment') }}</Name>
                 <Filter>
                     <Or>
                         <PropertyIsEqualTo>
