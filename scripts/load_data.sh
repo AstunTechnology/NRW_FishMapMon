@@ -28,20 +28,13 @@ ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' 1km_Grid/1km_Sea_Grid.TAB -nln grid -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
 # Habitat
-ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "HabitatLayers/Combined_Seabed_Habitat.TAB" -nln habitats_import -s_srs "EPSG:27700" -a_srs "EPSG:27700"
-
-ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "HabitatLayers/Intertidal/Intertidal_Habitat_Dissolved.tab" -nln intertidal_habitats -s_srs "EPSG:27700" -a_srs "EPSG:27700"
-
-ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "HabitatLayers/Subtidal/Subtidal_Habitat_Dissolved.tab" -nln subtidal_habitats -s_srs "EPSG:27700" -a_srs "EPSG:27700"
-
-ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "HabitatLayers/Subtidal/confidencelayer.tab" -nln subtidal_habitats_confidence -s_srs "EPSG:27700" -a_srs "EPSG:27700"
-
-ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "RestrictedZones/Closed_Scallop_Fishing.TAB" -nln restricted_closed_scalloping -s_srs "EPSG:27700" -a_srs "EPSG:27700"
-
-# Explicitly set the characher encoding to match the TAB file due to symbols outside ASCII range
-ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "RestrictedZones/Sev_and_ reg_orders_Wales.TAB" -nln several_and_regulatory_orders -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "HabitatLayers/Combined_Seabed_Habitat.TAB" -nln habitats -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
 # Restricted Zones
+ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "RestrictedZones/Closed_Scallop_Fishing.TAB" -nln restricted_closed_scalloping -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "RestrictedZones/Sev_and_ reg_orders_Wales.TAB" -nln several_and_regulatory_orders -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+
+# Detailed Fishing Activity
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Combined_tranches/CF_Polygon_Combined.TAB" -nln activity_commercial_fishing_polygon -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Combined_tranches/NCF_Point_combined.TAB" -nln activity_noncommercial_fishing_point -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Combined_tranches/NCF_Polygon_Combined.TAB" -nln activity_noncommercial_fishing_polygon -s_srs "EPSG:27700" -a_srs "EPSG:27700"

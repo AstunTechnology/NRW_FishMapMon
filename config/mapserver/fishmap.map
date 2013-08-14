@@ -85,14 +85,14 @@ MAP
     END
 
     LAYER
-        NAME "subtidal_habitats_confidence"
+        NAME "habitats_confidence"
         INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (select * from subtidal_habitats_confidence) as foo using unique ogc_fid using srid=27700"
+        DATA "wkb_geometry from (select * from habitats) as foo using unique ogc_fid using srid=27700"
         PROJECTION
             "init=epsg:27700"
         END
         METADATA
-            "ows_title" "Subtidal Habitats Confidence"
+            "ows_title" "Habitats Confidence"
             "gml_include_items" "all"
         END
         TOLERANCEUNITS pixels

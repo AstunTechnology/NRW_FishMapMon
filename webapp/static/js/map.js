@@ -193,18 +193,22 @@
                     content.append(jQuery.mustache(tmpl, model));
 
                     // De-duplicate content
-                    content.find('tbody').each(function() {
-                        var cur = this;
-                        // Only check for duplicates if the current element has
-                        // a parent and hence has not been removed from the DOM
-                        // in a previous pass
-                        if (jQuery(cur).parent().length) {
-                            // Find all other tbody elements that have the same
-                            // content and remove them
-                            content.find('tbody').filter(function(idx) {
-                                return this != cur && this.innerHTML == cur.innerHTML;
-                            }).remove();
-                        }
+                    content.find('table.info').each(function() {
+                        var table = jQuery(this)
+                        table.find('tbody').each(function() {
+                            var cur = this;
+                            // Only check for duplicates if the current element has
+                            // a parent and hence has not been removed from the DOM
+                            // in a previous pass
+                            if (jQuery(cur).parent().length) {
+                                // Find all other tbody elements that belong to
+                                // the same table and that have the same
+                                // content and remove them
+                                table.find('tbody').filter(function(idx) {
+                                    return this != cur && this.innerHTML == cur.innerHTML;
+                                }).remove();
+                            }
+                        });
                     });
 
                     // Remove rows with empty values

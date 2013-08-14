@@ -64,9 +64,9 @@
                 "spa": "{{ _('SPA') }}",
                 "sssi": "{{ _('SSSI') }}",
                 "ramsar": "{{ _('RAMSAR') }}",
-                "subtidal_habitats_confidence": "{{ _('Subtidal Habitats Confidence') }}",
+                "habitats_confidence": "{{ _('Seabed Habitat Confidence') }}",
                 "habitats_grp": "{{ _('Habitats') }}",
-                "habitats": "{{ _('Habitats') }}",
+                "habitats": "{{ _('Seabed Habitats') }}",
                 "restricted_grp": "{{ _('Restricted Zones') }}",
                 "restricted_closed_scalloping": "{{ _('Areas Closed to Scalloping') }}",
                 "several_and_regulatory_orders": "{{ _('Several and Regulating Orders') }}",
@@ -495,23 +495,31 @@
                     <th>{{#_}}Habitat{{/_}}</th>
                     <td>{{attributes.habitat_code}} {{attributes.habitat_name}}</td>
                 </tr>
-            </tbody>
-            {{/features}}
-        </table>
-        {{/habitats}}
-        {{#subtidal_habitats_confidence}}
-        <h2>{{#_}}subtidal_habitats_confidence{{/_}}</h2>
-        <table class="info">
-            {{#features}}
-            <tbody>
                 <tr>
                     <th>{{#_}}Confidence{{/_}}</th>
-                    <td>{{attributes.confiden11}}</td>
+                    <td>{{attributes.habitat_confidence}}</td>
                 </tr>
             </tbody>
             {{/features}}
         </table>
-        {{/subtidal_habitats_confidence}}
+        {{/habitats}}
+        {{#habitats_confidence}}
+        <h2>{{#_}}habitats_confidence{{/_}}</h2>
+        <table class="info">
+            {{#features}}
+            <tbody>
+                <tr>
+                    <th>{{#_}}Habitat{{/_}}</th>
+                    <td>{{attributes.habitat_code}} {{attributes.habitat_name}}</td>
+                </tr>
+                <tr>
+                    <th>{{#_}}Confidence{{/_}}</th>
+                    <td>{{attributes.habitat_confidence}}</td>
+                </tr>
+            </tbody>
+            {{/features}}
+        </table>
+        {{/habitats_confidence}}
         {{#sac}}
         <h2>{{#_}}sac{{/_}}</h2>
         <table class="info">

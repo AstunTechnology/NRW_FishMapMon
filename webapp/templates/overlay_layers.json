@@ -10,7 +10,7 @@
                     "visible": false
                 }, 
                 {
-                    "id": "subtidal_habitats_confidence", 
+                    "id": "habitats_confidence", 
                     "info": true, 
                     "legend": true, 
                     "visible": false

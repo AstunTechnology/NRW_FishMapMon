@@ -1,33 +1,19 @@
 <NamedLayer>
-    <Name>subtidal_habitats_confidence</Name>
+    <Name>habitats_confidence</Name>
     <UserStyle>
         <Name>name</Name>
         <FeatureTypeStyle>
             <Rule>
-                <Name>{{ _('Very poor') }}</Name>
-                <Filter>
-                    <PropertyIsEqualTo>
-                        <PropertyName>confiden11</PropertyName>
-                        <Literal>very poor</Literal>
-                    </PropertyIsEqualTo>
-                </Filter>
-                <PolygonSymbolizer>
-                    <Fill>
-                        <SvgParameter name="fill">#d22d2d</SvgParameter>
-                    </Fill>
-                </PolygonSymbolizer>
-            </Rule>
-            <Rule>
                 <Name>{{ _('Poor') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
-                        <PropertyName>confiden11</PropertyName>
-                        <Literal>poor</Literal>
+                        <PropertyName>habitat_confidence</PropertyName>
+                        <Literal>Poor</Literal>
                     </PropertyIsEqualTo>
                 </Filter>
                 <PolygonSymbolizer>
                     <Fill>
-                        <SvgParameter name="fill">#ffa850</SvgParameter>
+                        <SvgParameter name="fill">#ff7040</SvgParameter>
                     </Fill>
                 </PolygonSymbolizer>
             </Rule>
@@ -35,13 +21,13 @@
                 <Name>{{ _('Fair') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
-                        <PropertyName>confiden11</PropertyName>
-                        <Literal>fair</Literal>
+                        <PropertyName>habitat_confidence</PropertyName>
+                        <Literal>Fair</Literal>
                     </PropertyIsEqualTo>
                 </Filter>
                 <PolygonSymbolizer>
                     <Fill>
-                        <SvgParameter name="fill">#a0ffa0</SvgParameter>
+                        <SvgParameter name="fill">#cdff80</SvgParameter>
                     </Fill>
                 </PolygonSymbolizer>
             </Rule>
@@ -49,13 +35,27 @@
                 <Name>{{ _('Good') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
-                        <PropertyName>confiden11</PropertyName>
-                        <Literal>good</Literal>
+                        <PropertyName>habitat_confidence</PropertyName>
+                        <Literal>Good</Literal>
                     </PropertyIsEqualTo>
                 </Filter>
                 <PolygonSymbolizer>
                     <Fill>
-                        <SvgParameter name="fill">#00d000</SvgParameter>
+                        <SvgParameter name="fill">#00ff00</SvgParameter>
+                    </Fill>
+                </PolygonSymbolizer>
+              </Rule>
+              <Rule>
+                <Name>{{ _('Unknown') }}</Name>
+                <Filter>
+                    <PropertyIsEqualTo>
+                        <PropertyName>habitat_confidence</PropertyName>
+                        <Literal>Unknown</Literal>
+                    </PropertyIsEqualTo>
+                </Filter>
+                <PolygonSymbolizer>
+                    <Fill>
+                        <SvgParameter name="fill">#e0e0e0</SvgParameter>
                     </Fill>
                 </PolygonSymbolizer>
             </Rule>
