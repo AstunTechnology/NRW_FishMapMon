@@ -12,9 +12,15 @@ from flask.ext.security import Security
 from flask.ext.security import SQLAlchemyUserDatastore
 from flask.ext.security import UserMixin
 from flask.ext.security import current_user
+from flask.ext.security.forms import Form
+from flask.ext.security.forms import NewPasswordFormMixin
+from flask.ext.security.forms import PasswordConfirmFormMixin
+from flask.ext.security.forms import UniqueEmailFormMixin
 from flask.ext.security.utils import encrypt_password
 from flask.ext.sqlalchemy import SQLAlchemy
 from flask_mail import Mail
+from flask_wtf import SubmitField
+from flaskext.babel import _
 from flaskext.babel import Babel
 from sqlalchemy.exc import IntegrityError
 
@@ -88,6 +94,11 @@ class User(auth_db.Model, UserMixin):
     roles = auth_db.relationship('Role', secondary=users_roles,
                                  backref=auth_db.backref('users',
                                  lazy='dynamic'))
+
+class NewUserForm(Form, NewPasswordFormMixin, PasswordConfirmFormMixin,
+                  UniqueEmailFormMixin):
+    submit = SubmitField(_('Register user'))
+
 
 auth_datastore = SQLAlchemyUserDatastore(auth_db, User, Role)
 security = Security(app, auth_datastore)
@@ -165,6 +176,15 @@ def before_request():
 def home():
     return render_template('index.html', user=g.user)
 
+
+@app.route('/user_add', methods=['POST', 'GET'])
+def user_add():
+    if (g.user.is_authenticated() or 'dev' in g.user.roles
+            or 'admin' in g.user.roles):
+        form = NewUserForm(request.form)
+        return render_template('user_add.html', user=g.user, new_user_form=form)
+    else:
+        abort(404)
 
 @app.route('/gaz')
 def gaz():
