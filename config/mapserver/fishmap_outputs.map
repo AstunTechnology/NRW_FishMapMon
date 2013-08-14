@@ -108,7 +108,6 @@
 
     LAYER
         NAME "sensitivity_lvls_official_gen"
-        DEBUG 5
         INCLUDE "pgconnection.inc"
         DATA "wkb_geometry from (select * from sensitivity_lvls_%FISHING%_gen) as foo using unique ogc_fid using srid=27700"
         VALIDATION
