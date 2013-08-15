@@ -94,9 +94,10 @@ MAP
         METADATA
             "ows_title" "Habitats Confidence"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -118,6 +119,7 @@ MAP
         METADATA
             "ows_title" "Areas closed to Scalloping"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -144,6 +146,7 @@ MAP
         METADATA
             "ows_title" "Several and regulatory orders"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -170,6 +173,7 @@ MAP
         METADATA
             "ows_title" "activity_commercial_fishing_polygon"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -196,6 +200,7 @@ MAP
         METADATA
             "ows_title" "activity_noncommercial_fishing_point"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 20
@@ -225,6 +230,7 @@ MAP
         METADATA
             "ows_title" "activity_noncommercial_fishing_polygon"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -251,6 +257,7 @@ MAP
         METADATA
             "ows_title" "RSA Standing Areas"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -275,6 +282,7 @@ MAP
         METADATA
             "ows_title" "RSA Casting Areas"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -299,6 +307,7 @@ MAP
         METADATA
             "ows_title" "National Limits"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -338,6 +347,7 @@ MAP
         METADATA
             "ows_title" "Wrecks Point"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 6
@@ -364,6 +374,7 @@ MAP
         METADATA
             "ows_title" "SAC Features"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 1
@@ -390,6 +401,7 @@ MAP
         METADATA
             "ows_title" "sac_features_line"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 1
@@ -416,6 +428,7 @@ MAP
         METADATA
             "ows_title" "ramsar"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 1
@@ -440,6 +453,7 @@ MAP
         METADATA
             "ows_title" "sac"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 1
@@ -464,6 +478,7 @@ MAP
         METADATA
             "ows_title" "spa"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 1
@@ -488,6 +503,7 @@ MAP
         METADATA
             "ows_title" "sssi"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 1

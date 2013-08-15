@@ -11,6 +11,7 @@
         METADATA
             "ows_title" "intensity_lvls_official_gen"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -38,6 +39,7 @@
         METADATA
             "ows_title" "intensity_lvls_official_det"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -65,6 +67,7 @@
         METADATA
             "ows_title" "vessels_lvls_official_gen"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -92,6 +95,7 @@
         METADATA
             "ows_title" "vessels_lvls_official_det"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -120,6 +124,7 @@
         METADATA
             "ows_title" "sensitivity_lvls_official_gen"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -147,6 +152,7 @@
         METADATA
             "ows_title" "sensitivity_lvls_official_det"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -171,6 +177,7 @@
         METADATA
             "ows_title" "extents_king_scallops"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -195,6 +202,7 @@
         METADATA
             "ows_title" "extents_lot"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -219,6 +227,7 @@
         METADATA
             "ows_title" "extents_mussels"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -243,6 +252,7 @@
         METADATA
             "ows_title" "extents_nets"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -267,6 +277,7 @@
         METADATA
             "ows_title" "extents_fixed_pots"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -291,6 +302,7 @@
         METADATA
             "ows_title" "extents_cas_hand_gath"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -315,6 +327,7 @@
         METADATA
             "ows_title" "extents_pro_hand_gath"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -339,6 +352,7 @@
         METADATA
             "ows_title" "extents_queen_scallops"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -363,6 +377,7 @@
         METADATA
             "ows_title" "extents_rsa_charterboats"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -387,6 +402,7 @@
         METADATA
             "ows_title" "extents_rsa_noncharter"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -411,6 +427,7 @@
         METADATA
             "ows_title" "extents_rsa_shore"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -438,6 +455,7 @@
         METADATA
             "ows_title" "sensvtyconf_lvls_official"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -467,6 +485,7 @@
         METADATA
             "ows_title" "vessels_lvls_scenario_gen"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -496,6 +515,7 @@
         METADATA
             "ows_title" "vessels_lvls_combined_gen"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -525,6 +545,7 @@
         METADATA
             "ows_title" "vessels_lvls_scenario_det"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -554,6 +575,7 @@
         METADATA
             "ows_title" "vessels_lvls_combined_det"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -592,6 +614,7 @@
         METADATA
             "ows_title" "intensity_lvls_scenario_det"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -630,6 +653,7 @@
         METADATA
             "ows_title" "intensity_lvls_scenario_gen"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -669,6 +693,7 @@
         METADATA
             "ows_title" "intensity_lvls_combined_det"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -707,6 +732,7 @@
         METADATA
             "ows_title" "intensity_lvls_combined_gen"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -745,6 +771,7 @@
         METADATA
             "ows_title" "sensitivity_lvls_scenario_gen"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -783,6 +810,7 @@
         METADATA
             "ows_title" "sensitivity_lvls_scenario_det"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -821,6 +849,7 @@
         METADATA
             "ows_title" "sensitivity_lvls_combined_gen"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
@@ -859,6 +888,7 @@
         METADATA
             "ows_title" "sensitivity_lvls_combined_det"
             "gml_include_items" "all"
+            "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
         TOLERANCE 2
