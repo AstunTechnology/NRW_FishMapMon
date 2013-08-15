@@ -99,7 +99,7 @@ ALTER FUNCTION fishmap.calculate_intensity_nets(days numeric, length numeric, ne
 CREATE FUNCTION fishmap.calculate_intensity_pots_combined(days numeric, anchors numeric, pots numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
-	SELECT ( ($2 + $3) * $1 / ( $4 / 10000 ) ) / 10000;
+	SELECT ( ($2 + $3) * $1 / ( $4 / 10000 ) ) / 365;
 $_$;
 
 
@@ -135,53 +135,53 @@ ALTER FUNCTION fishmap.calculate_intensity_queen_scallops(days numeric, speed nu
 -- Name: calculate_intensity_rsa_charterboats(numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION fishmap.calculate_intensity_rsa_charterboats(days numeric, avghours numeric, people numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_rsa_charterboats(days numeric, rods numeric, avghours numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
-	SELECT ( $1 * $3 * 1.5 ) / $4;
+	SELECT ( ( $2 * $1 ) / ( $4 / 10000 ) ) / 52;
 $_$;
 
 
-ALTER FUNCTION fishmap.calculate_intensity_rsa_charterboats(days numeric, avghours numeric, people numeric, area numeric) OWNER TO fishmap_webapp;
+ALTER FUNCTION fishmap.calculate_intensity_rsa_charterboats(days numeric, rods numeric, avghours numeric, area numeric) OWNER TO fishmap_webapp;
 
 --
 -- Name: calculate_intensity_rsa_combined(numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION fishmap.calculate_intensity_rsa_combined(days numeric, avghours numeric, rods numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_rsa_combined(days numeric, rods numeric, avghours numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
-	SELECT ( $1 * $3 * 1.5 ) / $4;
+	SELECT ( ( $2 * $1 ) / ( $4 / 10000 ) ) / 52;
 $_$;
 
 
-ALTER FUNCTION fishmap.calculate_intensity_rsa_combined(days numeric, avghours numeric, rods numeric, area numeric) OWNER TO fishmap_webapp;
+ALTER FUNCTION fishmap.calculate_intensity_rsa_combined(days numeric, rods numeric, avghours numeric, area numeric) OWNER TO fishmap_webapp;
 
 --
 -- Name: calculate_intensity_rsa_noncharter(numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION fishmap.calculate_intensity_rsa_noncharter(days numeric, avghours numeric, num numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_rsa_noncharter(days numeric, rods numeric, avghours numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
-	SELECT ( $1 * $3 * ( $2 / 4 ) ) / $4;
+	SELECT ( ( $2 * $1 ) / ( $4 / 10000 ) ) / 52;
 $_$;
 
 
-ALTER FUNCTION fishmap.calculate_intensity_rsa_noncharter(days numeric, avghours numeric, num numeric, area numeric) OWNER TO fishmap_webapp;
+ALTER FUNCTION fishmap.calculate_intensity_rsa_noncharter(days numeric, rods numeric, avghours numeric, area numeric) OWNER TO fishmap_webapp;
 
 --
 -- Name: calculate_intensity_rsa_shore(numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION fishmap.calculate_intensity_rsa_shore(days numeric, avghours numeric, people numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_rsa_shore(days numeric, rods numeric, avghours numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
-	SELECT ( $1 * $3 * ($2 / 4) ) / $4;
+	SELECT ( $1 * $2 * ($3 / 4) ) / $4;
 $_$;
 
 
-ALTER FUNCTION fishmap.calculate_intensity_rsa_shore(days numeric, avghours numeric, people numeric, area numeric) OWNER TO fishmap_webapp;
+ALTER FUNCTION fishmap.calculate_intensity_rsa_shore(days numeric, rods numeric, avghours numeric, area numeric) OWNER TO fishmap_webapp;
 
 --
 -- Name: project_intensity(text, integer, numeric, text, boolean, boolean); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
@@ -283,7 +283,7 @@ differences AS (
 		))).geom AS wkb_geometry
 	FROM overlapping
 )
-SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, intensity_level, '|| quote_ident(intensityfield) ||', wkb_geometry FROM (
+SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, intensity_level, round('|| quote_ident(intensityfield) ||', 2), wkb_geometry FROM (
 	-- non-overlapping existing polygons
 	SELECT intensity_level::int, '|| quote_ident(intensityfield) ||', wkb_geometry
 	FROM '|| olddata ||'
@@ -303,7 +303,7 @@ SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, intensity_leve
 	SELECT '|| lvlcase ||' AS intensity_level, '|| quote_ident(intensityfield) ||', wkb_geometry FROM intersections
 ) AS intensities;';
 	ELSE
-		sql := 'SELECT ogc_fid, '|| lvlcase ||' AS intensity_level, '|| quote_ident(intensityfield) ||', wkb_geometry FROM ( 
+		sql := 'SELECT ogc_fid, '|| lvlcase ||' AS intensity_level, round('|| quote_ident(intensityfield) ||', 2), wkb_geometry FROM ( 
 	'|| newdata ||'
 ) AS intensities;';
 	END IF;
@@ -315,97 +315,7 @@ $$;
 
 ALTER FUNCTION fishmap.project_intensity_det(fishingname text, intensitylookup integer, intensity numeric, wkt text, combine boolean) OWNER TO fishmap_webapp;
 
---
--- Name: project_intensity_det(text, text, integer, numeric, text, boolean); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
---
 
-CREATE FUNCTION fishmap.project_intensity_det(fishingname text, intensityfield text, intensitylookup integer, intensity numeric, wkt text, combine boolean) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
-    LANGUAGE plpgsql
-    AS $$
-DECLARE
-	tablename text;
-	bounds numeric[];
-	lvlcase text;
-	newdata text;
-	olddata text;
-	sql text;
-BEGIN
-	tablename := 'intensity_lvls_'|| fishingname;
-	SELECT rangeboundaries INTO bounds FROM fishmap.intensity_lvls WHERE fishingtype = intensitylookup;
-	lvlcase = 'CASE 
-	WHEN '|| quote_ident(intensityfield) ||' < '|| bounds[1] ||' THEN 1 
-	WHEN '|| quote_ident(intensityfield) ||' > '|| bounds[2] ||' THEN 3 
-	ELSE 2 
-END';
-
-	
-	newdata := '
-	SELECT 
-		1 AS ogc_fid,
-		'|| intensity::text ||' AS '|| quote_ident(intensityfield) ||',
-		ST_GeomFromText('|| quote_literal(wkt) ||', 27700) AS wkb_geometry';
-		olddata := quote_ident(tablename) || '_det';
-
-	IF combine THEN
-		sql := '
-WITH project AS (
-	'|| newdata ||'
-), 
-overlapping AS (
-	SELECT
-		ogc_fid,
-     		'|| quote_ident(intensityfield) ||', 
-		wkb_geometry
-	FROM '|| olddata ||' AS existing
-	WHERE ST_Intersects(wkb_geometry, ST_GeomFromText('|| quote_literal(wkt) ||', 27700) )
-),
-intersections AS (
-	SELECT
-		'|| quote_ident(intensityfield) ||' + '|| intensity::text ||' AS '|| quote_ident(intensityfield) ||', 
-		ST_Intersection(wkb_geometry, (SELECT wkb_geometry FROM project)) AS wkb_geometry
-	FROM overlapping
-),
-differences AS (
-	SELECT '|| quote_ident(intensityfield) ||', 
-		(ST_Dump(ST_Difference(
-			wkb_geometry,
-			(SELECT wkb_geometry FROM project)
-		))).geom AS wkb_geometry
-	FROM overlapping
-)
-SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, intensity_level, '|| quote_ident(intensityfield) ||', wkb_geometry FROM (
-	-- non-overlapping existing polygons
-	SELECT intensity_level::int, '|| quote_ident(intensityfield) ||', wkb_geometry
-	FROM '|| olddata ||'
-	WHERE ogc_fid NOT IN (SELECT ogc_fid FROM overlapping)
-	UNION
-	-- non-overlapping parts of overlapping existing polygons  
-	SELECT '|| lvlcase ||' AS intensity_level, '|| quote_ident(intensityfield) ||', wkb_geometry FROM differences
-	UNION
-	-- non-overlapping parts of project polygon
-	SELECT '|| lvlcase ||' AS intensity_level, '|| quote_ident(intensityfield) ||', (ST_Dump(ST_Difference(
-		wkb_geometry,
-		(SELECT ST_Multi(ST_Union(wkb_geometry)) FROM overlapping)
-	))).geom AS wkb_geometry
-		FROM project
-	UNION 
-	--overlapping parts of project polygon and existing polygons
-	SELECT '|| lvlcase ||' AS intensity_level, '|| quote_ident(intensityfield) ||', wkb_geometry FROM intersections
-) AS intensities;';
-	ELSE
-		sql := 'SELECT ogc_fid, '|| lvlcase ||' AS intensity_level, '|| quote_ident(intensityfield) ||', wkb_geometry FROM ( 
-	'|| newdata ||'
-) AS intensities;';
-	END IF;
-	RAISE INFO 'statement: %', sql;                                                        
-        RETURN QUERY EXECUTE sql;
-END;
-$$;
-
-
-ALTER FUNCTION fishmap.project_intensity_det(fishingname text, intensityfield text, intensitylookup integer, intensity numeric, wkt text, combine boolean) OWNER TO fishmap_webapp;
-
---
 -- Name: project_intensity_gen(text, integer, numeric, text, boolean); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
@@ -485,85 +395,6 @@ $$;
 
 
 ALTER FUNCTION fishmap.project_intensity_gen(fishingname text, intensitylookup integer, intensity numeric, wkt text, combine boolean) OWNER TO fishmap_webapp;
-
---
--- Name: project_intensity_gen(text, text, integer, numeric, text, boolean); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
---
-
-CREATE FUNCTION fishmap.project_intensity_gen(fishingname text, intensityfield text, intensitylookup integer, intensity numeric, wkt text, combine boolean) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
-    LANGUAGE plpgsql
-    AS $$
-DECLARE
-	tablename text;
-	bounds numeric[];
-	lvlcase text;
-	newdata text;
-	olddata text;
-	sql text;
-BEGIN
-	tablename := 'intensity_lvls_'|| fishingname;
-	SELECT rangeboundaries INTO bounds FROM fishmap.intensity_lvls WHERE fishingtype = intensitylookup;
-	lvlcase = 'CASE 
-	WHEN '|| quote_ident(intensityfield) ||' < '|| bounds[1] ||' THEN 1 
-	WHEN '|| quote_ident(intensityfield) ||' > '|| bounds[2] ||' THEN 3 
-	ELSE 2 
-END';
-
-	
-	newdata := '
-	SELECT ogc_fid, '|| intensity::text ||' AS '|| quote_ident(intensityfield) ||', wkb_geometry
-	FROM grid
-	WHERE 
-		ST_Intersects(wkb_geometry, ST_GeomFromText('|| quote_literal(wkt) ||', 27700)) 
-		AND NOT ST_Touches(wkb_geometry, ST_GeomFromText('|| quote_literal(wkt) ||', 27700))';
-
-	olddata := quote_ident(tablename) || '_gen';
-
-	IF combine THEN
-		sql := '
-WITH project AS (
-	'|| newdata ||'
-), 
-overlapping AS (
-	SELECT
-		ogc_fid,
-     		'|| quote_ident(intensityfield) ||' + '|| intensity::text ||' AS '|| quote_ident(intensityfield) ||', 
-		wkb_geometry
-	FROM '|| olddata ||' AS existing
-	WHERE ST_Intersects(wkb_geometry, (SELECT ST_Multi(ST_Union(wkb_geometry)) FROM project) )
-)
-SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, intensity_level, round('|| quote_ident(intensityfield) ||', 2), wkb_geometry FROM (
-	-- non-overlapping parts of existing polygons
-	SELECT intensity_level::int, '|| quote_ident(intensityfield) ||', wkb_geometry
-	FROM '|| olddata ||'
-	WHERE ogc_fid NOT IN (SELECT ogc_fid FROM overlapping)
-	UNION 
-	-- non-overlapping parts of project polygon (small negative buffer to eliminate overlaps caused by rounding)
-	SELECT '|| lvlcase ||' AS intensity_level, '|| quote_ident(intensityfield) ||', wkb_geometry
-	FROM project
-	WHERE Coalesce(ST_Disjoint(
-		wkb_geometry,
-		ST_Buffer(
-			(SELECT ST_Multi(ST_Union(wkb_geometry)) FROM overlapping), 
-			-0.1
-		)
-	), true)
-	UNION 
-	--overlapping parts of project polygon and existing polygons
-	SELECT '|| lvlcase ||' AS intensity_level, '|| quote_ident(intensityfield) ||', wkb_geometry FROM overlapping
-) AS intensities;';
-	ELSE
-		sql := 'SELECT ogc_fid, '|| lvlcase ||' AS intensity_level, round('|| quote_ident(intensityfield) ||', 2), wkb_geometry FROM ( 
-	'|| newdata ||'
-) AS intensities;';
-	END IF;
-	RAISE INFO '%', sql;                                                 
-        RETURN QUERY EXECUTE sql;
-END;
-$$;
-
-
-ALTER FUNCTION fishmap.project_intensity_gen(fishingname text, intensityfield text, intensitylookup integer, intensity numeric, wkt text, combine boolean) OWNER TO fishmap_webapp;
 
 --
 -- Name: project_intensity_king_scallops(text, boolean, boolean, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp

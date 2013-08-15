@@ -19,3 +19,42 @@ WHERE
     st_geometrytype (
         wkb_geometry )
     = 'ST_LineString';
+
+
+-- Fudge all the supplied intensity data values where they've been generated using 
+-- the wrong (albeit similar) formula
+UPDATE intensity_lvls_pots_combined_det
+SET intensity_value = intensity_value * 10000 / 365;
+
+UPDATE intensity_lvls_pots_combined_gen
+SET intensity_value = intensity_value * 10000 / 365;
+
+UPDATE intensity_lvls_pots_commercial_det
+SET intensity_value = intensity_value * 10000 / 365;
+
+UPDATE intensity_lvls_pots_commercial_gen
+SET intensity_value = intensity_value * 10000 / 365;
+
+UPDATE intensity_lvls_pots_recreational_det
+SET intensity_value = intensity_value * 10000 / 365;
+
+UPDATE intensity_lvls_pots_recreational_gen
+SET intensity_value = intensity_value * 10000 / 365;
+
+UPDATE intensity_lvls_rsa_combined_det
+SET intensity_value = intensity_value * 10000 / 52;
+
+UPDATE intensity_lvls_rsa_combined_gen
+SET intensity_value = intensity_value * 10000 / 52;
+
+UPDATE intensity_lvls_rsa_charterboats_det
+SET intensity_value = intensity_value * 10000 / 52;
+
+UPDATE intensity_lvls_rsa_charterboats_gen
+SET intensity_value = intensity_value * 10000 / 52;
+
+UPDATE intensity_lvls_rsa_noncharter_det
+SET intensity_value = intensity_value * 10000 / 52;
+
+UPDATE intensity_lvls_rsa_noncharter_gen
+SET intensity_value = intensity_value * 10000 / 52;

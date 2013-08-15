@@ -412,28 +412,28 @@ def get_extra_sld_info(layer, args):
             ],
             "pots_recreational": [
                 {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0FFFF"},
-                {"name": "3 - 4", "type": "PropertyIsBetween", "lower": 4, "upper": 7, "color": "#80D5FF"},
+                {"name": "3 - 4", "type": "PropertyIsBetween", "lower": 3, "upper": 4, "color": "#80D5FF"},
                 {"name": "5 - 6", "type": "PropertyIsBetween", "lower": 5, "upper": 6, "color": "#00ABFF"},
-                {"name": "7 - 8", "type": "PropertyIsBetween", "lower": 7, "upper": 9, "color": "#2020FF"},
-                {"name": "9 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 10, "color": "#0000A0"}
+                {"name": "7 - 8", "type": "PropertyIsBetween", "lower": 7, "upper": 8, "color": "#2020FF"},
+                {"name": "9 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 9, "color": "#0000A0"}
             ],
             "pots_combined": [
                 {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0FFFF"},
-                {"name": "3 - 4", "type": "PropertyIsBetween", "lower": 4, "upper": 7, "color": "#80D5FF"},
+                {"name": "3 - 4", "type": "PropertyIsBetween", "lower": 3, "upper": 4, "color": "#80D5FF"},
                 {"name": "5 - 6", "type": "PropertyIsBetween", "lower": 5, "upper": 6, "color": "#00ABFF"},
                 {"name": "7 - 9", "type": "PropertyIsBetween", "lower": 7, "upper": 9, "color": "#2020FF"},
                 {"name": "10 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 10, "color": "#0000A0"}
             ],
             "rsa_charterboats": [
                 {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0FFFF"},
-                {"name": "3 - 4", "type": "PropertyIsBetween", "lower": 4, "upper": 7, "color": "#80D5FF"},
+                {"name": "3 - 4", "type": "PropertyIsBetween", "lower": 3, "upper": 4, "color": "#80D5FF"},
                 {"name": "5 - 6", "type": "PropertyIsBetween", "lower": 5, "upper": 6, "color": "#00ABFF"},
                 {"name": "7 - 9", "type": "PropertyIsBetween", "lower": 7, "upper": 9, "color": "#2020FF"},
                 {"name": "10 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 10, "color": "#0000A0"}
             ],
             "rsa_noncharter": [
                 {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0FFFF"},
-                {"name": "3 - 4", "type": "PropertyIsBetween", "lower": 4, "upper": 7, "color": "#80D5FF"},
+                {"name": "3 - 4", "type": "PropertyIsBetween", "lower": 3, "upper": 3, "color": "#80D5FF"},
                 {"name": "5 - 6", "type": "PropertyIsBetween", "lower": 5, "upper": 6, "color": "#00ABFF"},
                 {"name": "7 - 9", "type": "PropertyIsBetween", "lower": 7, "upper": 9, "color": "#2020FF"},
                 {"name": "10 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 10, "color": "#0000A0"}
