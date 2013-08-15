@@ -206,12 +206,12 @@ ul.tree li h3.collapsed {
 
 /* Popup Content */
 
-#popup_content th {
+#popup_content tbody.info th {
     text-align: right;
     vertical-align: top;
 }
 
-#popup_content tbody tr:last-child td, #popup_content tbody tr:last-child th {
+#popup_content tbody.info tr:last-child td, #popup_content tbody.info tr:last-child th {
     padding-bottom: 5px;
 }
 

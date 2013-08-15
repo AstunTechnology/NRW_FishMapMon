@@ -156,9 +156,9 @@
                     // Assign features to a model keyed on layer name
                     // for use in the info template. Project output layers are
                     // a bit special as they all use the same template
-                   var model = jQuery.extend({}, FISH_MAP.tmplView);
+                   var model = jQuery.extend({"layers":{}}, FISH_MAP.tmplView);
 
-                    for (var i = 0, feature; i < features.length; i++) {
+                   for (var i = 0, feature; i < features.length; i++) {
                         feature = features[i];
                         var key = feature.type;
                         // Determine if the feature is from an output layer and
@@ -177,13 +177,14 @@
                         if (prefix && prefix.length === 2) {
                             key = prefix[1];
                         }
-                        if (!model[key]) {
-                            model[key] = {
-                                id: feature.type,
-                                features: []
+                        if (!model.layers[key]) {
+                            model.layers[key] = {
+                                "id": feature.type,
+                                "key": key,
+                                "features": []
                             };
                         }
-                        model[key].features.push(feature);
+                        model.layers[key].features.push(feature);
                     }
 
                     var content = jQuery('#popup_content');
@@ -193,23 +194,23 @@
                     content.append(jQuery.mustache(tmpl, model));
 
                     // De-duplicate content
-                    content.find('table.info').each(function() {
-                        var table = jQuery(this)
-                        table.find('tbody').each(function() {
-                            var cur = this;
+                    for (key in model.layers) {
+                        tbodys = content.find('tbody.info.' + key);
+                        tbodys.each(function() {
+                            var tbody = this;
                             // Only check for duplicates if the current element has
                             // a parent and hence has not been removed from the DOM
                             // in a previous pass
-                            if (jQuery(cur).parent().length) {
+                            if (jQuery(tbody).parent().length) {
                                 // Find all other tbody elements that belong to
-                                // the same table and that have the same
+                                // the same tbody and that have the same
                                 // content and remove them
-                                table.find('tbody').filter(function(idx) {
-                                    return this != cur && this.innerHTML == cur.innerHTML;
+                                tbodys.filter(function() {
+                                    return this != tbody && this.innerHTML == tbody.innerHTML;
                                 }).remove();
                             }
                         });
-                    });
+                    }
 
                     // Remove rows with empty values
                     jQuery('td:empty()', content).parent().remove();
