@@ -92,17 +92,16 @@ $_$;
 ALTER FUNCTION fishmap.calculate_intensity_nets(days numeric, length numeric, nets numeric, area numeric) OWNER TO fishmap_webapp;
 
 --
--- Name: calculate_intensity_pots_combined(numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+-- Name: calculate_intensity_pots(numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION fishmap.calculate_intensity_pots_combined(days numeric, anchors numeric, pots numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_pots(days numeric, anchors numeric, pots numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
 	SELECT ( ($2 + $3) * $1 / ( $4 / 10000 ) ) / 365;
 $_$;
 
-
-ALTER FUNCTION fishmap.calculate_intensity_pots_combined(days numeric, anchors numeric, pots numeric, area numeric) OWNER TO fishmap_webapp;
+ALTER FUNCTION fishmap.calculate_intensity_pots(days numeric, anchors numeric, pots numeric, area numeric) owner to fishmap_webapp;
 
 --
 -- Name: calculate_intensity_pro_hand_gath(numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
@@ -592,6 +591,48 @@ $_$;
 ALTER FUNCTION fishmap.project_intensity_nets(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) OWNER TO fishmap_webapp;
 
 --
+-- Name: project_intensity_pots_commercial(text, boolean, boolean, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+--
+
+CREATE FUNCTION fishmap.project_intensity_pots_commercial(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
+    LANGUAGE sql
+    AS $_$
+	SELECT * FROM fishmap.project_intensity(
+		'pots_commercial'::text, 
+		9, 
+		fishmap.calculate_intensity_pots( $4[1], $4[2], $4[3], ST_Area(ST_GeomFromText($1))::numeric),
+		$1,
+		$2,
+		$3		
+	);
+$_$;
+
+
+ALTER FUNCTION fishmap.project_intensity_pots_commercial(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) OWNER TO fishmap_webapp;
+
+
+--
+-- Name: project_intensity_pots_recreational(text, boolean, boolean, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+--
+
+CREATE FUNCTION fishmap.project_intensity_pots_recreational(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, lvl integer, sum_intensity numeric, wkb_geometry public.geometry)
+    LANGUAGE sql
+    AS $_$
+	SELECT * FROM fishmap.project_intensity(
+		'pots_recreational'::text, 
+		9, 
+		fishmap.calculate_intensity_pots( $4[1], $4[2], $4[3], ST_Area(ST_GeomFromText($1))::numeric),
+		$1,
+		$2,
+		$3		
+	);
+$_$;
+
+
+ALTER FUNCTION fishmap.project_intensity_pots_recreational(wkt text, generalize boolean, combine boolean, VARIADIC args numeric[]) OWNER TO fishmap_webapp;
+
+
+--
 -- Name: project_intensity_pots_combined(text, boolean, boolean, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
@@ -601,7 +642,7 @@ CREATE FUNCTION fishmap.project_intensity_pots_combined(wkt text, generalize boo
 	SELECT * FROM fishmap.project_intensity(
 		'pots_combined'::text, 
 		9, 
-		fishmap.calculate_intensity_pots_combined( $4[1], $4[2], $4[3], ST_Area(ST_GeomFromText($1))::numeric),
+		fishmap.calculate_intensity_pots( $4[1], $4[2], $4[3], ST_Area(ST_GeomFromText($1))::numeric),
 		$1,
 		$2,
 		$3		
