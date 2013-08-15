@@ -76,7 +76,7 @@ VALUES
 	(989, 3, NULL, NULL, NULL, 'mussels'),
 	(990, 5, 'Light Otter Trawl', NULL, NULL, 'lot'),
 	(991, 8, NULL, NULL, NULL, 'nets'),
-	(992, 9, 'Parlour Pots', NULL, NULL, 'fixed_pots'),
+	(992, 9, 'Parlour Pots', NULL, NULL, 'combined_pots'),
 	(993, 10, 'Natural bait fishing', NULL, NULL, 'rsa_shore'),
 	(994, 10, 'Natural bait fishing', 'Charter Boat Fishing (Owner)', NULL, 'rsa_charterboats'),
 	(995, 10, NULL, NULL, NULL, 'rsa_noncharter'),

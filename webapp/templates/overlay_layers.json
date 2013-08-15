@@ -119,6 +119,7 @@
         {
             "activity": true, 
             "id": "vessels_grp", 
+            "activity_name": true,
             "layers": [
                 {
                     "id": "vessels_lvls_official", 
@@ -202,7 +203,7 @@
                     "visible": false
                 },
                 {
-                    "id": "extents_fixed_pots",
+                    "id": "extents_pots_combined",
                     "info": true,
                     "legend": true,
                     "visible": false
