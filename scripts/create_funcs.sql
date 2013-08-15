@@ -7,8 +7,7 @@
 CREATE FUNCTION fishmap.calculate_intensity__hand_gath(days numeric, avghours numeric, people numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
-	SELECT ( $1 * $2 * $3 * 40 ) / ( $4 / 10000 );
-	--SELECT $3/($4/10000)/($1/365);
+	SELECT $3/($4/10000)/($1/365);
 $_$;
 
 
@@ -177,7 +176,7 @@ ALTER FUNCTION fishmap.calculate_intensity_rsa_noncharter(days numeric, rods num
 CREATE FUNCTION fishmap.calculate_intensity_rsa_shore(days numeric, rods numeric, avghours numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
-	SELECT ( $1 * $2 * ($3 / 4) ) / $4;
+	SELECT ( ( $2 * $1 ) / ( $4 / 10000 ) ) / 52;
 $_$;
 
 

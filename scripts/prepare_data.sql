@@ -58,3 +58,9 @@ SET intensity_value = intensity_value * 10000 / 52;
 
 UPDATE intensity_lvls_rsa_noncharter_gen
 SET intensity_value = intensity_value * 10000 / 52;
+
+UPDATE intensity_lvls_rsa_shore_det
+SET intensity_value = intensity_value * 10000 / 52;
+
+UPDATE intensity_lvls_rsa_shore_gen
+SET intensity_value = intensity_value * 10000 / 52;
