@@ -33,7 +33,7 @@ ALTER FUNCTION fishmap.calculate_intensity_cas_hand_gath(days numeric, avghours 
 CREATE FUNCTION fishmap.calculate_intensity_dredges(days numeric, speed numeric, hours numeric, width numeric, num numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
-	SELECT ( $2 * $3 * $4 * $5 * $1 * 1000) / $6 ;
+	SELECT ( $2 * 1.852 * $3 * $4 * $5 * $1 * 1000) / $6 ;
 $_$;
 
 
@@ -59,7 +59,7 @@ ALTER FUNCTION fishmap.calculate_intensity_king_scallops(days numeric, speed num
 CREATE FUNCTION fishmap.calculate_intensity_lot(days numeric, speed numeric, hours numeric, width numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
-	SELECT ( $2 * $3 * $4 * $1 * 1000) / $5 ;
+	SELECT ( $2 * 1.852 * $3 * $4 * $1 * 1000) / $5 ;
 $_$;
 
 
