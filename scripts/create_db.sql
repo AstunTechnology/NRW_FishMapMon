@@ -32,7 +32,7 @@ ALTER DEFAULT PRIVILEGES IN SCHEMA fishmap
 CREATE TABLE IF NOT EXISTS fishmap.intensity_lvls (fishingtype int PRIMARY KEY, rangeboundaries decimal[]);
 INSERT INTO fishmap.intensity_lvls VALUES 
 	(1, '{0.8, 3.0}'),
-	(2, '{1.35, 10.2}'),
+	(2, '{0.8, 3.0}'),
 	(3, '{0.04, 3.0}'),
 	(5, '{0.93, 6.95}'),
 	(8, '{33.9, 254.6}'),

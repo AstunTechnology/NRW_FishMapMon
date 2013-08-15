@@ -592,7 +592,7 @@
     LAYER
         NAME "intensity_lvls_scenario_det"
         INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (select *, lvl as intensity_level FROM fishmap.project_intensity_lvls_new_det('%FISHING%'::text, '%WKT%'::text, %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric)) as levels using unique ogc_fid using srid=27700"
+        DATA "wkb_geometry from (select * FROM fishmap.project_intensity_lvls_new_det('%FISHING%'::text, '%WKT%'::text, %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric)) as levels using unique ogc_fid using srid=27700"
     VALIDATION
             'FISHING' '^[a-z_]+$'
             'WKT' '.*'
@@ -631,7 +631,7 @@
     LAYER
         NAME "intensity_lvls_scenario_gen"
         INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (select *, lvl as intensity_level FROM fishmap.project_intensity_lvls_new_gen('%FISHING%'::text, '%WKT%'::text, %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric)) as levels using unique ogc_fid using srid=27700"
+        DATA "wkb_geometry from (select * FROM fishmap.project_intensity_lvls_new_gen('%FISHING%'::text, '%WKT%'::text, %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric)) as levels using unique ogc_fid using srid=27700"
     VALIDATION
             'FISHING' '^[a-z_]+$'
             'WKT' '.*'
@@ -671,7 +671,7 @@
         NAME "intensity_lvls_combined_det"
         # DEBUG 5
         INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (select *, lvl as intensity_level FROM fishmap.project_intensity_lvls_combined_det('%FISHING%'::text, '%WKT%'::text, %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric)) as levels using unique ogc_fid using srid=27700"
+        DATA "wkb_geometry from (select * FROM fishmap.project_intensity_lvls_combined_det('%FISHING%'::text, '%WKT%'::text, %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric)) as levels using unique ogc_fid using srid=27700"
     VALIDATION
             'FISHING' '^[a-z_]+$'
             'WKT' '.*'
@@ -710,7 +710,7 @@
     LAYER
         NAME "intensity_lvls_combined_gen"
         INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (select *, lvl as intensity_level FROM fishmap.project_intensity_lvls_combined_gen('%FISHING%'::text, '%WKT%'::text, %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric)) as levels using unique ogc_fid using srid=27700"
+        DATA "wkb_geometry from (select * FROM fishmap.project_intensity_lvls_combined_gen('%FISHING%'::text, '%WKT%'::text, %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric)) as levels using unique ogc_fid using srid=27700"
         VALIDATION
             'FISHING' '^[a-z_]+$'
             'WKT' '.*'
