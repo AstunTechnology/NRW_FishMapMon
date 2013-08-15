@@ -90,3 +90,4 @@ globals:
   # image/transformation options
   image:
       resampling_method: nearest
+      paletted: false
