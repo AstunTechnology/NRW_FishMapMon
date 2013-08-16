@@ -72,7 +72,7 @@
                 "habitats": "{{ _('Seabed Habitats') }}",
                 "restricted_grp": "{{ _('Restricted Zones') }}",
                 "restricted_closed_scalloping": "{{ _('Areas Closed to Scalloping') }}",
-                "several_and_regulatory_orders": "{{ _('Several and Regulating Orders') }}",
+                "several_and_regulatory_orders": "{{ _('Several and Regulating Areas') }}",
                 "rsa_sites_grp": "{{ _('Recreational Sea Visits Sites') }}",
                 "rsa_standing_areas": "{{ _('RSA Standing Areas') }}",
                 "rsa_casting_sites": "{{ _('RSA Casting Areas') }}",
@@ -326,7 +326,6 @@
                     // empty string 'Unknown' will be returned instead
                     return function(text) {
                         var content = Mustache.render(text, this);
-                        console.log(content);
                         if (content === '') {
                             return 'Unknown';
                         }
@@ -571,7 +570,7 @@
             <tr>
                 <td colspan="2">
                     {% endraw %}
-                    <p class="more-info"><a href="{{ url_for('static', filename='docs/seabed_habitats.pdf') }}">{{ _('Further information on Seabed Habitats') }}</a></p>
+                    <p class="more-info"><a href="{{ url_for('static', filename='docs/help.pdf#habitats') }}">{{ _('Further information on Seabed Habitats') }}</a></p>
                     {% raw %}
                 </td>
             </tr>
@@ -601,7 +600,7 @@
             <tr>
                 <td colspan="2">
                     {% endraw %}
-                    <p class="more-info"><a href="{{ url_for('static', filename='docs/seabed_habitat_confidence.pdf') }}">{{ _('Further information on Seabed Habitat Confidence') }}</a></p>
+                    <p class="more-info"><a href="{{ url_for('static', filename='docs/help.pdf#habitats_confidence') }}">{{ _('Further information on Seabed Habitat Confidence') }}</a></p>
                     {% raw %}
                 </td>
             </tr>
@@ -627,6 +626,15 @@
             </tr>
         </tbody>
         {{/features}}
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    {% endraw %}
+                    <p class="more-info"><a href="{{ url_for('static', filename='docs/help.pdf#sac') }}">{{ _('Further information on SAC') }}</a></p>
+                    {% raw %}
+                </td>
+            </tr>
+        </tbody>
         {{/sac}}
         {{#sac_features}}
         <thead>
@@ -652,6 +660,15 @@
             </tr>
         </tbody>
         {{/features}}
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    {% endraw %}
+                    <p class="more-info"><a href="{{ url_for('static', filename='docs/help.pdf#sac_features') }}">{{ _('Further information on SAC Features') }}</a></p>
+                    {% raw %}
+                </td>
+            </tr>
+        </tbody>
         {{/sac_features}}
         {{#spa}}
         <thead>
@@ -673,6 +690,15 @@
             </tr>
         </tbody>
         {{/features}}
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    {% endraw %}
+                    <p class="more-info"><a href="{{ url_for('static', filename='docs/help.pdf#spa') }}">{{ _('Further information on SPAs') }}</a></p>
+                    {% raw %}
+                </td>
+            </tr>
+        </tbody>
         {{/spa}}
         {{#sssi}}
         <thead>
@@ -694,6 +720,15 @@
             </tr>
         </tbody>
         {{/features}}
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    {% endraw %}
+                    <p class="more-info"><a href="{{ url_for('static', filename='docs/help.pdf#sssi') }}">{{ _('Further information on SSSIs') }}</a></p>
+                    {% raw %}
+                </td>
+            </tr>
+        </tbody>
         {{/sssi}}
         {{#ramsar}}
         <thead>
@@ -715,6 +750,15 @@
             </tr>
         </tbody>
         {{/features}}
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    {% endraw %}
+                    <p class="more-info"><a href="{{ url_for('static', filename='docs/help.pdf#ramsar') }}">{{ _('Further information on RAMSAR') }}</a></p>
+                    {% raw %}
+                </td>
+            </tr>
+        </tbody>
         {{/ramsar}}
         {{#restricted_closed_scalloping}}
         <thead>
@@ -736,6 +780,15 @@
             </tr>
         </tbody>
         {{/features}}
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    {% endraw %}
+                    <p class="more-info"><a href="{{ url_for('static', filename='docs/help.pdf#areas_closed_to_scalloping') }}">{{ _('Further information on Areas Closed to Scalloping') }}</a></p>
+                    {% raw %}
+                </td>
+            </tr>
+        </tbody>
         {{/restricted_closed_scalloping}}
         {{#several_and_regulatory_orders}}
         <thead>
@@ -757,6 +810,15 @@
             </tr>
         </tbody>
         {{/features}}
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    {% endraw %}
+                    <p class="more-info"><a href="{{ url_for('static', filename='docs/help.pdf#several_and_regulating_areas') }}">{{ _('Further information on Several and Regulating Areas') }}</a></p>
+                    {% raw %}
+                </td>
+            </tr>
+        </tbody>
         {{/several_and_regulatory_orders}}
         {{#rsa_standing_areas}}
         <thead>
@@ -1379,6 +1441,15 @@
             </tr>
         </tbody>
         {{/features}}
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    {% endraw %}
+                    <p class="more-info"><a href="{{ url_for('static', filename='docs/help.pdf#wrecks') }}">{{ _('Further information on Wrecks') }}</a></p>
+                    {% raw %}
+                </td>
+            </tr>
+        </tbody>
         {{/wrecks}}
         {{#intensity}}
         <thead>
@@ -1411,7 +1482,7 @@
                 <td>{{attributes.intensity_level}}</td>
             </tr>
             <tr>
-                <th>{{#_}}Intensity Value{{/_}}</th>
+                <th>{{#_}}Intensity Value{{/_}}: </th>
                 <td>{{attributes.intensity_value}}</td>
             </tr>
             <tr>
@@ -1420,6 +1491,13 @@
             </tr>
         </tbody>
         {{/features}}
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    <p class="more-info"><a href="{% endraw %}{{ url_for('static', filename='docs/help.pdf#intensity') }}">{{ _('Further information on ') }}{% raw %} {{#_}}{{id}}{{/_}}</a></p>
+                </td>
+            </tr>
+        </tbody>
         {{/intensity}}
         {{#vessels}}
         <thead>
@@ -1440,11 +1518,18 @@
                 <td>{{attributes.intensity_level}}</td>
             </tr>
             <tr>
-                <th>{{#_}}Intensity Value{{/_}}</th>
+                <th>{{#_}}Intensity Value{{/_}}: </th>
                 <td>{{attributes.intensity_value}}</td>
             </tr>
         </tbody>
         {{/features}}
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    <p class="more-info"><a href="{% endraw %}{{ url_for('static', filename='docs/help.pdf#vessels') }}">{{ _('Further information on Number of Vessels') }}{% raw %}</a></p>
+                </td>
+            </tr>
+        </tbody>
         {{/vessels}}
         {{#sensitivity}}
         <thead>
@@ -1466,6 +1551,15 @@
             </tr>
         </tbody>
         {{/features}}
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    {% endraw %}
+                    <p class="more-info"><a href="{{ url_for('static', filename='docs/help.pdf#sensitivity') }}">{{ _('Further information on Habitat Sensitivity') }}</a></p>
+                    {% raw %}
+                </td>
+            </tr>
+        </tbody>
         {{/sensitivity}}
         {{#sensvtyconf}}
         <thead>
@@ -1483,6 +1577,15 @@
             </tr>
         </tbody>
         {{/features}}
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    {% endraw %}
+                    <p class="more-info"><a href="{{ url_for('static', filename='docs/help.pdf#sensvtyconf') }}">{{ _('Further information on Habitat Sensitivity Confidence') }}</a></p>
+                    {% raw %}
+                </td>
+            </tr>
+        </tbody>
         {{/sensvtyconf}}
         {{#extents}}
         <thead>
@@ -1500,6 +1603,15 @@
             </tr>
         </tbody>
         {{/features}}
+        <tbody>
+            <tr>
+                <td colspan="2">
+                    {% endraw %}
+                    <p class="more-info"><a href="{{ url_for('static', filename='docs/help.pdf#extents') }}">{{ _('Further information on Fishing Activity Extents') }}</a></p>
+                    {% raw %}
+                </td>
+            </tr>
+        </tbody>
         {{/extents}}
         {{/layers}}
     <table>
