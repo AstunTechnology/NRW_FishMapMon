@@ -4,7 +4,7 @@
         <Name>name</Name>
         <FeatureTypeStyle>
             <Rule>
-                <Name>{{ _('Combined Potting Extents') }}</Name>
+                <Name>{{ _('Commercial Potting Extents') }}</Name>
                 <PolygonSymbolizer>
                     <Stroke>
                         <SvgParameter name="stroke">#92d744</SvgParameter>

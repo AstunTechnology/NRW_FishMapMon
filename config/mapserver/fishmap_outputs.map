@@ -267,9 +267,59 @@
     END
 
     LAYER
+        NAME "extents_pots_commercial"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from extents_pots_commercial) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "extents_pots_commercial"
+            "gml_include_items" "all"
+            "gml_geometries" "none"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+    LAYER
+        NAME "extents_pots_recreational"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from extents_pots_recreational) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "extents_pots_recreational"
+            "gml_include_items" "all"
+            "gml_geometries" "none"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+    LAYER
         NAME "extents_pots_combined"
         INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (select * from extents_pots) as foo using unique ogc_fid using srid=27700"
+        DATA "wkb_geometry from (select * from extents_pots_combined) as foo using unique ogc_fid using srid=27700"
         PROJECTION
             "init=epsg:27700"
         END
@@ -400,6 +450,31 @@
         END
         METADATA
             "ows_title" "extents_rsa_noncharter"
+            "gml_include_items" "all"
+            "gml_geometries" "none"
+        END
+        TOLERANCEUNITS pixels
+        TOLERANCE 2
+        TEMPLATE 'id.tmpl'
+        STATUS OFF
+        TYPE POLYGON
+        UNITS METERS
+        CLASS
+            STYLE
+                COLOR 255 0 0
+            END
+        END
+    END
+
+    LAYER
+        NAME "extents_rsa_combined"
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from extents_rsa_combined) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            "ows_title" "extents_rsa_combined"
             "gml_include_items" "all"
             "gml_geometries" "none"
         END

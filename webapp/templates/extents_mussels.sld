@@ -4,7 +4,7 @@
         <Name>name</Name>
         <FeatureTypeStyle>
             <Rule>
-                <Name>{{ _('Mussels Extents') }}</Name>
+                <Name>{{ _('Mussel Seed Harvesting Extents') }}</Name>
                 <PolygonSymbolizer>
                     <Stroke>
                         <SvgParameter name="stroke">#73c57f</SvgParameter>

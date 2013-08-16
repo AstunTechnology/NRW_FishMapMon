@@ -203,6 +203,18 @@
                     "visible": false
                 },
                 {
+                    "id": "extents_pots_commercial",
+                    "info": true,
+                    "legend": true,
+                    "visible": false
+                },
+                {
+                    "id": "extents_pots_recreational",
+                    "info": true,
+                    "legend": true,
+                    "visible": false
+                },
+                {
                     "id": "extents_pots_combined",
                     "info": true,
                     "legend": true,
@@ -216,6 +228,12 @@
                 },
                 {
                     "id": "extents_rsa_noncharter",
+                    "info": true,
+                    "legend": true,
+                    "visible": false
+                },
+                {
+                    "id": "extents_rsa_combined",
                     "info": true,
                     "legend": true,
                     "visible": false
