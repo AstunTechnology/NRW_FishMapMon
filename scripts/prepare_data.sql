@@ -64,3 +64,16 @@ SET intensity_value = intensity_value * 10000 / 52;
 
 UPDATE intensity_lvls_rsa_shore_gen
 SET intensity_value = intensity_value * 10000 / 52;
+
+UPDATE intensity_lvls_cas_hand_gath_det
+SET intensity_value = intensity_value * 10000 / 1825;
+
+UPDATE intensity_lvls_cas_hand_gath_gen
+SET intensity_value = intensity_value * 10000 / 1825;
+
+UPDATE intensity_lvls_pro_hand_gath_det
+SET intensity_value = intensity_value * 10000 / 5475;
+
+UPDATE intensity_lvls_pro_hand_gath_gen
+SET intensity_value = intensity_value * 10000 / 5475;
+
