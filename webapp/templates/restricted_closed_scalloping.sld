@@ -7,7 +7,8 @@
                 <Name>{{ _('Areas closed to Scalloping') }}</Name>
                 <PolygonSymbolizer>
                     <Fill>
-                        <SvgParameter name="fill">#a0a0ff</SvgParameter>
+                        <SvgParameter name="fill">#A0C0FF</SvgParameter>
+                        <SvgParameter name="fill-opacity">0.35</SvgParameter>
                     </Fill>
                 </PolygonSymbolizer>
             </Rule>
