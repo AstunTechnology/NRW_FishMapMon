@@ -11,6 +11,7 @@ WITH ENCODING='UTF8'
 CREATE EXTENSION pg_trgm;
 
 GRANT SELECT ON ALL TABLES IN SCHEMA public TO fishmap_webapp;
+GRANT ALL ON geometry_columns TO fishmap_webapp;
 
 ALTER DEFAULT PRIVILEGES IN SCHEMA public
    GRANT SELECT ON TABLES TO fishmap_webapp;
