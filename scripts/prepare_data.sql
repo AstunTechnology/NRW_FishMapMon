@@ -1,3 +1,31 @@
+-- Break apart self-intersecting polygons and ensure all have sufficient points
+
+UPDATE habitats
+SET
+    wkb_geometry = ST_Multi (
+        ST_BuildArea (
+            ST_Union (
+                ST_Multi ( ST_Boundary ( wkb_geometry ) ),
+                ST_PointN (
+                    ST_Boundary ( wkb_geometry ),
+                    1 ) ) ) )
+WHERE
+    ST_IsValid ( wkb_geometry ) = FALSE;
+
+-- Index on habitat code for when doing lookup on this value
+CREATE INDEX habitats_habitat_code_idx 
+ON habitats 
+USING btree (habitat_code);
+
+-- Index on dominant habitat code for when doing lookup on this value
+CREATE INDEX habitats_dominant_habitat_idx 
+ON habitats 
+USING btree (dominant_habitat);
+
+-- Cluster geometry index to be more efficient on map 
+-- (spatially close features will be stored together)
+ALTER TABLE habitats CLUSTER ON habitats_geom_idx;
+
 -- Manipulate sac_features to split the lines out into seperate table and buffer
 -- lines so they can be queried
 DROP TABLE IF EXISTS sac_features_line;
