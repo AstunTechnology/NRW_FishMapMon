@@ -811,7 +811,7 @@ SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, summary, name,
 	FROM intensities i,
 		habitats h,
 		levels l
-	WHERE  l.habitat_id = h.habitat_code 
+	WHERE  l.habitat_id = h.dominant_habitat 
 		AND l.intensity_lvl = i.lvl
 		AND ST_Intersects(i.wkb_geometry, h.wkb_geometry)	
 ) AS sensitivities;
@@ -866,7 +866,7 @@ SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, summary, name,
 		habitats h,
 		levels l
 	WHERE ST_Intersects(i.wkb_geometry, h.wkb_geometry)
-		AND  l.habitat_id = h.habitat_code AND l.intensity_lvl = i.lvl
+		AND  l.habitat_id = h.dominant_habitat AND l.intensity_lvl = i.lvl
 ) AS sensitivities;', 
 		activity,
 		wkt, 
