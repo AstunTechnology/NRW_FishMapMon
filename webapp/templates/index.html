@@ -73,9 +73,6 @@
                 "restricted_grp": "{{ _('Restricted Zones') }}",
                 "restricted_closed_scalloping": "{{ _('Areas Closed to Scalloping') }}",
                 "several_and_regulatory_orders": "{{ _('Several and Regulating Areas') }}",
-                "rsa_sites_grp": "{{ _('Recreational Sea Visits Sites') }}",
-                "rsa_standing_areas": "{{ _('RSA Standing Areas') }}",
-                "rsa_casting_sites": "{{ _('RSA Casting Areas') }}",
                 "contextual_grp": "{{ _('Reference Data') }}",
                 "national_limits": "{{ _('National Limits') }}",
                 "wrecks": "{{ _('Wrecks') }}",
@@ -824,40 +821,6 @@
             </tr>
         </tbody>
         {{/several_and_regulatory_orders}}
-        {{#rsa_standing_areas}}
-        <thead>
-            <tr>
-                <th colspan="2">
-                    <h2>{{#_}}rsa_standing_areas{{/_}}</h2>
-                </th>
-            </tr>
-        </thead>
-        {{#features}}
-        <tbody class="info {{key}}">
-            <tr>
-                <th>{{#_}}Activity{{/_}}: </th>
-                <td>{{attributes.activity}}</td>
-            </tr>
-        </tbody>
-        {{/features}}
-        {{/rsa_standing_areas}}
-        {{#rsa_casting_sites}}
-        <thead>
-            <tr>
-                <th colspan="2">
-                    <h2>{{#_}}rsa_casting_sites{{/_}}</h2>
-                </th>
-            </tr>
-        </thead>
-        {{#features}}
-        <tbody class="info {{key}}">
-            <tr>
-                <th>{{#_}}Activity{{/_}}: </th>
-                <td>{{attributes.activity}}</td>
-            </tr>
-        </tbody>
-        {{/features}}
-        {{/rsa_casting_sites}}
         {{#activity_commercial_fishing_polygon}}
         <thead>
             <tr>

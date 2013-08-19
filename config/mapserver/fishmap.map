@@ -248,56 +248,6 @@ MAP
     END
 
     LAYER
-        NAME "rsa_standing_areas"
-        INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (select * from rsa_standing_areas) as foo using unique ogc_fid using srid=27700"
-        PROJECTION
-            "init=epsg:27700"
-        END
-        METADATA
-            "ows_title" "RSA Standing Areas"
-            "gml_include_items" "all"
-            "gml_geometries" "none"
-        END
-        TOLERANCEUNITS pixels
-        TOLERANCE 2
-        TEMPLATE 'id.tmpl'
-        STATUS OFF
-        TYPE POLYGON
-        UNITS METERS
-        CLASS
-            STYLE
-                COLOR 255 0 0
-            END
-        END
-    END
-
-    LAYER
-        NAME "rsa_casting_sites"
-        INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (select * from rsa_casting_sites) as foo using unique ogc_fid using srid=27700"
-        PROJECTION
-            "init=epsg:27700"
-        END
-        METADATA
-            "ows_title" "RSA Casting Areas"
-            "gml_include_items" "all"
-            "gml_geometries" "none"
-        END
-        TOLERANCEUNITS pixels
-        TOLERANCE 2
-        TEMPLATE 'id.tmpl'
-        STATUS OFF
-        TYPE POLYGON
-        UNITS METERS
-        CLASS
-            STYLE
-                COLOR 255 0 0
-            END
-        END
-    END
-
-    LAYER
         NAME "national_limits"
         INCLUDE "pgconnection.inc"
         DATA "wkb_geometry from (select * from national_limits where lmtdis in (3, 6, 9, 12) and szfeatcode in (13500, 5400)) as foo using unique ogc_fid using srid=4326"

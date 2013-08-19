@@ -258,28 +258,8 @@
                 }
             ],
             "output": true
-        }
-        {% if g.user.is_authenticated() %}
-        ,{
-            "id": "rsa_sites_grp", 
-            "layers": [
-                {
-                    "id": "rsa_standing_areas", 
-                    "info": true, 
-                    "legend": true, 
-                    "visible": false
-                }, 
-                {
-                    "id": "rsa_casting_sites", 
-                    "info": true, 
-                    "legend": true, 
-                    "visible": false
-                }
-            ], 
-            "output": true
-        }
-        {% endif %}
-        ,{
+        },
+        {
             "id": "default_grp", 
             "layers": [
                 {

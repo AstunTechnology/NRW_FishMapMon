@@ -39,11 +39,6 @@ ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Combined_tranches/NCF_Point_combined.TAB" -nln activity_noncommercial_fishing_point -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/Combined_tranches/NCF_Polygon_Combined.TAB" -nln activity_noncommercial_fishing_polygon -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
-# RSA
-ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/RSA_Sites/RSA_sites_poly_new.TAB" -nln rsa_standing_areas -s_srs "EPSG:27700" -a_srs "EPSG:27700"
-
-ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "FMM_Data/RSA_Sites/RSA_Sites_Casting_New.TAB" -nln rsa_casting_sites -s_srs "EPSG:27700" -a_srs "EPSG:27700"
-
 # Mixture of polylines and multi-polylines hence the -explodecollections to get only polylines
 ogr2ogr -overwrite -skipfailures -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "BaseMapping/Hydrospatial/szSE_UK_NATIONAL_LIMITS.TAB" -nln national_limits -s_srs "EPSG:4326" -a_srs "EPSG:4326" -explodecollections
 
