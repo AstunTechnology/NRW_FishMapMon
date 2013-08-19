@@ -4,10 +4,31 @@
         <Name>name</Name>
         <FeatureTypeStyle>
             <Rule>
+                <Name>{{ _('Mud and Sand Flats') }}</Name>
+                <ogc:Filter>
+                    <ogc:PropertyIsEqualTo>
+                        <ogc:PropertyName>feature_type</ogc:PropertyName>
+                        <ogc:Literal>Mud and Sand Flats</ogc:Literal>
+                    </ogc:PropertyIsEqualTo>
+                </ogc:Filter>
+                <PolygonSymbolizer>
+                    <Fill>
+                        <GraphicFill>
+                            <Graphic>
+                                <ExternalGraphic>
+                                    <OnlineResource xlink:type="simple" xlink:href="symbols/images/mapinfo_brush_14_orange.png" />
+                                    <Format>image/png</Format>
+                                </ExternalGraphic>
+                            </Graphic>
+                        </GraphicFill>
+                    </Fill>
+                </PolygonSymbolizer>
+            </Rule>
+            <Rule>
                 <Name>{{ _('Shallow Inlets and Bays') }}</Name>
                 <ogc:Filter>
                     <ogc:PropertyIsEqualTo>
-                        <ogc:PropertyName>general_feature</ogc:PropertyName>
+                        <ogc:PropertyName>feature_type</ogc:PropertyName>
                         <ogc:Literal>Shallow Inlets and Bays</ogc:Literal>
                     </ogc:PropertyIsEqualTo>
                 </ogc:Filter>
@@ -25,32 +46,11 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>{{ _('Mudflats and Sandflats') }}</Name>
-                <ogc:Filter>
-                    <ogc:PropertyIsEqualTo>
-                        <ogc:PropertyName>general_feature</ogc:PropertyName>
-                        <ogc:Literal>Mudflats and Sandflats</ogc:Literal>
-                    </ogc:PropertyIsEqualTo>
-                </ogc:Filter>
-                <PolygonSymbolizer>
-                    <Fill>
-                        <GraphicFill>
-                            <Graphic>
-                                <ExternalGraphic>
-                                    <OnlineResource xlink:type="simple" xlink:href="symbols/images/mapinfo_brush_14_orange.png" />
-                                    <Format>image/png</Format>
-                                </ExternalGraphic>
-                            </Graphic>
-                        </GraphicFill>
-                    </Fill>
-                </PolygonSymbolizer>
-            </Rule>
-            <Rule>
                 <Name>{{ _('Reefs') }}</Name>
                 <ogc:Filter>
                     <ogc:PropertyIsEqualTo>
-                        <ogc:PropertyName>general_feature</ogc:PropertyName>
-                        <ogc:Literal>reefs</ogc:Literal>
+                        <ogc:PropertyName>feature_type</ogc:PropertyName>
+                        <ogc:Literal>Reefs</ogc:Literal>
                     </ogc:PropertyIsEqualTo>
                 </ogc:Filter>
                 <PolygonSymbolizer>
@@ -70,7 +70,7 @@
                 <Name>{{ _('Sandbanks') }}</Name>
                 <ogc:Filter>
                     <ogc:PropertyIsEqualTo>
-                        <ogc:PropertyName>general_feature</ogc:PropertyName>
+                        <ogc:PropertyName>feature_type</ogc:PropertyName>
                         <ogc:Literal>Sandbanks</ogc:Literal>
                     </ogc:PropertyIsEqualTo>
                 </ogc:Filter>
@@ -95,11 +95,14 @@
                 <Name>{{ _('Sea Caves') }}</Name>
                 <ogc:Filter>
                     <ogc:PropertyIsEqualTo>
-                        <ogc:PropertyName>general_feature</ogc:PropertyName>
-                        <ogc:Literal>Sea Caves (dummy)</ogc:Literal>
+                        <ogc:PropertyName>feature_type</ogc:PropertyName>
+                        <ogc:Literal>Sea Caves</ogc:Literal>
                     </ogc:PropertyIsEqualTo>
                 </ogc:Filter>
                 <PolygonSymbolizer>
+                    <Fill>
+                        <CssParameter name="fill">#FF00FF</CssParameter>
+                    </Fill>
                     <Stroke>
                         <CssParameter name="stroke">#FF00FF</CssParameter>
                         <CssParameter name="stroke-width">2</CssParameter>
