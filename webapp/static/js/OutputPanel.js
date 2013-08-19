@@ -166,7 +166,8 @@ OutputPanel = OpenLayers.Class({
         var fields = this.scenarioFields[this.getActivity()];
         for (var i = 0, fld; i < fields.length; i++) {
             fld = fields[i];
-            jQuery('form fieldset.' + fld, this.div).show();
+            jQuery('form fieldset.' + fld, this.div)
+                .find('input').val(0).end().show();
         }
         jQuery('form').show();
     },
