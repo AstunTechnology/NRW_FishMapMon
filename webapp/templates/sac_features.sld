@@ -88,10 +88,6 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <!-- This is a place holder for the sea caves features which
-                     are actually held in a seperate sac_features_line table
-                     which is styled via a CLASS in the mapfile itself and
-                     displayed via a REQUIRES statement -->
                 <Name>{{ _('Sea Caves') }}</Name>
                 <ogc:Filter>
                     <ogc:PropertyIsEqualTo>
