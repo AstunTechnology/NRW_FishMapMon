@@ -250,7 +250,7 @@ MAP
     LAYER
         NAME "national_limits"
         INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (select * from national_limits where lmtdis in (3, 6, 9, 12) and szfeatcode in (13500, 5400)) as foo using unique ogc_fid using srid=4326"
+        DATA "wkb_geometry from (select * from national_limits where catlmt = 'Normal Baseline' and lmtdis in (1, 3, 6, 9, 12) and szfeatcode in (5400, 13500, 29900)) as foo using unique ogc_fid using srid=4326"
         PROJECTION
             "init=epsg:4326"
         END
