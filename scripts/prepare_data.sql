@@ -26,18 +26,8 @@ USING btree (dominant_habitat);
 -- (spatially close features will be stored together)
 ALTER TABLE habitats CLUSTER ON habitats_geom_idx;
 
--- Manipulate sac_features to split the lines out into seperate table and buffer
--- lines so they can be queried
-DROP TABLE IF EXISTS sac_features_line;
-CREATE TABLE sac_features_line AS
-SELECT
-    *
-FROM
-    sac_features
-WHERE
-    st_geometrytype (
-        wkb_geometry )
-    = 'ST_LineString';
+-- Manipulate sac_features to buffer lines so they can be displayed in the same
+-- layer and queried
 UPDATE sac_features
 SET
     wkb_geometry = st_buffer (

@@ -367,7 +367,10 @@ MAP
     LAYER
         NAME "sac_features"
         INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (select * from sac_features) as foo using unique ogc_fid using srid=27700"
+        # NOTE: Calculated draw_order column used to sort the features and
+        # influence the draw order within the layer. I don't think this is
+        # guaranteed but on inspection it works with MapServer v5.6
+        DATA "wkb_geometry from (select * from (select *, CASE feature_type WHEN 'Shallow Inlets and Bays' THEN 0 WHEN 'Mud and Sand Flats' THEN 1 WHEN 'Sandbanks' THEN 2 WHEN 'Reefs' THEN 3 WHEN 'Sea Caves' THEN 4 END as draw_order from sac_features) as sac_feat order by draw_order) as foo using unique ogc_fid using srid=27700"
         PROJECTION
             "init=epsg:27700"
         END
@@ -385,35 +388,6 @@ MAP
         CLASS
             STYLE
                 COLOR 255 0 0
-            END
-        END
-    END
-
-    # Line features from the sac_features layer end up here and are displayed
-    # via the REQUIRES clause
-    LAYER
-        NAME "sac_features_line"
-        INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (select * from sac_features_line) as foo using unique ogc_fid using srid=27700"
-        PROJECTION
-            "init=epsg:27700"
-        END
-        METADATA
-            "ows_title" "sac_features_line"
-            "gml_include_items" "all"
-            "gml_geometries" "none"
-        END
-        TOLERANCEUNITS pixels
-        TOLERANCE 1
-        TEMPLATE 'id.tmpl'
-        STATUS DEFAULT
-        REQUIRES "[sac_features]"
-        TYPE LINE
-        UNITS METERS
-        CLASS
-            STYLE
-                COLOR 255 0 255
-                WIDTH 2
             END
         END
     END
