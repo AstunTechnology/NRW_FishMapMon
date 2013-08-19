@@ -322,9 +322,21 @@
         },
         'activitychange': function(e) {
             FISH_MAP.fishingactivity = outputPanel.getActivity();
+            // Get a reference to the activity groups
+            var grps = overlayLayers.getGroupsByProperty('activity', true);
+            // If no activity is chosen then hide the activity layers
+            if (FISH_MAP.fishingactivity === null) {
+                for (var m = 0, grp; m < grps.length; m++) {
+                    grp = grps[m];
+                    grp.fishingactivity = FISH_MAP.fishingactivity;
+                    for (var n = 0, lyr; n < grp.layers.length; n++) {
+                        lyr = grp.layers[n];
+                        lyr.visible = false;
+                    }
+                }
+            }
             // Add a _fullName property and desc to all activity layers which
             // can be used in templates etc.
-            var grps = overlayLayers.getGroupsByProperty('activity', true);
             for (var m = 0, grp; m < grps.length; m++) {
                 grp = grps[m];
                 grp.fishingactivity = FISH_MAP.fishingactivity;

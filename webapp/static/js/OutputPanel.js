@@ -40,8 +40,13 @@ OutputPanel = OpenLayers.Class({
     },
 
     _setActivity: function(activity) {
-        this._activity = activity;
-        this.events.triggerEvent("activitychange", {activity: this.getActivity()});
+        this._activity = (activity === "") ? null : activity;
+        this.events.triggerEvent("activitychange", {"activity": this.getActivity()});
+        if (this._activity === null) {
+            this.div.find('.activity-tree, p.buttons').hide();
+        } else {
+            this.div.find('.activity-tree, p.buttons').show();
+        }
         return this.getActivity();
     },
 

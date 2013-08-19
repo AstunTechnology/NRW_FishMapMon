@@ -126,7 +126,7 @@
                 "intensity_lvls_official_queen_scallops": "{{ _('Queen Scallop Dredging Intensity: FishMap Môn Results') }}",
                 "intensity_lvls_official_rsa_charterboats": "{{ _('Charter Boat Angling Intensity: FishMap Môn Results') }}",
                 "intensity_lvls_official_rsa_noncharter": "{{ _('Private Boat Angling Intensity: FishMap Môn Results') }}",
-                "intensity_lvls_official_rsa_combined": "{{ _('Combined Boat Angling: FishMap Môn Results') }}",
+                "intensity_lvls_official_rsa_combined": "{{ _('Combined Boat Angling Intensity: FishMap Môn Results') }}",
                 "intensity_lvls_official_rsa_shore": "{{ _('Shore Angling Intensity: FishMap Môn Results') }}",
                 "intensity_lvls_scenario_cas_hand_gath": "{{ _('Casual Hand Gather Intensity: Scenario Results') }}",
                 "intensity_lvls_scenario_pots_commercial": "{{ _('Commercial Potting Intensity: Scenario Results') }}",
@@ -419,6 +419,7 @@
     {% raw %}
         <div class="activity">
             <select>
+                <option value="">{% endraw %}{{ _('Select a fishing activty type') }}{% raw %}</option>
             {{#activities}}
                 <option value="{{.}}">{{#_}}{{.}}{{/_}}</option>
             {{/activities}}
