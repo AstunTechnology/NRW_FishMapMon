@@ -519,7 +519,7 @@
     LAYER
         NAME "sensvtyconf_lvls_official"
         INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (select * from sensitivity_conf_%FISHING%) as foo using unique ogc_fid using srid=27700"
+        DATA "wkb_geometry from (select * from sensvtyconf_lvls_%FISHING%) as foo using unique ogc_fid using srid=27700"
         VALIDATION
             'FISHING' '^[a-z_]+$'
         END
