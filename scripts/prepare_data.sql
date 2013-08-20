@@ -95,3 +95,20 @@ SET intensity_value = intensity_value * 10000 / 5475;
 UPDATE intensity_lvls_pro_hand_gath_gen
 SET intensity_value = intensity_value * 10000 / 5475;
 
+-- Create views for commercial and recreational potting confidence
+
+CREATE OR REPLACE VIEW sensvtyconf_lvls_pots_commercial AS 
+ SELECT sensvtyconf_lvls_pots_combined.ogc_fid, sensvtyconf_lvls_pots_combined.wkb_geometry, sensvtyconf_lvls_pots_combined.fishingtype, sensvtyconf_lvls_pots_combined.habitat_code, sensvtyconf_lvls_pots_combined.habitat_name, sensvtyconf_lvls_pots_combined.sensitivityconfidence
+   FROM sensvtyconf_lvls_pots_combined;
+
+ALTER TABLE sensvtyconf_lvls_pots_commercial
+  OWNER TO fishmap_webapp;
+
+CREATE OR REPLACE VIEW sensvtyconf_lvls_pots_recreational AS 
+ SELECT sensvtyconf_lvls_pots_combined.ogc_fid, sensvtyconf_lvls_pots_combined.wkb_geometry, sensvtyconf_lvls_pots_combined.fishingtype, sensvtyconf_lvls_pots_combined.habitat_code, sensvtyconf_lvls_pots_combined.habitat_name, sensvtyconf_lvls_pots_combined.sensitivityconfidence
+   FROM sensvtyconf_lvls_pots_combined;
+
+ALTER TABLE sensvtyconf_lvls_pots_recreational
+  OWNER TO fishmap_webapp;
+
+
