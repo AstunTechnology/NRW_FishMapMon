@@ -2,7 +2,7 @@
 
 CREATE DATABASE fishmap
 WITH ENCODING='UTF8'
-     OWNER=postgres
+     OWNER=fishmap_webapp
      TEMPLATE=template_postgis
      CONNECTION LIMIT=-1;
 
