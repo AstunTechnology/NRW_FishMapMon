@@ -564,8 +564,7 @@
 
     function scenarioAddFeature(feature) {
         FISH_MAP.scenario.feature = feature;
-        // outputPanel.showScenarioForm();
-        events.triggerEvent('polygondrawn');
+        events.triggerEvent('polygondrawn', {"polygon": feature});
     }
 
     function showScenario(args) {

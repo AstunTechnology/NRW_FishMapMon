@@ -19,6 +19,10 @@ OutputPanel = OpenLayers.Class({
                 jQuery('.new_scenario').parent().hide();
             },
             'polygondrawn': function(e) {
+                // Calculate the area and show it in the form
+                var area = (e.polygon.geometry.getArea()/1000000);
+                area = area.toFixed(2)
+                that.div.find('#scenario_area').val(area);
                 that.showInfo('polygondrawn');
                 that.showScenarioForm();
             },
@@ -113,17 +117,43 @@ OutputPanel = OpenLayers.Class({
             return false;
         });
 
-        jQuery('input[name=show_scenario]', panel.div).click(function() {
-            var args = [];
-            jQuery('form fieldset:visible').each(function() {
-                var val = 0;
-                jQuery(this).find('input:text').each(function() {
-                    val += parseInt(this.value, 10);
-                })
-                args.push(val);
-            });
-            panel.events.triggerEvent("showscenario", {args: args});
-            return false;
+        // Define specific validation rules for some inputs
+        var rsvRules = [
+            "range=0-31,dpm_0,Please enter a number of days per month.",
+            "range=0-31,dpm_1,Please enter a number of days per month.",
+            "range=0-31,dpm_2,Please enter a number of days per month.",
+            "range=0-31,dpm_3,Please enter a number of days per month.",
+            "range=0-31,dpm_4,Please enter a number of days per month.",
+            "range=0-31,dpm_5,Please enter a number of days per month.",
+            "range=0-31,dpm_6,Please enter a number of days per month.",
+            "range=0-31,dpm_7,Please enter a number of days per month.",
+            "range=0-31,dpm_8,Please enter a number of days per month.",
+            "range=0-31,dpm_9,Please enter a number of days per month.",
+            "range=0-31,dpm_10,Please enter a number of days per month.",
+            "range=0-31,dpm_11,Please enter a number of days per month."
+        ];
+
+        // Then add generic for all
+        jQuery('form div.variable input', panel.div).each(function () {
+            rsvRules.push("required," + this.name + ",Please enter a number.");
+            rsvRules.push("digits_only," + this.name + ",Please enter a number.");
+        });
+
+        jQuery('form', panel.div).RSV({
+            onCompleteHandler: function() {
+                var args = [];
+                jQuery('form div.variable fieldset:visible', panel.div).each(function() {
+                    var val = 0;
+                    jQuery(this).find('input:text').each(function() {
+                        val += parseInt(this.value, 10);
+                    })
+                    args.push(val);
+                });
+                panel.events.triggerEvent("showscenario", {args: args});
+                return false;
+            },
+            displayType: "alert-one",
+            "rules": rsvRules
         });
 
         return this.div;
@@ -162,14 +192,14 @@ OutputPanel = OpenLayers.Class({
     },
 
     showScenarioForm: function() {
-        jQuery('form fieldset', this.div).hide();
+        jQuery('form div.variable fieldset', this.div).hide();
         var fields = this.scenarioFields[this.getActivity()];
         for (var i = 0, fld; i < fields.length; i++) {
             fld = fields[i];
             jQuery('form fieldset.' + fld, this.div)
                 .find('input').val(0).end().show();
         }
-        jQuery('form').show();
+        jQuery('form', this.div).show();
     },
 
     hideScenarioForm: function() {

@@ -383,6 +383,7 @@
     <script src="{{ url_for('static', filename='js/jquery-1.9.1.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery.mustache.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery-ui-1.10.3.custom.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.rsv-2.5.1.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/proj4js-custom.min.js') }}"></script>
     <script type="text/javascript">
         Proj4js.defs["EPSG:27700"] = "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +datum=OSGB36 +units=m +no_defs";
@@ -424,67 +425,73 @@
             </select>
             <div class="info predrawpolygon"><p>{{ _('Please draw an area on the map.') }}</p><p>{{ _('Click to add a point and double click to finish drawing.') }}</p></div>
             <div class="info polygondrawn">{{ _('Please provide details of the fishing activity and click "Calculate Scenario".') }}</div>
-            <form>
-                <fieldset class="dpm">
-                    <legend>Days per month</legend>
-                    <p><label for="dpm_0">{{ _('January') }}</label> <input type="text" id="dpm_0" name="dpm_0" value="0" size="2" /></p>
-                    <p><label for="dpm_1">{{ _('February') }}</label> <input type="text" id="dpm_1" name="dpm_1" value="0" size="2" /></p>
-                    <p><label for="dpm_2">{{ _('March') }}</label> <input type="text" id="dpm_2" name="dpm_2" value="0" size="2" /></p>
-                    <p><label for="dpm_3">{{ _('April') }}</label> <input type="text" id="dpm_3" name="dpm_3" value="0" size="2" /></p>
-                    <p><label for="dpm_4">{{ _('May') }}</label> <input type="text" id="dpm_4" name="dpm_4" value="0" size="2" /></p>
-                    <p><label for="dpm_5">{{ _('June') }}</label> <input type="text" id="dpm_5" name="dpm_5" value="0" size="2" /></p>
-                    <p><label for="dpm_6">{{ _('July') }}</label> <input type="text" id="dpm_6" name="dpm_6" value="0" size="2" /></p>
-                    <p><label for="dpm_7">{{ _('August') }}</label> <input type="text" id="dpm_7" name="dpm_7" value="0" size="2" /></p>
-                    <p><label for="dpm_8">{{ _('September') }}</label> <input type="text" id="dpm_8" name="dpm_8" value="0" size="2" /></p>
-                    <p><label for="dpm_9">{{ _('October') }}</label> <input type="text" id="dpm_9" name="dpm_9" value="0" size="2" /></p>
-                    <p><label for="dpm_10">{{ _('November') }}</label> <input type="text" id="dpm_10" name="dpm_10" value="0" size="2" /></p>
-                    <p><label for="dpm_11">{{ _('December') }}</label> <input type="text" id="dpm_11" name="dpm_11" value="0" size="2" /></p>
+            <form id="scenario_form" action="" method="GET">
+                <fieldset class="scenario_area">
+                    <legend>{{ _('Scenario Area') }}</legend>
+                    <p><input type="text" id="scenario_area" name="scenario_area" value="0" size="4" readonly="readonly" /><label for="scenario_area"> km<sup>2</sup></p>
                 </fieldset>
-                <fieldset class="gear_speed">
-                    <legend>{{ _('Gear Speed (knots)') }}</legend>
-                    <p><input type="text" id="gear_speed" name="gear_speed" value="0" size="4" /></p>
-                </fieldset>
-                <fieldset class="gear_time">
-                    <legend>{{ _('Gear Time (hours per day)') }}</legend>
-                    <p><input type="text" id="gear_time" name="gear_time" value="0" size="4" /></p>
-                </fieldset>
-                <fieldset class="gear_width">
-                    <legend>{{ _('Gear Width (metres)') }}</legend>
-                    <p><input type="text" id="gear_width" name="gear_width" value="0" size="4" /></p>
-                </fieldset>
-                <fieldset class="num_dredges">
-                    <legend>{{ _('Number of Dredges') }}</legend>
-                    <p><input type="text" id="num_dredges" name="num_dredges" value="0" size="4" /></p>
-                </fieldset>
-                <fieldset class="net_len">
-                    <legend>{{ _('Net Length (metres)') }}</legend>
-                    <p><input type="text" id="net_len" name="net_len" value="0" size="4" /></p>
-                </fieldset>
-                <fieldset class="num_nets">
-                    <legend>{{ _('Number of Nets') }}</legend>
-                    <p><input type="text" id="num_nets" name="num_nets" value="0" size="4" /></p>
-                </fieldset>
-                <fieldset class="num_pots">
-                    <legend>{{ _('Number of Pots') }}</legend>
-                    <p><input type="text" id="num_pots" name="num_pots" value="0" size="4" /></p>
-                </fieldset>
-                <fieldset class="num_anchors">
-                    <legend>{{ _('Number of Anchors') }}</legend>
-                    <p><input type="text" id="num_anchors" name="num_anchors" value="0" size="4" /></p>
-                </fieldset>
-                <fieldset class="num_rods">
-                    <legend>{{ _('Number of Fishermen/ Rods') }}</legend>
-                    <p><input type="text" id="num_rods" name="num_rods" value="0" size="4" /></p>
-                </fieldset>
-                <fieldset class="avg_hours">
-                    <legend>{{ _('Average Hours') }}</legend>
-                    <p><input type="text" id="avg_hours" name="avg_hours" value="0" size="4" /></p>
-                </fieldset>
-                <fieldset class="num_gath">
-                    <legend>{{ _('Number of Visits') }}</legend>
-                    <p><input type="text" id="num_gath" name="num_gath" value="0" size="4" /></p>
-                </fieldset>
-                <p class="buttons"><input type="button" name="show_scenario" value="{{ _('Calculate Scenario') }}" /> <input type="button" name="clear_scenario" value="{{ _('Clear Scenario') }}" /></p>
+                <div class="variable">
+                    <fieldset class="dpm">
+                        <legend>Days per month</legend>
+                        <p><label for="dpm_0">{{ _('January') }}</label> <input type="text" id="dpm_0" name="dpm_0" value="0" size="2" /></p>
+                        <p><label for="dpm_1">{{ _('February') }}</label> <input type="text" id="dpm_1" name="dpm_1" value="0" size="2" /></p>
+                        <p><label for="dpm_2">{{ _('March') }}</label> <input type="text" id="dpm_2" name="dpm_2" value="0" size="2" /></p>
+                        <p><label for="dpm_3">{{ _('April') }}</label> <input type="text" id="dpm_3" name="dpm_3" value="0" size="2" /></p>
+                        <p><label for="dpm_4">{{ _('May') }}</label> <input type="text" id="dpm_4" name="dpm_4" value="0" size="2" /></p>
+                        <p><label for="dpm_5">{{ _('June') }}</label> <input type="text" id="dpm_5" name="dpm_5" value="0" size="2" /></p>
+                        <p><label for="dpm_6">{{ _('July') }}</label> <input type="text" id="dpm_6" name="dpm_6" value="0" size="2" /></p>
+                        <p><label for="dpm_7">{{ _('August') }}</label> <input type="text" id="dpm_7" name="dpm_7" value="0" size="2" /></p>
+                        <p><label for="dpm_8">{{ _('September') }}</label> <input type="text" id="dpm_8" name="dpm_8" value="0" size="2" /></p>
+                        <p><label for="dpm_9">{{ _('October') }}</label> <input type="text" id="dpm_9" name="dpm_9" value="0" size="2" /></p>
+                        <p><label for="dpm_10">{{ _('November') }}</label> <input type="text" id="dpm_10" name="dpm_10" value="0" size="2" /></p>
+                        <p><label for="dpm_11">{{ _('December') }}</label> <input type="text" id="dpm_11" name="dpm_11" value="0" size="2" /></p>
+                    </fieldset>
+                    <fieldset class="gear_speed">
+                        <legend>{{ _('Gear Speed (knots)') }}</legend>
+                        <p><input type="text" id="gear_speed" name="gear_speed" value="0" size="4" /></p>
+                    </fieldset>
+                    <fieldset class="gear_time">
+                        <legend>{{ _('Gear Time (hours per day)') }}</legend>
+                        <p><input type="text" id="gear_time" name="gear_time" value="0" size="4" /></p>
+                    </fieldset>
+                    <fieldset class="gear_width">
+                        <legend>{{ _('Gear Width (metres)') }}</legend>
+                        <p><input type="text" id="gear_width" name="gear_width" value="0" size="4" /></p>
+                    </fieldset>
+                    <fieldset class="num_dredges">
+                        <legend>{{ _('Number of Dredges') }}</legend>
+                        <p><input type="text" id="num_dredges" name="num_dredges" value="0" size="4" /></p>
+                    </fieldset>
+                    <fieldset class="net_len">
+                        <legend>{{ _('Net Length (metres)') }}</legend>
+                        <p><input type="text" id="net_len" name="net_len" value="0" size="4" /></p>
+                    </fieldset>
+                    <fieldset class="num_nets">
+                        <legend>{{ _('Number of Nets') }}</legend>
+                        <p><input type="text" id="num_nets" name="num_nets" value="0" size="4" /></p>
+                    </fieldset>
+                    <fieldset class="num_pots">
+                        <legend>{{ _('Number of Pots') }}</legend>
+                        <p><input type="text" id="num_pots" name="num_pots" value="0" size="4" /></p>
+                    </fieldset>
+                    <fieldset class="num_anchors">
+                        <legend>{{ _('Number of Anchors') }}</legend>
+                        <p><input type="text" id="num_anchors" name="num_anchors" value="0" size="4" /></p>
+                    </fieldset>
+                    <fieldset class="num_rods">
+                        <legend>{{ _('Number of Fishermen/ Rods') }}</legend>
+                        <p><input type="text" id="num_rods" name="num_rods" value="0" size="4" /></p>
+                    </fieldset>
+                    <fieldset class="avg_hours">
+                        <legend>{{ _('Average Hours') }}</legend>
+                        <p><input type="text" id="avg_hours" name="avg_hours" value="0" size="4" /></p>
+                    </fieldset>
+                    <fieldset class="num_gath">
+                        <legend>{{ _('Number of Visits') }}</legend>
+                        <p><input type="text" id="num_gath" name="num_gath" value="0" size="4" /></p>
+                    </fieldset>
+                </div>
+                <p class="buttons"><input type="submit" name="show_scenario" value="{{ _('Calculate Scenario') }}" /> <input type="button" name="clear_scenario" value="{{ _('Clear Scenario') }}" /></p>
             </form>
             <div class="info scenariocalculated"><p>{{ _('View the results of your scenario by enabling the scenario layers below.') }}</p><p>{{ _('If you change the criteria above click the "Calculate Scenario" button to see the changes on the map.') }}</p></div>
             <div class="activity-tree">
