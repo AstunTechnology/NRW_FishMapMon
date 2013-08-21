@@ -7,7 +7,7 @@
                 <Name>{{ _('Charter Boat Angling Extents') }}</Name>
                 <PolygonSymbolizer>
                     <Stroke>
-                        <SvgParameter name="stroke">#0a12f8</SvgParameter>
+                        <SvgParameter name="stroke">#00A0A0</SvgParameter>
                         <SvgParameter name="stroke-width">2px</SvgParameter>
                     </Stroke>
                     <Fill>

@@ -7,7 +7,7 @@
                 <Name>{{ _('King Scallop Dredging Extents') }}</Name>
                 <PolygonSymbolizer>
                     <Stroke>
-                        <SvgParameter name="stroke">#0c35f1</SvgParameter>
+                        <SvgParameter name="stroke">#0000FF</SvgParameter>
                         <SvgParameter name="stroke-width">2px</SvgParameter>
                     </Stroke>
                     <Fill>

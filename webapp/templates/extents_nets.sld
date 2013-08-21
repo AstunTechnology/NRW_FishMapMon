@@ -4,10 +4,10 @@
         <Name>name</Name>
         <FeatureTypeStyle>
             <Rule>
-                <Name>{{ _('Netting Extents') }}</Name>
+                <Name>{{ _('Bottom Set Nets Extents') }}</Name>
                 <PolygonSymbolizer>
                     <Stroke>
-                        <SvgParameter name="stroke">#c58678</SvgParameter>
+                        <SvgParameter name="stroke">#C0C000</SvgParameter>
                         <SvgParameter name="stroke-width">2px</SvgParameter>
                     </Stroke>
                     <Fill>

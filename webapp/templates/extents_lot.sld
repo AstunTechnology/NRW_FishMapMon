@@ -7,7 +7,7 @@
                 <Name>{{ _('Light Otter Trawl Extents') }}</Name>
                 <PolygonSymbolizer>
                     <Stroke>
-                        <SvgParameter name="stroke">#a12bae</SvgParameter>
+                        <SvgParameter name="stroke">#800000</SvgParameter>
                         <SvgParameter name="stroke-width">2px</SvgParameter>
                     </Stroke>
                     <Fill>

@@ -7,7 +7,7 @@
                 <Name>{{ _('Combined Potting Extents') }}</Name>
                 <PolygonSymbolizer>
                     <Stroke>
-                        <SvgParameter name="stroke">#92d744</SvgParameter>
+                        <SvgParameter name="stroke">#FF0000</SvgParameter>
                         <SvgParameter name="stroke-width">2px</SvgParameter>
                     </Stroke>
                     <Fill>

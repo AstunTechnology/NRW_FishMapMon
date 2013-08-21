@@ -4,10 +4,10 @@
         <Name>name</Name>
         <FeatureTypeStyle>
             <Rule>
-                <Name>{{ _('RSA Non Charter Boats Extents') }}</Name>
+                <Name>{{ _('Private Boat Angling Extents') }}</Name>
                 <PolygonSymbolizer>
                     <Stroke>
-                        <SvgParameter name="stroke">#fb811d</SvgParameter>
+                        <SvgParameter name="stroke">#8080FF</SvgParameter>
                         <SvgParameter name="stroke-width">2px</SvgParameter>
                     </Stroke>
                     <Fill>

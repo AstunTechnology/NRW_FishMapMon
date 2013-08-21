@@ -7,7 +7,7 @@
                 <Name>{{ _('Mussel Seed Harvesting Extents') }}</Name>
                 <PolygonSymbolizer>
                     <Stroke>
-                        <SvgParameter name="stroke">#73c57f</SvgParameter>
+                        <SvgParameter name="stroke">#FF00FF</SvgParameter>
                         <SvgParameter name="stroke-width">2px</SvgParameter>
                     </Stroke>
                     <Fill>

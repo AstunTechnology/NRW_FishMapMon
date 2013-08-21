@@ -7,7 +7,7 @@
                 <Name>{{ _('Recreational Potting Extents') }}</Name>
                 <PolygonSymbolizer>
                     <Stroke>
-                        <SvgParameter name="stroke">#92d744</SvgParameter>
+                        <SvgParameter name="stroke">#FF7040</SvgParameter>
                         <SvgParameter name="stroke-width">2px</SvgParameter>
                     </Stroke>
                     <Fill>

@@ -4,10 +4,10 @@
         <Name>name</Name>
         <FeatureTypeStyle>
             <Rule>
-                <Name>{{ _('Professional Hand Gather Extents') }}</Name>
+                <Name>{{ _('Professional Hand Gathering Extents') }}</Name>
                 <PolygonSymbolizer>
                     <Stroke>
-                        <SvgParameter name="stroke">#bf2717</SvgParameter>
+                        <SvgParameter name="stroke">#800080</SvgParameter>
                         <SvgParameter name="stroke-width">2px</SvgParameter>
                     </Stroke>
                     <Fill>
