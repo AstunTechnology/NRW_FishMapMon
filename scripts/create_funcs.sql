@@ -776,47 +776,41 @@ ALTER FUNCTION fishmap.project_intensity_rsa_shore(wkt text, generalize boolean,
 -- Name: project_sensitivity_lvls_combined(text, text, text, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION fishmap.project_sensitivity_lvls_combined(activity text, wkt text, bbox text, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, summary integer, name text, sensitivity_level integer, intensity_level integer, wkb_geometry public.geometry)
+CREATE FUNCTION fishmap.project_sensitivity_lvls_combined(activity_name text, wkt text, bbox text, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, summary integer, name text, sensitivity_level integer, intensity_level integer, wkb_geometry public.geometry)
     LANGUAGE plpgsql
     AS $_$
 DECLARE
 	sql text;
 BEGIN
-	
+
+CREATE TEMP TABLE _tmp_sensitivity_levels ON COMMIT DROP AS (
+    SELECT habitat_id, intensity_lvl, sensitivity_lvl
+    FROM fishmap.sensitivity_matrix
+    WHERE activity_id = (SELECT id FROM fishmap.activities WHERE fishmap_name = activity_name)
+);  
+CREATE TEMP TABLE _tmp_sensitivity_intensities ON COMMIT DROP AS (
+    SELECT il.intensity_level, il.wkb_geometry
+    FROM fishmap.project_intensity_lvls_combined_gen(
+        activity_name, 
+        wkt, 
+        VARIADIC args) il
+    WHERE ST_Intersects(il.wkb_geometry,  ST_GeomFromText(bbox, 27700))
+);
 	sql := format(
 		'
-WITH levels AS (
-	SELECT habitat_id, intensity_lvl, sensitivity_lvl
-	FROM fishmap.sensitivity_matrix
-	WHERE activity_id = (SELECT id FROM fishmap.activities WHERE fishmap_name = %1$L)
-),
-intensities AS (
-	SELECT intensity_level, wkb_geometry
-	FROM fishmap.project_intensity_lvls_combined_gen(
-		%1$L, 
-		%2$L, 
-		%4$s)	
-	WHERE ST_Intersects(wkb_geometry,  ST_GeomFromText(%3$L, 27700))
-),
-intensity_area AS (
-	SELECT ST_Buffer(
-		(SELECT ST_Multi(ST_Union(wkb_geometry)) FROM intensities),
-		-0.1
-	) AS wkb_geometry
-)
 SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, summary, name, sensitivity_level, intensity_level, wkb_geometry FROM (
 	
 	-- new polygons
 	SELECT h.habitat_code::int AS summary, h.habitat_name::text AS name, l.sensitivity_lvl AS sensitivity_level, i.intensity_level, ST_Intersection(i.wkb_geometry, h.wkb_geometry) AS wkb_geometry
-	FROM intensities i,
+	FROM _tmp_sensitivity_intensities i,
 		habitats h,
-		levels l
+		_tmp_sensitivity_levels l
 	WHERE  l.habitat_id = h.dominant_habitat 
 		AND l.intensity_lvl = i.intensity_level
 		AND ST_Intersects(i.wkb_geometry, h.wkb_geometry)	
 ) AS sensitivities;
 ', 
-		activity,
+		activity_name,
 		wkt, 
 		bbox,
 		(
@@ -836,39 +830,37 @@ ALTER FUNCTION fishmap.project_sensitivity_lvls_combined(activity text, wkt text
 -- Name: project_sensitivity_lvls_new(text, text, text, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION fishmap.project_sensitivity_lvls_new(activity text, wkt text, bbox text, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, summary integer, name text, sensitivity_level integer, intensity_level integer, wkb_geometry public.geometry)
+CREATE FUNCTION fishmap.project_sensitivity_lvls_new(activity_name text, wkt text, bbox text, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, summary integer, name text, sensitivity_level integer, intensity_level integer, wkb_geometry public.geometry)
     LANGUAGE plpgsql
     AS $_$
 DECLARE
 	sql text;
 BEGIN	
-	sql := format(
+    CREATE TEMP TABLE _tmp_sensitivity_levels ON COMMIT DROP AS (
+        SELECT habitat_id, intensity_lvl, sensitivity_lvl
+        FROM fishmap.sensitivity_matrix
+        WHERE activity_id = (SELECT id FROM fishmap.activities WHERE fishmap_name = activity_name)
+);
+    CREATE TEMP TABLE _tmp_sensitivity_intensities ON COMMIT DROP AS (
+        SELECT il.intensity_level, il.wkb_geometry
+        FROM fishmap.project_intensity_lvls_combined_gen(
+            activity_name,                
+            wkt,                        
+            VARIADIC args) il
+        WHERE ST_Intersects(il.wkb_geometry,  ST_GeomFromText(bbox, 27700))
+);
+
+    sql := format(
 		'
-WITH levels AS (
-	SELECT habitat_id, intensity_lvl, sensitivity_lvl
-	FROM fishmap.sensitivity_matrix
-	WHERE activity_id = (SELECT id FROM fishmap.activities WHERE fishmap_name = %1$L)
-),
-intensities AS (
-	SELECT intensity_level, wkb_geometry
-	FROM fishmap.project_intensity_lvls_new_gen(%1$L, %2$L, %4$s)
-	WHERE ST_Intersects(
-		wkb_geometry, 
-		ST_Intersection(
-			ST_GeomFromText(%2$L, 27700),
-			ST_GeomFromText(%3$L, 27700)
-		)
-	)
-)
 SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, summary, name, sensitivity_level, intensity_level, wkb_geometry FROM (
 	SELECT h.habitat_code AS summary, h.habitat_name::text AS name, l.sensitivity_lvl AS sensitivity_level, i.intensity_level, ST_Intersection(i.wkb_geometry, h.wkb_geometry) AS wkb_geometry
-	FROM intensities i,
+	FROM _tmp_sensitivity_intensities i,
 		habitats h,
-		levels l
+		_tmp_sensitivity_levels l
 	WHERE ST_Intersects(i.wkb_geometry, h.wkb_geometry)
 		AND  l.habitat_id = h.dominant_habitat AND l.intensity_lvl = i.intensity_level
 ) AS sensitivities;', 
-		activity,
+		activity_name,
 		wkt, 
 		bbox,
 		(
