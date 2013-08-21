@@ -234,8 +234,9 @@ def wms():
         data=args
     )
 
-    resp = make_response(r.content)
+    resp = make_response(r.content, r.status_code)
     resp.headers['Content-Type'] = r.headers['Content-Type']
+
 
     if cacheable:
         dt = datetime.datetime.utcnow()
