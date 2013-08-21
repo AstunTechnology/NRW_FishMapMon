@@ -141,11 +141,11 @@ ogr2ogr -overwrite -skipfailures -sql "select Definitive_Name + ' - ' + County_N
 ogr2ogr -append -skipfailures -sql "select Post_code as name from CodePoint_Wales_points" -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "Search/OS_CodePoints/CodePoint_Wales_points.TAB" -nln gaz -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
 # Protected Sites
-ogr2ogr -append -skipfailures  -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "ProtectedSites/SAC_Features/SAC_features.TAB" -nln sac_features -s_srs "EPSG:27700" -a_srs "EPSG:27700"
-ogr2ogr -append -skipfailures  -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "ProtectedSites/SAC_TAB/sac.tab" -nln sac -s_srs "EPSG:27700" -a_srs "EPSG:27700"
-ogr2ogr -append -skipfailures  -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "ProtectedSites/SPA_TAB/spa.tab" -nln spa -s_srs "EPSG:27700" -a_srs "EPSG:27700"
-ogr2ogr -append -skipfailures  -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "ProtectedSites/SSSI_TAB/sssi.tab" -nln sssi -s_srs "EPSG:27700" -a_srs "EPSG:27700"
-ogr2ogr -append -skipfailures  -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "ProtectedSites/Ramsar_TAB/ramsar.tab" -nln ramsar -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -overwrite -skipfailures  -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "ProtectedSites/SAC_Features/SAC_features.TAB" -nln sac_features -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -overwrite -skipfailures  -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "ProtectedSites/SAC_TAB/sac.tab" -nln sac -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -overwrite -skipfailures  -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "ProtectedSites/SPA_TAB/spa.tab" -nln spa -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -overwrite -skipfailures  -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "ProtectedSites/SSSI_TAB/sssi.tab" -nln sssi -s_srs "EPSG:27700" -a_srs "EPSG:27700"
+ogr2ogr -overwrite -skipfailures  -f PostgreSQL PG:'dbname=fishmap active_schema=public host=localhost user=fishmap_webapp password=<password>' "ProtectedSites/Ramsar_TAB/ramsar.tab" -nln ramsar -s_srs "EPSG:27700" -a_srs "EPSG:27700"
 
 # NOTE: You probably need to run
 # 'psql -U fishmap_webapp -d fishmap -f prepare_data.sql'
