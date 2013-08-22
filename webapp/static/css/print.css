@@ -1,0 +1,63 @@
+.heading h1 {
+    display: block;
+    position: static;
+    font-size: 1.4em;
+}
+
+.heading img {
+    display: none;
+}
+
+#toolbar {
+    display: none;
+}
+
+#map {
+    top: 0;
+}
+
+aside {
+    font-size: 1em;
+    width: 200px;
+}
+
+#main {
+    left: 200px;
+}
+
+aside .outputs {
+    padding-left: 0;
+}
+
+ul.tree, ul.tree ul {
+    padding: 0;
+    margin: 0;
+}
+
+aside .overlays {
+    display: none;
+}
+
+.std-tree {
+    display: none;
+}
+
+aside .buttons {
+    display: none !important;
+}
+
+.olControlMapSearch, .olControlBaseMapSwitcher, .olControlPanZoomBar {
+    display: none;
+}
+
+input, select {
+    font-size: inherit;
+}
+
+aside h2 {
+    display:none;
+}
+
+.olControlLegendPanel .legend h2 {
+    display: none;
+}
