@@ -321,7 +321,6 @@ def update_wms_layers(layers, auth):
             cacheable = False
             break
 
-    print(layers)
     return layers, cacheable
 
 
@@ -454,14 +453,18 @@ def get_extra_sld_info(layer, args):
                 {"name": "750 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 750, "color": "#0000A0"}
             ],
             "cas_hand_gath": [
-                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0FFFF"},
-                {"name": "3", "type": "PropertyIsEqualTo", "value": 3, "color": "#80D5FF"},
-                {"name": "4 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 4, "color": "#00ABFF"}
+                {"name": "39 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 39, "color": "#A0FFFF"},
+                {"name": "40 - 69", "type": "PropertyIsBetween", "lower": 40, "upper": 69, "color": "#80D5FF"},
+                {"name": "70 - 99", "type": "PropertyIsBetween", "lower": 70, "upper": 99, "color": "#00ABFF"},
+                {"name": "100 - 149", "type": "PropertyIsBetween", "lower": 100, "upper": 149, "color": "#004BE0"},
+                {"name": "150 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 150, "color": "#0000A0"}
             ],
             "pro_hand_gath": [
-                {"name": "2 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 2, "color": "#A0FFFF"},
-                {"name": "3", "type": "PropertyIsEqualTo", "value": 3, "color": "#80D5FF"},
-                {"name": "4 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 4, "color": "#00ABFF"}
+                {"name": "39 or less", "type": "PropertyIsLessThanOrEqualTo", "value": 39, "color": "#A0FFFF"},
+                {"name": "40 - 69", "type": "PropertyIsBetween", "lower": 40, "upper": 69, "color": "#80D5FF"},
+                {"name": "70 - 99", "type": "PropertyIsBetween", "lower": 70, "upper": 99, "color": "#00ABFF"},
+                {"name": "100 - 149", "type": "PropertyIsBetween", "lower": 100, "upper": 149, "color": "#004BE0"},
+                {"name": "150 or more", "type": "PropertyIsGreaterThanOrEqualTo", "value": 150, "color": "#0000A0"}
             ],
         }
         data['bands'] = vessels_bands[layer]
