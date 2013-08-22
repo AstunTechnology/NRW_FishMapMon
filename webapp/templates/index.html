@@ -1448,16 +1448,32 @@
                 <td>{{attributes.geartype}}</td>
             </tr>
             <tr>
-                <th>{{#_}}Species{{/_}}: </th>
-                <td>{{attributes.speciescom}}</td>
-            </tr>
-            <tr>
                 <th>{{#_}}Intensity Level{{/_}}: </th>
                 <td>{{attributes.intensity_level}}</td>
             </tr>
             <tr>
                 <th>{{#_}}Intensity Value{{/_}}: </th>
                 <td>{{attributes.intensity_value}}</td>
+            </tr>
+            <tr>
+                <th>{{#_}}Number of gatherers per year{{/_}}: </th>
+                <td>{{attributes.num_gatherers_year}}</td>
+            </tr>
+            <tr>
+                <th>{{#_}}Number of anglers per year{{/_}}: </th>
+                <td>{{attributes.num_anglers_year}}</td>
+            </tr>
+            <tr>
+                <th>{{#_}}Species{{/_}}: </th>
+                <td>{{attributes.species}}</td>
+            </tr>
+            <tr>
+                <th>{{#_}}Species{{/_}}: </th>
+                <td>{{attributes.speciescommon1}}</td>
+            </tr>
+            <tr>
+                <th>{{#_}}User ID{{/_}}: </th>
+                <td>{{attributes.userid}}</td>
             </tr>
             <tr>
                 <th>{{#_}}no_vessels_{{fishingactivity}}{{/_}}: </th>
@@ -1517,10 +1533,10 @@
         <tbody class="info {{key}}">
             <tr>
                 <th>{{#_}}Habitat{{/_}}: </th>
-                <td>{{attributes.habitat_name}}</td>
+                <td>{{attributes.habitat_code}} {{attributes.habitat_name}}</td>
             </tr>
             <tr>
-                <th>{{#_}}Habitat confidence{{/_}}: </th>
+                <th>{{#_}}Habitat Confidence{{/_}}: </th>
                 <td>{{attributes.habitat_confidence}}</td>
             </tr>
             <tr>
@@ -1530,6 +1546,10 @@
             <tr>
                 <th>{{#_}}Intensity Level{{/_}}: </th>
                 <td>{{attributes.intensity_level}}</td>
+            </tr>
+            <tr>
+                <th>{{#_}}User ID{{/_}}: </th>
+                <td>{{attributes.userid}}</td>
             </tr>
         </tbody>
         {{/features}}
