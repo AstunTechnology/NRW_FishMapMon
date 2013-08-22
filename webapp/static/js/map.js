@@ -75,20 +75,31 @@
     map.addLayer(charts);
 
     var visibleOverlays = overlayLayers.getVisibleLayers();
-    var overlays = wmsLayer(
-        "Overlays",
-        FISH_MAP.WMS_OVERLAY_URL,
-        {
-            layers: visibleOverlays.join(',')
-        },
-        {
-            attribution: FISH_MAP.getText('os_copy'),
-            singleTile: false,
-            tileSize: new OpenLayers.Size(512, 512)
-        }
-    );
-    map.addLayer(overlays);
     
+    
+    // Add a layer for each static overlay
+    var overlays = {};
+    for (var i = 0; i < overlayLayers.list.length; i++) {
+        var layer = overlayLayers.list[i];
+        var overlay = wmsLayer(
+            layer.id,
+            FISH_MAP.WMS_OVERLAY_URL,
+            {
+                layers: layer.id 
+            },
+            {
+                attribution: FISH_MAP.getText('os_copy'),
+                singleTile: false,
+                tileSize: new OpenLayers.Size(512, 512)
+            }
+        );
+        overlay.setVisibility(layer.visible);
+        overlays[layer.id] = overlay;
+        map.addLayer(overlay);
+    }
+   
+    
+
     var calculated = wmsLayer(
         "Calculated",
         FISH_MAP.WMS_OVERLAY_URL,
@@ -275,7 +286,7 @@
             refreshCalculatedLayer();
         }
         else {
-            refreshOverlayLayer();
+            refreshOverlayLayers();
         }
     }
 
@@ -300,24 +311,25 @@
         return params;
     }
 
-    function refreshOverlayLayer() {
-        // Refresh the overlay WMS layer
-        var visibleLayers = overlayLayers.getVisibleLayers();
-        var visibleStatic = [];
-        for (var i = 0; i < visibleLayers.length; i++) {
-            var layer = visibleLayers[i];
-            if (!layer.calculated) {
-                visibleStatic.push(layer);
+    function refreshOverlayLayers() {
+        // Refresh the overlay WMS layers
+        for (var i = 0; i < overlayLayers.list.length; i++) {
+            var layer = overlayLayers.list[i];
+            if (overlays[layer.id]) {
+                var overlay = overlays[layer.id];
+                overlay.setVisibility(layer.visible);
+                if (layer.visible) {
+                    var params = {
+                        'LAYERS': layer.id
+                    };
+                    if (layer.output_layer && FISH_MAP.fishingactivity) {
+                        params['FISHING'] = FISH_MAP.fishingactivity;
+                    }
+                    overlay.mergeNewParams(params);
+                }
             }
         }
-        // Hide the layer if there are no visible layers to avoid an invalid
-        // WMS request being generated
-        overlays.setVisibility(visibleStatic.length);
-        var params = {
-            'LAYERS': visibleStatic.join(',')
-        };
-        params['FISHING'] = FISH_MAP.fishingactivity;
-        overlays.mergeNewParams(params);
+        var visibleLayers = overlayLayers.getVisibleLayers();
         legendPanel.showLayers(jQuery.grep(visibleLayers, function(item) {return item.legend}));
     }     
      
@@ -431,6 +443,9 @@
         // Define lookup for layers
         layers.layers = {};
 
+        // Ordered list of layers
+        layers.list = [];
+
         for (var m = 0, grp; m < layers.groups.length; m++) {
             grp = layers.groups[m];
             grp.addLayer = function(lyr) {
@@ -442,6 +457,15 @@
             for (var n = 0, lyr; n < grp.layers.length; n++) {
                 lyr = grp.layers[n];
                 decorateLyr(lyr, grp);
+                layers.list.push(lyr);
+                var prefix = lyr.id.split('_')[0];
+                lyr.output_layer = false;
+                for (var p = 0; p < FISH_MAP.outputTypes.length; p++) {
+                    if(FISH_MAP.outputTypes[p] === prefix ) {
+                        lyr.output_layer = true;
+                        break;
+                    }
+                }
             }
         }
 
@@ -578,7 +602,7 @@
         removeScenarioLayers();
         events.triggerEvent('clearscenario');
         // Refresh the map state
-        refreshOverlayLayer();
+        refreshOverlayLayers();
         refreshCalculatedLayer();
     }
 
@@ -625,7 +649,7 @@
         addScenarioLayers();
         events.triggerEvent('scenariocalculated');
         // Refresh the map state
-        refreshOverlayLayer();
+        refreshOverlayLayers();
         refreshCalculatedLayer();
     }
 
