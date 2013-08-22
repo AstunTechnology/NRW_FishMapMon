@@ -4,6 +4,7 @@
     var overlayLayers = FISH_MAP.overlayLayers;
     var outputActivities = FISH_MAP.outputActivities;
     var outputTypes = FISH_MAP.outputTypes;
+    var scenarioLayerNames = FISH_MAP.scenarioLayerNames;
 
     overlayLayers = layersCollection(overlayLayers);
 
@@ -87,6 +88,19 @@
         }
     );
     map.addLayer(overlays);
+    
+    var calculated = wmsLayer(
+        "Calculated",
+        FISH_MAP.WMS_OVERLAY_URL,
+        {
+            layers: visibleOverlays.join(',')
+        },
+        {
+            singleTile: true
+        }
+    );
+    calculated.setVisibility(false);
+    map.addLayer(calculated);
 
     var legendPanel = new OpenLayers.Control.LegendPanel({
         layers: [overlays],
@@ -255,8 +269,14 @@
 
     function layer_toggle(layers, id, visible) {
         // Update the model
-        layers.getLayerById(id).visible = visible;
-        refreshOverlayLayer();
+        l = layers.getLayerById(id)
+        l.visible = visible;
+        if( l.calculated) {
+            refreshCalculatedLayer();
+        }
+        else {
+            refreshOverlayLayer();
+        }
     }
 
     function deleteScenarioParams(params) {
@@ -281,18 +301,47 @@
     }
 
     function refreshOverlayLayer() {
-        deleteScenarioParams(overlays.params);
         // Refresh the overlay WMS layer
         var visibleLayers = overlayLayers.getVisibleLayers();
+        var visibleStatic = [];
+        for (var i = 0; i < visibleLayers.length; i++) {
+            var layer = visibleLayers[i];
+            if (!layer.calculated) {
+                visibleStatic.push(layer);
+            }
+        }
         // Hide the layer if there are no visible layers to avoid an invalid
         // WMS request being generated
-        overlays.setVisibility(visibleLayers.length);
+        overlays.setVisibility(visibleStatic.length);
         var params = {
-            'LAYERS': visibleLayers.join(',')
+            'LAYERS': visibleStatic.join(',')
         };
         params['FISHING'] = FISH_MAP.fishingactivity;
+        overlays.mergeNewParams(params);
+        legendPanel.showLayers(jQuery.grep(visibleLayers, function(item) {return item.legend}));
+    }     
+     
+    function refreshCalculatedLayer() {   
+        // Refresh the calculated WMS layer
+        var visibleLayers = overlayLayers.getVisibleLayers();
+        var visibleCalculated = [];
+        for (var i = 0; i < visibleLayers.length; i++) {
+            var layer = visibleLayers[i];
+            if (layer.calculated) {
+                visibleCalculated.push(layer);
+            }
+        }
+        
+        // Hide the layer if there are no visible layers to avoid an invalid
+        // WMS request being generated
+        calculated.setVisibility(visibleCalculated.length);
+        var params = {
+            'LAYERS': visibleCalculated.join(',')
+        };
+
+        params['FISHING'] = FISH_MAP.fishingactivity;
         if (FISH_MAP.scenario && FISH_MAP.scenario.feature) {
-            params['COUNT'] = 1;
+            params['COUNT'] = FISH_MAP.scenario.count || 1;
             params['WKT'] = FISH_MAP.scenario.feature.geometry.toString();
         }
         if (FISH_MAP.scenario && FISH_MAP.scenario.args) {
@@ -301,7 +350,9 @@
                 params['ARG' + (i + 1)] = arg;
             }
         }
-        overlays.mergeNewParams(params);
+
+        calculated.mergeNewParams(params);
+
         legendPanel.showLayers(jQuery.grep(visibleLayers, function(item) {return item.legend}));
     }
 
@@ -528,10 +579,11 @@
         events.triggerEvent('clearscenario');
         // Refresh the map state
         refreshOverlayLayer();
+        refreshCalculatedLayer();
     }
 
     function addScenarioLayers() {
-        // Add the additional layers to the activiy groups if they dont'
+        // Add the additional layers to the activity groups if they don't
         // already exist
         for (var i = 0, type, grp, lyrId, lyr; i < FISH_MAP.scenarioLayerNames.length; i++) {
             lyrId = FISH_MAP.scenarioLayerNames[i];
@@ -542,8 +594,9 @@
                     "id": lyrId,
                     "info": true,
                     "legend": true,
-                    "visible": false
-                };
+                    "visible": false,
+                    "calculated": true
+            };
                 var layerInfo = FISH_MAP.getLayerInfo(lyr.id);
                 lyr._fullName = layerInfo.fullName;
                 grp.addLayer(lyr);
@@ -573,6 +626,7 @@
         events.triggerEvent('scenariocalculated');
         // Refresh the map state
         refreshOverlayLayer();
+        refreshCalculatedLayer();
     }
 
 })();
