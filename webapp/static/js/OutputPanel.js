@@ -142,6 +142,9 @@ OutputPanel = OpenLayers.Class({
         jQuery('form', panel.div).RSV({
             onCompleteHandler: function() {
                 var args = [];
+                var count = 1;
+                var activity = panel.getActivity();
+
                 jQuery('form div.variable fieldset:visible', panel.div).each(function() {
                     var val = 0;
                     jQuery(this).find('input:text').each(function() {
@@ -149,7 +152,12 @@ OutputPanel = OpenLayers.Class({
                     })
                     args.push(val);
                 });
-                panel.events.triggerEvent("showscenario", {args: args});
+
+                if (panel.countFields[activity]) {
+                    count = jQuery("input#" + panel.countFields[activity]).val();
+                }
+
+                panel.events.triggerEvent("showscenario", {"args": args, "count": count});
                 return false;
             },
             displayType: "alert-one",
@@ -224,6 +232,14 @@ OutputPanel = OpenLayers.Class({
         "rsa_shore": ['dpm', 'num_rods', 'avg_hours'],
         "cas_hand_gath": ['dpm', 'num_gath', 'avg_hours'],
         "pro_hand_gath": ['dpm', 'num_gath', 'avg_hours']
-    }
+    },
 
+    /** 
+     * 'COUNT' field used for "vessel" calculations
+     */
+    countFields: {
+        "rsa_shore": "num_rods",
+        "cas_hand_gath": "num_gath",
+        "pro_hand_gath": "num_gath"
+    }
 });

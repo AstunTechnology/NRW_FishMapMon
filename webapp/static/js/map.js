@@ -428,7 +428,7 @@
             clearScenario();
         },
         'showscenario': function(e) {
-            showScenario(e.args);
+            showScenario(e.args, e.count);
         }
     });
 
@@ -644,8 +644,9 @@
         events.triggerEvent('polygondrawn', {"polygon": feature});
     }
 
-    function showScenario(args) {
-        FISH_MAP.scenario.args = args
+    function showScenario(args, count) {
+        FISH_MAP.scenario.args = args;
+        FISH_MAP.scenario.count = count;
         addScenarioLayers();
         events.triggerEvent('scenariocalculated');
         // Refresh the map state
