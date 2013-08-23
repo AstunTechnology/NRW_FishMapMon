@@ -30,78 +30,78 @@ ALTER FUNCTION fishmap.calculate_intensity_cas_hand_gath(days numeric, avghours 
 -- Name: calculate_intensity_dredges(numeric, numeric, numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION fishmap.calculate_intensity_dredges(days numeric, speed numeric, hours numeric, width numeric, num numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_dredges(days numeric, speed numeric, hours numeric, width numeric, dredges numeric, vessels numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
-	SELECT ( $2 * 1.852 * $3 * $4 * $5 * $1 * 1000) / $6 ;
+	SELECT ( $2 * 1.852 * $3 * $4 * $5 * $1 * 1000 * $6 ) / $7 ;
 $_$;
 
 
-ALTER FUNCTION fishmap.calculate_intensity_dredges(days numeric, speed numeric, hours numeric, width numeric, num numeric, area numeric) OWNER TO fishmap_webapp;
+ALTER FUNCTION fishmap.calculate_intensity_dredges(days numeric, speed numeric, hours numeric, width numeric, dredges numeric, vessels numeric, area numeric) OWNER TO fishmap_webapp;
 
 --
--- Name: calculate_intensity_king_scallops(numeric, numeric, numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+-- Name: calculate_intensity_king_scallops(numeric, numeric, numeric, numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION fishmap.calculate_intensity_king_scallops(days numeric, speed numeric, hours numeric, width numeric, num numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_king_scallops(days numeric, speed numeric, hours numeric, width numeric, dredges numeric, vessels numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
-	SELECT * FROM fishmap.calculate_intensity_dredges( $1, $2, $3, $4, $5, $6);
+	SELECT * FROM fishmap.calculate_intensity_dredges( $1, $2, $3, $4, $5, $6, $7);
 $_$;
 
 
-ALTER FUNCTION fishmap.calculate_intensity_king_scallops(days numeric, speed numeric, hours numeric, width numeric, num numeric, area numeric) OWNER TO fishmap_webapp;
+ALTER FUNCTION fishmap.calculate_intensity_king_scallops(days numeric, speed numeric, hours numeric, width numeric, dredges numeric, vessels numeric, area numeric) OWNER TO fishmap_webapp;
 
 --
--- Name: calculate_intensity_lot(numeric, numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+-- Name: calculate_intensity_lot(numeric, numeric, numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION fishmap.calculate_intensity_lot(days numeric, speed numeric, hours numeric, width numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_lot(days numeric, speed numeric, hours numeric, width numeric, vessels numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
-	SELECT ( $2 * 1.852 * $3 * $4 * $1 * 1000) / $5 ;
+	SELECT ( $2 * 1.852 * $3 * $4 * $1 * 1000 * $5) / $6 ;
 $_$;
 
 
-ALTER FUNCTION fishmap.calculate_intensity_lot(days numeric, speed numeric, hours numeric, width numeric, area numeric) OWNER TO fishmap_webapp;
+ALTER FUNCTION fishmap.calculate_intensity_lot(days numeric, speed numeric, hours numeric, width numeric, vessels numeric, area numeric) OWNER TO fishmap_webapp;
 
 --
--- Name: calculate_intensity_mussels(numeric, numeric, numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+-- Name: calculate_intensity_mussels(numeric, numeric, numeric, numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION fishmap.calculate_intensity_mussels(days numeric, speed numeric, hours numeric, width numeric, num numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_mussels(days numeric, speed numeric, hours numeric, width numeric, dredges numeric, vessels numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
-	SELECT * FROM fishmap.calculate_intensity_dredges( $1, $2, $3, $4, $5, $6);
+	SELECT * FROM fishmap.calculate_intensity_dredges( $1, $2, $3, $4, $5, $6, $7);
 $_$;
 
 
-ALTER FUNCTION fishmap.calculate_intensity_mussels(days numeric, speed numeric, hours numeric, width numeric, num numeric, area numeric) OWNER TO fishmap_webapp;
+ALTER FUNCTION fishmap.calculate_intensity_mussels(days numeric, speed numeric, hours numeric, width numeric, dredges numeric, vessels numeric, area numeric) OWNER TO fishmap_webapp;
 
 --
--- Name: calculate_intensity_nets(numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+-- Name: calculate_intensity_nets(numeric, numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION fishmap.calculate_intensity_nets(days numeric, length numeric, nets numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_nets(days numeric, length numeric, nets numeric, vessels numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
-	SELECT (( $2 * $3 * $1 ) / 100 ) / ( $4 / 1000000 );
+	SELECT (( $2 * $3 * $1 * $4 ) / 100 ) / ( $5 / 1000000 );
 $_$;
 
 
-ALTER FUNCTION fishmap.calculate_intensity_nets(days numeric, length numeric, nets numeric, area numeric) OWNER TO fishmap_webapp;
+ALTER FUNCTION fishmap.calculate_intensity_nets(days numeric, length numeric, nets numeric, vessels numeric, area numeric) OWNER TO fishmap_webapp;
 
 --
--- Name: calculate_intensity_pots(numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+-- Name: calculate_intensity_pots(numeric, numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION fishmap.calculate_intensity_pots(days numeric, anchors numeric, pots numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_pots(days numeric, anchors numeric, pots numeric, vessels numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
-	SELECT ( ($2 + $3) * $1 / ( $4 / 10000 ) ) / 365;
+	SELECT ( ( ($2 + $3) * $1 * $4 ) / ( $5 / 10000 ) ) / 365;
 $_$;
 
-ALTER FUNCTION fishmap.calculate_intensity_pots(days numeric, anchors numeric, pots numeric, area numeric) owner to fishmap_webapp;
+ALTER FUNCTION fishmap.calculate_intensity_pots(days numeric, anchors numeric, pots numeric, vessels numeric, area numeric) owner to fishmap_webapp;
 
 --
 -- Name: calculate_intensity_pro_hand_gath(numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
@@ -117,56 +117,56 @@ $_$;
 ALTER FUNCTION fishmap.calculate_intensity_pro_hand_gath(days numeric, avghours numeric, people numeric, area numeric) OWNER TO fishmap_webapp;
 
 --
--- Name: calculate_intensity_queen_scallops(numeric, numeric, numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+-- Name: calculate_intensity_queen_scallops(numeric, numeric, numeric, numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION fishmap.calculate_intensity_queen_scallops(days numeric, speed numeric, hours numeric, width numeric, num numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_queen_scallops(days numeric, speed numeric, hours numeric, width numeric, dredges numeric, vessels numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
-	SELECT * FROM fishmap.calculate_intensity_dredges( $1, $2, $3, $4, $5, $6);
+	SELECT * FROM fishmap.calculate_intensity_dredges( $1, $2, $3, $4, $5, $6, $7);
 $_$;
 
 
-ALTER FUNCTION fishmap.calculate_intensity_queen_scallops(days numeric, speed numeric, hours numeric, width numeric, num numeric, area numeric) OWNER TO fishmap_webapp;
+ALTER FUNCTION fishmap.calculate_intensity_queen_scallops(days numeric, speed numeric, hours numeric, width numeric, dredges numeric, vessels numeric, area numeric) OWNER TO fishmap_webapp;
 
 --
--- Name: calculate_intensity_rsa_charterboats(numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+-- Name: calculate_intensity_rsa_charterboats(numeric, numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION fishmap.calculate_intensity_rsa_charterboats(days numeric, rods numeric, avghours numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_rsa_charterboats(days numeric, rods numeric, avghours numeric, vessels numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
-	SELECT ( ( $2 * $1 ) / ( $4 / 10000 ) ) / 52;
+	SELECT ( ( $2 * $1 * $4 ) / ( $5 / 10000 ) ) / 52;
 $_$;
 
 
-ALTER FUNCTION fishmap.calculate_intensity_rsa_charterboats(days numeric, rods numeric, avghours numeric, area numeric) OWNER TO fishmap_webapp;
+ALTER FUNCTION fishmap.calculate_intensity_rsa_charterboats(days numeric, rods numeric, avghours numeric, vessels numeric, area numeric) OWNER TO fishmap_webapp;
 
 --
--- Name: calculate_intensity_rsa_combined(numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+-- Name: calculate_intensity_rsa_combined(numeric, numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION fishmap.calculate_intensity_rsa_combined(days numeric, rods numeric, avghours numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_rsa_combined(days numeric, rods numeric, avghours numeric, vessels numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
-	SELECT ( ( $2 * $1 ) / ( $4 / 10000 ) ) / 52;
+	SELECT ( ( $2 * $1 * $4) / ( $5 / 10000 ) ) / 52;
 $_$;
 
 
-ALTER FUNCTION fishmap.calculate_intensity_rsa_combined(days numeric, rods numeric, avghours numeric, area numeric) OWNER TO fishmap_webapp;
+ALTER FUNCTION fishmap.calculate_intensity_rsa_combined(days numeric, rods numeric, avghours numeric, vessels numeric, area numeric) OWNER TO fishmap_webapp;
 
 --
--- Name: calculate_intensity_rsa_noncharter(numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
+-- Name: calculate_intensity_rsa_noncharter(numeric, numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION fishmap.calculate_intensity_rsa_noncharter(days numeric, rods numeric, avghours numeric, area numeric) RETURNS numeric
+CREATE FUNCTION fishmap.calculate_intensity_rsa_noncharter(days numeric, rods numeric, avghours numeric, vessels numeric, area numeric) RETURNS numeric
     LANGUAGE sql
     AS $_$
-	SELECT ( ( $2 * $1 ) / ( $4 / 10000 ) ) / 52;
+	SELECT ( ( $2 * $1 * $4 ) / ( $5 / 10000 ) ) / 52;
 $_$;
 
 
-ALTER FUNCTION fishmap.calculate_intensity_rsa_noncharter(days numeric, rods numeric, avghours numeric, area numeric) OWNER TO fishmap_webapp;
+ALTER FUNCTION fishmap.calculate_intensity_rsa_noncharter(days numeric, rods numeric, avghours numeric, vessels numeric, area numeric) OWNER TO fishmap_webapp;
 
 --
 -- Name: calculate_intensity_rsa_shore(numeric, numeric, numeric, numeric); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
@@ -404,7 +404,7 @@ CREATE FUNCTION fishmap.project_intensity_king_scallops(wkt text, generalize boo
 	SELECT * FROM fishmap.project_intensity(
 		'king_scallops'::text, 
 		1, 
-		fishmap.calculate_intensity_king_scallops( $4[1], $4[2], $4[3], $4[4], $4[5], ST_Area(ST_GeomFromText($1))::numeric),
+		fishmap.calculate_intensity_king_scallops( $4[1], $4[2], $4[3], $4[4], $4[5], $4[6], ST_Area(ST_GeomFromText($1))::numeric),
 		$1,
 		$2,
 		$3		
@@ -424,7 +424,7 @@ CREATE FUNCTION fishmap.project_intensity_lot(wkt text, generalize boolean, comb
 	SELECT * FROM fishmap.project_intensity(
 		'lot'::text, 
 		5, 
-		fishmap.calculate_intensity_lot( $4[1], $4[2], $4[3], $4[4], ST_Area(ST_GeomFromText($1))::numeric),
+		fishmap.calculate_intensity_lot( $4[1], $4[2], $4[3], $4[4], $4[5], ST_Area(ST_GeomFromText($1))::numeric),
 		$1,
 		$2,
 		$3			
@@ -560,7 +560,7 @@ CREATE FUNCTION fishmap.project_intensity_mussels(wkt text, generalize boolean, 
 	SELECT * FROM fishmap.project_intensity(
 		'mussels'::text, 
 		3, 
-		fishmap.calculate_intensity_mussels( $4[1], $4[2], $4[3], $4[4], $4[5], ST_Area(ST_GeomFromText($1))::numeric),
+		fishmap.calculate_intensity_mussels( $4[1], $4[2], $4[3], $4[4], $4[5], $4[6], ST_Area(ST_GeomFromText($1))::numeric),
 		$1,
 		$2,
 		$3	
@@ -580,7 +580,7 @@ CREATE FUNCTION fishmap.project_intensity_nets(wkt text, generalize boolean, com
 	SELECT * FROM fishmap.project_intensity(
 		'nets'::text, 
 		8, 
-		fishmap.calculate_intensity_nets( $4[1], $4[2], $4[3], ST_Area(ST_GeomFromText($1))::numeric),
+		fishmap.calculate_intensity_nets( $4[1], $4[2], $4[3], $4[4], ST_Area(ST_GeomFromText($1))::numeric),
 		$1,
 		$2,
 		$3	
@@ -600,7 +600,7 @@ CREATE FUNCTION fishmap.project_intensity_pots_commercial(wkt text, generalize b
 	SELECT * FROM fishmap.project_intensity(
 		'pots_commercial'::text, 
 		9, 
-		fishmap.calculate_intensity_pots( $4[1], $4[2], $4[3], ST_Area(ST_GeomFromText($1))::numeric),
+		fishmap.calculate_intensity_pots( $4[1], $4[2], $4[3], $4[4], ST_Area(ST_GeomFromText($1))::numeric),
 		$1,
 		$2,
 		$3		
@@ -621,7 +621,7 @@ CREATE FUNCTION fishmap.project_intensity_pots_recreational(wkt text, generalize
 	SELECT * FROM fishmap.project_intensity(
 		'pots_recreational'::text, 
 		9, 
-		fishmap.calculate_intensity_pots( $4[1], $4[2], $4[3], ST_Area(ST_GeomFromText($1))::numeric),
+		fishmap.calculate_intensity_pots( $4[1], $4[2], $4[3], $4[4], ST_Area(ST_GeomFromText($1))::numeric),
 		$1,
 		$2,
 		$3		
@@ -642,7 +642,7 @@ CREATE FUNCTION fishmap.project_intensity_pots_combined(wkt text, generalize boo
 	SELECT * FROM fishmap.project_intensity(
 		'pots_combined'::text, 
 		9, 
-		fishmap.calculate_intensity_pots( $4[1], $4[2], $4[3], ST_Area(ST_GeomFromText($1))::numeric),
+		fishmap.calculate_intensity_pots( $4[1], $4[2], $4[3], $4[4], ST_Area(ST_GeomFromText($1))::numeric),
 		$1,
 		$2,
 		$3		
@@ -682,7 +682,7 @@ CREATE FUNCTION fishmap.project_intensity_queen_scallops(wkt text, generalize bo
 	SELECT * FROM fishmap.project_intensity(
 		'queen_scallops'::text, 
 		2, 
-		fishmap.calculate_intensity_queen_scallops( $4[1], $4[2], $4[3], $4[4], $4[5], ST_Area(ST_GeomFromText($1))::numeric),
+		fishmap.calculate_intensity_queen_scallops( $4[1], $4[2], $4[3], $4[4], $4[5], $4[6], ST_Area(ST_GeomFromText($1))::numeric),
 		$1,
 		$2,
 		$3		
@@ -702,7 +702,7 @@ CREATE FUNCTION fishmap.project_intensity_rsa_charterboats(wkt text, generalize 
 	SELECT * FROM fishmap.project_intensity(
 		'rsa_charterboats'::text, 
 		10, 
-		fishmap.calculate_intensity_rsa_charterboats( $4[1], $4[2], $4[3], ST_Area(ST_GeomFromText($1))::numeric),
+		fishmap.calculate_intensity_rsa_charterboats( $4[1], $4[2], $4[3], $4[4], ST_Area(ST_GeomFromText($1))::numeric),
 		$1,
 		$2,
 		$3	
@@ -722,7 +722,7 @@ CREATE FUNCTION fishmap.project_intensity_rsa_combined(wkt text, generalize bool
 	SELECT * FROM fishmap.project_intensity(
 		'rsa_combined'::text, 
 		10, 
-		fishmap.calculate_intensity_rsa_combined( $4[1], $4[2], $4[3], ST_Area(ST_GeomFromText($1))::numeric),
+		fishmap.calculate_intensity_rsa_combined( $4[1], $4[2], $4[3], $4[4], ST_Area(ST_GeomFromText($1))::numeric),
 		$1,
 		$2,
 		$3		
@@ -742,7 +742,7 @@ CREATE FUNCTION fishmap.project_intensity_rsa_noncharter(wkt text, generalize bo
 	SELECT * FROM fishmap.project_intensity(
 		'rsa_noncharter'::text,
 		10, 
-		fishmap.calculate_intensity_rsa_noncharter( $4[1], $4[2], $4[3], ST_Area(ST_GeomFromText($1))::numeric),
+		fishmap.calculate_intensity_rsa_noncharter( $4[1], $4[2], $4[3], $4[4], ST_Area(ST_GeomFromText($1))::numeric),
 		$1,
 		$2,
 		$3		

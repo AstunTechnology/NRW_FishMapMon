@@ -218,17 +218,17 @@ OutputPanel = OpenLayers.Class({
      * Lookup of activity to scenario fields
      */
     scenarioFields: {
-        "king_scallops": ['dpm', 'gear_speed', 'gear_time', 'gear_width', 'num_dredges'],
-        "queen_scallops": ['dpm', 'gear_speed', 'gear_time', 'gear_width', 'num_dredges'],
-        "mussels": ['dpm', 'gear_speed', 'gear_time', 'gear_width', 'num_dredges'],
-        "lot": ['dpm', 'gear_speed', 'gear_time', 'gear_width'],
-        "nets": ['dpm', 'net_len', 'num_nets'],
-        "pots_commercial": ['dpm', 'num_pots', 'num_anchors'],
-        "pots_recreational": ['dpm', 'num_pots', 'num_anchors'],
-        "pots_combined": ['dpm', 'num_pots', 'num_anchors'],
-        "rsa_charterboats": ['dpm', 'num_rods', 'avg_hours'],
-        "rsa_noncharter": ['dpm', 'num_rods', 'avg_hours'],
-        "rsa_combined": ['dpm', 'num_rods', 'avg_hours'],
+        "king_scallops": ['dpm', 'gear_speed', 'gear_time', 'gear_width', 'num_dredges', "vessels"],
+        "queen_scallops": ['dpm', 'gear_speed', 'gear_time', 'gear_width', 'num_dredges', "vessels"],
+        "mussels": ['dpm', 'gear_speed', 'gear_time', 'gear_width', 'num_dredges', "vessels"],
+        "lot": ['dpm', 'gear_speed', 'gear_time', 'gear_width', "vessels"],
+        "nets": ['dpm', 'net_len', 'num_nets', "vessels"],
+        "pots_commercial": ['dpm', 'num_pots', 'num_anchors', "vessels"],
+        "pots_recreational": ['dpm', 'num_pots', 'num_anchors', "vessels"],
+        "pots_combined": ['dpm', 'num_pots', 'num_anchors', "vessels"],
+        "rsa_charterboats": ['dpm', 'num_rods', 'avg_hours', "vessels"],
+        "rsa_noncharter": ['dpm', 'num_rods', 'avg_hours', "vessels"],
+        "rsa_combined": ['dpm', 'num_rods', 'avg_hours', "vessels"],
         "rsa_shore": ['dpm', 'num_rods', 'avg_hours'],
         "cas_hand_gath": ['dpm', 'num_gath', 'avg_hours'],
         "pro_hand_gath": ['dpm', 'num_gath', 'avg_hours']
@@ -238,6 +238,17 @@ OutputPanel = OpenLayers.Class({
      * 'COUNT' field used for "vessel" calculations
      */
     countFields: {
+        "king_scallops": "vessels",
+        "queen_scallops": "vessels",
+        "mussels": "vessels",
+        "lot": "vessels",
+        "nets": "vessels",
+        "pots_commercial": "vessels",
+        "pots_recreational": "vessels",
+        "pots_combined": "vessels",
+        "rsa_charterboats": "vessels",
+        "rsa_noncharter": "vessels",
+        "rsa_combined": "vessels",
         "rsa_shore": "num_rods",
         "cas_hand_gath": "num_gath",
         "pro_hand_gath": "num_gath"
