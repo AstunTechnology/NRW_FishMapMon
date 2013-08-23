@@ -5,7 +5,7 @@
         <FeatureTypeStyle>
             {% for band in info['bands'] %}
             <Rule>
-                <Name>{{band['name']}}</Name>
+                <Name>Level {{band['name']}}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>intensity_level</PropertyName>
