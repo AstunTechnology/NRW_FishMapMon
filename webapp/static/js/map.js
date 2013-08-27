@@ -140,7 +140,7 @@
                 this.vendorParams = {}
                 this.vendorParams['FISHING'] = FISH_MAP.fishingactivity;
                 if (FISH_MAP.scenario && FISH_MAP.scenario.feature) {
-                    this.vendorParams['COUNT'] = 1;
+                    this.vendorParams['COUNT'] = FISH_MAP.scenario.count;
                     this.vendorParams['WKT'] = FISH_MAP.scenario.feature.geometry.toString();
                 }
                 if (FISH_MAP.scenario && FISH_MAP.scenario.args) {

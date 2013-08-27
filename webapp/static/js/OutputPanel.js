@@ -144,6 +144,7 @@ OutputPanel = OpenLayers.Class({
                 var args = [];
                 var count = 1;
                 var activity = panel.getActivity();
+                var countField = panel.countFields[activity];
 
                 jQuery('form div.variable fieldset:visible', panel.div).each(function() {
                     var val = 0;
@@ -153,8 +154,12 @@ OutputPanel = OpenLayers.Class({
                     args.push(val);
                 });
 
-                if (panel.countFields[activity]) {
-                    count = jQuery("input#" + panel.countFields[activity]).val();
+                if (countField) {
+                    count = jQuery("input#" + countField).val();
+                    if (countField != "vessels") {
+                        // Number of visits so multiply by days, always the first arg 
+                        count = count * args[0];
+                    }
                 }
 
                 panel.events.triggerEvent("showscenario", {"args": args, "count": count});
