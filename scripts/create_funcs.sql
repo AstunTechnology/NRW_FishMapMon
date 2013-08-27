@@ -796,11 +796,9 @@ CREATE TEMP TABLE _tmp_sensitivity_intensities ON COMMIT DROP AS (
         VARIADIC args) il
     WHERE ST_Intersects(il.wkb_geometry,  ST_GeomFromText(bbox, 27700))
 );
-	sql := format(
-		'
+	sql := format('
 SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, summary, name, sensitivity_level, intensity_level, wkb_geometry FROM (
 	
-	-- new polygons
 	SELECT h.habitat_code::int AS summary, h.habitat_name::text AS name, l.sensitivity_lvl AS sensitivity_level, i.intensity_level, ST_Intersection(i.wkb_geometry, h.wkb_geometry) AS wkb_geometry
 	FROM _tmp_sensitivity_intensities i,
 		habitats h,
@@ -809,15 +807,7 @@ SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, summary, name,
 		AND l.intensity_lvl = i.intensity_level
 		AND ST_Intersects(i.wkb_geometry, h.wkb_geometry)	
 ) AS sensitivities;
-', 
-		activity_name,
-		wkt, 
-		bbox,
-		(
-		      SELECT string_agg(arg::text, '::numeric, ') 
-		      FROM unnest(args) arg
-		) || '::numeric'
-	);
+');
 	RAISE INFO '%', sql;
 	RETURN QUERY EXECUTE sql;
 END;
@@ -850,8 +840,7 @@ CREATE TEMP TABLE _tmp_sensitivity_intensities ON COMMIT DROP AS (
         VARIADIC args) il
     WHERE ST_Intersects(il.wkb_geometry,  ST_GeomFromText(bbox, 27700))
 );
-	sql := format(
-		'
+	sql := format('
 SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, summary, name, sensitivity_level, intensity_level, wkb_geometry FROM (
 	
 	-- new polygons
@@ -863,15 +852,7 @@ SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, summary, name,
 		AND l.intensity_lvl = i.intensity_level
 		AND ST_Intersects(i.wkb_geometry, h.wkb_geometry)	
 ) AS sensitivities;
-', 
-		activity_name,
-		wkt, 
-		bbox,
-		(
-		      SELECT string_agg(arg::text, '::numeric, ') 
-		      FROM unnest(args) arg
-		) || '::numeric'
-	);
+');
 	RAISE INFO '%', sql;
 	RETURN QUERY EXECUTE sql;
 END;
@@ -904,8 +885,7 @@ CREATE TEMP TABLE _tmp_sensitivity_intensities ON COMMIT DROP AS (
     WHERE ST_Intersects(il.wkb_geometry,  ST_GeomFromText(bbox, 27700))
 );
 
-    sql := format(
-		'
+    sql := format('
 SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, summary, name, sensitivity_level, intensity_level, wkb_geometry FROM (
 	SELECT h.habitat_code AS summary, h.habitat_name::text AS name, l.sensitivity_lvl AS sensitivity_level, i.intensity_level, ST_Intersection(i.wkb_geometry, h.wkb_geometry) AS wkb_geometry
 	FROM _tmp_sensitivity_intensities i,
@@ -913,15 +893,8 @@ SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, summary, name,
 		_tmp_sensitivity_levels l
 	WHERE ST_Intersects(i.wkb_geometry, h.wkb_geometry)
 		AND  l.habitat_id = h.dominant_habitat AND l.intensity_lvl = i.intensity_level
-) AS sensitivities;', 
-		activity_name,
-		wkt, 
-		bbox,
-		(
-		      SELECT string_agg(arg::text, ', ') 
-		      FROM unnest(args) arg
-		)
-	);
+) AS sensitivities;
+');
 	RAISE INFO '%', sql;
 	RETURN QUERY EXECUTE sql;
 END;
@@ -954,8 +927,7 @@ CREATE TEMP TABLE _tmp_sensitivity_intensities ON COMMIT DROP AS (
     WHERE ST_Intersects(il.wkb_geometry,  ST_GeomFromText(bbox, 27700))
 );
 
-    sql := format(
-		'
+    sql := format('
 SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, summary, name, sensitivity_level, intensity_level, wkb_geometry FROM (
 	SELECT h.habitat_code AS summary, h.habitat_name::text AS name, l.sensitivity_lvl AS sensitivity_level, i.intensity_level, ST_Intersection(i.wkb_geometry, h.wkb_geometry) AS wkb_geometry
 	FROM _tmp_sensitivity_intensities i,
@@ -963,15 +935,8 @@ SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, summary, name,
 		_tmp_sensitivity_levels l
 	WHERE ST_Intersects(i.wkb_geometry, h.wkb_geometry)
 		AND  l.habitat_id = h.dominant_habitat AND l.intensity_lvl = i.intensity_level
-) AS sensitivities;', 
-		activity_name,
-		wkt, 
-		bbox,
-		(
-		      SELECT string_agg(arg::text, ', ') 
-		      FROM unnest(args) arg
-		)
-	);
+) AS sensitivities;
+');
 	RAISE INFO '%', sql;
 	RETURN QUERY EXECUTE sql;
 END;
