@@ -817,10 +817,13 @@ SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, habitat_code, 
         , intensity_level
         , wkb_geometry
     FROM 
-        %I        
+        %I s       
+    WHERE 
+        ST_Disjoint(s.wkb_geometry, ST_GeomFromText(%L, 27700)) 
 ) AS sensitivities;
 ',
-'sensitivity_lvls_'||activity_name||'_gen'
+'sensitivity_lvls_'||activity_name||'_gen',
+wkt
 );
 	RAISE INFO '%', sql;
 	RETURN QUERY EXECUTE sql;
