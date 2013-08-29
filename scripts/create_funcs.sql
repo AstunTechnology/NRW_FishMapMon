@@ -790,7 +790,35 @@ CREATE TEMP TABLE _tmp_sensitivity_intensities ON COMMIT DROP AS (
         ST_Intersects(il.wkb_geometry,  ST_GeomFromText(wkt, 27700))
 );
 
-    sql := format('
+CREATE TEMP TABLE _tmp_union ON COMMIT DROP AS (
+    SELECT ST_Union(
+        ST_SnapToGrid(
+            si.wkb_geometry
+            , 0.1
+        )
+    ) AS wkb_geometry
+    FROM _tmp_sensitivity_intensities si
+);
+
+CREATE TEMP TABLE _tmp_habitats ON COMMIT DROP AS (
+    SELECT 
+        h.habitat_code
+        , h.habitat_name
+        , h.dominant_habitat
+        , h.habitat_confidence
+        , ST_Intersection(
+            h.wkb_geometry
+            , (
+                SELECT u.wkb_geometry FROM _tmp_union u
+            ) 
+        ) AS wkb_geometry
+    FROM 
+        habitats h
+    WHERE
+        ST_Intersects(h.wkb_geometry, (SELECT u.wkb_geometry FROM _tmp_union u))
+);
+
+sql := format('
 SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, habitat_code, habitat_name, dominant_habitat, habitat_confidence, sensitivity_level, intensity_level, wkb_geometry FROM (
 	SELECT 
         h.habitat_code
@@ -802,11 +830,10 @@ SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, habitat_code, 
         , h.wkb_geometry
 	FROM 
         _tmp_sensitivity_intensities i
-		, habitats_gen h
+		, _tmp_habitats h
 		, _tmp_sensitivity_levels l
 	WHERE 
-        ST_Within(ST_Centroid(i.wkb_geometry), h.wkb_geometry)
-		AND  l.habitat_id = h.dominant_habitat AND l.intensity_lvl = i.intensity_level
+		l.habitat_id = h.dominant_habitat AND l.intensity_lvl = i.intensity_level
     UNION
     SELECT 
         habitat_code
@@ -819,7 +846,7 @@ SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, habitat_code, 
     FROM 
         %I s       
     WHERE 
-        ST_Disjoint(s.wkb_geometry, ST_GeomFromText(%L, 27700)) 
+        ST_Disjoint(s.wkb_geometry, ST_Buffer((SELECT u.wkb_geometry FROM _tmp_union u), -0.1)) 
 ) AS sensitivities;
 ',
 'sensitivity_lvls_'||activity_name||'_gen',
@@ -882,7 +909,7 @@ ALTER FUNCTION fishmap.project_sensitivity_lvls_combined_det(activity_name text,
 -- Name: project_sensitivity_lvls_scenario_gen(text, text, text, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION fishmap.project_sensitivity_lvls_scenario_gen(activity_name text, wkt text, bbox text, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, habitat_code integer, habitat_name text, sensitivity_level integer, intensity_level integer, wkb_geometry public.geometry)
+CREATE FUNCTION fishmap.project_sensitivity_lvls_scenario_gen(activity_name text, wkt text, bbox text, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, habitat_code integer, habitat_name text, dominant_habitat integer, habitat_confidence character varying(20), sensitivity_level integer, intensity_level integer, wkb_geometry public.geometry)
     LANGUAGE plpgsql
     AS $_$
 DECLARE
@@ -904,21 +931,50 @@ CREATE TEMP TABLE _tmp_sensitivity_intensities ON COMMIT DROP AS (
     WHERE ST_Intersects(il.wkb_geometry,  ST_GeomFromText(bbox, 27700))
 );
 
+CREATE TEMP TABLE _tmp_union ON COMMIT DROP AS (
+    SELECT ST_Union(
+        ST_SnapToGrid(
+            si.wkb_geometry
+            , 0.1
+        )
+    ) AS wkb_geometry
+    FROM _tmp_sensitivity_intensities si
+);
+
+CREATE TEMP TABLE _tmp_habitats ON COMMIT DROP AS (
+    SELECT 
+        h.habitat_code
+        , h.habitat_name
+        , h.dominant_habitat
+        , h.habitat_confidence
+        , ST_Intersection(
+            h.wkb_geometry
+            , (
+                SELECT u.wkb_geometry FROM _tmp_union u
+            ) 
+        ) AS wkb_geometry
+    FROM 
+        habitats h
+    WHERE
+        ST_Intersects(h.wkb_geometry, (SELECT u.wkb_geometry FROM _tmp_union u))
+);
+    
     sql := format('
-SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, habitat_code, habitat_name, sensitivity_level, intensity_level, wkb_geometry FROM (
+SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, habitat_code, habitat_name,dominant_habitat, habitat_confidence, sensitivity_level, intensity_level, wkb_geometry FROM (
 	SELECT 
         h.habitat_code
         , h.habitat_name::text
+        , h.dominant_habitat
+        , h.habitat_confidence
         , l.sensitivity_lvl AS sensitivity_level
         , i.intensity_level
         , h.wkb_geometry
 	FROM 
         _tmp_sensitivity_intensities i
-		, habitats_gen h
+		, _tmp_habitats h
 		, _tmp_sensitivity_levels l
 	WHERE 
-        ST_Within(ST_Centroid(i.wkb_geometry), h.wkb_geometry)
-		AND  l.habitat_id = h.dominant_habitat AND l.intensity_lvl = i.intensity_level
+		l.habitat_id = h.dominant_habitat AND l.intensity_lvl = i.intensity_level
 ) AS sensitivities;
 ');
 	RAISE INFO '%', sql;
@@ -939,10 +995,10 @@ CREATE FUNCTION fishmap.project_sensitivity_lvls_scenario_det(activity_name text
 DECLARE
 	sql text;
 BEGIN	
-    CREATE TEMP TABLE _tmp_sensitivity_levels ON COMMIT DROP AS (
-        SELECT habitat_id, intensity_lvl, sensitivity_lvl
-        FROM fishmap.sensitivity_matrix
-        WHERE activity_id = (SELECT id FROM fishmap.activities WHERE fishmap_name = activity_name)
+CREATE TEMP TABLE _tmp_sensitivity_levels ON COMMIT DROP AS (
+    SELECT habitat_id, intensity_lvl, sensitivity_lvl
+    FROM fishmap.sensitivity_matrix
+    WHERE activity_id = (SELECT id FROM fishmap.activities WHERE fishmap_name = activity_name)
 );
 CREATE TEMP TABLE _tmp_sensitivity_intensities ON COMMIT DROP AS (
     SELECT il.intensity_level, il.wkb_geometry
@@ -956,10 +1012,12 @@ CREATE TEMP TABLE _tmp_sensitivity_intensities ON COMMIT DROP AS (
     sql := format('
 SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, habitat_code, habitat_name, sensitivity_level, intensity_level, wkb_geometry FROM (
 	SELECT h.habitat_code, h.habitat_name::text, l.sensitivity_lvl AS sensitivity_level, i.intensity_level, ST_Intersection(i.wkb_geometry, h.wkb_geometry) AS wkb_geometry
-	FROM _tmp_sensitivity_intensities i,
-		habitats h,
-		_tmp_sensitivity_levels l
-	WHERE ST_Intersects(i.wkb_geometry, h.wkb_geometry)
+	FROM 
+        _tmp_sensitivity_intensities i
+		, habitats h
+		, _tmp_sensitivity_levels l
+	WHERE 
+        ST_Intersects(i.wkb_geometry, h.wkb_geometry)
 		AND  l.habitat_id = h.dominant_habitat AND l.intensity_lvl = i.intensity_level
 ) AS sensitivities;
 ');

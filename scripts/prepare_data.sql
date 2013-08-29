@@ -24,43 +24,6 @@ WHERE
         wkb_geometry )
     = 'ST_LineString';
 
--- Create generalized habitats table for use in scenario generalized calculations
--- Should really be supplied by NRW
-DROP TABLE IF EXISTS habitats_gen CASCADE;
-CREATE TABLE habitats_gen AS (
-	SELECT 
-		DISTINCT ON (g.ogc_fid)
-		g.ogc_fid
-		, h.habitat_code
-		, h.habitat_name
-		, h.habitat_confidence
-		, h.dominant_habitat
-		, g.wkb_geometry
-	FROM 
-		grid g
-		, habitats h
-	WHERE 
-		ST_Intersects(g.wkb_geometry, h.wkb_geometry)
-	GROUP BY
-		g.ogc_fid
-		, h.habitat_code
-		, h.habitat_name
-		, h.habitat_confidence
-		, h.dominant_habitat
-	ORDER BY 
-		g.ogc_fid
-		, Sum(ST_Area(ST_Intersection(g.wkb_geometry, h.wkb_geometry))) DESC
-)
-;
-ALTER TABLE habitats_gen ADD PRIMARY KEY (ogc_fid);
-ALTER TABLE habitats_gen
-  OWNER TO fishmap_webapp;
-CREATE INDEX habitats_gen_wkb_geometry_idx
-  ON habitats_gen
-  USING gist
-  (wkb_geometry );
-ALTER TABLE habitats_gen CLUSTER ON habitats_gen_wkb_geometry_idx;
-
 
 -- Fudge all the supplied intensity data values where they've been generated using 
 -- the wrong (albeit similar) formula
