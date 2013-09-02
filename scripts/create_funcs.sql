@@ -287,10 +287,18 @@ SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, intensity_leve
 	SELECT '|| lvlcase ||' AS intensity_level, '|| quote_ident(intensityfield) ||', wkb_geometry FROM differences
 	UNION
 	-- non-overlapping parts of project polygon
-	SELECT '|| lvlcase ||' AS intensity_level, '|| quote_ident(intensityfield) ||', (ST_Dump(ST_Difference(
-		wkb_geometry,
-		(SELECT ST_Multi(ST_Union(wkb_geometry)) FROM overlapping)
-	))).geom AS wkb_geometry
+	SELECT 
+        '|| lvlcase ||' AS intensity_level
+        , '|| quote_ident(intensityfield) ||'
+        , (ST_Dump(
+                COALESCE(
+                    ST_Difference(
+		                wkb_geometry
+                        , (SELECT ST_Multi(ST_Union(wkb_geometry)) FROM overlapping)
+	                )
+                    , wkb_geometry
+                )
+        )).geom AS wkb_geometry
 		FROM project
 	UNION 
 	--overlapping parts of project polygon and existing polygons
@@ -1110,11 +1118,18 @@ SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, '|| quote_iden
 		FROM overlapping
 	UNION 
 	-- non-overlapping parts of project polygon
-	SELECT '|| quote_ident(countfield) ||'::int, (ST_Dump(ST_Difference(
-		wkb_geometry,
-		(SELECT ST_Multi(ST_Union(wkb_geometry)) FROM overlapping)
-	))).geom AS wkb_geometry
-		FROM project
+	SELECT 
+        '|| quote_ident(countfield) ||'::int, 
+        (ST_Dump(
+            COALESCE(
+                ST_Difference(
+                    wkb_geometry
+                    , (SELECT ST_Multi(ST_Union(wkb_geometry)) FROM overlapping)
+                )
+                , wkb_geometry
+            )
+        )).geom AS wkb_geometry
+    	FROM project
 	UNION 
 	--overlapping parts of project polygon and existing polygons
 	SELECT ('|| quote_ident(countfield) ||' + (SELECT '|| quote_ident(countfield) ||' FROM project))::int AS '|| quote_ident(countfield) ||', ST_Intersection(wkb_geometry, (SELECT wkb_geometry FROM project)) FROM overlapping
