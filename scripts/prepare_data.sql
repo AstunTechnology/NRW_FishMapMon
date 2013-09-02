@@ -1,34 +1,4 @@
--- Delete any LineStrings from the habitat and sensitivity confidence tables which where probably
--- introduced when the data was simplified. Once the data is straight we may be
--- able to remove this
-DELETE FROM habitats WHERE st_geometrytype(wkb_geometry) = 'ST_LineString';
-DELETE FROM sensvtyconf_lvls_cas_hand_gath WHERE st_geometrytype(wkb_geometry) = 'ST_LineString';
-DELETE FROM sensvtyconf_lvls_lot WHERE st_geometrytype(wkb_geometry) = 'ST_LineString';
-DELETE FROM sensvtyconf_lvls_mussels WHERE st_geometrytype(wkb_geometry) = 'ST_LineString';
-DELETE FROM sensvtyconf_lvls_nets WHERE st_geometrytype(wkb_geometry) = 'ST_LineString';
-DELETE FROM sensvtyconf_lvls_pots_combined WHERE st_geometrytype(wkb_geometry) = 'ST_LineString';
-DELETE FROM sensvtyconf_lvls_pro_hand_gath WHERE st_geometrytype(wkb_geometry) = 'ST_LineString';
-DELETE FROM sensvtyconf_lvls_rsa_charterboats WHERE st_geometrytype(wkb_geometry) = 'ST_LineString';
-DELETE FROM sensvtyconf_lvls_rsa_commercial WHERE st_geometrytype(wkb_geometry) = 'ST_LineString';
-DELETE FROM sensvtyconf_lvls_rsa_noncharter WHERE st_geometrytype(wkb_geometry) = 'ST_LineString';
-DELETE FROM sensvtyconf_lvls_rsa_shore WHERE st_geometrytype(wkb_geometry) = 'ST_LineString';
-DELETE FROM sensvtyconf_lvls_queen_scallops WHERE st_geometrytype(wkb_geometry) = 'ST_LineString';
-DELETE FROM sensvtyconf_lvls_king_scallops WHERE st_geometrytype(wkb_geometry) = 'ST_LineString';
-
--- Break apart self-intersecting polygons and ensure all have sufficient points
-UPDATE habitats
-SET
-    wkb_geometry = ST_Multi (
-        ST_BuildArea (
-            ST_Union (
-                ST_Multi ( ST_Boundary ( wkb_geometry ) ),
-                ST_PointN (
-                    ST_Boundary ( wkb_geometry ),
-                    1 ) ) ) )
-WHERE
-    ST_IsValid ( wkb_geometry ) = FALSE;
-
--- Index on habitat code for when doing lookup on this value
+﻿-- Index on habitat code for when doing lookup on this value
 CREATE INDEX habitats_habitat_code_idx 
 ON habitats 
 USING btree (habitat_code);

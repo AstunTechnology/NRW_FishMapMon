@@ -667,7 +667,7 @@
     LAYER
         NAME "intensity_lvls_scenario_det"
         INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (select * FROM fishmap.project_intensity_lvls_new_det('%FISHING%'::text, '%WKT%'::text, %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric)) as levels using unique ogc_fid using srid=27700"
+        DATA "wkb_geometry from (select * FROM fishmap.project_intensity_lvls_new_det('%FISHING%'::text, '%WKT%'::text, %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric, %ARG6%::numeric)) as levels using unique ogc_fid using srid=27700"
     VALIDATION
             'FISHING' '^[a-z_]+$'
             'WKT' '.*'
@@ -681,6 +681,8 @@
             'default_ARG4' 'null'
             'ARG5' '^[0-9]+(\.[0-9]+)?$'
             'default_ARG5' 'null'
+            'ARG6' '^[0-9]+(\.[0-9]+)?$'
+            'default_ARG6' 'null'
         END
         PROJECTION
             "init=epsg:27700"
@@ -706,7 +708,7 @@
     LAYER
         NAME "intensity_lvls_scenario_gen"
         INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (select * FROM fishmap.project_intensity_lvls_new_gen('%FISHING%'::text, '%WKT%'::text, %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric)) as levels using unique ogc_fid using srid=27700"
+        DATA "wkb_geometry from (select * FROM fishmap.project_intensity_lvls_new_gen('%FISHING%'::text, '%WKT%'::text, %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric, %ARG6%::numeric)) as levels using unique ogc_fid using srid=27700"
     VALIDATION
             'FISHING' '^[a-z_]+$'
             'WKT' '.*'
@@ -720,6 +722,8 @@
             'default_ARG4' 'null'
             'ARG5' '^[0-9]+(\.[0-9]+)?$'
             'default_ARG5' 'null'
+            'ARG6' '^[0-9]+(\.[0-9]+)?$'
+            'default_ARG6' 'null'
         END
         PROJECTION
             "init=epsg:27700"
@@ -746,7 +750,7 @@
         NAME "intensity_lvls_combined_det"
         # DEBUG 5
         INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (select * FROM fishmap.project_intensity_lvls_combined_det('%FISHING%'::text, '%WKT%'::text, %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric)) as levels using unique ogc_fid using srid=27700"
+        DATA "wkb_geometry from (select * FROM fishmap.project_intensity_lvls_combined_det('%FISHING%'::text, '%WKT%'::text, %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric, %ARG6%::numeric)) as levels using unique ogc_fid using srid=27700"
     VALIDATION
             'FISHING' '^[a-z_]+$'
             'WKT' '.*'
@@ -760,6 +764,8 @@
             'default_ARG4' 'null'
             'ARG5' '^[0-9]+(\.[0-9]+)?$'
             'default_ARG5' 'null'
+            'ARG6' '^[0-9]+(\.[0-9]+)?$'
+            'default_ARG6' 'null'
         END
         PROJECTION
             "init=epsg:27700"
@@ -785,7 +791,7 @@
     LAYER
         NAME "intensity_lvls_combined_gen"
         INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (select * FROM fishmap.project_intensity_lvls_combined_gen('%FISHING%'::text, '%WKT%'::text, %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric)) as levels using unique ogc_fid using srid=27700"
+        DATA "wkb_geometry from (select * FROM fishmap.project_intensity_lvls_combined_gen('%FISHING%'::text, '%WKT%'::text, %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric, %ARG6%::numeric)) as levels using unique ogc_fid using srid=27700"
         VALIDATION
             'FISHING' '^[a-z_]+$'
             'WKT' '.*'
@@ -799,6 +805,8 @@
             'default_ARG4' 'null'
             'ARG5' '^[0-9]+(\.[0-9]+)?$'
             'default_ARG5' 'null'
+            'ARG6' '^[0-9]+(\.[0-9]+)?$'
+            'default_ARG6' 'null'
         END
         PROJECTION
             "init=epsg:27700"
@@ -824,7 +832,7 @@
     LAYER
         NAME "sensitivity_lvls_scenario_gen"
         INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (SELECT * FROM fishmap.project_sensitivity_lvls_new('%FISHING%'::text, '%WKT%'::text, ST_AsText(!BOX!), true, %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric)) AS levels USING unique ogc_fid USING srid=27700"
+        DATA "wkb_geometry from (SELECT * FROM fishmap.project_sensitivity_lvls_scenario_gen('%FISHING%'::text, '%WKT%'::text, ST_AsText(!BOX!), %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric, %ARG6%::numeric)) AS levels USING unique ogc_fid USING srid=27700"
     VALIDATION
             'FISHING' '^[a-z_]+$'
             'WKT' '.*'
@@ -838,6 +846,8 @@
             'default_ARG4' 'null'
             'ARG5' '^[0-9]+(\.[0-9]+)?$'
             'default_ARG5' 'null'
+            'ARG6' '^[0-9]+(\.[0-9]+)?$'
+            'default_ARG6' 'null'
         END
         PROJECTION
             "init=epsg:27700"
@@ -863,7 +873,7 @@
     LAYER
         NAME "sensitivity_lvls_scenario_det"
         INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (SELECT * FROM fishmap.project_sensitivity_lvls_new('%FISHING%'::text, '%WKT%'::text, ST_AsText(!BOX!), false,  %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric)) AS levels USING unique ogc_fid USING srid=27700"
+        DATA "wkb_geometry from (SELECT * FROM fishmap.project_sensitivity_lvls_scenario_det('%FISHING%'::text, '%WKT%'::text, ST_AsText(!BOX!),  %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric, %ARG6%::numeric)) AS levels USING unique ogc_fid USING srid=27700"
     VALIDATION
             'FISHING' '^[a-z_]+$'
             'WKT' '.*'
@@ -877,6 +887,8 @@
             'default_ARG4' 'null'
             'ARG5' '^[0-9]+(\.[0-9]+)?$'
             'default_ARG5' 'null'
+            'ARG6' '^[0-9]+(\.[0-9]+)?$'
+            'default_ARG6' 'null'
         END
         PROJECTION
             "init=epsg:27700"
@@ -902,7 +914,7 @@
     LAYER
         NAME "sensitivity_lvls_combined_gen"
         INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (SELECT * FROM fishmap.project_sensitivity_lvls_combined('%FISHING%'::text, '%WKT%'::text,  ST_AsText(!BOX!), true, %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric)) AS levels USING unique ogc_fid USING srid=27700"
+        DATA "wkb_geometry from (SELECT * FROM fishmap.project_sensitivity_lvls_combined_gen('%FISHING%'::text, '%WKT%'::text,  ST_AsText(!BOX!), %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric, %ARG6%::numeric)) AS levels USING unique ogc_fid USING srid=27700"
     VALIDATION
             'FISHING' '^[a-z_]+$'
             'WKT' '.*'
@@ -916,6 +928,8 @@
             'default_ARG4' 'null'
             'ARG5' '^[0-9]+(\.[0-9]+)?$'
             'default_ARG5' 'null'
+            'ARG6' '^[0-9]+(\.[0-9]+)?$'
+            'default_ARG6' 'null'
         END
         PROJECTION
             "init=epsg:27700"
@@ -941,7 +955,7 @@
     LAYER
         NAME "sensitivity_lvls_combined_det"
         INCLUDE "pgconnection.inc"
-        DATA "wkb_geometry from (SELECT * FROM fishmap.project_sensitivity_lvls_combined('%FISHING%'::text, '%WKT%'::text,  ST_AsText(!BOX!), false, %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric)) AS levels USING unique ogc_fid USING srid=27700"
+        DATA "wkb_geometry from (SELECT * FROM fishmap.project_sensitivity_lvls_combined_det('%FISHING%'::text, '%WKT%'::text,  ST_AsText(!BOX!), %ARG1%::numeric, %ARG2%::numeric, %ARG3%::numeric, %ARG4%::numeric, %ARG5%::numeric, %ARG6%::numeric)) AS levels USING unique ogc_fid USING srid=27700"
     VALIDATION
             'FISHING' '^[a-z_]+$'
             'WKT' '.*'
@@ -955,6 +969,8 @@
             'default_ARG4' 'null'
             'ARG5' '^[0-9]+(\.[0-9]+)?$'
             'default_ARG5' 'null'
+            'ARG6' '^[0-9]+(\.[0-9]+)?$'
+            'default_ARG6' 'null'
         END
         PROJECTION
             "init=epsg:27700"

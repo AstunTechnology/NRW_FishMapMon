@@ -140,7 +140,7 @@
                 this.vendorParams = {}
                 this.vendorParams['FISHING'] = FISH_MAP.fishingactivity;
                 if (FISH_MAP.scenario && FISH_MAP.scenario.feature) {
-                    this.vendorParams['COUNT'] = 1;
+                    this.vendorParams['COUNT'] = FISH_MAP.scenario.count;
                     this.vendorParams['WKT'] = FISH_MAP.scenario.feature.geometry.toString();
                 }
                 if (FISH_MAP.scenario && FISH_MAP.scenario.args) {
@@ -428,7 +428,7 @@
             clearScenario();
         },
         'showscenario': function(e) {
-            showScenario(e.args);
+            showScenario(e.args, e.count);
         }
     });
 
@@ -644,8 +644,9 @@
         events.triggerEvent('polygondrawn', {"polygon": feature});
     }
 
-    function showScenario(args) {
-        FISH_MAP.scenario.args = args
+    function showScenario(args, count) {
+        FISH_MAP.scenario.args = args;
+        FISH_MAP.scenario.count = count;
         addScenarioLayers();
         events.triggerEvent('scenariocalculated');
         // Refresh the map state
