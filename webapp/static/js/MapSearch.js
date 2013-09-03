@@ -59,11 +59,18 @@ OpenLayers.Control.MapSearch = OpenLayers.Class(OpenLayers.Control, {
             minLength: 2
         });
 
-        this.input.click(function() {
+        this.input.bind("click touchstart", function() {
             jQuery(this).autocomplete("search");
+            var delay = setTimeout(
+                function(){
+                    jQuery(".ui-autocomplete>li>a").addClass("test");
+                }
+                , 100
+            );
+            return false;
         });
 
-        jQuery('body').click(function() {
+        jQuery('body').bind("click touchstart", function() {
             jQuery(that.input).autocomplete("close");
         });
 
@@ -78,6 +85,7 @@ OpenLayers.Control.MapSearch = OpenLayers.Class(OpenLayers.Control, {
             "mousemove": stopEvt,
             "mouseup": stopEvt,
             "click": stopEvt,
+            "touchstart": stopEvt,
             "mouseout": stopEvt,
             "dblclick": stopEvt,
             scope: this
