@@ -12,8 +12,18 @@
     display: none;
 }
 
+/* #main { */
+/*     z-index: 0; */
+/* } */
+
 #map {
-    top: 0;
+    position: static;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 600px;
+    width: 100%;
+    margin-bottom: 1em;
 }
 
 .aside {
@@ -29,6 +39,10 @@
     padding-left: 0;
 }
 
+.aside .outputs .info {
+    display: none !important;
+}
+
 ul.tree, ul.tree ul {
     padding: 0;
     margin: 0;
@@ -38,8 +52,8 @@ ul.tree, ul.tree ul {
     display: none !important;
 }
 
-.std-tree {
-    display: none;
+.activity-tree, .std-tree {
+    display: none !important;
 }
 
 .aside .buttons {
@@ -58,6 +72,18 @@ input, select {
     display:none;
 }
 
+#legend {
+    position: static;
+    overflow: visible;
+    page-break-before: always;
+}
+
 #legend .legend h2 {
     display: none;
+}
+
+#legend .content {
+    overflow: visible;
+    height: 100%;
+    border: 0;
 }

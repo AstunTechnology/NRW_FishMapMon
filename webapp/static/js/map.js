@@ -1,5 +1,26 @@
 (function(){
 
+    window.onbeforeprint = function() {
+        console.log('onbeforeprint');
+        var extent = map.getExtent();
+        var lyr = map.layers[3];
+        for (var iRow=0, len=lyr.grid.length; iRow<len; iRow++) {
+            var row = lyr.grid[iRow];
+            for(var iCol=0, clen=row.length; iCol<clen; iCol++) {
+                var tile = row[iCol];
+                if (tile.bounds.intersectsBounds(extent) === false) {
+                    tile.clear();
+                }
+            }
+        }
+    };
+
+    window.onafterprint = function() {
+        console.log('onafterprint');
+        var lyr = map.layers[3];
+        lyr.redraw();
+    }
+
     // Commonly used app config
     var overlayLayers = FISH_MAP.overlayLayers;
     var outputActivities = FISH_MAP.outputActivities;
@@ -31,7 +52,7 @@
         new OpenLayers.Control.ScaleLine()
     ];
 
-    var map = new OpenLayers.Map('map', {
+    window.map = new OpenLayers.Map('map', {
         projection: "EPSG:27700",
         units: "m",
         resolutions: [2.5, 5, 10, 25, 50, 100, 150],
