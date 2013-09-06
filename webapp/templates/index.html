@@ -390,6 +390,7 @@
     <script src="{{ url_for('static', filename='js/jquery-1.9.1.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery.mustache.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery-ui-1.10.3.custom.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.ui.touch-punch.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery.rsv-2.5.1.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/proj4js-custom.min.js') }}"></script>
     <script type="text/javascript">
@@ -397,9 +398,9 @@
     </script>
     <script src="{{ url_for('static', filename='js/OpenLayers-2.12/OpenLayers.js') }}"></script>
     <script src="{{ url_for('static', filename='js/OutputPanel.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/LegendPanel.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/MapSearch.js') }}"></script>
     <script src="{{ url_for('static', filename='js/BaseMapSwitcher.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/MapSearch.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/LegendPanel.js') }}"></script>
     <script id="treeTmpl" type="text/template">
     {% raw %}
         <ul class="tree">
@@ -1638,6 +1639,10 @@
                 <th>{{#_}}Intensity Value{{/_}}: </th>
                 <td>{{attributes.intensity_value}}</td>
             </tr>
+            <tr>
+                <th>{{#_}}User ID(s){{/_}}: </th>
+                <td>{{attributes.userid}}</td>
+            </tr>
         </tbody>
         {{/features}}
         <tbody>
@@ -1673,10 +1678,6 @@
             <tr>
                 <th>{{#_}}Intensity Level{{/_}}: </th>
                 <td>{{attributes.intensity_level}}</td>
-            </tr>
-            <tr>
-                <th>{{#_}}User ID{{/_}}: </th>
-                <td>{{attributes.userid}}</td>
             </tr>
         </tbody>
         {{/features}}

@@ -47,9 +47,10 @@ OpenLayers.Control.LegendPanel = OpenLayers.Class(OpenLayers.Control, {
         this.legendDiv.innerHTML = "<h2>" + this.title + "</h2><div class='content'></div>";
         this.div.appendChild(this.legendDiv);
 
-        jQuery('.legend', this.div).children().prev().click(function(evt) {
+        jQuery('.legend', this.div).children().prev().bind("click touchstart", function(evt) {
             jQuery(this).siblings().toggle();
             jQuery(this).parent().toggleClass('open');
+            return false;
         });
 
         this.events = new OpenLayers.Events(this, this.div, null, true);
@@ -63,6 +64,7 @@ OpenLayers.Control.LegendPanel = OpenLayers.Class(OpenLayers.Control, {
             "mousemove": stopEvt,
             "mouseup": stopEvt,
             "click": stopEvt,
+            "touchstart": stopEvt,
             "mouseout": stopEvt,
             "dblclick": stopEvt,
             scope: this

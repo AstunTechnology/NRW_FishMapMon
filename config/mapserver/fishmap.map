@@ -1,5 +1,4 @@
 MAP
-
     CONFIG PROJ_LIB "/usr/share/proj"
     PROJECTION
         "init=epsg:27700"
