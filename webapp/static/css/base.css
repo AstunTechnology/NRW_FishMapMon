@@ -221,10 +221,10 @@ ul.tree li h3.collapsed {
 
 /* Legend Panel */
 
-.olControlLegendPanel {
+#legend {
+    position: absolute;
     right: 5px;
     bottom: 5px;
-    /* width: 400px; */
     background-color: white;
     border-radius: 5px 5px 0 0;
     -webkit-border-top-left-radius: 5px;

@@ -58,6 +58,6 @@ input, select {
     display:none;
 }
 
-.olControlLegendPanel .legend h2 {
+#legend .legend h2 {
     display: none;
 }

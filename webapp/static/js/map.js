@@ -114,6 +114,7 @@
     map.addLayer(calculated);
 
     var legendPanel = new OpenLayers.Control.LegendPanel({
+        div: jQuery('#legend').get(0),
         layers: [overlays],
         title: FISH_MAP.getText('legend')
     });
