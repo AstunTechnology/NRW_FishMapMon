@@ -1,0 +1,6 @@
+#map {
+    /* IE8 has an issue with rendering map images that are not in the map
+     * viewport on subsequent pages, IE7 can't cope with the map being 100%
+     * high */
+    height: 600px;
+}
