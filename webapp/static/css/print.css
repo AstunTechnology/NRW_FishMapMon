@@ -12,10 +12,6 @@
     display: none;
 }
 
-/* #main { */
-/*     z-index: 0; */
-/* } */
-
 #map {
     position: static;
     -moz-box-sizing: border-box;

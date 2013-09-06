@@ -1,24 +1,54 @@
 (function(){
 
+    /**
+     * jQuery browser detection taken from jquery-migrate-1.2.1.js
+     */
+    jQuery.uaMatch = function( ua ) {
+        ua = ua.toLowerCase();
+
+        var match = /(chrome)[ \/]([\w.]+)/.exec( ua ) ||
+            /(webkit)[ \/]([\w.]+)/.exec( ua ) ||
+            /(opera)(?:.*version|)[ \/]([\w.]+)/.exec( ua ) ||
+            /(msie) ([\w.]+)/.exec( ua ) ||
+            ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec( ua ) ||
+            [];
+
+        return {
+            browser: match[ 1 ] || "",
+            version: match[ 2 ] || "0"
+        };
+    };
+
     window.onbeforeprint = function() {
-        console.log('onbeforeprint');
-        var extent = map.getExtent();
-        var lyr = map.layers[3];
-        for (var iRow=0, len=lyr.grid.length; iRow<len; iRow++) {
-            var row = lyr.grid[iRow];
-            for(var iCol=0, clen=row.length; iCol<clen; iCol++) {
-                var tile = row[iCol];
-                if (tile.bounds.intersectsBounds(extent) === false) {
-                    tile.clear();
+        // console.log('onbeforeprint');
+        var ua = jQuery.uaMatch(navigator.userAgent);
+        // Clear any tiles outside of the map viewport if the browser is IE8 to
+        // limit the affect of map images being shown on subsiquent pages
+        if (ua.browser === 'msie' && ua.version ==="8.0") {
+            var extent = map.getExtent();
+            for (var i = 0, lyr; i < map.layers.length; i++) {
+                var lyr = map.layers[i];
+                if (lyr.grid) {
+                    for (var iRow=0, len=lyr.grid.length; iRow<len; iRow++) {
+                        var row = lyr.grid[iRow];
+                        for(var iCol=0, clen=row.length; iCol<clen; iCol++) {
+                            var tile = row[iCol];
+                            if (tile.bounds.intersectsBounds(extent) === false) {
+                                tile.clear();
+                            }
+                        }
+                    }
                 }
             }
         }
     };
 
     window.onafterprint = function() {
-        console.log('onafterprint');
-        var lyr = map.layers[3];
-        lyr.redraw();
+        // console.log('onafterprint');
+        for (var i = 0, lyr; i < map.layers.length; i++) {
+            var lyr = map.layers[i];
+            lyr.redraw();
+        }
     }
 
     // Commonly used app config
@@ -111,7 +141,7 @@
             {
                 attribution: FISH_MAP.getText('os_copy'),
                 singleTile: false,
-                tileSize: new OpenLayers.Size(512, 512)
+                tileSize: new OpenLayers.Size(256, 256)
             }
         );
         overlay.setVisibility(layer.visible);
