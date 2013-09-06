@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" /> -->
     <meta charset="utf-8" />
     <title>{{ _('Natural Resources Wales') }}/ {{ _('FishMap Môn') }}</title>
     <link href="{{ url_for('static', filename='img/favicon.png') }}" type="image/png" rel="icon" />
@@ -19,6 +18,10 @@
     <![endif]-->
 
     <link href="{{ url_for('static', filename='css/print.css') }}" rel="stylesheet" media="print" />
+
+    <!--[if lt IE 9]>
+    <link href="{{ url_for('static', filename='css/print_lt_ie9.css') }}" rel="stylesheet" media="print" />
+    <![endif]-->
 
 </head>
 

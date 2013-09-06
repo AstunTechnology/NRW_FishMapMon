@@ -19,11 +19,25 @@
         };
     };
 
+    // Make some decisions base on browser for printing (really rather not do
+    // this but IE can be harsh sometimes...
+    var ua = jQuery.uaMatch(navigator.userAgent);
+
+    var tileWidth = 512,
+        layerRatio = 1.4,
+        layerBuffer = 1;
+
+    if (ua.browser === 'msie' && parseInt(ua.version, 10) < 9) {
+        tileWidth = 256;
+        layerRatio = 1;
+        layerBuffer = 0;
+    }
+
     window.onbeforeprint = function() {
         // console.log('onbeforeprint');
-        var ua = jQuery.uaMatch(navigator.userAgent);
         // Clear any tiles outside of the map viewport if the browser is IE8 to
         // limit the affect of map images being shown on subsiquent pages
+        var ua = jQuery.uaMatch(navigator.userAgent);
         if (ua.browser === 'msie' && ua.version ==="8.0") {
             var extent = map.getExtent();
             for (var i = 0, lyr; i < map.layers.length; i++) {
@@ -141,7 +155,7 @@
             {
                 attribution: FISH_MAP.getText('os_copy'),
                 singleTile: false,
-                tileSize: new OpenLayers.Size(256, 256)
+                tileSize: new OpenLayers.Size(tileWidth, tileWidth)
             }
         );
         overlay.setVisibility(layer.visible);
@@ -322,8 +336,8 @@
                         {
                             projection: 'EPSG:27700',
                             singleTile: true,
-                            buffer: 0,
-                            ratio: 1
+                            buffer: layerBuffer,
+                            ratio: layerRatio
                         })
                 );
         map.addLayer(lyr);
