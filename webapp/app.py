@@ -1,5 +1,6 @@
 import datetime
 import os
+import re
 import requests
 import xml.etree.ElementTree as ET
 
@@ -237,7 +238,7 @@ def wms():
 
     body = r.content
     if 'GetFeatureInfo' in args['REQUEST']:
-        body = process_feature_info(r.text)
+        body = process_feature_info(layers, r.text)
 
     resp = make_response(body, r.status_code)
     resp.headers['Content-Type'] = r.headers['Content-Type']
@@ -253,16 +254,30 @@ def wms():
     return resp
 
 
-def process_feature_info(body):
-    """ Apply suppression to the vessel count fields returned in GetFeatureInfo
-    response """
-    vessel_fields = ['_overlaps', 'num_gatherers_year', 'num_anglers_year']
+def process_feature_info(layers, body):
+    """ Update the GetFeatureInfo response to remove any references to whether
+    the data is generalised or detailed and apply suppression to the vessel
+    count fields """
+
     ET.register_namespace('gml', 'http://www.opengis.net/gml')
     tree = ET.fromstring(body)
+
+    # Remove suffixes
+    for layer in layers.split(','):
+        for elm in tree.iter(layer + '_layer'):
+            elm.tag = re.sub('(_gen|_det)', '', elm.tag)
+            gml_name = elm.find('{http://www.opengis.net/gml}name')
+            gml_name.text = re.sub('(_gen|_det)', '', gml_name.text)
+        for elm in tree.iter(layer + '_feature'):
+            elm.tag = re.sub('(_gen|_det)', '', elm.tag)
+
+    # Suppress vessels values
+    vessel_fields = ['_overlaps', 'num_gatherers_year', 'num_anglers_year']
     for vessel_field in vessel_fields:
         for elm in tree.iter(vessel_field):
             if int(elm.text, 10) <= 2:
                 elm.text = '2 or less'
+
     body = ET.tostring(tree, encoding='utf8', method='xml')
     return body
 

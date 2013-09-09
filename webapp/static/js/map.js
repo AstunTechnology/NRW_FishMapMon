@@ -233,10 +233,6 @@
                 var features = [];
                 for (var i = 0, feature; i < event.features.length; i++) {
                     feature = event.features[i];
-                    // "Correct" the layer name (type) if it ends with
-                    // _gen or _det, this should probably be done server-side
-                    // but that would require rewriting the gml response
-                    feature.type = feature.type.replace(/(_gen|_det)$/, '')
                     if (overlayLayers.getLayerById(feature.type).info) {
                         features.push(feature);
                     }
