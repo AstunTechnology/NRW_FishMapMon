@@ -1,6 +1,7 @@
 import datetime
 import os
 import requests
+import xml.etree.ElementTree as ET
 
 from flask import Flask
 from flask import g
@@ -234,9 +235,12 @@ def wms():
         data=args
     )
 
-    resp = make_response(r.content, r.status_code)
-    resp.headers['Content-Type'] = r.headers['Content-Type']
+    body = r.content
+    if 'GetFeatureInfo' in args['REQUEST']:
+        body = process_feature_info(r.text)
 
+    resp = make_response(body, r.status_code)
+    resp.headers['Content-Type'] = r.headers['Content-Type']
 
     if cacheable:
         dt = datetime.datetime.utcnow()
@@ -247,6 +251,20 @@ def wms():
         resp.headers.add('Cache-Control', 'no-cache, no-store, max-age=0')
 
     return resp
+
+
+def process_feature_info(body):
+    """ Apply suppression to the vessel count fields returned in GetFeatureInfo
+    response """
+    vessel_fields = ['_overlaps', 'num_gatherers_year', 'num_anglers_year']
+    ET.register_namespace('gml', 'http://www.opengis.net/gml')
+    tree = ET.fromstring(body)
+    for vessel_field in vessel_fields:
+        for elm in tree.iter(vessel_field):
+            if int(elm.text, 10) <= 2:
+                elm.text = '2 or less'
+    body = ET.tostring(tree, encoding='utf8', method='xml')
+    return body
 
 
 class InvalidWmsArgs(Exception):
