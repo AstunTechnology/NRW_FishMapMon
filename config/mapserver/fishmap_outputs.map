@@ -14,7 +14,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -42,7 +42,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -70,7 +70,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -98,7 +98,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -126,7 +126,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -154,7 +154,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -179,7 +179,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -204,7 +204,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -229,7 +229,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -254,7 +254,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -279,7 +279,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -304,7 +304,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -329,7 +329,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -354,7 +354,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -379,7 +379,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -404,7 +404,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -429,7 +429,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -454,7 +454,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -479,7 +479,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -504,7 +504,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -532,7 +532,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -562,7 +562,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -592,7 +592,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -622,7 +622,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -652,7 +652,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -693,7 +693,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -734,7 +734,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -776,7 +776,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -817,7 +817,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -858,7 +858,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -899,7 +899,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -940,7 +940,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -981,7 +981,7 @@
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON

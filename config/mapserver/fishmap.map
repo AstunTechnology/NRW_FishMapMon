@@ -121,7 +121,7 @@ MAP
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -148,7 +148,7 @@ MAP
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -175,7 +175,7 @@ MAP
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -232,7 +232,7 @@ MAP
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -259,7 +259,7 @@ MAP
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS ON
         TYPE LINE
@@ -329,7 +329,7 @@ MAP
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 1
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -354,7 +354,7 @@ MAP
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 1
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -379,7 +379,7 @@ MAP
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 1
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -404,7 +404,7 @@ MAP
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 1
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -429,7 +429,7 @@ MAP
             "gml_geometries" "none"
         END
         TOLERANCEUNITS pixels
-        TOLERANCE 1
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         STATUS OFF
         TYPE POLYGON
@@ -455,7 +455,7 @@ MAP
             ows_title "Mask"
         END
         STATUS OFF
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         TYPE POLYGON
         UNITS METERS
@@ -477,7 +477,7 @@ MAP
             ows_title "Project Area"
         END
         STATUS OFF
-        TOLERANCE 2
+        TOLERANCE 0
         TEMPLATE 'id.tmpl'
         TYPE LINE
         UNITS METERS
