@@ -1,6 +1,5 @@
 import datetime
 import os
-import re
 import requests
 import xml.etree.ElementTree as ET
 
@@ -97,6 +96,7 @@ class User(auth_db.Model, UserMixin):
                                  backref=auth_db.backref('users',
                                  lazy='dynamic'))
 
+
 class NewUserForm(Form, NewPasswordFormMixin, PasswordConfirmFormMixin,
                   UniqueEmailFormMixin):
     submit = SubmitField(_('Register user'))
@@ -184,9 +184,11 @@ def user_add():
     if (g.user.is_authenticated() or 'dev' in g.user.roles
             or 'admin' in g.user.roles):
         form = NewUserForm(request.form)
-        return render_template('user_add.html', user=g.user, new_user_form=form)
+        return render_template('user_add.html',
+                               user=g.user, new_user_form=form)
     else:
         abort(404)
+
 
 @app.route('/gaz')
 def gaz():
@@ -238,7 +240,8 @@ def wms():
 
     body = r.content
     if 'GetFeatureInfo' in args['REQUEST']:
-        body = process_feature_info(layers, r.text)
+        body = process_feature_info(layers.split(','),
+                                    r.text, g.user.is_authenticated())
 
     resp = make_response(body, r.status_code)
     resp.headers['Content-Type'] = r.headers['Content-Type']
@@ -254,7 +257,7 @@ def wms():
     return resp
 
 
-def process_feature_info(layers, body):
+def process_feature_info(layers, body, auth):
     """ Update the GetFeatureInfo response to remove any references to whether
     the data is generalised or detailed and apply suppression to the vessel
     count fields """
@@ -263,20 +266,26 @@ def process_feature_info(layers, body):
     tree = ET.fromstring(body)
 
     # Remove suffixes
-    for layer in layers.split(','):
-        for elm in tree.iter(layer + '_layer'):
-            elm.tag = re.sub('(_gen|_det)', '', elm.tag)
+    suffix = get_layer_suffix(auth)
+    for layer in layers:
+        tag = '%s_layer' % layer
+        for elm in tree.iter(tag):
+            elm.tag = elm.tag.replace(suffix, '')
             gml_name = elm.find('{http://www.opengis.net/gml}name')
-            gml_name.text = re.sub('(_gen|_det)', '', gml_name.text)
-        for elm in tree.iter(layer + '_feature'):
-            elm.tag = re.sub('(_gen|_det)', '', elm.tag)
+            gml_name.text = gml_name.text.replace(suffix, '')
+        tag = '%s_feature' % layer
+        for elm in tree.iter(tag):
+            elm.tag = elm.tag.replace(suffix, '')
 
-    # Suppress vessels values
-    vessel_fields = ['_overlaps', 'num_gatherers_year', 'num_anglers_year']
-    for vessel_field in vessel_fields:
-        for elm in tree.iter(vessel_field):
-            if int(elm.text, 10) <= 2:
-                elm.text = '2 or less'
+    # Suppress low vessel values if not logged in
+    if not auth:
+        vessel_fields = ['_overlaps', 'num_gatherers_year', 'num_anglers_year']
+        for vessel_field in vessel_fields:
+            # There could be more than one layer with the vessel field so use
+            # an iterator
+            for elm in tree.iter(vessel_field):
+                if int(elm.text, 10) <= 2:
+                    elm.text = '2 or less'
 
     body = ET.tostring(tree, encoding='utf8', method='xml')
     return body
@@ -335,7 +344,7 @@ def update_wms_layers(layers, auth):
         based on whether the user is logged in or not. All other layers just
         pass through with the same name """
         if layer.startswith(detailed_layers):
-            suffix = '_det' if auth else '_gen'
+            suffix = get_layer_suffix(auth)
             return '%s%s' % (layer, suffix)
         return layer
 
@@ -355,6 +364,11 @@ def update_wms_layers(layers, auth):
             break
 
     return layers, cacheable
+
+
+def get_layer_suffix(auth):
+    suffix = '_det' if auth else '_gen'
+    return suffix
 
 
 def render_sld(layers, args):
