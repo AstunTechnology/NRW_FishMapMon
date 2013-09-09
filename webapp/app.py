@@ -174,7 +174,9 @@ def before_request():
 
 @app.route('/')
 def home():
-    return render_template('index.html', user=g.user)
+    resp = make_response(render_template('index.html', user=g.user))
+    resp.headers['X-UA-Compatible'] = 'IE=edge'
+    return resp
 
 
 @app.route('/user_add', methods=['POST', 'GET'])
