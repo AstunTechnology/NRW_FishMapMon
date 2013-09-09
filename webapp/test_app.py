@@ -6,34 +6,34 @@ class TestUpdateWmsLayers():
 
     def test_update_wms_layers_param(self):
         """ Public layers are returned untouched """
-        layers_in = ["project_area", "subtidal_habitats"]
-        layers_out = update_wms_layers(layers_in, False)
+        layers_in = ["project_area", "habitats"]
+        layers_out, cachable = update_wms_layers(layers_in, False)
         eq_(layers_in, layers_out)
 
     def test_update_wms_restricted_not_logged_in(self):
         """ Restricted layers removed when user not logged in """
         layers_in = ["activity_commercial_fishing_polygon"]
-        layers_out = update_wms_layers(layers_in, False)
+        layers_out, cacheable = update_wms_layers(layers_in, False)
         eq_(layers_out, [])
 
     def test_update_wms_mixed_not_logged_in(self):
         """ Restricted layers removed, public layers retained for public user
         """
         layers_in = ["project_area", "activity_commercial_fishing_polygon"]
-        layers_out = update_wms_layers(layers_in, False)
+        layers_out, cacheable = update_wms_layers(layers_in, False)
         eq_(layers_out, ["project_area"])
 
     def test_update_wms_restricted_logged_in(self):
         """ Restricted layers returned when the user is logged in """
         layers_in = ["activity_commercial_fishing_polygon"]
-        layers_out = update_wms_layers(layers_in, True)
+        layers_out, cacheable = update_wms_layers(layers_in, True)
         eq_(layers_out, layers_in)
 
     def test_update_wms_mixed_logged_in(self):
         """ Public and restricted layers returned when the user is logged in
         """
         layers_in = ["project_area", "activity_commercial_fishing_polygon"]
-        layers_out = update_wms_layers(layers_in, True)
+        layers_out, cacheable = update_wms_layers(layers_in, True)
         eq_(
             layers_out,
             layers_in
@@ -46,13 +46,13 @@ class TestUpdateWmsLayers():
             "vessels_lvls_pots_combined",
             "sensitivity_lvls_nets"
         ]
-        layers_out = update_wms_layers(layers_in, False)
+        layers_out, cacheable = update_wms_layers(layers_in, False)
         eq_(
             layers_out,
             [
                 "intensity_lvls_cas_hand_gath_gen",
                 "vessels_lvls_pots_combined_gen",
-                "sensitivity_lvls_nets"
+                "sensitivity_lvls_nets_gen"
             ]
         )
 
@@ -63,13 +63,13 @@ class TestUpdateWmsLayers():
             "vessels_lvls_pots_combined",
             "sensitivity_lvls_nets"
         ]
-        layers_out = update_wms_layers(layers_in, True)
+        layers_out, cacheable = update_wms_layers(layers_in, True)
         eq_(
             layers_out,
             [
                 "intensity_lvls_cas_hand_gath_det",
                 "vessels_lvls_pots_combined_det",
-                "sensitivity_lvls_nets"
+                "sensitivity_lvls_nets_det"
             ]
         )
 
@@ -81,8 +81,8 @@ class TestRenderSld():
         """ Single layer results in a single NamedLayer """
         with app.test_client() as c:
             c.get("/")
-            sld = render_sld(["subtidal_habitats"], {})
-            assert "subtidal_habitats" in sld
+            sld = render_sld(["habitats"], {})
+            assert "habitats" in sld
             assert sld.count('<NamedLayer>') == 1
 
     def test_multiple(self):
@@ -90,11 +90,11 @@ class TestRenderSld():
         with app.test_client() as c:
             c.get("/")
             sld = render_sld([
-                "subtidal_habitats",
+                "habitats",
                 "intensity_lvls_official_gen"
             ], {"FISHING": "cas_hand_gath"})
             assert "intensity_lvls_official_gen" in sld
-            assert "subtidal_habitats" in sld
+            assert "habitats" in sld
             assert sld.count('<NamedLayer>') == 2
 
     def test_output_layers(self):
@@ -118,12 +118,12 @@ class TestRenderSld():
         with app.test_client() as c:
             c.get("/")
             sld = render_sld([
-                "subtidal_habitats",
+                "habitats",
                 "intensity_lvls_official_gen",
                 "this_layer_does_not_have_a_template"
             ], {"FISHING": "cas_hand_gath"})
             assert "intensity_lvls_official" in sld
-            assert "subtidal_habitats" in sld
+            assert "habitats" in sld
             assert "this_layer_does_not_have_a_template" not in sld
             assert sld.count('<NamedLayer>') == 2
 
