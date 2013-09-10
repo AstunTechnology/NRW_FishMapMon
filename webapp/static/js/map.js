@@ -72,6 +72,11 @@
     var scenarioLayerNames = FISH_MAP.scenarioLayerNames;
 
     overlayLayers = layersCollection(overlayLayers);
+    overlayLayers.events.register('visiblechange', this, function(e) {
+        // console.log('map.js visiblechange', e);
+        refreshCalculatedLayer();
+        refreshOverlayLayers();
+    });
 
     var controls = [
         new OpenLayers.Control.TouchNavigation({
@@ -158,7 +163,7 @@
                 tileSize: new OpenLayers.Size(tileWidth, tileWidth)
             }
         );
-        overlay.setVisibility(layer.visible);
+        overlay.setVisibility(layer.getVisible());
         overlays[layer.id] = overlay;
         map.addLayer(overlay);
     }
@@ -343,13 +348,7 @@
     function layer_toggle(layers, id, visible) {
         // Update the model
         l = layers.getLayerById(id)
-        l.visible = visible;
-        if( l.calculated) {
-            refreshCalculatedLayer();
-        }
-        else {
-            refreshOverlayLayers();
-        }
+        l.setVisible(visible);
     }
 
     function deleteScenarioParams(params) {
@@ -379,8 +378,8 @@
             var layer = overlayLayers.list[i];
             if (overlays[layer.id]) {
                 var overlay = overlays[layer.id];
-                overlay.setVisibility(layer.visible);
-                if (layer.visible) {
+                overlay.setVisibility(layer.getVisible());
+                if (layer.getVisible()) {
                     var params = {
                         'LAYERS': layer.id
                     };
@@ -393,9 +392,9 @@
         }
         var visibleLayers = overlayLayers.getVisibleLayers();
         legendPanel.showLayers(jQuery.grep(visibleLayers, function(item) {return item.legend}));
-    }     
-     
-    function refreshCalculatedLayer() {   
+    }
+
+    function refreshCalculatedLayer() {
         // Refresh the calculated WMS layer
         var visibleLayers = overlayLayers.getVisibleLayers();
         var visibleCalculated = [];
@@ -405,7 +404,7 @@
                 visibleCalculated.push(layer);
             }
         }
-        
+
         // Hide the layer if there are no visible layers to avoid an invalid
         // WMS request being generated
         calculated.setVisibility(visibleCalculated.length);
@@ -456,7 +455,7 @@
                     grp.fishingactivity = FISH_MAP.fishingactivity;
                     for (var n = 0, lyr; n < grp.layers.length; n++) {
                         lyr = grp.layers[n];
-                        lyr.visible = false;
+                        lyr.setVisible(false);
                     }
                 }
             }
@@ -508,6 +507,8 @@
         // Ordered list of layers
         layers.list = [];
 
+        layers.events = new OpenLayers.Events(layers, null, null, true);
+
         for (var m = 0, grp; m < layers.groups.length; m++) {
             grp = layers.groups[m];
             grp.addLayer = function(lyr) {
@@ -518,12 +519,12 @@
             };
             for (var n = 0, lyr; n < grp.layers.length; n++) {
                 lyr = grp.layers[n];
-                decorateLyr(lyr, grp);
+                lyr = decorateLyr(lyr, grp);
                 layers.list.push(lyr);
                 var prefix = lyr.id.split('_')[0];
                 lyr.output_layer = false;
                 for (var p = 0; p < FISH_MAP.outputTypes.length; p++) {
-                    if(FISH_MAP.outputTypes[p] === prefix ) {
+                    if(FISH_MAP.outputTypes[p] === prefix) {
                         lyr.output_layer = true;
                         break;
                     }
@@ -552,6 +553,30 @@
             return this.id;
         }
 
+        function _setVisible(lyr, visible) {
+            // console.log('_setVisible', lyr, visible);
+            if (lyr.visible !== visible) {
+                lyr.visible = visible;
+                if (lyr.visible && lyr.output_layer) {
+                    // Ensure only one output layer is visible at a time
+                    var visLyrs = layers.getVisibleLayers();
+                    for (var i = 0, l; i < visLyrs.length; i++) {
+                        l = visLyrs[i];
+                        if (l !== lyr && l.output_layer) {
+                            l.visible = false;
+                        }
+                    }
+                }
+                layers.events.triggerEvent("visiblechange");
+            }
+            return lyr.visible;
+        }
+
+        function _getVisible(lyr) {
+            // console.log('_getVisible', lyr);
+            return lyr.visible;
+        }
+
         function decorateLyr(lyr, grp) {
             // Add the layer to the lookup
             layers.layers[lyr.id] = lyr;
@@ -559,12 +584,19 @@
             lyr.toString = _toString
             // Allow us to get the group from the layer
             lyr._group = grp;
+            // Add method to get/set visibility
+            lyr.setVisible = function(visible) {
+                return _setVisible(lyr, visible);
+            };
+            lyr.getVisible = function() {
+                return _getVisible(lyr);
+            };
             return lyr;
         }
 
         function addLayer(grp, lyr) {
             removeLayer(lyr);
-            decorateLyr(lyr, grp);
+            lyr = decorateLyr(lyr, grp);
             grp.layers.push(lyr);
         }
 
@@ -681,13 +713,17 @@
                     "info": true,
                     "legend": true,
                     "visible": false,
-                    "calculated": true
-            };
+                    "calculated": true,
+                    "output_layer": true
+                };
                 var layerInfo = FISH_MAP.getLayerInfo(lyr.id);
                 lyr._fullName = layerInfo.fullName;
                 grp.addLayer(lyr);
             }
         }
+        // Make a default scenario layer visible to help the user out
+        var defaultLayer = overlayLayers.getLayerById('intensity_lvls_scenario');
+        defaultLayer.setVisible(true);
     }
 
     function removeScenarioLayers() {

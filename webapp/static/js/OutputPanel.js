@@ -8,6 +8,10 @@ OutputPanel = OpenLayers.Class({
     */
     initialize: function(options) {
         this.layers = options.layers;
+        this.layers.events.register('visiblechange', this, function(e) {
+            // console.log('OutputPanel.js visiblechange', e);
+            this.drawActivityLayers();
+        });
         this.activities = options.activities;
         this.div = jQuery(options.div);
         this.controller = options.controller;
@@ -80,17 +84,6 @@ OutputPanel = OpenLayers.Class({
         this.div.find('h3').click().first().click();
 
         this.div.delegate('input:checkbox', 'change', function() {
-            // Ensure only one activity layer is visible at a time
-            if (jQuery(this).parents().hasClass('activity') && this.checked) {
-                var that = this;
-                panel.div.find('.activity input:checkbox:checked').filter(function() {
-                    // return (jQuery(this).val().match(panel.getActivity()) && this !== that);
-                    return (this !== that);
-                }).each(function() {
-                    this.checked = false;
-                    panel.events.triggerEvent("layerchange", {layer: this.value, state: this.checked});
-                });
-            }
             panel.events.triggerEvent("layerchange", {layer: this.value, state: this.checked});
         });
 
@@ -199,6 +192,10 @@ OutputPanel = OpenLayers.Class({
     syncLayers: function() {
         // Ensure that the appropriate extent layer is enabled for the selected
         // activity
+        // TODO Ideally this wouldn't be done here but instead the layers model
+        // would be updated in map.js when the activity changesbut currently
+        // it's not possible due to the requirement to know if the user has
+        // toggled a layer on...
         var panel = this;
         jQuery('.extents_grp input:checkbox', this.div).each(function() {
             var elm = jQuery(this);
@@ -219,7 +216,6 @@ OutputPanel = OpenLayers.Class({
         var activityHtml = jQuery.mustache(activityTmpl, {"layers": this.layers});
         // Clear the existing activity layer tree and append the new version
         this.div.find('.activity-tree').children().detach().end().append(activityHtml);
-        this.syncLayers();
     },
 
     showInfo: function(state) {
