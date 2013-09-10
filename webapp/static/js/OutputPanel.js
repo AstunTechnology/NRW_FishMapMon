@@ -136,8 +136,31 @@ OutputPanel = OpenLayers.Class({
         // Then add generic for all
         jQuery('form div.variable input', panel.div).each(function () {
             rsvRules.push("required," + this.name + ",Please enter a number.");
-            rsvRules.push("digits_only," + this.name + ",Please enter a number.");
         });
+
+        /**
+         * Custom validation function used with RSV that uses 'int' and 'float'
+         * classes assigned to the inputs to determine how the field should be
+         * validated
+         */
+        window.checkNumber = function() {
+            var valid = true;
+            jQuery('form div.variable input.float', panel.div).each(function () {
+                if (isNaN(parseFloat(this.value))) {
+                    valid = [[this, "Please enter a number (decimal places are allowed)"]];
+                    return false;
+                }
+            });
+            jQuery('form div.variable input.int', panel.div).each(function () {
+                var n = parseFloat(this.value, 10);
+                if (isNaN(n) || (n % 1 != 0)) {
+                    valid = [[this, "Please enter a whole number (no decimal places)"]];
+                    return false;
+                }
+            });
+            return valid;
+        };
+        rsvRules.push("function,window.checkNumber");
 
         jQuery('form', panel.div).RSV({
             onCompleteHandler: function() {
@@ -149,7 +172,7 @@ OutputPanel = OpenLayers.Class({
                 jQuery('form div.variable fieldset:visible', panel.div).each(function() {
                     var val = 0;
                     jQuery(this).find('input:text').each(function() {
-                        val += parseInt(this.value, 10);
+                        val += parseFloat(this.value);
                     })
                     args.push(val);
                 });
