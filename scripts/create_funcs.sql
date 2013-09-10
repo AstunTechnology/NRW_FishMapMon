@@ -365,7 +365,7 @@ END';
 
 	olddata := quote_ident(tablename) || '_gen';
 
-	CREATE TEMP TABLE project ON COMMIT DROP AS SELECT g.ogc_fid, intensity AS intensity_value, g.wkb_geometry
+	CREATE TEMP TABLE project ON COMMIT DROP AS SELECT g.ogc_fid, intensity AS intensity_value, ''''::text AS userid, g.wkb_geometry
 	FROM grid g
 	WHERE 
 		ST_Intersects(g.wkb_geometry, ST_GeomFromText(wkt, 27700)) 
@@ -381,7 +381,7 @@ WITH overlapping AS (
 	FROM '|| olddata ||' AS existing
 	WHERE ST_Intersects(wkb_geometry, (SELECT ST_Multi(ST_Union(wkb_geometry)) FROM project) )
 )
-SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, intensity_level, round('|| quote_ident(intensityfield) ||', 2), '''' AS userid, wkb_geometry FROM (
+SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, intensity_level, round('|| quote_ident(intensityfield) ||', 2), ''''::text AS userid, wkb_geometry FROM (
 	-- non-overlapping parts of existing polygons
 	SELECT intensity_level::int, '|| quote_ident(intensityfield) ||', wkb_geometry
 	FROM '|| olddata ||'
@@ -402,7 +402,7 @@ SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, intensity_leve
 	SELECT '|| lvlcase ||' AS intensity_level, '|| quote_ident(intensityfield) ||', wkb_geometry FROM overlapping
 ) AS intensities;';
 	ELSE
-		sql := 'SELECT ogc_fid, '|| lvlcase ||' AS intensity_level, round('|| quote_ident(intensityfield) ||', 2), wkb_geometry FROM project AS intensities;';
+		sql := 'SELECT ogc_fid, '|| lvlcase ||' AS intensity_level, round('|| quote_ident(intensityfield) ||', 2), ''''::text AS userid, wkb_geometry FROM project AS intensities;';
 	END IF;
 	RAISE INFO '%', sql;                                                 
         RETURN QUERY EXECUTE sql;
@@ -485,7 +485,7 @@ ALTER FUNCTION fishmap.project_intensity_lvls_combined_det(activity text, wkt te
 -- Name: project_intensity_lvls_combined_gen(text, text, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION fishmap.project_intensity_lvls_combined_gen(activity text, wkt text, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, intensity_level integer, intensity_value numeric, wkb_geometry public.geometry)
+CREATE FUNCTION fishmap.project_intensity_lvls_combined_gen(activity text, wkt text, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, intensity_level integer, intensity_value numeric, userid text, wkb_geometry public.geometry)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -543,7 +543,7 @@ ALTER FUNCTION fishmap.project_intensity_lvls_new_det(activity text, wkt text, V
 -- Name: project_intensity_lvls_new_gen(text, text, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION fishmap.project_intensity_lvls_new_gen(activity text, wkt text, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, intensity_level integer, intensity_value numeric, wkb_geometry public.geometry)
+CREATE FUNCTION fishmap.project_intensity_lvls_new_gen(activity text, wkt text, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, intensity_level integer, intensity_value numeric, iserid text, wkb_geometry public.geometry)
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -858,13 +858,21 @@ SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, habitat_code, 
         , h.habitat_confidence
         , l.sensitivity_lvl AS sensitivity_level
         , i.intensity_level
-        , h.wkb_geometry
+        , ST_Intersection(
+            h.wkb_geometry,
+            i.wkb_geometry
+        ) AS wkb_geometry
 	FROM 
         _tmp_sensitivity_intensities i
 		, _tmp_habitats h
 		, _tmp_sensitivity_levels l
 	WHERE 
-		l.habitat_id = h.dominant_habitat AND l.intensity_lvl = i.intensity_level
+		l.habitat_id = h.dominant_habitat 
+        AND l.intensity_lvl = i.intensity_level
+        AND ST_Intersects(
+            h.wkb_geometry,
+            i.wkb_geometry
+        )
     UNION
     SELECT 
         habitat_code
@@ -999,13 +1007,21 @@ SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, habitat_code, 
         , h.habitat_confidence
         , l.sensitivity_lvl AS sensitivity_level
         , i.intensity_level
-        , h.wkb_geometry
+        , ST_Intersection(
+            h.wkb_geometry
+            , i.wkb_geometry
+        ) AS wkb_geometry
 	FROM 
         _tmp_sensitivity_intensities i
 		, _tmp_habitats h
 		, _tmp_sensitivity_levels l
 	WHERE 
-		l.habitat_id = h.dominant_habitat AND l.intensity_lvl = i.intensity_level
+		l.habitat_id = h.dominant_habitat 
+        AND l.intensity_lvl = i.intensity_level
+        AND ST_Intersects(
+            h.wkb_geometry
+            , i.wkb_geometry
+        )
 ) AS sensitivities;
 ');
 	RAISE INFO '%', sql;
@@ -1020,7 +1036,7 @@ ALTER FUNCTION fishmap.project_sensitivity_lvls_scenario_gen(activity_name text,
 -- Name: project_sensitivity_lvls_scenario_det(text, text, text, numeric[]); Type: FUNCTION; Schema: fishmap; Owner: fishmap_webapp
 --
 
-CREATE FUNCTION fishmap.project_sensitivity_lvls_scenario_det(activity_name text, wkt text, bbox text, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, habitat_code integer, habitat_name text, sensitivity_level integer, intensity_level integer, wkb_geometry public.geometry)
+CREATE FUNCTION fishmap.project_sensitivity_lvls_scenario_det(activity_name text, wkt text, bbox text, VARIADIC args numeric[]) RETURNS TABLE(ogc_fid integer, habitat_code integer, habitat_name text, dominant_habitat integer, habitat_confidence character varying(20), sensitivity_level integer, intensity_level integer, wkb_geometry public.geometry)
     LANGUAGE plpgsql
     AS $_$
 DECLARE
@@ -1041,8 +1057,13 @@ CREATE TEMP TABLE _tmp_sensitivity_intensities ON COMMIT DROP AS (
 );
 
     sql := format('
-SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, habitat_code, habitat_name, sensitivity_level, intensity_level, wkb_geometry FROM (
-	SELECT h.habitat_code, h.habitat_name::text, l.sensitivity_lvl AS sensitivity_level, i.intensity_level, ST_Intersection(i.wkb_geometry, h.wkb_geometry) AS wkb_geometry
+SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, habitat_code, habitat_name, dominant_habitat, habitat_confidence, sensitivity_level, intensity_level, wkb_geometry FROM (
+	SELECT 
+        h.habitat_code
+        , h.habitat_name::text
+        , h.dominant_habitat
+        , h.habitat_confidence
+        , l.sensitivity_lvl AS sensitivity_level, i.intensity_level, ST_Intersection(i.wkb_geometry, h.wkb_geometry) AS wkb_geometry
 	FROM 
         _tmp_sensitivity_intensities i
 		, habitats h
