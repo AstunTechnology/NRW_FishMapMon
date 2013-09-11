@@ -158,6 +158,7 @@
                 layers: layer.id 
             },
             {
+                transitionEffect: null,
                 attribution: FISH_MAP.getText('os_copy'),
                 singleTile: false,
                 tileSize: new OpenLayers.Size(tileWidth, tileWidth)
@@ -177,6 +178,7 @@
             layers: visibleOverlays.join(',')
         },
         {
+            transitionEffect: null,
             singleTile: true
         }
     );
