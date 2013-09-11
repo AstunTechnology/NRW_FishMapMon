@@ -698,8 +698,8 @@
         removeScenarioLayers();
         events.triggerEvent('clearscenario');
         // Refresh the map state
-        refreshOverlayLayers();
         refreshCalculatedLayer();
+        refreshOverlayLayers();
     }
 
     function addScenarioLayers() {
@@ -750,8 +750,8 @@
         addScenarioLayers();
         events.triggerEvent('scenariocalculated');
         // Refresh the map state
-        refreshOverlayLayers();
         refreshCalculatedLayer();
+        refreshOverlayLayers();
     }
 
 })();
