@@ -119,7 +119,7 @@
                         <GraphicFill>
                             <Graphic>
                                 <ExternalGraphic>
-                                    <OnlineResource xlink:type="simple" xlink:href="symbols/images/mapinfo_brush_48_yellow.png" />
+                                    <OnlineResource xlink:type="simple" xlink:href="symbols/images/mapinfo_brush_16_pink.png" />
                                     <Format>image/png</Format>
                                 </ExternalGraphic>
                             </Graphic>
@@ -140,7 +140,7 @@
                         <GraphicFill>
                             <Graphic>
                                 <ExternalGraphic>
-                                    <OnlineResource xlink:type="simple" xlink:href="symbols/images/mapinfo_brush_48_yellow.png" />
+                                    <OnlineResource xlink:type="simple" xlink:href="symbols/images/mapinfo_brush_16_green.png" />
                                     <Format>image/png</Format>
                                 </ExternalGraphic>
                             </Graphic>
@@ -161,7 +161,7 @@
                         <GraphicFill>
                             <Graphic>
                                 <ExternalGraphic>
-                                    <OnlineResource xlink:type="simple" xlink:href="symbols/images/mapinfo_brush_48_yellow.png" />
+                                    <OnlineResource xlink:type="simple" xlink:href="symbols/images/mapInfo_brush_25_green.png" />
                                     <Format>image/png</Format>
                                 </ExternalGraphic>
                             </Graphic>
@@ -182,7 +182,7 @@
                         <GraphicFill>
                             <Graphic>
                                 <ExternalGraphic>
-                                    <OnlineResource xlink:type="simple" xlink:href="symbols/images/mapinfo_brush_48_yellow.png" />
+                                    <OnlineResource xlink:type="simple" xlink:href="symbols/images/mapinfo_brush_17_brown.png" />
                                     <Format>image/png</Format>
                                 </ExternalGraphic>
                             </Graphic>
@@ -203,12 +203,16 @@
                         <GraphicFill>
                             <Graphic>
                                 <ExternalGraphic>
-                                    <OnlineResource xlink:type="simple" xlink:href="symbols/images/mapinfo_brush_48_yellow.png" />
+                                    <OnlineResource xlink:type="simple" xlink:href="symbols/images/mapinfo_brush_18_lightblue.png" />
                                     <Format>image/png</Format>
                                 </ExternalGraphic>
                             </Graphic>
                         </GraphicFill>
                     </Fill>
+                    <Stroke>
+                        <CssParameter name="stroke">#00FF00</CssParameter>
+                        <CssParameter name="stroke-width">2</CssParameter>
+                    </Stroke>
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
@@ -221,14 +225,8 @@
                 </ogc:Filter>
                 <PolygonSymbolizer>
                     <Fill>
-                        <GraphicFill>
-                            <Graphic>
-                                <ExternalGraphic>
-                                    <OnlineResource xlink:type="simple" xlink:href="symbols/images/mapinfo_brush_48_yellow.png" />
-                                    <Format>image/png</Format>
-                                </ExternalGraphic>
-                            </Graphic>
-                        </GraphicFill>
+                        <CssParameter name="fill">#55007F</CssParameter>
+                        <CssParameter name="fill-opacity">0.75</CssParameter>
                     </Fill>
                 </PolygonSymbolizer>
             </Rule>
