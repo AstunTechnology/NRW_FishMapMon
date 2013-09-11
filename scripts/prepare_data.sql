@@ -22,7 +22,7 @@ SET
 WHERE
     st_geometrytype (
         wkb_geometry )
-    = 'ST_LineString';
+    IN ('ST_LineString', 'ST_Point');
 
 
 -- Fudge all the supplied intensity data values where they've been generated using 
