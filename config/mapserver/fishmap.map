@@ -316,10 +316,7 @@ MAP
     LAYER
         NAME "sac_features"
         INCLUDE "pgconnection.inc"
-        # NOTE: Calculated draw_order column used to sort the features and
-        # influence the draw order within the layer. I don't think this is
-        # guaranteed but on inspection it works with MapServer v5.6
-        DATA "wkb_geometry from (select * from (select *, CASE feature_type WHEN 'Shallow Inlets and Bays' THEN 0 WHEN 'Mud and Sand Flats' THEN 1 WHEN 'Sandbanks' THEN 2 WHEN 'Reefs' THEN 3 WHEN 'Sea Caves' THEN 4 END as draw_order from sac_features) as sac_feat order by draw_order) as foo using unique ogc_fid using srid=27700"
+        DATA "wkb_geometry from (select * from sac_features) as foo using unique ogc_fid using srid=27700"
         PROJECTION
             "init=epsg:27700"
         END
