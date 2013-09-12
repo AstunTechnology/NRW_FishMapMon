@@ -144,9 +144,22 @@
     );
     map.addLayer(charts);
 
+    // var charts = wmsLayer(
+    //     'charts',
+    //     FISH_MAP.WMS_CHARTS_URL,
+    //     {
+    //         layers: 'charts',
+    //         transparent: false
+    //     },
+    //     {
+    //         attribution: FISH_MAP.getText('os_copy'),
+    //         singleTile: true
+    //     }
+    // );
+    // map.addLayer(charts);
+
     var visibleOverlays = overlayLayers.getVisibleLayers();
-    
-    
+
     // Add a layer for each static overlay
     var overlays = {};
     for (var i = 0; i < overlayLayers.list.length; i++) {
