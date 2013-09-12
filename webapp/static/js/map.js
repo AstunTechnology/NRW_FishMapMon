@@ -133,6 +133,20 @@
     );
     map.addLayer(os);
 
+    // var os = wmsLayer(
+    //     'os',
+    //     FISH_MAP.WMS_OS_URL,
+    //     {
+    //         layers: 'os',
+    //         transparent: false
+    //     },
+    //     {
+    //         attribution: FISH_MAP.getText('os_copy'),
+    //         singleTile: true
+    //     }
+    // );
+    // map.addLayer(os);
+
     var charts = new OpenLayers.Layer.TMS(
         FISH_MAP.getText("admiralty_chart"),
         FISH_MAP.TMS_ROOT_URL,

@@ -25,7 +25,7 @@ Notes
 To create the OS raster tile index:
 
     cd data/BaseMapping
-    gdaltindex ./OS250k/os250k.shp ./OS250k/*.TIF
+    gdaltindex ./OS250k/os250k.shp ./OS250k/*.tif
 
     This shouldn't be necessary if the expected Mapserver paths are used.
 
