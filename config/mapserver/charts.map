@@ -48,6 +48,28 @@ MAP
     END
 
     LAYER
+        NAME "land"
+        GROUP "nomap"
+        TYPE POLYGON
+        INCLUDE "pgconnection.inc"
+        DATA "wkb_geometry from (select * from high_water_wales) as foo using unique ogc_fid using srid=27700"
+        PROJECTION
+            "init=epsg:27700"
+        END
+        METADATA
+            ows_title "Land"
+        END
+        CLASS
+            STYLE
+                COLOR 246 200 110
+                OUTLINECOLOR 246 200 110
+            END
+        END
+        STATUS DEFAULT
+        UNITS METERS
+    END
+
+    LAYER
         NAME "small"
         GROUP charts
         MINSCALEDENOM 110000
