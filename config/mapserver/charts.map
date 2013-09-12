@@ -72,7 +72,7 @@ MAP
     LAYER
         NAME "small"
         GROUP charts
-        MINSCALEDENOM 110000
+        # MINSCALEDENOM 110000
         TILEINDEX "Hydrospatial/ChartedRaster/small/small.shp"
         TYPE RASTER
         PROJECTION
@@ -156,7 +156,7 @@ MAP
         NAME "1413-0_W"
         GROUP charts
         MAXSCALEDENOM 52000
-        DATA "Hydrospatial/ChartedRaster/large/1413-0_W.tif"
+        DATA "Hydrospatial/ChartedRaster/large/1413-0_W.png"
         TYPE RASTER
         PROJECTION
             "proj=tmerc"
@@ -181,7 +181,7 @@ MAP
         NAME "1512-5_W"
         GROUP charts
         MAXSCALEDENOM 52000
-        DATA "Hydrospatial/ChartedRaster/large/1512-5_W.tif"
+        DATA "Hydrospatial/ChartedRaster/large/1512-5_W.png"
         TYPE RASTER
         PROJECTION
             "proj=tmerc"
