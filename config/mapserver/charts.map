@@ -103,100 +103,16 @@ MAP
     END
 
     LAYER
-        NAME "1464-2_W"
+        NAME "large"
         GROUP charts
         MAXSCALEDENOM 52000
-        DATA "Hydrospatial/ChartedRaster/large/1464-2_W.png"
+        TILEINDEX "Hydrospatial/ChartedRaster/large/large.shp"
         TYPE RASTER
         PROJECTION
-            "proj=tmerc"
-            "lat_0=0"
-            "lon_0=-4.103333333333333"
-            "k=1"
-            "x_0=0"
-            "y_0=0"
-            "ellps=WGS84"
-            "towgs84=0,0,0,0,0,0,0"
-            "units=m"
-            "no_defs"
+            "init=epsg:4326"
         END
         METADATA
-            ows_title "1464-2_W"
-        END
-        STATUS OFF
-        UNITS METERS
-    END
-
-    LAYER
-        NAME "1464-1_W"
-        GROUP charts
-        MAXSCALEDENOM 52000
-        DATA "Hydrospatial/ChartedRaster/large/1464-1_W.png"
-        TYPE RASTER
-        PROJECTION
-            "proj=tmerc"
-            "lat_0=0"
-            "lon_0=-4.311666666666667"
-            "k=1"
-            "x_0=0"
-            "y_0=0"
-            "ellps=WGS84"
-            "towgs84=0,0,0,0,0,0,0"
-            "units=m"
-            "no_defs"
-        END
-        METADATA
-            ows_title "1464-1_W"
-        END
-        STATUS OFF
-        UNITS METERS
-    END
-
-    LAYER
-        NAME "1413-0_W"
-        GROUP charts
-        MAXSCALEDENOM 52000
-        DATA "Hydrospatial/ChartedRaster/large/1413-0_W.png"
-        TYPE RASTER
-        PROJECTION
-            "proj=tmerc"
-            "lat_0=0"
-            "lon_0=-4.626666666666667"
-            "k=1"
-            "x_0=0"
-            "y_0=0"
-            "ellps=WGS84"
-            "towgs84=0,0,0,0,0,0,0"
-            "units=m"
-            "no_defs"
-        END
-        METADATA
-            ows_title "1413-0_W"
-        END
-        STATUS OFF
-        UNITS METERS
-    END
-
-    LAYER
-        NAME "1512-5_W"
-        GROUP charts
-        MAXSCALEDENOM 52000
-        DATA "Hydrospatial/ChartedRaster/large/1512-5_W.png"
-        TYPE RASTER
-        PROJECTION
-            "proj=tmerc"
-            "lat_0=0"
-            "lon_0=-4.55"
-            "k=1"
-            "x_0=0"
-            "y_0=0"
-            "ellps=WGS84"
-            "towgs84=0,0,0,0,0,0,0"
-            "units=m"
-            "no_defs"
-        END
-        METADATA
-            ows_title "1512-5_W"
+            ows_title "Large Scale"
         END
         STATUS OFF
         UNITS METERS
