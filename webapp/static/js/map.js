@@ -171,6 +171,7 @@
                 layers: layer.id 
             },
             {
+                transitionEffect: null,
                 attribution: FISH_MAP.getText('os_copy'),
                 singleTile: false,
                 tileSize: new OpenLayers.Size(tileWidth, tileWidth)
@@ -190,6 +191,7 @@
             layers: visibleOverlays.join(',')
         },
         {
+            transitionEffect: null,
             singleTile: true
         }
     );
@@ -709,8 +711,8 @@
         removeScenarioLayers();
         events.triggerEvent('clearscenario');
         // Refresh the map state
-        refreshOverlayLayers();
         refreshCalculatedLayer();
+        refreshOverlayLayers();
     }
 
     function addScenarioLayers() {
@@ -761,8 +763,8 @@
         addScenarioLayers();
         events.triggerEvent('scenariocalculated');
         // Refresh the map state
-        refreshOverlayLayers();
         refreshCalculatedLayer();
+        refreshOverlayLayers();
     }
 
 })();

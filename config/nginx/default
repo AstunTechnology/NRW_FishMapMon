@@ -1,44 +1,58 @@
+upstream fishmap_webapp {
+        server unix:/tmp/gunicorn_fishmap_webapp.sock fail_timeout=0;
+}
+
 server {
-	root /usr/share/nginx/www;
-	index index.html index.htm;
+        listen 8001;
+        root /usr/share/nginx/www;
+        index index.html index.htm;
 
-	server_name localhost;
+        server_name cy.fmm.server.name en.fmm.server.name localhost;
 
+        location /alive {
+                add_header Content-Type text/plain;
+                return 200 'Number 5 is alive!'; # for AWS load-balancing
+        }
 
-	location /geoservices/ {
-		# ultimately points at Mapserver CGI
-		proxy_pass http://127.0.0.1:5001;
-		proxy_redirect          default;
-		proxy_set_header        Host            $host;
-		proxy_set_header        X-Real-IP       $remote_addr;
-		proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
-		client_max_body_size    10m;
-		client_body_buffer_size 128k;
-		proxy_connect_timeout   90;
-		proxy_send_timeout      90;
-		proxy_read_timeout      90;
-		proxy_buffers           32 4k;
-	}
+        location /static/ {
+                gzip_disable            "MSIE [1-6]\.(?!.*SV1)";
+                gzip                    on;
+                gzip_http_version       1.1;
+                gzip_vary               on;
+                gzip_comp_level         6;
+                gzip_proxied            any;
+                gzip_types              text/plain text/html text/css application/json application/javascript application/x-javascript text/javascript text/xml application/xml application/rss+xml application/atom+xml application/rdf+xml;
+                root /home/apps/fishmap/webapp/;
+                expires                 1y;
+                add_header              Cache-Control   public;
+        }
 
- 	location / {
-                try_files $uri @flask;
+        location / {
+                try_files               $uri @flask;
+                satisfy                 any;
+                allow                   10.62.114.115/32;
+                allow                   10.227.197.251/32;
+                deny                    all;
+                auth_basic              "Authentication required";
+                auth_basic_user_file    /etc/nginx/.htpasswd/fishmap;
         }
 
 
-	location @flask {
-		# Flask front-end
-		proxy_pass http://127.0.0.1:5000;
-		proxy_redirect          off;
-		proxy_set_header        Host            $host;
-		proxy_set_header        X-Real-IP       $remote_addr;
-		proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
-		client_max_body_size    10m;
-		client_body_buffer_size 128k;
-		proxy_connect_timeout   90;
-		proxy_send_timeout      90;
-		proxy_read_timeout      90;
-		proxy_buffers           32 4k;
-	}
+        location @flask {
+                # Flask front-end
+                proxy_pass http://fishmap_webapp;
+                proxy_redirect          off;
+                proxy_set_header        Host            $host;
+                proxy_set_header        X-Real-IP       $remote_addr;
+                proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+                client_max_body_size    10m;
+                client_body_buffer_size 128k;
+                proxy_connect_timeout   90;
+                proxy_send_timeout      90;
+                proxy_read_timeout      90;
+                proxy_buffers           32 4k;
+        }
 
 }
+
 
