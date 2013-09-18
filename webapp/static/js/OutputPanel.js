@@ -1,4 +1,4 @@
-OutputPanel = OpenLayers.Class({
+OutputPanel = OpenLayers.Class(LayerPanel, {
 
     /**
     * Constructor: OutputPanel
@@ -7,15 +7,20 @@ OutputPanel = OpenLayers.Class({
     * options - {Object} Options for panel.
     */
     initialize: function(options) {
-        this.layers = options.layers;
-        this.div = jQuery(options.div);
+
+        this.init(options);
+        // this.layers = options.layers;
+        // this.div = jQuery(options.div);
+        // this.events = new OpenLayers.Events(this, this.div.get(0), null, true);
+
         this.activities = options.activities;
-        this.controller = options.controller;
+
         this.layers.events.register('visiblechange', this, function(e) {
             // console.log('OutputPanel.js visiblechange', e);
             this.syncActivityLayers(e.changed);
         });
-        this.events = new OpenLayers.Events(this, this.div.get(0), null, true);
+
+        this.controller = options.controller;
         var that = this;
         this.controller.on({
             'predrawpolygon': function(e) {
@@ -41,6 +46,7 @@ OutputPanel = OpenLayers.Class({
                 jQuery('.new_scenario').parent().show();
             }
         });
+
         this.draw();
     },
 
@@ -186,6 +192,8 @@ OutputPanel = OpenLayers.Class({
             "rules": rsvRules
         });
 
+        this.addTooltips();
+
         return this.div;
 
     },
@@ -210,6 +218,11 @@ OutputPanel = OpenLayers.Class({
                 this.checked = true;
             }
         }).change();
+
+        // Need to ensure that tooltips are in sync after we change the checked
+        // state manaually
+        this.addTooltips();
+
     },
 
     drawActivityLayers: function() {
@@ -217,6 +230,7 @@ OutputPanel = OpenLayers.Class({
         var activityHtml = jQuery.mustache(activityTmpl, {"layers": this.layers});
         // Clear the existing activity layer tree and append the new version
         this.div.find('.activity-tree').children().detach().end().append(activityHtml);
+        this.addTooltips();
     },
 
     syncActivityLayers: function(changed) {

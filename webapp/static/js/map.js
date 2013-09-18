@@ -107,7 +107,8 @@
         resolutions: [2.5, 5, 10, 25, 50, 100, 150],
         maxExtent: new OpenLayers.Bounds(-3276800,-3276800,3276800,3276800),
         restrictedExtent: new OpenLayers.Bounds(120000, 130000, 375000, 445000),
-        controls: controls
+        controls: controls,
+        zoomDuration: 5
     });
 
     var nomap = new OpenLayers.Layer.TMS(
@@ -458,7 +459,16 @@
         legendPanel.showLayers(jQuery.grep(visibleLayers, function(item) {return item.legend}));
     }
 
-    createLayerTree(overlayLayers, jQuery('.overlays'), layer_toggle);
+    var layerPanel = new LayerPanel({
+        layers: overlayLayers,
+        div: jQuery('.overlays').get(0)
+    });
+
+    layerPanel.events.on({
+        'layerchange': function(e) {
+            layer_toggle(layerPanel.layers, e.layer, e.state);
+        }
+    });
 
     var events = new OpenLayers.Events(this, jQuery('#map').get(0), null, true);
 
@@ -521,8 +531,6 @@
             showScenario(e.args, e.count);
         }
     });
-
-    outputPanel.draw();
 
     function layersCollection(layers) {
 

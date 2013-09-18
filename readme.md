@@ -17,6 +17,12 @@ For Python PostgreSQL driver
 * python-dev
 * libpq-dev
 
+TODO
+----
+
+* Consider setting .olBackBuffer {display: none;} when changing activity to avoid previous activity being shown
+* Move logic to show extents to map.js
+
 Notes
 -----
 

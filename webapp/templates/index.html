@@ -397,10 +397,15 @@
         Proj4js.defs["EPSG:27700"] = "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +datum=OSGB36 +units=m +no_defs";
     </script>
     <script src="{{ url_for('static', filename='js/OpenLayers-2.13/OpenLayers.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/LayerPanel.js') }}"></script>
     <script src="{{ url_for('static', filename='js/OutputPanel.js') }}"></script>
     <script src="{{ url_for('static', filename='js/BaseMapSwitcher.js') }}"></script>
     <script src="{{ url_for('static', filename='js/MapSearch.js') }}"></script>
     <script src="{{ url_for('static', filename='js/LegendPanel.js') }}"></script>
+    <script id="showLayerTmpl" type="text/template">{{ _('Click to show') }} {% raw %}{{text}}{% endraw %} {{ _('layer') }}</script>
+    <script id="hideLayerTmpl" type="text/template">{{ _('Click to hide') }} {% raw %}{{text}}{% endraw %} {{ _('layer') }}</script>
+    <script id="showHeaderTmpl" type="text/template">{{ _('Click to show') }} {% raw %}{{text}}{% endraw %} {{ _('layers') }}</script>
+    <script id="hideHeaderTmpl" type="text/template">{{ _('Click to hide') }} {% raw %}{{text}}{% endraw %} {{ _('layers') }}</script>
     <script id="treeTmpl" type="text/template">
     {% raw %}
         <ul class="tree">
