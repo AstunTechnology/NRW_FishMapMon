@@ -8,13 +8,13 @@ OutputPanel = OpenLayers.Class({
     */
     initialize: function(options) {
         this.layers = options.layers;
+        this.div = jQuery(options.div);
+        this.activities = options.activities;
+        this.controller = options.controller;
         this.layers.events.register('visiblechange', this, function(e) {
             // console.log('OutputPanel.js visiblechange', e);
-            this.drawActivityLayers();
+            this.syncActivityLayers(e.changed);
         });
-        this.activities = options.activities;
-        this.div = jQuery(options.div);
-        this.controller = options.controller;
         this.events = new OpenLayers.Events(this, this.div.get(0), null, true);
         var that = this;
         this.controller.on({
@@ -41,6 +41,7 @@ OutputPanel = OpenLayers.Class({
                 jQuery('.new_scenario').parent().show();
             }
         });
+        this.draw();
     },
 
     getActivity: function() {
@@ -216,6 +217,13 @@ OutputPanel = OpenLayers.Class({
         var activityHtml = jQuery.mustache(activityTmpl, {"layers": this.layers});
         // Clear the existing activity layer tree and append the new version
         this.div.find('.activity-tree').children().detach().end().append(activityHtml);
+    },
+
+    syncActivityLayers: function(changed) {
+        for (var i = 0, lyr; i < changed.length; i++) {
+            lyr = changed[i];
+            jQuery('#' + lyr.id).get(0).checked = lyr.getVisible();
+        }
     },
 
     showInfo: function(state) {

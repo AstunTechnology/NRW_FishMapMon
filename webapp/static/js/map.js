@@ -20,7 +20,7 @@
     };
 
     // Make some decisions base on browser for printing (really rather not do
-    // this but IE can be harsh sometimes...
+    // this but IE can be harsh sometimes...)
     var ua = jQuery.uaMatch(navigator.userAgent);
 
     var tileWidth = 512,
@@ -585,6 +585,7 @@
         function _setVisible(lyr, visible) {
             // console.log('_setVisible', lyr, visible);
             if (lyr.visible !== visible) {
+                var changed = [lyr];
                 lyr.visible = visible;
                 if (lyr.visible && lyr.output_layer) {
                     // Ensure only one output layer is visible at a time
@@ -592,11 +593,14 @@
                     for (var i = 0, l; i < visLyrs.length; i++) {
                         l = visLyrs[i];
                         if (l !== lyr && l.output_layer) {
-                            l.visible = false;
+                            if (l.visible) {
+                                l.visible = false;
+                                changed.push(l);
+                            }
                         }
                     }
                 }
-                layers.events.triggerEvent("visiblechange");
+                layers.events.triggerEvent("visiblechange", {"changed": changed});
             }
             return lyr.visible;
         }
@@ -750,9 +754,6 @@
                 grp.addLayer(lyr);
             }
         }
-        // Make a default scenario layer visible to help the user out
-        var defaultLayer = overlayLayers.getLayerById('intensity_lvls_scenario');
-        defaultLayer.setVisible(true);
     }
 
     function removeScenarioLayers() {
@@ -776,6 +777,9 @@
         FISH_MAP.scenario.count = count;
         addScenarioLayers();
         events.triggerEvent('scenariocalculated');
+        // Make a default scenario layer visible to help the user out
+        var defaultLayer = overlayLayers.getLayerById('intensity_lvls_scenario');
+        defaultLayer.setVisible(true);
         // Refresh the map state
         refreshCalculatedLayer();
         refreshOverlayLayers();
