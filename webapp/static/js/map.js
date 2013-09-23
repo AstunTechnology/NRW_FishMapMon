@@ -431,6 +431,10 @@
     }
 
     function refreshCalculatedLayer() {
+
+        // Hide the layer until we have set the new parameters
+        calculated.setVisibility(false);
+
         // Refresh the calculated WMS layer
         var visibleLayers = overlayLayers.getVisibleLayers();
         var visibleCalculated = [];
@@ -441,9 +445,6 @@
             }
         }
 
-        // Hide the layer if there are no visible layers to avoid an invalid
-        // WMS request being generated
-        calculated.setVisibility(visibleCalculated.length);
         var params = {
             'LAYERS': visibleCalculated.join(',')
         };
@@ -461,6 +462,10 @@
         }
 
         calculated.mergeNewParams(params);
+
+        // Hide the layer if there are no visible layers to avoid an invalid
+        // WMS request being generated
+        calculated.setVisibility(visibleCalculated.length);
 
         legendPanel.showLayers(jQuery.grep(visibleLayers, function(item) {return item.legend}));
     }
