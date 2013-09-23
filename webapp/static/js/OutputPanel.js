@@ -9,9 +9,6 @@ OutputPanel = OpenLayers.Class(LayerPanel, {
     initialize: function(options) {
 
         this.init(options);
-        // this.layers = options.layers;
-        // this.div = jQuery(options.div);
-        // this.events = new OpenLayers.Events(this, this.div.get(0), null, true);
 
         this.activities = options.activities;
 
@@ -99,12 +96,12 @@ OutputPanel = OpenLayers.Class(LayerPanel, {
         // activity changes. Checking the box via the keyboard should also
         // trigger the click event which is what we want
         this.div.delegate('input:checkbox', 'click', function() {
-            jQuery(this).addClass('clicked');
+            var l = panel.layers.getLayerById(this.id);
+            l.clicked = (this.checked);
         });
 
         this.div.find('select').change(function() {
             panel._setActivity(this.value);
-            panel.syncLayers();
         }).change();
 
         jQuery('a.new_scenario', panel.div).click(function() {
@@ -195,33 +192,6 @@ OutputPanel = OpenLayers.Class(LayerPanel, {
         this.addTooltips();
 
         return this.div;
-
-    },
-
-    syncLayers: function() {
-        // Ensure that the appropriate extent layer is enabled for the selected
-        // activity
-        // TODO Ideally this wouldn't be done here but instead the layers model
-        // would be updated in map.js when the activity changesbut currently
-        // it's not possible due to the requirement to know if the user has
-        // toggled a layer on...
-        var panel = this;
-        jQuery('.extents_grp input:checkbox', this.div).each(function() {
-            var elm = jQuery(this);
-            // Uncheck all layers that the user has not selected themselves
-            if (elm.hasClass('clicked') === false) {
-                this.checked = false;
-            }
-            // Always check the layer that is assocaiated with the current
-            // activity
-            if (this.id.match(panel.getActivity())) {
-                this.checked = true;
-            }
-        }).change();
-
-        // Need to ensure that tooltips are in sync after we change the checked
-        // state manaually
-        this.addTooltips();
 
     },
 

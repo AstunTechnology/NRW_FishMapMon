@@ -484,25 +484,31 @@
             layer_toggle(outputPanel.layers, e.layer, e.state);
         },
         'activitychange': function(e) {
-            FISH_MAP.fishingactivity = outputPanel.getActivity();
-            // Get a reference to the activity groups
+            var activity = outputPanel.getActivity();
+
+            // Record the activity for use elsewhere
+            FISH_MAP.fishingactivity = activity;
+
+            // Update the activity layers
             var grps = overlayLayers.getGroupsByProperty('activity', true);
+
             // If no activity is chosen then hide the activity layers
-            if (FISH_MAP.fishingactivity === null) {
+            if (activity === null) {
                 for (var m = 0, grp; m < grps.length; m++) {
                     grp = grps[m];
-                    grp.fishingactivity = FISH_MAP.fishingactivity;
+                    grp.fishingactivity = activity;
                     for (var n = 0, lyr; n < grp.layers.length; n++) {
                         lyr = grp.layers[n];
                         lyr.setVisible(false);
                     }
                 }
             }
+
             // Add a _fullName property and desc to all activity layers which
             // can be used in templates etc.
             for (var m = 0, grp; m < grps.length; m++) {
                 grp = grps[m];
-                grp.fishingactivity = FISH_MAP.fishingactivity;
+                grp.fishingactivity = activity;
                 for (var n = 0, lyr; n < grp.layers.length; n++) {
                     lyr = grp.layers[n];
                     // Lookup the full name for the layer which includes the
@@ -519,6 +525,23 @@
                     lyr.desc = (descText != descTextId) ? descText : false;
                 }
             }
+
+            // Enable the appropriate extents layer based on current fishing
+            // activity
+            if (activity) {
+                var grp = overlayLayers.getGroupsByProperty('id', 'extents_grp')[0];
+                for (var i = 0, l; i < grp.layers.length; i++) {
+                    l = grp.layers[i];
+                    if (l.id == 'extents_' + activity) {
+                        l.setVisible(true);
+                    } else {
+                        if (!l.clicked) {
+                            l.setVisible(false);
+                        }
+                    }
+                }
+            }
+
             clearScenario();
         },
         'newscenario': function(e) {
