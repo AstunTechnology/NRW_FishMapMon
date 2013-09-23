@@ -403,17 +403,17 @@
 
     function refreshOverlayLayers() {
         // Refresh the overlay WMS layers
+        var activity = FISH_MAP.fishingactivity;
         for (var i = 0; i < overlayLayers.list.length; i++) {
             var layer = overlayLayers.list[i];
             if (overlays[layer.id]) {
                 var overlay = overlays[layer.id];
                 if (layer.getVisible()) {
-                    var params = {
-                        'LAYERS': layer.id
-                    };
                     if (layer.output_layer) {
-                        if (FISH_MAP.fishingactivity) {
-                            params['FISHING'] = FISH_MAP.fishingactivity;
+                        if (activity) {
+                            if (overlay.params.FISHING !== activity) {
+                                overlay.mergeNewParams({'FISHING': activity});
+                            }
                         } else {
                             // The fishing activity must be defined for us to
                             // show output layers as the activity is used to
@@ -421,7 +421,6 @@
                             overlay.setVisibility(false);
                         }
                     }
-                    overlay.mergeNewParams(params);
                 }
                 overlay.setVisibility(layer.getVisible());
             }
@@ -463,7 +462,7 @@
 
         calculated.mergeNewParams(params);
 
-        // Hide the layer if there are no visible layers to avoid an invalid
+        // Only show the layer if there are visible layers to avoid an invalid
         // WMS request being generated
         calculated.setVisibility(visibleCalculated.length);
 
@@ -772,7 +771,6 @@
         events.triggerEvent('clearscenario');
         // Refresh the map state
         refreshCalculatedLayer();
-        refreshOverlayLayers();
     }
 
     function addScenarioLayers() {
@@ -824,7 +822,6 @@
         defaultLayer.setVisible(true);
         // Refresh the map state
         refreshCalculatedLayer();
-        refreshOverlayLayers();
     }
 
 })();
