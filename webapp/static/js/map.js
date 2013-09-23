@@ -73,7 +73,6 @@
 
     overlayLayers = layersCollection(overlayLayers);
     overlayLayers.events.register('visiblechange', this, function(e) {
-        // console.log('map.js visiblechange', e);
         refreshCalculatedLayer();
         refreshOverlayLayers();
     });
@@ -189,16 +188,16 @@
             {
                 attribution: FISH_MAP.getText('os_copy'),
                 singleTile: false,
-                tileSize: new OpenLayers.Size(tileWidth, tileWidth)
+                tileSize: new OpenLayers.Size(tileWidth, tileWidth),
+                createBackBuffer: function() {return null}
             }
         );
         overlay.setVisibility(layer.getVisible());
         overlays[layer.id] = overlay;
         map.addLayer(overlay);
     }
-   
-    
 
+    // Add a single layer for calculated layers
     var calculated = wmsLayer(
         "Calculated",
         FISH_MAP.WMS_OVERLAY_URL,
