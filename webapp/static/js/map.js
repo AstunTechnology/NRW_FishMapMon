@@ -407,16 +407,23 @@
             var layer = overlayLayers.list[i];
             if (overlays[layer.id]) {
                 var overlay = overlays[layer.id];
-                overlay.setVisibility(layer.getVisible());
                 if (layer.getVisible()) {
                     var params = {
                         'LAYERS': layer.id
                     };
-                    if (layer.output_layer && FISH_MAP.fishingactivity) {
-                        params['FISHING'] = FISH_MAP.fishingactivity;
+                    if (layer.output_layer) {
+                        if (FISH_MAP.fishingactivity) {
+                            params['FISHING'] = FISH_MAP.fishingactivity;
+                        } else {
+                            // The fishing activity must be defined for us to
+                            // show output layers as the activity is used to
+                            // determine which data to show
+                            overlay.setVisibility(false);
+                        }
                     }
                     overlay.mergeNewParams(params);
                 }
+                overlay.setVisibility(layer.getVisible());
             }
         }
         var visibleLayers = overlayLayers.getVisibleLayers();
