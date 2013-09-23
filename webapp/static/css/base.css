@@ -378,3 +378,20 @@ div.olControlScaleLine {
     bottom: 60px;
     left: 5px;
 }
+
+/* Disable GPU transitions */
+img.olTileImage {
+    -webkit-transform: inherit;
+    -moz-transform: inherit;
+    -o-transform: inherit;
+    -ms-transform: inherit;
+    transform: inherit;
+    -webkit-backface-visibility: inherit;
+    -moz-backface-visibility: inherit;
+    -ms-backface-visibility: inherit;
+    backface-visibility: inherit;
+    -webkit-perspective: inherit;
+    -moz-perspective: inherit;
+    -ms-perspective: inherit;
+    perspective: inherit;
+}

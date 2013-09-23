@@ -24,8 +24,8 @@
     var ua = jQuery.uaMatch(navigator.userAgent);
 
     var tileWidth = 512,
-        layerRatio = 1.4,
-        layerBuffer = 1;
+        layerRatio = 1,
+        layerBuffer = 0;
 
     if (ua.browser === 'msie' && parseInt(ua.version, 10) < 9) {
         tileWidth = 256;
@@ -108,7 +108,8 @@
         maxExtent: new OpenLayers.Bounds(-3276800,-3276800,3276800,3276800),
         restrictedExtent: new OpenLayers.Bounds(120000, 130000, 375000, 445000),
         controls: controls,
-        zoomDuration: 5
+        tileManager: null,
+        zoomMethod: OpenLayers.Easing.Expo.easeOut
     });
 
     var nomap = new OpenLayers.Layer.TMS(
@@ -186,7 +187,6 @@
                 layers: layer.id 
             },
             {
-                transitionEffect: null,
                 attribution: FISH_MAP.getText('os_copy'),
                 singleTile: false,
                 tileSize: new OpenLayers.Size(tileWidth, tileWidth)
