@@ -263,7 +263,7 @@
             "id": "default_grp", 
             "layers": [
                 {
-                    "id": "mask,project_area", 
+                    "id": "project_area", 
                     "info": false, 
                     "legend": false, 
                     "visible": true
