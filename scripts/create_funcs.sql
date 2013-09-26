@@ -281,7 +281,7 @@ differences AS (
 		))).geom AS wkb_geometry
 	FROM overlapping
 )
-SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, intensity_level, round('|| quote_ident(intensityfield) ||', 2), userid::text, wkb_geometry FROM (
+SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, intensity_level, round('|| quote_ident(intensityfield) ||', 4), userid::text, wkb_geometry FROM (
 	-- non-overlapping existing polygons
 	SELECT 
         intensity_level::int
@@ -326,7 +326,7 @@ SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, intensity_leve
     SELECT 
         ogc_fid
         , '|| lvlcase ||' AS intensity_level
-        , round('|| quote_ident(intensityfield) ||', 2)
+        , round('|| quote_ident(intensityfield) ||', 4)
         , ''''::text AS userid
         , wkb_geometry FROM project AS intensities;';
 	END IF;
@@ -381,7 +381,7 @@ WITH overlapping AS (
 	FROM '|| olddata ||' AS existing
 	WHERE ST_Intersects(wkb_geometry, (SELECT ST_Multi(ST_Union(wkb_geometry)) FROM project) )
 )
-SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, intensity_level, round('|| quote_ident(intensityfield) ||', 2), ''''::text AS userid, wkb_geometry FROM (
+SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, intensity_level, round('|| quote_ident(intensityfield) ||', 4), ''''::text AS userid, wkb_geometry FROM (
 	-- non-overlapping parts of existing polygons
 	SELECT intensity_level::int, '|| quote_ident(intensityfield) ||', wkb_geometry
 	FROM '|| olddata ||'
@@ -402,7 +402,7 @@ SELECT row_number() OVER (ORDER BY wkb_geometry)::int AS ogc_fid, intensity_leve
 	SELECT '|| lvlcase ||' AS intensity_level, '|| quote_ident(intensityfield) ||', wkb_geometry FROM overlapping
 ) AS intensities;';
 	ELSE
-		sql := 'SELECT ogc_fid, '|| lvlcase ||' AS intensity_level, round('|| quote_ident(intensityfield) ||', 2), ''''::text AS userid, wkb_geometry FROM project AS intensities;';
+		sql := 'SELECT ogc_fid, '|| lvlcase ||' AS intensity_level, round('|| quote_ident(intensityfield) ||', 4), ''''::text AS userid, wkb_geometry FROM project AS intensities;';
 	END IF;
 	RAISE INFO '%', sql;                                                 
         RETURN QUERY EXECUTE sql;
