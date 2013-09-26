@@ -209,8 +209,8 @@
             singleTile: true
         }
     );
-    calculated.setVisibility(false);
     map.addLayer(calculated);
+    calculated.setVisibility(false);
 
     var legendPanel = new OpenLayers.Control.LegendPanel({
         div: jQuery('#legend').get(0),
@@ -794,6 +794,19 @@
                 grp.addLayer(lyr);
             }
         }
+
+        // Correct z-index of calculated layer so that it falls just below the
+        // first extents layer
+        for (var i = 0, layer; i < overlayLayers.list.length; i++) {
+            layer = overlayLayers.list[i];
+            if (layer.id.indexOf('extents_') === 0) {
+                // "calculated" is an OpenLayers layer and "overlays" is a hash of
+                // OpenLayers layers
+                calculated.setZIndex(overlays[layer.id].getZIndex() - 1);
+                break;
+            }
+        }
+
     }
 
     function removeScenarioLayers() {
