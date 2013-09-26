@@ -29,4 +29,4 @@ cd ../nomap
 cd ../os
 7z a ../os-0-4.7z 0 1 2 3 4
 7z a ../os-5.7z 5
-7z a ../os-6.7z 6 single_color_tiles/
+7z a -v40m ../os-6.7z 6 single_color_tiles/
