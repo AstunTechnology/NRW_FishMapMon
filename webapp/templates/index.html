@@ -30,7 +30,7 @@
     <div id="main">
         <div id="toolbar"><p>
             {%- if 'dev' in g.user.roles or 'admin' in g.user.roles -%}
-            <a href="{{ url_for('user_add') }}">Add user</a> | 
+            <a href="{{ url_for('user_add') }}">{{ _('Add user') }}</a> | 
             {% endif %}
             {%- if g.user.is_authenticated() -%}
             <b>{{ g.user.email }}</b> |
