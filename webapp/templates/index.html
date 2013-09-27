@@ -29,7 +29,7 @@
 
     <div id="main">
         <div id="toolbar"><p>
-            <a href="{{ url_for('static', filename='docs/help.pdf') }}#habitats">{{ _('Help') }}</a> |&nbsp;
+            <a href="{{ url_for('static', filename='docs/help.pdf') }}#habitats" title="{{ _('Download or view the help document') }}">{{ _('Help') }}</a> |&nbsp;
             {%- if 'dev' in g.user.roles or 'admin' in g.user.roles -%}
             <a href="{{ url_for('user_add') }}">{{ _('Add user') }}</a> | 
             {% endif %}
