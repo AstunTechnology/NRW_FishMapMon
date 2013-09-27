@@ -336,6 +336,10 @@ ul.tree li h3.collapsed {
     background-color: #406254;
 }
 
+.olPopupCloseBox {
+    background-image: url("../img/close.gif");
+}
+
 .olFramedCloudPopupContent h2 {
     margin: 0.2em;
 }
