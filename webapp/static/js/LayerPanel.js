@@ -15,10 +15,10 @@ LayerPanel = OpenLayers.Class({
         this.layers = options.layers;
         this.div = jQuery(options.div);
         this.events = new OpenLayers.Events(this, this.div.get(0), null, true);
-        this.showLayerTmpl = jQuery('#showLayerTmpl').html();
-        this.hideLayerTmpl = jQuery('#hideLayerTmpl').html();
-        this.showHeaderTmpl = jQuery('#showHeaderTmpl').html();
-        this.hideHeaderTmpl = jQuery('#hideHeaderTmpl').html();
+        this.showLayerTmpl = jQuery.trim(jQuery('#showLayerTmpl').html());
+        this.hideLayerTmpl = jQuery.trim(jQuery('#hideLayerTmpl').html());
+        this.showHeaderTmpl = jQuery.trim(jQuery('#showHeaderTmpl').html());
+        this.hideHeaderTmpl = jQuery.trim(jQuery('#hideHeaderTmpl').html());
     },
 
     draw: function() {
