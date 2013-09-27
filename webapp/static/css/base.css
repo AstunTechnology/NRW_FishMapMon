@@ -206,6 +206,10 @@ ul.tree li h3.collapsed {
 
 /* Popup Content */
 
+#popup_content thead th {
+    text-align: left;
+}
+
 #popup_content tbody.info th {
     text-align: right;
     vertical-align: top;
