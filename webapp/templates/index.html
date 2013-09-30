@@ -60,6 +60,7 @@
 
     <script type="text/javascript">
         window.FISH_MAP = {
+            "locale": "{{g.locale}}",
             "text": {
                 "os_copy": "&copy; {{ _('Crown Copyright and database right 2013. Ordnance Survey 100019741') }}",
                 "chart_copy": "&copy; {{ _('British Crown and OceanWise Ltd, 2013. All rights reserved. License No. EK001-20120402. Not to be used for Navigation') }}",
@@ -383,7 +384,7 @@
         FISH_MAP.ROOT_URL = window.location.protocol + '//' + window.location.host + window.location.pathname;
         FISH_MAP.GAZ_URL = FISH_MAP.ROOT_URL + 'gaz?q=';
         FISH_MAP.WMS_ROOT_URL = FISH_MAP.ROOT_URL + 'wms?map=';
-        FISH_MAP.WMS_OVERLAY_URL = FISH_MAP.WMS_ROOT_URL + 'fishmap';
+        FISH_MAP.WMS_OVERLAY_URL = FISH_MAP.WMS_ROOT_URL + 'fishmap&locale=' + FISH_MAP.locale;
         FISH_MAP.WMS_OS_URL = FISH_MAP.WMS_ROOT_URL + 'os';
         FISH_MAP.WMS_CHARTS_URL = FISH_MAP.WMS_ROOT_URL + 'charts';
         FISH_MAP.TMS_ROOT_URL = "{{ url_for('static', filename='tiles/') }}";
