@@ -39,7 +39,7 @@ To create the OS raster tile index:
 
 From the webapp directory first scan templates and python files for strings to translate by running:
 
-    pybabel extract -F babel.cfg -o strings.pot .
+    pybabel extract -F babel.cfg -k lazy_gettext -o strings.pot .
 
 Create files for all languages that contain the translated text:
 
