@@ -403,7 +403,7 @@ def get_extra_sld_info(layer, args):
         layer = args.get('FISHING')
         intensity_bands = {
             "king_scallops": ["&lt;0.8", "0.8 - 3", "&gt;3"],
-            "queen_scallops": ["&lt;0.8", "0.8 - 3", "&gt;3"],
+            "queen_scallops": ["&lt;1.35", "1.35 - 10.2", "&gt;10.2"],
             "mussels": ["&lt;0.4", "0.4 - 3", "&gt;3"],
             "lot": ["&lt;0.93", "0.93 - 6.95", "&gt;6.95"],
             "nets": ["&lt;33.9", "33.9 - 254.6", "&gt;254.6"],
