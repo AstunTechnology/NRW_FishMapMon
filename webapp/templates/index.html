@@ -60,7 +60,7 @@
 
     <script type="text/javascript">
         window.FISH_MAP = {
-            "locale": "{{g.locale}}",
+            "locale": "{{ g.locale if g.locale else 'en' }}",
             "text": {
                 "os_copy": "&copy; {{ _('Crown Copyright and database right 2013. Ordnance Survey 100019741') }}",
                 "chart_copy": "&copy; {{ _('British Crown and OceanWise Ltd, 2013. All rights reserved. License No. EK001-20120402. Not to be used for Navigation') }}",
