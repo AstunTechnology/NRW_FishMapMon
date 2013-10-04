@@ -41,7 +41,15 @@ OpenLayers.Control.BaseMapSwitcher = OpenLayers.Class(OpenLayers.Control, {
             return false;
         });
 
+        this.map.events.register('changebaselayer', this, function(e) {
+            this.updateActiveLayer(e.layer);
+        });
+
         return this.div;
+    },
+
+    updateActiveLayer: function(layer) {
+        jQuery('a', this.div).removeClass('active').filter('#' + layer.id).addClass('active');
     },
 
     CLASS_NAME: "OpenLayers.Control.BaseMapSwitcher"
