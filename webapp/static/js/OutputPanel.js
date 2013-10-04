@@ -45,6 +45,14 @@ OutputPanel = OpenLayers.Class(LayerPanel, {
         });
 
         this.draw();
+
+    },
+
+    setActivity: function(activity) {
+        // console.log('setActivity, ' + activity);
+        this.div.find('select').val(activity);
+        this._setActivity(activity);
+        // console.log(this.div.find('select').val());
     },
 
     getActivity: function() {
@@ -52,6 +60,7 @@ OutputPanel = OpenLayers.Class(LayerPanel, {
     },
 
     _setActivity: function(activity) {
+        // console.log('_setActivity, ' + activity);
         this._activity = (activity === "") ? null : activity;
         this.events.triggerEvent("activitychange", {"activity": this.getActivity()});
         if (this._activity === null) {
@@ -161,27 +170,8 @@ OutputPanel = OpenLayers.Class(LayerPanel, {
 
         jQuery('form', panel.div).RSV({
             onCompleteHandler: function() {
-                var args = [];
-                var count = 1;
-                var activity = panel.getActivity();
-                var countField = panel.countFields[activity];
-
-                jQuery('form div.variable fieldset:visible', panel.div).each(function() {
-                    var val = 0;
-                    jQuery(this).find('input:text').each(function() {
-                        val += parseFloat(this.value);
-                    })
-                    args.push(val);
-                });
-
-                if (countField) {
-                    count = jQuery("input#" + countField).val();
-                    if (countField != "vessels") {
-                        // Number of visits so multiply by days, always the first arg 
-                        count = count * args[0];
-                    }
-                }
-
+                var args = panel.calcArgs();
+                var count = panel.calcCount(args);
                 panel.events.triggerEvent("showscenario", {"args": args, "count": count});
                 return false;
             },
@@ -193,6 +183,59 @@ OutputPanel = OpenLayers.Class(LayerPanel, {
 
         return this.div;
 
+    },
+
+    setFormValues: function(controls) {
+        for (var id in controls) {
+            jQuery('#' + id, this.div).val(controls[id]);
+        }
+    },
+
+    calcArgs: function() {
+        var args = [];
+
+        jQuery('form div.variable fieldset:visible', this.div).each(function() {
+            var val = 0;
+            jQuery(this).find('input:text').each(function() {
+                val += parseFloat(this.value);
+            })
+            args.push(val);
+        });
+
+        return args;
+    },
+
+    calcCount: function(args) {
+        var count = 1;
+        var activity = this.getActivity();
+        var countField = this.countFields[activity];
+        if (countField) {
+            count = jQuery("input#" + countField).val();
+            if (countField != "vessels") {
+                // Number of visits so multiply by days, always the first arg 
+                count = count * args[0];
+            }
+        }
+        return count;
+    },
+
+    getRawFormValues: function() {
+        var panel = this;
+        var controls = [];
+        jQuery('form div.variable fieldset:visible', panel.div).each(function() {
+            jQuery(this).find('input:text').each(function() {
+                controls.push({id: this.id, val: parseFloat(this.value)});
+            })
+        });
+        return controls;
+    },
+
+    getRawFormValueString: function() {
+        var controls = this.getRawFormValues();
+        var params = jQuery.map(controls, function(o) {
+            return o.id + '=' + o.val;
+        });
+        return params.join('&');
     },
 
     drawActivityLayers: function() {

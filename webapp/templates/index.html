@@ -17,7 +17,7 @@
     <link href="{{ url_for('static', filename='css/base_lt_ie8.css') }}" rel="stylesheet" />
     <![endif]-->
 
-    <link href="{{ url_for('static', filename='css/print.css') }}" rel="stylesheet" media="print" />
+    <link href="{{ url_for('static', filename='css/print.css') }}" rel="stylesheet" media="print" id="printcss" />
 
     <!--[if lt IE 9]>
     <link href="{{ url_for('static', filename='css/print_lt_ie9.css') }}" rel="stylesheet" media="print" />
@@ -394,6 +394,7 @@
     <script src="{{ url_for('static', filename='js/jquery-ui-1.10.3.custom.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery.ui.touch-punch.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery.rsv-2.5.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/parseuri.js') }}"></script>
     <script src="{{ url_for('static', filename='js/proj4js-custom.min.js') }}"></script>
     <script type="text/javascript">
         Proj4js.defs["EPSG:27700"] = "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +datum=OSGB36 +units=m +no_defs";

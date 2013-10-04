@@ -837,4 +837,68 @@
         refreshCalculatedLayer();
     }
 
+    // Set the initial state
+    // * locale /
+    // * Center and Zoom level /
+    // * Base map /
+    // * Activity
+    // * Scenario region
+    // * Scenario args
+    // * Overlay layers (including activity layers if activity is set)
+    // Also possibly need
+    // * Popup
+    // Can we accomadate authenticated users?
+    // http://localhost:5000/?locale=en&z=3&y=386534&x=254249&overlays=habitats,restricted_closed_scalloping&basemap=os
+    // http://localhost:5000/?locale=en&z=3&y=386534&x=254249&overlays=habitats,wrecks,intensity_lvls_official&basemap=os&activity=king_scallops
+    // http://localhost:5000/?locale=en&z=3&y=386534&x=254249&overlays=habitats,wrecks,intensity_lvls_official&basemap=os&activity=king_scallops&area=POLYGON%28%28251399%20393996.5%2C253574%20388896.5%2C251224%20388896.5%2C249649%20390171.5%2C251399%20393996.5%29%29
+    // http://localhost:5000/?locale=en&z=3&y=386534&x=254249&overlays=habitats,wrecks,intensity_lvls_scenario&basemap=os&fishing=lot&count=6&wkt=POLYGON%28%28251399%20393996.5%2C253574%20388896.5%2C251224%20388896.5%2C249649%20390171.5%2C251399%20393996.5%29%29&arg1=25&arg2=5&arg3=8&arg4=30&arg5=6&
+    // http://localhost:5000/?locale=en&z=3&y=386534&x=254249&overlays=habitats,wrecks,intensity_lvls_scenario&basemap=os&fishing=lot&count=6&wkt=POLYGON%28%28251399%20393996.5%2C253574%20388896.5%2C251224%20388896.5%2C249649%20390171.5%2C251399%20393996.5%29%29&dpm_0=0&dpm_1=0&dpm_2=0&dpm_3=0&dpm_4=0&dpm_5=2&dpm_6=3&dpm_7=0&dpm_8=0&dpm_9=0&dpm_10=0&dpm_11=0&gear_speed=6&gear_time=7&gear_width=8&vessels=9
+
+    var params = parseUri(window.location).queryKey;
+    if (params) {
+        // console.log(params);
+
+        if (params.x && params.y && params.z) {
+            // console.log(params.x, params.y, params.z);
+            map.setCenter(new OpenLayers.LonLat(params.x, params.y), params.z);
+        }
+
+        if (params.basemap) {
+            for (var i = 0, layer; i < map.layers.length; i++) {
+                layer = this.map.layers[i];
+                if (layer.isBaseLayer) {
+                    if (layer.layername === params.basemap) {
+                        map.setBaseLayer(layer);
+                        break;
+                    }
+                }
+            }
+        }
+
+        if (params.fishing) {
+            outputPanel.setActivity(params.fishing);
+        }
+
+        if (params.wkt) {
+            newScenario();
+            var wkt = decodeURIComponent(params.wkt);
+            var feats = (new OpenLayers.Format.WKT()).read(wkt);
+            scenarioLayer.addFeatures(feats);
+            scenarioAddFeature(feats);
+            outputPanel.setFormValues(params);
+            var args = outputPanel.calcArgs();
+            var count = outputPanel.calcCount(args);
+            showScenario(args, params.count);
+            jQuery('#printcss').get(0).media = 'all';
+        }
+
+        if (params.overlays) {
+            var lyrs = params.overlays.split(',');
+            for (var i = 0; i < lyrs.length; i++) {
+                overlayLayers.getLayerById(lyrs[i]).setVisible(true);
+            }
+        }
+
+    }
+
 })();
