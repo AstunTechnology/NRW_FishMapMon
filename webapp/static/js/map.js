@@ -571,6 +571,13 @@
         }
     });
 
+    var exportLink = new OpenLayers.Control.ExportLink({
+        overlayLayers: overlayLayers,
+        outputPanel: outputPanel,
+        linkText: null
+    });
+    map.addControl(exportLink);
+
     function layersCollection(layers) {
 
         // Allow layers to be quickly looked up on layer name and add a toString
@@ -891,7 +898,7 @@
             // Overlays (including any related to the current fishing activity
             // and scenario
             if (params.overlays) {
-                var lyrs = params.overlays.split(',');
+                var lyrs = decodeURIComponent(params.overlays).split(',');
                 for (var i = 0; i < lyrs.length; i++) {
                     overlayLayers.getLayerById(lyrs[i]).setVisible(true);
                 }
