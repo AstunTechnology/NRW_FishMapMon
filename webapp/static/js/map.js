@@ -229,7 +229,6 @@
     var baseMapSwitcher = new OpenLayers.Control.BaseMapSwitcher();
     map.addControl(baseMapSwitcher);
 
-
     info = new OpenLayers.Control.WMSGetFeatureInfo({
         url: FISH_MAP.WMS_OVERLAY_URL, 
         infoFormat: 'application/vnd.ogc.gml',
@@ -273,6 +272,13 @@
                 }
 
                 if (features.length) {
+
+                    // Record the last x/y location so we can reproduce the
+                    // current view in ExportLink
+                    FISH_MAP.info = {
+                        x: event.xy.x,
+                        y: event.xy.y
+                    };
 
                     // Assign features to a model keyed on layer name
                     // for use in the info template. Project output layers are
@@ -895,6 +901,10 @@
             if (params.mode === 'export') {
                 jQuery('#print_css').get(0).media = 'all';
             }
+
+            if (params.infox && params.infoy) {
+                info.getInfoForClick({xy: new OpenLayers.Pixel(params.infox, params.infoy)})
+            }
         }
     }
 
@@ -906,9 +916,11 @@
      * Also pre-select the fishing activity and show it's intensity:
      *   http://localhost:5000/?locale=en&z=3&y=386534&x=254249&overlays=habitats,wrecks,intensity_lvls_official&basemap=os&fishing=lot
      * Create a scenario including an area of interest:
-     *   http://localhost:5000/?locale=en&z=3&y=386534&x=254249&overlays=habitats,wrecks,intensity_lvls_scenario&basemap=os&fishing=lot&count=6&wkt=POLYGON%28%28251399%20393996.5%2C253574%20388896.5%2C251224%20388896.5%2C249649%20390171.5%2C251399%20393996.5%29%29&dpm_0=0&dpm_1=0&dpm_2=0&dpm_3=0&dpm_4=0&dpm_5=2&dpm_6=3&dpm_7=0&dpm_8=0&dpm_9=0&dpm_10=0&dpm_11=0&gear_speed=2&gear_time=6&gear_width=8&vessels=9
+     *   http://localhost:5000/?locale=en&z=3&y=386534&x=254249&overlays=habitats,wrecks,intensity_lvls_scenario&basemap=os&fishing=lot&wkt=POLYGON%28%28251399%20393996.5%2C253574%20388896.5%2C251224%20388896.5%2C249649%20390171.5%2C251399%20393996.5%29%29&dpm_0=0&dpm_1=0&dpm_2=0&dpm_3=0&dpm_4=0&dpm_5=2&dpm_6=3&dpm_7=0&dpm_8=0&dpm_9=0&dpm_10=0&dpm_11=0&gear_speed=2&gear_time=6&gear_width=8&vessels=9
      * Create a scenario and also switch to 'export' mode which uses the print style sheet
-     *   http://localhost:5000/?locale=en&z=3&y=386534&x=254249&overlays=habitats,wrecks,intensity_lvls_scenario&basemap=os&fishing=lot&count=6&wkt=POLYGON%28%28251399%20393996.5%2C253574%20388896.5%2C251224%20388896.5%2C249649%20390171.5%2C251399%20393996.5%29%29&dpm_0=0&dpm_1=0&dpm_2=0&dpm_3=0&dpm_4=0&dpm_5=2&dpm_6=3&dpm_7=0&dpm_8=0&dpm_9=0&dpm_10=0&dpm_11=0&gear_speed=2&gear_time=6&gear_width=8&vessels=9&mode=export
+     *   http://localhost:5000/?locale=en&z=3&y=386534&x=254249&overlays=habitats,wrecks,intensity_lvls_scenario&basemap=os&fishing=lot&wkt=POLYGON%28%28251399%20393996.5%2C253574%20388896.5%2C251224%20388896.5%2C249649%20390171.5%2C251399%20393996.5%29%29&dpm_0=0&dpm_1=0&dpm_2=0&dpm_3=0&dpm_4=0&dpm_5=2&dpm_6=3&dpm_7=0&dpm_8=0&dpm_9=0&dpm_10=0&dpm_11=0&gear_speed=2&gear_time=6&gear_width=8&vessels=9&mode=export
+     * Show info popup with infox / infoy
+     *   http://localhost:5000/?locale=en&z=3&y=386534&x=254249&overlays=habitats,wrecks,intensity_lvls_scenario&basemap=os&fishing=lot&wkt=POLYGON%28%28251399%20393996.5%2C253574%20388896.5%2C251224%20388896.5%2C249649%20390171.5%2C251399%20393996.5%29%29&dpm_0=0&dpm_1=0&dpm_2=0&dpm_3=0&dpm_4=0&dpm_5=2&dpm_6=3&dpm_7=0&dpm_8=0&dpm_9=0&dpm_10=0&dpm_11=0&gear_speed=2&gear_time=6&gear_width=8&vessels=9&mode=export&infox=387&infoy=236
      */
     setView(parseUri(window.location).queryKey);
 
