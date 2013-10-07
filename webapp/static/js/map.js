@@ -889,7 +889,6 @@
             var args = outputPanel.calcArgs();
             var count = outputPanel.calcCount(args);
             showScenario(args, params.count);
-            jQuery('#printcss').get(0).media = 'all';
         }
 
         if (params.overlays) {
@@ -897,6 +896,10 @@
             for (var i = 0; i < lyrs.length; i++) {
                 overlayLayers.getLayerById(lyrs[i]).setVisible(true);
             }
+        }
+
+        if (params.mode === 'export') {
+            jQuery('#print_css').get(0).media = 'all';
         }
 
     }
