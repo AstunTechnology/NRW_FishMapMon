@@ -837,71 +837,79 @@
         refreshCalculatedLayer();
     }
 
-    // Set the initial state
-    // * locale /
-    // * Center and Zoom level /
-    // * Base map /
-    // * Activity
-    // * Scenario region
-    // * Scenario args
-    // * Overlay layers (including activity layers if activity is set)
-    // Also possibly need
-    // * Popup
-    // Can we accomadate authenticated users?
-    // http://localhost:5000/?locale=en&z=3&y=386534&x=254249&overlays=habitats,restricted_closed_scalloping&basemap=os
-    // http://localhost:5000/?locale=en&z=3&y=386534&x=254249&overlays=habitats,wrecks,intensity_lvls_official&basemap=os&activity=king_scallops
-    // http://localhost:5000/?locale=en&z=3&y=386534&x=254249&overlays=habitats,wrecks,intensity_lvls_official&basemap=os&activity=king_scallops&area=POLYGON%28%28251399%20393996.5%2C253574%20388896.5%2C251224%20388896.5%2C249649%20390171.5%2C251399%20393996.5%29%29
-    // http://localhost:5000/?locale=en&z=3&y=386534&x=254249&overlays=habitats,wrecks,intensity_lvls_scenario&basemap=os&fishing=lot&count=6&wkt=POLYGON%28%28251399%20393996.5%2C253574%20388896.5%2C251224%20388896.5%2C249649%20390171.5%2C251399%20393996.5%29%29&arg1=25&arg2=5&arg3=8&arg4=30&arg5=6&
-    // http://localhost:5000/?locale=en&z=3&y=386534&x=254249&overlays=habitats,wrecks,intensity_lvls_scenario&basemap=os&fishing=lot&count=6&wkt=POLYGON%28%28251399%20393996.5%2C253574%20388896.5%2C251224%20388896.5%2C249649%20390171.5%2C251399%20393996.5%29%29&dpm_0=0&dpm_1=0&dpm_2=0&dpm_3=0&dpm_4=0&dpm_5=2&dpm_6=3&dpm_7=0&dpm_8=0&dpm_9=0&dpm_10=0&dpm_11=0&gear_speed=6&gear_time=7&gear_width=8&vessels=9
+    /**
+     * Set the state of the application based on passed parameters.
+     * Used with server-side image export but also possible to use to bookmark
+     * a given view of the application
+     */
+    function setView(params) {
+        if (params) {
+            // console.log(params);
 
-    var params = parseUri(window.location).queryKey;
-    if (params) {
-        // console.log(params);
+            // Map view
+            if (params.x && params.y && params.z) {
+                map.setCenter(new OpenLayers.LonLat(params.x, params.y), params.z);
+            }
 
-        if (params.x && params.y && params.z) {
-            // console.log(params.x, params.y, params.z);
-            map.setCenter(new OpenLayers.LonLat(params.x, params.y), params.z);
-        }
-
-        if (params.basemap) {
-            for (var i = 0, layer; i < map.layers.length; i++) {
-                layer = this.map.layers[i];
-                if (layer.isBaseLayer) {
-                    if (layer.layername === params.basemap) {
-                        map.setBaseLayer(layer);
-                        break;
+            // Base map
+            if (params.basemap) {
+                for (var i = 0, layer; i < map.layers.length; i++) {
+                    layer = this.map.layers[i];
+                    if (layer.isBaseLayer) {
+                        if (layer.layername === params.basemap) {
+                            map.setBaseLayer(layer);
+                            break;
+                        }
                     }
                 }
             }
-        }
 
-        if (params.fishing) {
-            outputPanel.setActivity(params.fishing);
-        }
+            // Selected fishing activity
+            if (params.fishing) {
+                outputPanel.setActivity(params.fishing);
+                // Scenario (depends on fishing activity)
+                if (params.wkt) {
+                    newScenario();
+                    drawCtrl.deactivate();
+                    var wkt = decodeURIComponent(params.wkt);
+                    var feats = (new OpenLayers.Format.WKT()).read(wkt);
+                    scenarioLayer.addFeatures(feats);
+                    scenarioAddFeature(feats);
+                    outputPanel.setFormValues(params);
+                    var args = outputPanel.calcArgs();
+                    var count = outputPanel.calcCount(args);
+                    showScenario(args, params.count);
+                }
+            }
 
-        if (params.wkt) {
-            newScenario();
-            var wkt = decodeURIComponent(params.wkt);
-            var feats = (new OpenLayers.Format.WKT()).read(wkt);
-            scenarioLayer.addFeatures(feats);
-            scenarioAddFeature(feats);
-            outputPanel.setFormValues(params);
-            var args = outputPanel.calcArgs();
-            var count = outputPanel.calcCount(args);
-            showScenario(args, params.count);
-        }
+            // Overlays (including any related to the current fishing activity
+            // and scenario
+            if (params.overlays) {
+                var lyrs = params.overlays.split(',');
+                for (var i = 0; i < lyrs.length; i++) {
+                    overlayLayers.getLayerById(lyrs[i]).setVisible(true);
+                }
+            }
 
-        if (params.overlays) {
-            var lyrs = params.overlays.split(',');
-            for (var i = 0; i < lyrs.length; i++) {
-                overlayLayers.getLayerById(lyrs[i]).setVisible(true);
+            // Layout
+            if (params.mode === 'export') {
+                jQuery('#print_css').get(0).media = 'all';
             }
         }
-
-        if (params.mode === 'export') {
-            jQuery('#print_css').get(0).media = 'all';
-        }
-
     }
+
+    /**
+     * Set the initial view based on the query string parameters
+     * Example urls for testing:
+     * Set the view and enable some overlay layers:
+     *   http://localhost:5000/?locale=en&z=3&y=386534&x=254249&overlays=habitats,wrecks
+     * Also pre-select the fishing activity and show it's intensity:
+     *   http://localhost:5000/?locale=en&z=3&y=386534&x=254249&overlays=habitats,wrecks,intensity_lvls_official&basemap=os&fishing=lot
+     * Create a scenario including an area of interest:
+     *   http://localhost:5000/?locale=en&z=3&y=386534&x=254249&overlays=habitats,wrecks,intensity_lvls_scenario&basemap=os&fishing=lot&count=6&wkt=POLYGON%28%28251399%20393996.5%2C253574%20388896.5%2C251224%20388896.5%2C249649%20390171.5%2C251399%20393996.5%29%29&dpm_0=0&dpm_1=0&dpm_2=0&dpm_3=0&dpm_4=0&dpm_5=2&dpm_6=3&dpm_7=0&dpm_8=0&dpm_9=0&dpm_10=0&dpm_11=0&gear_speed=2&gear_time=6&gear_width=8&vessels=9
+     * Create a scenario and also switch to 'export' mode which uses the print style sheet
+     *   http://localhost:5000/?locale=en&z=3&y=386534&x=254249&overlays=habitats,wrecks,intensity_lvls_scenario&basemap=os&fishing=lot&count=6&wkt=POLYGON%28%28251399%20393996.5%2C253574%20388896.5%2C251224%20388896.5%2C249649%20390171.5%2C251399%20393996.5%29%29&dpm_0=0&dpm_1=0&dpm_2=0&dpm_3=0&dpm_4=0&dpm_5=2&dpm_6=3&dpm_7=0&dpm_8=0&dpm_9=0&dpm_10=0&dpm_11=0&gear_speed=2&gear_time=6&gear_width=8&vessels=9&mode=export
+     */
+    setView(parseUri(window.location).queryKey);
 
 })();
