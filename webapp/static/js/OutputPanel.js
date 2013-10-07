@@ -230,14 +230,6 @@ OutputPanel = OpenLayers.Class(LayerPanel, {
         return controls;
     },
 
-    getRawFormValueString: function() {
-        var controls = this.getRawFormValues();
-        var params = jQuery.map(controls, function(o) {
-            return o.id + '=' + o.val;
-        });
-        return params.join('&');
-    },
-
     drawActivityLayers: function() {
         var activityTmpl = jQuery('#activityLayersTmpl').html();
         var activityHtml = jQuery.mustache(activityTmpl, {"layers": this.layers});
