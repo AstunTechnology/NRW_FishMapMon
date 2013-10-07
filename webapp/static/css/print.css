@@ -1,13 +1,3 @@
-.heading h1 {
-    display: block;
-    position: static;
-    font-size: 1.4em;
-}
-
-.heading img {
-    display: none;
-}
-
 #toolbar {
     display: none;
 }
@@ -20,15 +10,6 @@
     height: 650px;
     width: 100%;
     margin-bottom: 1em;
-}
-
-.aside {
-    font-size: 1em;
-    width: 200px;
-}
-
-#main {
-    left: 200px;
 }
 
 .aside .outputs {
