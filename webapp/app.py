@@ -8,6 +8,9 @@ from flask import g
 from flask import make_response
 from flask import render_template
 from flask import request
+from flask import url_for
+from flask import jsonify
+from flask import send_file
 from flask.ext.security import RoleMixin
 from flask.ext.security import Security
 from flask.ext.security import SQLAlchemyUserDatastore
@@ -24,6 +27,16 @@ from flask_wtf import SubmitField
 from flaskext.babel import _
 from flaskext.babel import Babel
 from sqlalchemy.exc import IntegrityError
+
+from rq import Queue
+from rq.job import Job
+from redis import Redis
+
+from export import export_image
+
+# Tell RQ what Redis connection to use
+redis_conn = Redis()
+q = Queue(connection=redis_conn)  # no args implies the default queue
 
 LOCALES = {
     'en': 'English',
@@ -257,6 +270,33 @@ def wms():
         resp.headers.add('Cache-Control', 'no-cache, no-store, max-age=0')
 
     return resp
+
+
+@app.route('/export')
+def export():
+    args = request.args.copy()
+    args['_external'] = True
+    url = url_for('home', **args)
+    job = q.enqueue(export_image, url)
+    return jsonify(job_key=job.key.replace('rq:job:', ''))
+
+
+@app.route('/export/status/<job_key>', methods=['GET'])
+def export_status(job_key):
+    job = Job.fetch(job_key, connection=redis_conn)
+    if job.is_finished:
+        url = url_for('export_result', job_key=job_key)
+        return jsonify(status="complete", result=url), 200
+    elif job.is_failed:
+        return jsonify(status="failed"), 500
+    else:
+        return jsonify(status="pending"), 202
+
+
+@app.route('/export/result/<job_key>', methods=['GET'])
+def export_result(job_key):
+    return send_file('static/tmp/%s.png' % job_key,
+                     as_attachment=True, attachment_filename='nrw-fmm.png')
 
 
 def process_feature_info(layers, body, auth):

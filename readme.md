@@ -6,22 +6,26 @@ Dependencies
 
 The dependencies for the Python web applicaion are defined in webapp/REQUIREMENTS and can be installed using pip, it is assumed that the application is installed with a Python 2.7 virtualenv. Additional dependencies include:
 
-* ppa:ubuntugis/ppa
-    * cgi-mapserver
-    * postgresql-9.1-postgis
+From `ppa:ubuntugis/ppa`:
+
+    * `cgi-mapserver`
+    * `postgresql-9.1-postgis`
 
 For fuzzy search:
-* postgresql-contrib
+
+* `postgresql-contrib`
 
 For Python PostgreSQL driver
-* python-dev
-* libpq-dev
+
+* `python-dev`
+* `libpq-dev`
+
+For Export Image functionality:
+
+* `redis-server`
 
 TODO
 ----
-
-* Consider setting .olBackBuffer {display: none;} when changing activity to avoid previous activity being shown
-* Move logic to show extents to map.js
 
 Notes
 -----
@@ -32,8 +36,6 @@ To create the OS raster tile index:
 
     cd data/BaseMapping
     gdaltindex ./OS250k/os250k.shp ./OS250k/*.tif
-
-    This shouldn't be necessary if the expected Mapserver paths are used.
 
 ### Translations
 
@@ -109,24 +111,4 @@ For requests made to show impact of project area selection the following custom 
 <tr><td>cas_hand_gath    </td><td> days/year </td><td> avg. hours </td><td> # people   </td><td>           </td><td> </td></tr>
 <tr><td>pro_hand_gath    </td><td> days/year </td><td> avg. hours </td><td> # people   </td><td>           </td><td> </td></tr>
 </table>
-
-
-
-#### Example URLs
-
-* SLD
-    * Single layer (English): http://localhost/en/sld?layers=intertidal_habitats
-    * Multiple layers (Welsh): http://localhost/cy/sld?layers=project_area,intertidal_habitats
-
-* Legends
-    * English: http://localhost/en/wms/map=fishmap?LAYER=intertidal_habitats&VERSION=1.1.1&FORMAT=image%2Fpng&SERVICE=WMS&REQUEST=GetLegendGraphic&SLD=http%3A//localhost%3A5000/en/sld%3Flayers%3Dintertidal_habitats
-    * Welsh: http://localhost/cy/wms/map=fishmap?LAYER=intertidal_habitats&VERSION=1.1.1&FORMAT=image%2Fpng&SERVICE=WMS&REQUEST=GetLegendGraphic&SLD=http%3A//localhost%3A5000/cy/sld%3Flayers%3Dintertidal_habitats
-
-* Map
-    * http://localhost/en/wms/map=fishmap?LAYERS=subtidal_habitats&VERSION=1.1.1&FORMAT=image%2Fpng&TRANSPARENT=TRUE&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS=EPSG%3A27700&BBOX=221800,352075,275000,385125&WIDTH=1064&HEIGHT=661&SLD=http%3A//localhost%3A5000/en/sld%3Flayers%3Dsubtidal_habitats
-    * Calling with custom parameters for project - http://localhost/wms?map=fishmap&LAYERS=project_area%2Cvessels_lvls_project&VERSION=1.1.1&FORMAT=image%2Fpng&TRANSPARENT=TRUE&SERVICE=WMS&REQUEST=GetMap&STYLES=&SRS=EPSG%3A27700&BBOX=170375,315250,317075,445000&WIDTH=978&HEIGHT=865&FISHING=king_scallops&WKT=POLYGON((257765%20399710,%20271127%20408059,%20266732%20401588,%20260503%20396375,%20257765%20399710))&COUNT=1
-
-
-* GetFeatureInfo
-    * GML: localhost/en/wms/map=fishmap?LAYERS=intertidal_habitats&QUERY_LAYERS=intertidal_habitats&STYLES=&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetFeatureInfo&BBOX=246750%2C368462.5%2C273350%2C374937.5&FEATURE_COUNT=10&HEIGHT=259&WIDTH=1064&FORMAT=image%2Fpng&INFO_FORMAT=application/vnd.ogc.gml&SRS=EPSG%3A27700&X=603&Y=47
 
