@@ -51,8 +51,10 @@
 
     <div class="aside">
         <div class="heading">
-            <img src="{{ url_for('static', filename='img/header-logos.png') }}" alt="{{ _('Natural Resources Wales, FishMap Môn, European Fisheries Fund and Welsh Government logos') }}" />
-            <h1>{{ _('FishMap Môn') }}</h1>
+            <a href="{{ url_for('home') }}">
+                <img src="{{ url_for('static', filename='img/header-logos.png') }}" alt="{{ _('Natural Resources Wales, FishMap Môn, European Fisheries Fund and Welsh Government logos') }}" />
+                <h1>{{ _('FishMap Môn') }}</h1>
+            </a>
         </div>
         <div class="overlays"></div>
         <div class="outputs"><h2>{{ _('FishMap Môn Results') }}</h2></div>

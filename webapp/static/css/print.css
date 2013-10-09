@@ -12,6 +12,10 @@
     margin-bottom: 1em;
 }
 
+.aside {
+    bottom: inherit;
+}
+
 .aside .outputs {
     padding-left: 0;
 }
