@@ -257,6 +257,7 @@
                     null,
                     true
                 );
+                this.popup.panMapIfOutOfView = true;
                 this.map.addPopup(this.popup, true);
 
             },
@@ -275,9 +276,10 @@
 
                     // Record the last x/y location so we can reproduce the
                     // current view in ExportLink
+                    var lonLat = map.getLonLatFromPixel(event.xy);
                     FISH_MAP.info = {
-                        x: event.xy.x,
-                        y: event.xy.y
+                        x: lonLat.lon,
+                        y: lonLat.lat
                     };
 
                     // Assign features to a model keyed on layer name
@@ -342,8 +344,10 @@
                     // Remove rows with empty values
                     jQuery('td:empty()', content).parent().remove();
 
-                    // Force the popup to resize based on the content
+                    // Force the popup to resize based on the content and
+                    // ensure it's visible
                     this.popup.updateSize();
+                    this.popup.panIntoView();
 
                 } else {
 
@@ -574,7 +578,10 @@
     var exportLink = new OpenLayers.Control.ExportLink({
         overlayLayers: overlayLayers,
         outputPanel: outputPanel,
-        linkText: null
+        buttonText: FISH_MAP.getText('export_export_image'),
+        waitText: FISH_MAP.getText('export_wait'),
+        errorMessage: FISH_MAP.getText('export_error'),
+        downloadText: FISH_MAP.getText('export_download')
     });
     map.addControl(exportLink);
 
@@ -884,7 +891,7 @@
                 if (params.wkt) {
                     newScenario();
                     drawCtrl.deactivate();
-                    var wkt = decodeURIComponent(params.wkt);
+                    var wkt = decodeURIComponent(params.wkt).replace(/\+/g, ' ');
                     var feats = (new OpenLayers.Format.WKT()).read(wkt);
                     scenarioLayer.addFeatures(feats);
                     scenarioAddFeature(feats);
@@ -910,7 +917,8 @@
             }
 
             if (params.infox && params.infoy) {
-                info.getInfoForClick({xy: new OpenLayers.Pixel(params.infox, params.infoy)})
+                var xy = map.getPixelFromLonLat(new OpenLayers.LonLat(params.infox, params.infoy));
+                info.getInfoForClick({xy: xy})
             }
         }
     }

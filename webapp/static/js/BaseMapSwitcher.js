@@ -27,6 +27,7 @@ OpenLayers.Control.BaseMapSwitcher = OpenLayers.Class(OpenLayers.Control, {
                         .attr('href', '#')
                         .attr('id', layer.id)
                         .text(layer.name)
+                        .addClass('button')
                         .toggleClass('active', layer.visibility);
                 jQuery(this.div).append(link);
             }

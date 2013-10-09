@@ -130,18 +130,11 @@ ul.tree li h3.collapsed {
     padding-left: 10px;
 }
 
-.outputs .info {
-    color: white;
-    background-color: #009EAD;
-    background-image: url("../img/silk/information.png");
-    background-position: 0.5em 0.5em;
-    background-repeat: no-repeat;
-    border: 1px solid lightgray;
-    margin: 0.5em;
-    padding: 0.5em 0.5em 0.5em 2.5em;
+.outputs div.info {
+    /* See common div.info, p.info rule */
 }
 
-.outputs .info > p {
+.info > p {
     padding-bottom: 0.25em;
 }
 
@@ -202,6 +195,37 @@ ul.tree li h3.collapsed {
     display: block;
     text-align: left;
     background-image: url("../img/silk/add.png");
+}
+
+/* Common reusable classes */
+
+/* Common button class for links */
+a.button {
+    background-color: #3f3f3f;
+    color: #cccccc;
+    display: inline-block;
+    margin: 2px;
+    padding: 6px 10px;
+    text-decoration: none;
+    -webkit-border-radius: 5px;
+    -moz-border-radius-topleft: 5px;
+    border-radius: 5px;
+}
+
+/* Common block info class used for messages */
+div.info, p.info {
+    color: white;
+    background-color: #009EAD;
+    background-image: url("../img/silk/information.png");
+    background-position: 0.5em 0.5em;
+    background-repeat: no-repeat;
+    border: 1px solid lightgray;
+    margin: 0.5em;
+    padding: 0.5em 0.5em 0.5em 2.5em;
+}
+
+div.info a, p.info a {
+    color: white;
 }
 
 /* Popup Content */
@@ -286,20 +310,42 @@ ul.tree li h3.collapsed {
 }
 
 .olControlBaseMapSwitcher a {
-    background-color: #3f3f3f;
-    color: #cccccc;
-    display: inline-block;
-    margin: 2px;
-    padding: 6px 10px;
-    text-decoration: none;
-    -webkit-border-radius: 5px;
-    -moz-border-radius-topleft: 5px;
-    border-radius: 5px;
+    /* See common a.button rule */
 }
 
 .olControlBaseMapSwitcher a.active {
     color: white;
     font-weight: bold;
+}
+
+/* Export Link */
+
+.olControlExportLink {
+    right: 503px;
+    top: 6px;
+}
+
+.olControlExportLink a.button {
+    background-image: url("../img/silk/picture_save.png");
+    background-position: 5px center;
+    background-repeat: no-repeat;
+    padding-left: 25px;
+}
+
+.olControlExportLink.loading a.button {
+    background-image: url('../img/loading-light.gif');
+}
+
+.olControlExportLink p.info {
+    display: none;
+    position: absolute;
+    padding: 0.5em 0 0.5em 2em;
+    margin: 2px 0 0;
+    /* Based on common div.info, p.info rule */
+}
+
+.olControlExportLink p.info.active {
+    display: block;
 }
 
 /* Map Search */
@@ -311,6 +357,7 @@ ul.tree li h3.collapsed {
 
 .olControlMapSearch input {
     font-size: 1.2em;
+    width: 225px;
     border: 2px solid #3F3F3F;
     padding: 2px;
     -webkit-border-radius: 5px;

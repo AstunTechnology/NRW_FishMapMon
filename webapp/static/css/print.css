@@ -37,7 +37,7 @@ ul.tree, ul.tree ul {
     display: none !important;
 }
 
-.olControlMapSearch, .olControlBaseMapSwitcher, .olControlPanZoomBar {
+.olControlMapSearch, .olControlBaseMapSwitcher, .olControlPanZoomBar, .olControlExportLink {
     display: none;
 }
 
