@@ -255,7 +255,17 @@
                     null,
                     '<div id="popup_content"><p class="loading">Loading...</p></div>',
                     null,
-                    true
+                    true,
+                    function(e) {
+                        // Clear the last info coords to avoid maps being
+                        // exported with popups when the current map is not
+                        // displaying a popup
+                        FISH_MAP.info = null;
+                        // Now do the default OpenLayers stuff to close the
+                        // popup
+                        this.hide();
+                        OpenLayers.Event.stop(e);
+                    }
                 );
                 this.popup.panMapIfOutOfView = true;
                 this.map.addPopup(this.popup, true);
