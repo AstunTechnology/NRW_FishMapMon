@@ -8,8 +8,8 @@ The dependencies for the Python web applicaion are defined in webapp/REQUIREMENT
 
 From `ppa:ubuntugis/ppa`:
 
-    * `cgi-mapserver`
-    * `postgresql-9.1-postgis`
+* `cgi-mapserver`
+* `postgresql-9.1-postgis`
 
 For fuzzy search:
 
@@ -23,6 +23,23 @@ For Python PostgreSQL driver
 For Export Image functionality:
 
 * `redis-server`
+* `phantomjs`
+* `casperjs`
+
+## Install PhantomJS & CasperJS
+
+    # All software installed in /usr/local/src
+    cd /usr/local/src
+
+    # Install PhantomJS
+    sudo wget https://phantomjs.googlecode.com/files/phantomjs-1.9.2-linux-x86_64.tar.bz2
+    sudo tar -xvf phantomjs-1.9.2-linux-x86_64.tar.bz2
+    sudo mv phantomjs-1.9.2-linux-x86_64 phantomjs
+    sudo ln -sf /usr/local/src/phantomjs/bin/phantomjs /usr/local/bin/phantomjs
+
+    # Install CasperJS
+    sudo git clone git://github.com/n1k0/casperjs.git
+    sudo ln -sf /usr/local/src/casperjs/bin/casperjs /usr/local/bin/casperjs
 
 TODO
 ----
