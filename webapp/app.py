@@ -1,5 +1,6 @@
 import datetime
 import os
+import re
 import requests
 import xml.etree.ElementTree as ET
 
@@ -277,6 +278,9 @@ def export():
     args = request.args.copy()
     args['_external'] = True
     url = url_for('home', **args)
+    sub = '://%s:%s@' % (os.environ.get('HTTP_AUTH_USER', ''),
+                         os.environ.get('HTTP_AUTH_PASS', ''))
+    url = re.sub(r'://', sub, url)
     job = q.enqueue(export_image, url)
     return jsonify(job_key=job.key.replace('rq:job:', ''))
 
