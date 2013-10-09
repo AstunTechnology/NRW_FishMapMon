@@ -13,6 +13,7 @@ var filepath = out_dir + key + '.png';
 casper.start();
 
 casper.viewport(1024, 650).thenOpen(url, function() {
+    this.wait(1000);
     this.capture(filepath);
     casper.echo(filepath);
 });
