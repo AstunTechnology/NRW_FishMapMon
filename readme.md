@@ -41,6 +41,12 @@ For Export Image functionality:
     sudo git clone git://github.com/n1k0/casperjs.git
     sudo ln -sf /usr/local/src/casperjs/bin/casperjs /usr/local/bin/casperjs
 
+## Task to delete old export images
+
+The export images only need to be kept for a short while, the following entry in the apps users crontab runs every 6 hours and deletes all files that have not been modified in the last 6 hours:
+
+    * */6 * * * find /home/apps/fishmap/webapp/static/tmp/ -mmin +180 -type f -iname "*.png" -delete
+
 TODO
 ----
 
