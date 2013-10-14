@@ -25,83 +25,6 @@ WHERE
     IN ('ST_LineString', 'ST_Point');
 
 
--- Fudge all the supplied intensity data values where they've been generated using 
--- the wrong (albeit similar) formula
-UPDATE intensity_lvls_pots_combined_det
-SET intensity_value = intensity_value * 10000 / 365;
-
-UPDATE intensity_lvls_pots_combined_gen
-SET intensity_value = intensity_value * 10000 / 365;
-
-UPDATE intensity_lvls_pots_commercial_det
-SET intensity_value = intensity_value * 10000 / 365;
-
-UPDATE intensity_lvls_pots_commercial_gen
-SET intensity_value = intensity_value * 10000 / 365;
-
-UPDATE intensity_lvls_pots_recreational_det
-SET intensity_value = intensity_value * 10000 / 365;
-
-UPDATE intensity_lvls_pots_recreational_gen
-SET intensity_value = intensity_value * 10000 / 365;
-
-UPDATE intensity_lvls_rsa_combined_det
-SET intensity_value = intensity_value * 10000 / 52;
-
-UPDATE intensity_lvls_rsa_combined_gen
-SET intensity_value = intensity_value * 10000 / 52;
-
-UPDATE intensity_lvls_rsa_charterboats_det
-SET intensity_value = intensity_value * 10000 / 52;
-
-UPDATE intensity_lvls_rsa_charterboats_gen
-SET intensity_value = intensity_value * 10000 / 52;
-
-UPDATE intensity_lvls_rsa_noncharter_det
-SET intensity_value = intensity_value * 10000 / 52;
-
-UPDATE intensity_lvls_rsa_noncharter_gen
-SET intensity_value = intensity_value * 10000 / 52;
-
-UPDATE intensity_lvls_rsa_shore_det
-SET intensity_value = intensity_value * 10000 / 52;
-
-UPDATE intensity_lvls_rsa_shore_gen
-SET intensity_value = intensity_value * 10000 / 52;
-
-UPDATE intensity_lvls_cas_hand_gath_det
-SET intensity_value = intensity_value * 10000 / 1825;
-
-UPDATE intensity_lvls_cas_hand_gath_gen
-SET intensity_value = intensity_value * 10000 / 1825;
-
-UPDATE intensity_lvls_pro_hand_gath_det
-SET intensity_value = intensity_value * 10000 / 5475;
-
-UPDATE intensity_lvls_pro_hand_gath_gen
-SET intensity_value = intensity_value * 10000 / 5475;
-
--- Update the _overlaps attribute with value from num_gatherers_year for
--- consistency
-UPDATE intensity_lvls_cas_hand_gath_det
-SET _overlaps = num_gatherers_year;
-
-UPDATE intensity_lvls_cas_hand_gath_gen
-SET _overlaps = num_gatherers_year;
-
-UPDATE intensity_lvls_pro_hand_gath_det
-SET _overlaps = num_gatherers_year;
-
-UPDATE intensity_lvls_pro_hand_gath_gen
-SET _overlaps = num_gatherers_year;
-
--- Rename num_anglers_year to _overlaps for consistency
-ALTER TABLE intensity_lvls_rsa_shore_det
-RENAME COLUMN num_anglers_year TO _overlaps;
-
-ALTER TABLE intensity_lvls_rsa_shore_gen
-RENAME COLUMN num_anglers_year TO _overlaps;
-
 -- Create views for commercial and recreational potting confidence
 
 CREATE OR REPLACE VIEW sensvtyconf_lvls_pots_commercial AS 
@@ -117,5 +40,4 @@ CREATE OR REPLACE VIEW sensvtyconf_lvls_pots_recreational AS
 
 ALTER TABLE sensvtyconf_lvls_pots_recreational
   OWNER TO fishmap_webapp;
-
 
