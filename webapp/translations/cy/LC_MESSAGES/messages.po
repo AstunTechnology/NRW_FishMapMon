@@ -20,367 +20,367 @@ msgstr ""
 
 #: app.py:102
 msgid "Register user"
-msgstr ""
+msgstr "Cofrestru defnyddiwr"
 
 #: security_strings.py:3
 msgid "You must sign in"
-msgstr ""
+msgstr "Rhaid i chi fewngofnodi"
 
 #: security_strings.py:4
 msgid "Welcome"
-msgstr ""
+msgstr "Croeso"
 
 #: security_strings.py:5
 msgid "Please confirm your email"
-msgstr ""
+msgstr "Cadarnhewch eich e-bost"
 
 #: security_strings.py:6
 msgid "Login instructions"
-msgstr ""
+msgstr "Cyfarwyddiadau mewngofnodi"
 
 #: security_strings.py:7
 msgid "Your password has been reset"
-msgstr ""
+msgstr "Mae’ch cyfrinair wedi’i ailosod"
 
 #: security_strings.py:9
 msgid "Your password has been changed"
-msgstr ""
+msgstr "Mae’ch cyfrinair wedi’i newid"
 
 #: security_strings.py:11
 msgid "Password reset instructions"
-msgstr ""
+msgstr "Cyfarwyddiadau ailosod cyfrinair"
 
 #: security_strings.py:13
 msgid "You do not have permission to view this resource."
-msgstr ""
+msgstr "Nid oes gennych chi ganiatâd i weld yr adnodd hwn"
 
 #: security_strings.py:15
 #, python-format
 msgid "Thank you. Confirmation instructions have been sent to %(email)s."
-msgstr ""
+msgstr "Diolch. Anfonwyd cyfarwyddiadau cadarnhau at"
 
 #: security_strings.py:18
 msgid "Thank you. Your email has been confirmed."
-msgstr ""
+msgstr "Diolch. Mae’ch e-bost wedi’i gadarnhau."
 
 #: security_strings.py:20
 msgid "Your email has already been confirmed."
-msgstr ""
+msgstr "Mae’ch e-bost wedi’i gadarnhau eisoes."
 
 #: security_strings.py:22
 msgid "Invalid confirmation token."
-msgstr ""
+msgstr "Tocyn cadarnhau annilys."
 
 #: security_strings.py:24
 #, python-format
 msgid "%(email)s is already associated with an account."
-msgstr ""
+msgstr "mae %(email) yn cael ei ddefnyddio ar gyfer cyfrif yn barod"
 
 #: security_strings.py:26
 msgid "Password does not match"
-msgstr ""
+msgstr "Nid yw’r cyfrinair yn cyfateb"
 
 #: security_strings.py:28
 msgid "Passwords do not match"
-msgstr ""
+msgstr "Nid yw’r cyfrineiriau’n cyfateb"
 
 #: security_strings.py:30
 msgid "Redirections outside the domain are forbidden"
-msgstr ""
+msgstr "Gwaherddir ailgyfeirio y tu allan i’r parth"
 
 #: security_strings.py:32
 #, python-format
 msgid "Instructions to reset your password have been sent to %(email)s."
-msgstr ""
+msgstr "Anfonwyd cyfarwyddiadau i ailosod eich cyfrinar at %(email)s"
 
 #: security_strings.py:35
 #, python-format
 msgid ""
 "You did not reset your password within %(within)s. New instructions have "
 "been sent to %(email)s."
-msgstr ""
+msgstr "Ni wnaethoch ailosod eich cyfrinair o fewn%(within)s. Anfonwyd cyfarwyddiadau newydd at %(email)s"
 
 #: security_strings.py:38
 msgid "Invalid reset password token."
-msgstr ""
+msgstr "Tocyn ailosod cyfrinair annilys."
 
 #: security_strings.py:40
 msgid "Email requires confirmation."
-msgstr ""
+msgstr "Angen cadarnhau’r e-bost"
 
 #: security_strings.py:42
 #, python-format
 msgid "Confirmation instructions have been sent to %(email)s."
-msgstr ""
+msgstr "Anfonwyd cyfarwyddiadau cadarnhau at %(email)s."
 
 #: security_strings.py:44
 #, python-format
 msgid ""
 "You did not confirm your email within %(within)s. New instructions to "
 "confirm your email have been sent to %(email)s."
-msgstr ""
+msgstr "Ni wnaethoch gadarnhau eich e-bost o fewn %(within)s. Anfonwyd cyfarwyddiadau newydd i gadarnhau eich e-bost at %(email)s"
 
 #: security_strings.py:48
 #, python-format
 msgid ""
 "You did not login within %(within)s. New instructions to login have been "
 "sent to %(email)s."
-msgstr ""
+msgstr "Ni wnaethoch fewngofnodi o fewn %(within)s. Anfonwyd cyfarwyddiadau newydd i fewngofnodi at %(email)s "
 
 #: security_strings.py:51
 #, python-format
 msgid "Instructions to login have been sent to %(email)s."
-msgstr ""
+msgstr "Anfonwyd cyfarwyddiadau ar fewngofnodi at %(email)s."
 
 #: security_strings.py:53
 msgid "Invalid login token."
-msgstr ""
+msgstr "Tocyn mewngofnodi annilys."
 
 #: security_strings.py:55
 msgid "Account is disabled."
-msgstr ""
+msgstr "Mae’r cyfrif wedi’i analluogi."
 
 #: security_strings.py:57
 msgid "Email not provided"
-msgstr ""
+msgstr "Ni ddarparwyd e-bost"
 
 #: security_strings.py:59
 msgid "Invalid email address"
-msgstr ""
+msgstr "Cyfeiriad e-bost annilys"
 
 #: security_strings.py:61
 msgid "No password entered"
-msgstr ""
+msgstr "Heb gofnodi cyfrinair"
 
 #: security_strings.py:63
 msgid "Specified user does not exist"
-msgstr ""
+msgstr "Y defnyddiwr penodedig ddim yn bodoli"
 
 #: security_strings.py:65
 msgid "Invalid password"
-msgstr ""
+msgstr "Cyfrinair annilys"
 
 #: security_strings.py:66
 msgid "You have successfuly logged in."
-msgstr ""
+msgstr "Rydych chi wedi mewngofnodi’n llwyddiannus"
 
 #: security_strings.py:68
 msgid ""
 "You successfully reset your password and you have been logged in "
 "automatically."
-msgstr ""
+msgstr "Rydych wedi ailosod eich cyfrinair ac rydym wedi’ch mewngofnodi’n awtomatig."
 
 #: security_strings.py:71
 msgid "You successfully changed your password."
-msgstr ""
+msgstr "Rydych wedi llwyddo i newid eich cyfrinair."
 
 #: security_strings.py:73
 msgid "Please log in to access this page."
-msgstr ""
+msgstr "Mewngofnodwch i fynd i’r dudalen hon."
 
 #: security_strings.py:75
 msgid "Please reauthenticate to access this page."
-msgstr ""
+msgstr "Ailddilyswch i fynd i’r dudalen hon"
 
 #: templates/extents_cas_hand_gath.sld:7
 msgid "Casual Hand Gathering Extents"
-msgstr ""
+msgstr "Ardaloedd Casglu Achlysurol â Llaw"
 
 #: templates/extents_king_scallops.sld:7 templates/index.html:295
 msgid "King Scallop Dredging Extents"
-msgstr ""
+msgstr "Ardaloedd Treillio am Gregyn Bylchog"
 
 #: templates/extents_lot.sld:7 templates/index.html:296
 msgid "Light Otter Trawl Extents"
-msgstr ""
+msgstr "Ardaloedd Llusgrwyd Estyllod Ysgafn"
 
 #: templates/extents_mussels.sld:7 templates/index.html:297
 msgid "Mussel Seed Harvesting Extents"
-msgstr ""
+msgstr "Ardaloedd Cynaeafu Gawn Cregyn Gleision"
 
 #: templates/extents_nets.sld:7 templates/index.html:298
 msgid "Bottom Set Nets Extents"
-msgstr ""
+msgstr "Ardaloedd Rhwydi wedi’u Gosod ar Wely’r Môr"
 
 #: templates/extents_pots_combined.sld:7 templates/index.html:301
 msgid "Combined Potting Extents"
-msgstr ""
+msgstr "Ardaloedd Dal mewn Cewyll Cyfun"
 
 #: templates/extents_pots_commercial.sld:7 templates/index.html:299
 msgid "Commercial Potting Extents"
-msgstr ""
+msgstr "Ardaloedd Dal mewn Cewyll Masnachol"
 
 #: templates/extents_pots_recreational.sld:7 templates/index.html:300
 msgid "Recreational Potting Extents"
-msgstr ""
+msgstr "Ardaloedd Dal mewn Cewyll Hamdden"
 
 #: templates/extents_pro_hand_gath.sld:7
 msgid "Professional Hand Gathering Extents"
-msgstr ""
+msgstr "Ardaloedd Casglu Proffesiynol â Llaw"
 
 #: templates/extents_queen_scallops.sld:7 templates/index.html:304
 msgid "Queen Scallop Dredging Extents"
-msgstr ""
+msgstr "Ardaloedd Treillio am Gwiniaid"
 
 #: templates/extents_rsa_charterboats.sld:7 templates/index.html:305
 msgid "Charter Boat Angling Extents"
-msgstr ""
+msgstr "Ardaloedd Pysgota Cychod Siarter"
 
 #: templates/extents_rsa_combined.sld:7 templates/index.html:307
 msgid "Combined Boat Angling Extents"
-msgstr ""
+msgstr "Ardaloedd Pysgota Cychod Cyfun"
 
 #: templates/extents_rsa_noncharter.sld:7 templates/index.html:306
 msgid "Private Boat Angling Extents"
-msgstr ""
+msgstr "Ardaloedd Pysgota Cychod Preifat"
 
 #: templates/extents_rsa_shore.sld:7 templates/index.html:308
 msgid "Shore Angling Extents"
-msgstr ""
+msgstr "Ardaloedd Pysgota’r Glannau"
 
 #: templates/habitats.sld:7
 msgid "Upper Shore Stable Rock with Lichens and Algal Crusts"
-msgstr "Upper Shore Stable Rock with Lichens and Algal Crusts"
+msgstr "Craig sefydlog ar ran uchaf y lan gyda chennau a chramen algaidd"
 
 #: templates/habitats.sld:21
 msgid "Wave Exposed Intertidal Stable Rock"
-msgstr ""
+msgstr "Craig sefydlog rynglanwol y mae’r tonnau’n effeithio arni"
 
 #: templates/habitats.sld:35
 msgid "Moderately Exposed Intertidal Rock"
-msgstr ""
+msgstr "Craig rynglanwol y mae’r tonnau’n effeithio’n gymedrol arni"
 
 #: templates/habitats.sld:49
-msgid "Seaweeds and Mussels on Moderately Exposed Rock"
-msgstr ""
+msgid " Brown and red seaweeds and mussels on moderately exposed (intertidal lower shore) rock"
+msgstr "Gwymon coch a brown a chregyn gleision ar graig sy’n weddol agored (ar ran isaf rynglanwol y lan)"
 
 #: templates/habitats.sld:63
-msgid "Mussels and Piddocks on Intertidal Clay and Peat"
-msgstr ""
+msgid "Mussels and boring bivalves (piddocks) on intertidal clay and peat"
+msgstr "Cregyn gleision a chregyn deuglawr sy’n tyllu (pidogau) ar glai a mawn rhynglanwol"
 
 #: templates/habitats.sld:77
 msgid "Honeycomb Worm Reefs"
-msgstr ""
+msgstr "Riffiau’r llyngyren ddiliau"
 
 #: templates/habitats.sld:91
-msgid "Sheltered Bedrock, Boulders and Cobbles"
-msgstr ""
+msgid "Sheltered intertidal bedrock, boulders and cobbles"
+msgstr "Creigwely, clogfeini a cherrig crynion rhynglanwol cysgodol"
 
 #: templates/habitats.sld:105
 msgid "Rockpools and Overhangs"
-msgstr ""
+msgstr "Pyllau trai a bargodion"
 
 #: templates/habitats.sld:119
-msgid "Brown Seaweeds, Barnacles and Fucoids"
-msgstr ""
+msgid "Intertidal brown seaweeds, barnacles or ephemeral seaweeds on boulders, cobbles and pebbles"
+msgstr "Gwymon brown, gwyrain neu wymon dros dro rhynglanwol ar glogfeini, cerrig crynion a cherrig mân"
 
 #: templates/habitats.sld:133
-msgid "Muddy Sands - Excluding Gaper Clams"
-msgstr ""
+msgid "Intertidal muddy sands - excluding biotopes supporting gaper clam"
+msgstr "Tywod lleidiog rhynglanwol – heb gynnwys biotopau sy’n cynnal cregyn blacen"
 
 #: templates/habitats.sld:147
-msgid "Muds and Sands - Including Gaper Clams"
-msgstr ""
+msgid " Intertidal muds and sands supporting gaper clam"
+msgstr " Llaid a thywod rhynglanwol sy’n cynnal cregyn blacen"
 
 #: templates/habitats.sld:161
 msgid "Intertidal Muds"
-msgstr ""
+msgstr "Llaid rhynglanwol"
 
 #: templates/habitats.sld:175
 msgid "Saltmarshes"
-msgstr ""
+msgstr "Morfeydd"
 
 #: templates/habitats.sld:189
 msgid "Vertical Subtidal Rock with Associated Community"
-msgstr ""
+msgstr "Craig islanwol fertigol gyda chymuned gysylltiedig"
 
 #: templates/habitats.sld:203
 msgid "Erect and Branching Species That are Very Slow Growing"
-msgstr ""
+msgstr "Rhywogaethau islanwol talsyth, canghennog sy’n tyfu’n araf iawn"
 
 #: templates/habitats.sld:217
-msgid "Sand and Gravels with Long Lived Bivalves"
-msgstr ""
+msgid "Coarse sands and gravels with communities that include large and/or long lived bivalves"
+msgstr "Tywod a graean bras gyda chymunedau sy’n cynnwys cregyn deuglawr mawr a/neu rai sy’n byw’n hir"
 
 #: templates/habitats.sld:231
 msgid "Maerl Beds"
-msgstr ""
+msgstr "Gwelyau maerl"
 
 #: templates/habitats.sld:245
 msgid "Stable Subtidal Fine Sands"
-msgstr ""
+msgstr "Tywod mân islanwol yn bennaf sy’n sefydlog"
 
 #: templates/habitats.sld:259
 msgid "Stable Muddy Sands, Sandy Muds and Muds"
-msgstr ""
+msgstr "Tywod lleidiog, llaid tywodlyd a llaid sefydlog islanwol"
 
 #: templates/habitats.sld:273
-msgid "Rockwith Low-lying Fast Growing Faunal Turf"
-msgstr ""
+msgid "Predominantly subtidal rock with low-lying and fast growing faunal turf"
+msgstr " Craig sy’n islanwol yn bennaf gyda thyfiant milodol isel sy’n tyfu’n gyflym "
 
 #: templates/habitats.sld:287
-msgid "Rock with Erect and Branching Species"
-msgstr ""
+msgid "Predominantly subtidal rock with erect and branching species that are slow growing"
+msgstr "Craig sy’n islanwol yn bennaf gyda rhywogaethau talsyth, canghennog sy’n tyfu’n araf"
 
 #: templates/habitats.sld:301
 msgid "Shallow Subtidal Rock with Kelp"
-msgstr ""
+msgstr "Craig islanwol fas gyda môr-wiail"
 
 #: templates/habitats.sld:315
 msgid "Kelp and Seaweeds on Sand Scoured Rock"
-msgstr ""
+msgstr "Cymunedau môr-wiail a gwymon ar graig a gaiff ei sgwrio gan dywod"
 
 #: templates/habitats.sld:329
 msgid "Dynamic, Shallow Water Fine Sands"
-msgstr ""
+msgstr "Tywod mân, dynamig mewn dŵr bas"
 
 #: templates/habitats.sld:343
 msgid "Oyster Beds"
-msgstr ""
+msgstr "Gwelyau wystrys"
 
 #: templates/habitats.sld:357
-msgid "Underboulder and Cobbles Shallow Subtidal Community "
-msgstr ""
+msgid "Underboulder communities on lower shore and shallow subtidal boulders"
+msgstr "Cymunedau dan glogfeini ar ran isaf y lan a chlogfeini islanwol bas"
 
 #: templates/habitats.sld:371
 msgid "Biogenic Reef on Sediment"
-msgstr ""
+msgstr "Rîff fiogenig ar waddod"
 
 #: templates/habitats.sld:385
 msgid "Stable, Species Rich Mixed Sediments"
-msgstr ""
+msgstr "Gwaddodion cymysg, sefydlog sy’n cynnwys cyfoeth o rywogaethau"
 
 #: templates/habitats.sld:399
-msgid "Unstable Coarse Sediments - Robust Fauna"
-msgstr ""
+msgid "Unstable cobbles, pebbles, gravels and/or coarse sands supporting relatively robust communities"
+msgstr "Tywod bras a / neu gerrig crynion, cerrig mân a graean ansefydlog sy’n cynnal cymunedau eithaf cadarn"
 
 #: templates/habitats.sld:413
 msgid "Seagrass Beds"
-msgstr ""
+msgstr "Gwelyau morwellt"
 
 #: templates/habitats.sld:427
-msgid "Stable but Tidal Swept Cobbles, Pebbles and Gravel"
-msgstr ""
+msgid "Stable but generally tideswept cobbles, pebbles, gravels and coarse sediments"
+msgstr  Cerrig crynion, cerrig mân, graean a gwaddodion bras sy’n sefydlog ond a gaiff eu hysgubo gan y llanw’n gyffredinol"
 
 #: templates/habitats.sld:441
 msgid "Mosaic of Rock and Sediment"
-msgstr ""
+msgstr "Craig a gwaddodi am mosaig"
 
 #: templates/habitats_confidence.sld:7
 msgid "Poor"
-msgstr ""
+msgstr "Gwael"
 
 #: templates/habitats_confidence.sld:21
 msgid "Fair"
-msgstr ""
+msgstr "Gweddol"
 
 #: templates/habitats_confidence.sld:35
 msgid "Good"
-msgstr ""
+msgstr "Da"
 
 #: templates/habitats_confidence.sld:49 templates/sensvtyconf.sld:7
 msgid "Unknown"
-msgstr ""
+msgstr "Anhysbys"
 
 #: templates/index.html:5
 msgid "Natural Resources Wales"
@@ -392,19 +392,19 @@ msgstr "FishMap Môn"
 
 #: templates/index.html:32
 msgid "Download or view the help document"
-msgstr ""
+msgstr "Lawrlwytho neu weld y ddogfen gymorth"
 
 #: templates/index.html:32
 msgid "Help"
-msgstr ""
+msgstr "Cymorth"
 
 #: templates/index.html:34
 msgid "Add user"
-msgstr ""
+msgstr "Ychwanegu defnyddiwr"
 
 #: templates/index.html:38
 msgid "Sign out"
-msgstr ""
+msgstr "Allgofnodi"
 
 #: templates/index.html:40 templates/security/_menu.html:4
 #: templates/security/login_user.html:3 templates/security/login_user.html:15
@@ -415,11 +415,11 @@ msgstr "Mewngofnodi"
 msgid ""
 "Natural Resources Wales, FishMap Môn, European Fisheries Fund and Welsh "
 "Government logos"
-msgstr ""
+msgstr "Logos Cyfoeth Naturiol Cymru, FishMap Môn, Cronfa Pysgodfeydd Ewrop a Llywodraeth Cymru"
 
 #: templates/index.html:58
 msgid "FishMap Môn Results"
-msgstr ""
+msgstr "Canlyniadau FishMap Môn"
 
 #: templates/index.html:64
 msgid "Crown Copyright and database right 2013. Ordnance Survey 100019741"
@@ -432,158 +432,160 @@ msgid ""
 "British Crown and OceanWise Ltd, 2013. All rights reserved. License No. "
 "EK001-20120402. Not to be used for Navigation"
 msgstr ""
+"Y Goron Brydeinig ac OceanWise Ltd, 2013. Cedwir pob hawl. Rhif Trwydded"
+"EK001-20120402. Dim i’w ddefnyddio ar gyfer Mordwyo"
 
 #: templates/index.html:66
 msgid "Legend"
-msgstr ""
+msgstr "Allwedd"
 
 #: templates/index.html:67
 msgid "Search for place name or postcode."
-msgstr ""
+msgstr "Chwiliwch am enw lle neu god post."
 
 #: templates/index.html:68
 msgid "No results found."
-msgstr ""
+msgstr "Dim canlyniadau."
 
 #: templates/index.html:70 templates/index.html:71
 msgid "Project Area"
-msgstr "prosiect Ardal"
+msgstr "Prosiect Ardal"
 
 #: templates/index.html:72
 msgid "Protected Sites"
-msgstr ""
+msgstr "Ardaloedd Gwarchodedig"
 
 #: templates/index.html:73 templates/sac.sld:7
 msgid "SAC"
-msgstr ""
+msgstr "ACA"
 
 #: templates/index.html:74
 msgid "SAC Features"
-msgstr ""
+msgstr "Nodwedd ACA"
 
 #: templates/index.html:75 templates/spa.sld:7
 msgid "SPA"
-msgstr ""
+msgstr "AGA"
 
 #: templates/index.html:76 templates/sssi.sld:7
 msgid "SSSI"
-msgstr ""
+msgstr "SoDdGA"
 
 #: templates/index.html:77 templates/ramsar.sld:7
 msgid "RAMSAR"
-msgstr ""
+msgstr "RAMSAR"
 
 #: templates/index.html:78
 msgid "Seabed Habitat Confidence"
-msgstr ""
+msgstr "Hyder ynghylch  Cynefin"
 
 #: templates/index.html:79
 msgid "Habitats"
-msgstr ""
+msgstr "Cynefin"
 
 #: templates/index.html:80
 msgid "Seabed Habitats"
-msgstr "Seabed Habitats"
+msgstr "Cynefinoedd Gwely’r Môr"
 
 #: templates/index.html:81
 msgid "Restricted Zones"
-msgstr ""
+msgstr "Parthau dan Gyfyngiadau"
 
 #: templates/index.html:82
 msgid "Areas Closed to Scalloping"
-msgstr ""
+msgstr "Ardaloedd ar Gau i Gasglu Cregyn Bylchog"
 
 #: templates/index.html:83
 msgid "Several and Regulating Areas"
-msgstr ""
+msgstr "Ardaloedd Gorchmynion Pysgodfa Unigol a Rheoleiddio Pysgodfa"
 
 #: templates/index.html:84
 msgid "Reference Data"
-msgstr ""
+msgstr "Data Cyfeirio"
 
 #: templates/index.html:85
 msgid "National Limits"
-msgstr ""
+msgstr "Cyfyngiadau Cenedlaethol"
 
 #: templates/index.html:86
 msgid "Wrecks"
-msgstr ""
+msgstr "Llongau drylliedig"
 
 #: templates/index.html:87
 msgid "Casual Hand Gather"
-msgstr ""
+msgstr "Casglu Achlysurol â Llaw"
 
 #: templates/index.html:88
 msgid "Commercial Potting"
-msgstr ""
+msgstr "Dal mewn Cewyll Masnachol"
 
 #: templates/index.html:89
 msgid "Recreational Potting"
-msgstr ""
+msgstr "Dal mewn Cewyll Hamdden"
 
 #: templates/index.html:90
 msgid "Combined Potting"
-msgstr ""
+msgstr "Dal mewn Cewyll Cyfun"
 
 #: templates/index.html:91
 msgid "King Scallop Dredging"
-msgstr ""
+msgstr "Treillio am Gregyn Bylchog"
 
 #: templates/index.html:92
 msgid "Light Otter Trawl"
-msgstr ""
+msgstr "Llusgrwyd Estyllod Ysgafn"
 
 #: templates/index.html:93
 msgid "Mussel Seed Harvesting"
-msgstr ""
+msgstr "Treillio am Rawn Cregyn Gleision"
 
 #: templates/index.html:94
 msgid "Bottom Set Nets"
-msgstr ""
+msgstr "Rhwydi wedi’u Gosod ar Wely’r Môr"
 
 #: templates/index.html:95
 msgid "Professional Hand Gather"
-msgstr ""
+msgstr "Casglu Proffesiynol â Llaw"
 
 #: templates/index.html:96
 msgid "Queen Scallop Dredging"
-msgstr ""
+msgstr "Treillio am Gwiniaid"
 
 #: templates/index.html:97
 msgid "Charter Boat Angling"
-msgstr ""
+msgstr "Pysgota Cychod Siarter"
 
 #: templates/index.html:98
 msgid "Private Boat Angling"
-msgstr ""
+msgstr "Pysgota Cychod Preifat"
 
 #: templates/index.html:99
 msgid "Combined Boat Angling"
-msgstr ""
+msgstr "Pysgota Cychod Cyfun"
 
 #: templates/index.html:100
 msgid "Shore Angling"
-msgstr ""
+msgstr "Pysgota’r Glannau"
 
 #: templates/index.html:101
 msgid "Detailed Fishing Activity"
-msgstr ""
+msgstr "Gweithgareddau Pysgota Manwl"
 
 #: templates/index.html:102
 msgid "Combined Commercial Activity"
-msgstr ""
+msgstr "Gweithgareddau Masnachol Cyfun"
 
 #: templates/index.html:103
 msgid "Shore Angling Locations"
-msgstr ""
+msgstr "Lleoliadau Pysgota’r Glannau"
 
 #: templates/index.html:104
 msgid "Combined Non-Commercial Activity"
-msgstr ""
+msgstr "Gweithgareddau Anfasnachol Cyfun"
 
 #: templates/index.html:105
 msgid "Fishing Intensity"
-msgstr ""
+msgstr "Dwysedd Pysgota"
 
 #: templates/index.html:106 templates/index.html:108 templates/index.html:109
 #: templates/index.html:110 templates/index.html:111 templates/index.html:112
@@ -594,644 +596,644 @@ msgstr ""
 #: templates/index.html:226 templates/index.html:228 templates/index.html:229
 #: templates/index.html:230 templates/index.html:231 templates/index.html:508
 msgid "Number of Vessels"
-msgstr ""
+msgstr "Nifer yr Ymweliadau"
 
 #: templates/index.html:107 templates/index.html:115 templates/index.html:120
 #: templates/index.html:219 templates/index.html:227 templates/index.html:232
 msgid "Number of Visits"
-msgstr ""
+msgstr "Nifer yr Ymweliadau"
 
 #: templates/index.html:121
 msgid "Casual Hand Gather Intensity: FishMap Môn Results"
-msgstr ""
+msgstr "Dwysedd Casglu Achlysurol â Llaw: Canlyniadau FishMap Môn"
 
 #: templates/index.html:122
 msgid "Commercial Potting Intensity: FishMap Môn Results"
-msgstr ""
+msgstr "Dwysedd Dal mewn Cewyll Masnachol: Canlyniadau FishMap Môn"
 
 #: templates/index.html:123
 msgid "Recreational Potting Intensity: FishMap Môn Results"
-msgstr ""
+msgstr "Dwysedd Dal mewn Cewyll Hamdden: Canlyniadau FishMap Môn"
 
 #: templates/index.html:124
 msgid "Combined Potting Intensity: FishMap Môn Results"
-msgstr ""
+msgstr "Dwysedd Dal mewn Cewyll Cyfun: Canlyniadau FishMap Môn"
 
 #: templates/index.html:125
 msgid "King Scallop Dredging Intensity: FishMap Môn Results"
-msgstr ""
+msgstr "Dwysedd Treillio am Gregyn Bylchog: Canlyniadau FishMap Môn"
 
 #: templates/index.html:126
 msgid "Light Otter Trawl Intensity: FishMap Môn Results"
-msgstr ""
+msgstr "Dwysedd Llusgrwyd Estyllod Ysgafn: Canlyniadau FishMap Môn"
 
 #: templates/index.html:127
 msgid "Mussel Seed Harvesting Intensity: FishMap Môn Results"
-msgstr ""
+msgstr "Dwysedd Cynaeafu Grawn Cregyn Gleision: Canlyniadau FishMap Môn"
 
 #: templates/index.html:128
 msgid "Bottom Set Nets Intensity: FishMap Môn Results"
-msgstr ""
+msgstr "Dwysedd Rhwydi wedi’u Gosod ar Wely’r Môr: Canlyniadau FishMap Môn"
 
 #: templates/index.html:129
 msgid "Professional Hand Gather Intensity: FishMap Môn Results"
-msgstr ""
+msgstr "Dwysedd Casglu Proffesiynol â Llaw: Canlyniadau FishMap Môn"
 
 #: templates/index.html:130
 msgid "Queen Scallop Dredging Intensity: FishMap Môn Results"
-msgstr ""
+msgstr "Dwysedd Treillio am Gwiniaid: Canlyniadau FishMap Môn"
 
 #: templates/index.html:131
 msgid "Charter Boat Angling Intensity: FishMap Môn Results"
-msgstr ""
+msgstr "Dwysedd Pysgota Cychod Siarter: Canlyniadau FishMap Môn"
 
 #: templates/index.html:132
 msgid "Private Boat Angling Intensity: FishMap Môn Results"
-msgstr ""
+msgstr "Dwysedd Pysgota Cychod Preifat: Canlyniadau FishMap Môn"
 
 #: templates/index.html:133
 msgid "Combined Boat Angling Intensity: FishMap Môn Results"
-msgstr ""
+msgstr "Dwysedd Pysgota Cychod Cyfun: Canlyniadau FishMap Môn"
 
 #: templates/index.html:134
 msgid "Shore Angling Intensity: FishMap Môn Results"
-msgstr ""
+msgstr "Dwysedd Pysgota’r Glannau: Canlyniadau FishMap Môn"
 
 #: templates/index.html:135
 msgid "Casual Hand Gather Intensity: Scenario Results"
-msgstr ""
+msgstr "Dwysedd Casglu Achlysurol â Llaw: Canlyniadau Senario"
 
 #: templates/index.html:136
 msgid "Commercial Potting Intensity: Scenario Results"
-msgstr ""
+msgstr "Dwysedd Dal mewn Cewyll Masnachol: Canlyniadau Senario"
 
 #: templates/index.html:137
 msgid "Recreational Potting Intensity: Scenario Results"
-msgstr ""
+msgstr "Dwysedd Dal mewn Cewyll Hamdden: Canlyniadau Senario"
 
 #: templates/index.html:138
 msgid "Combined Potting Intensity: Scenario Results"
-msgstr ""
+msgstr "Dwysedd Dal mewn Cewyll Cyfun: Canlyniadau Senario"
 
 #: templates/index.html:139
 msgid "King Scallop Dredging Intensity: Scenario Results"
-msgstr ""
+msgstr "Dwysedd Treillio am Gregyn Bylchog: Canlyniadau Senario"
 
 #: templates/index.html:140
 msgid "Light Otter Trawl Intensity: Scenario Results"
-msgstr ""
+msgstr "Dwysedd Llusgrwyd Estyllod Ysgafn: Canlyniadau Senario"
 
 #: templates/index.html:141
 msgid "Mussel Seed Harvesting Intensity: Scenario Results"
-msgstr ""
+msgstr "Dwysedd Cynaeafu Grawn Cregyn Gleision: Canlyniadau Senario"
 
 #: templates/index.html:142
 msgid "Bottom Set Nets Intensity: Scenario Results"
-msgstr ""
+msgstr "Dwysedd Rhwydi wedi’u Gosod ar Wely’r Môr: Canlyniadau Senario"
 
 #: templates/index.html:143
 msgid "Professional Hand Gather Intensity: Scenario Results"
-msgstr ""
+msgstr "Dwysedd Casglu Proffesiynol â Llaw: Canlyniadau Senario"
 
 #: templates/index.html:144
 msgid "Queen Scallop Dredging Intensity: Scenario Results"
-msgstr ""
+msgstr "Dwysedd Treillio am Gwiniaid: Canlyniadau Senario"
 
 #: templates/index.html:145
 msgid "Charter Boat Angling Intensity: Scenario Results"
-msgstr ""
+msgstr "Dwysedd Pysgota Cychod Siarter: Canlyniadau Senario"
 
 #: templates/index.html:146
 msgid "Private Boat Angling Intensity: Scenario Results"
-msgstr ""
+msgstr "Dwysedd Pysgota Cychod Preifat: Canlyniadau Senario"
 
 #: templates/index.html:147
 msgid "Combined Boat Angling Intensity: Scenario Results"
-msgstr ""
+msgstr "Dwysedd Pysgota Cychod Cyfun: Canlyniadau Senario"
 
 #: templates/index.html:148
 msgid "Shore Angling Intensity: Scenario Results"
-msgstr ""
+msgstr "Dwysedd Pysgota’r Glannau: Canlyniadau Senario"
 
 #: templates/index.html:149
 msgid "Casual Hand Gather Intensity: Combined Results"
-msgstr ""
+msgstr "Dwysedd Casglu Achlysurol â Llaw: Canlyniadau Cyfun"
 
 #: templates/index.html:150
 msgid "Commercial Potting Intensity: Combined Results"
-msgstr ""
+msgstr "Dwysedd Dal mewn Cewyll Masnachol: Canlyniadau Cyfun"
 
 #: templates/index.html:151
 msgid "Recreational Potting Intensity: Combined Results"
-msgstr ""
+msgstr "Dwysedd Dal mewn Cewyll Hamdden: Canlyniadau Cyfun"
 
 #: templates/index.html:152
 msgid "Combined Potting Intensity: Combined Results"
-msgstr ""
+msgstr "Dwysedd Dal mewn Cewyll Cyfun: Canlyniadau Cyfun"
 
 #: templates/index.html:153
 msgid "King Scallop Dredging Intensity: Combined Results"
-msgstr ""
+msgstr "Dwysedd Treillio am Gregyn Bylchog: Canlyniadau Cyfun"
 
 #: templates/index.html:154
 msgid "Light Otter Trawl Intensity: Combined Results"
-msgstr ""
+msgstr "Dwysedd Treillio Estyllod Ysgafn: Canlyniadau Cyfun"
 
 #: templates/index.html:155
 msgid "Mussel Seed Harvesting Intensity: Combined Results"
-msgstr ""
+msgstr "Dwysedd Cynaeafu Grawn Cregyn Gleision: Canlyniadau Cyfun"
 
 #: templates/index.html:156
 msgid "Bottom Set Nets Intensity: Combined Results"
-msgstr ""
+msgstr "Dwysedd Rhwydi wedi’u Gosod ar Wely’r Môr: Canlyniadau Cyfun"
 
 #: templates/index.html:157
 msgid "Professional Hand Gather Intensity: Combined Results"
-msgstr ""
+msgstr "Dwysedd Casglu Proffesiynol â Llaw: Canlyniadau Cyfun"
 
 #: templates/index.html:158
 msgid "Queen Scallop Dredging Intensity: Combined Results"
-msgstr ""
+msgstr "Dwysedd Treillio am Gwiniaid: Canlyniadau Cyfun"
 
 #: templates/index.html:159
 msgid "Charter Boat Angling Intensity: Combined Results"
-msgstr ""
+msgstr "Dwysedd Pysgota Cychod Siarter: Canlyniadau Cyfun"
 
 #: templates/index.html:160
 msgid "Private Boat Angling Intensity: Combined Results"
-msgstr ""
+msgstr "Dwysedd Pysgota Cychod Preifat: Canlyniadau Cyfun"
 
 #: templates/index.html:161
 msgid "Combined Boat Angling Intensity: Combined Results"
-msgstr ""
+msgstr "Dwysedd Pysgota Cychod Cyfun: Canlyniadau Cyfun"
 
 #: templates/index.html:162
 msgid "Shore Angling Intensity: Combined Results"
-msgstr ""
+msgstr "Dwysedd Pysgota’r Glannau: Canlyniadau Cyfun"
 
 #: templates/index.html:163 templates/index.html:164 templates/index.html:169
 #: templates/index.html:170
 msgid "(Number of times area fished per year)"
-msgstr ""
+msgstr "(Sawl gwaith y pysgotir yr ardal bob blwyddyn)"
 
 #: templates/index.html:165 templates/index.html:172
 msgid "(Number of People /ha /day)"
-msgstr ""
+msgstr "(Nifer y Bobl /ha/dydd)"
 
 #: templates/index.html:166 templates/index.html:167 templates/index.html:168
 msgid "(Number of Pots lifted & dropped / ha / day)"
-msgstr ""
+msgstr "Nifer y Cewyll a godir ac a ollyngir / ha / dydd)"
 
 #: templates/index.html:171
 msgid "(Number of 100m net panels fished in a km2 / year)"
-msgstr ""
+msgstr "(Nifer y paneli rhwyd 100m a bysgotir mewn km2 / flwyddyn)"
 
 #: templates/index.html:173 templates/index.html:174 templates/index.html:175
 #: templates/index.html:176
 msgid "(Number of People /ha /week)"
-msgstr ""
+msgstr "(Nifer y Bobl/ha / wythnos)"
 
 #: templates/index.html:177
 msgid "Casual Hand Gathering Visits: FishMap Môn Results"
-msgstr ""
+msgstr "Ymweliadau Casglu Achlysurol â Llaw: Canlyniadau FishMap Môn"
 
 #: templates/index.html:178
 msgid "Commercial Potting Vessels: FishMap Môn Results"
-msgstr ""
+msgstr "Badau Dal mewn Cewyll Masnachol: Canlyniadau FishMap Môn"
 
 #: templates/index.html:179
 msgid "Recreational Potting Vessels: FishMap Môn Results"
-msgstr ""
+msgstr "Badau Dal mewn Cewyll Hamdden: Canlyniadau FishMap Môn"
 
 #: templates/index.html:180
 msgid "Combined Potting Vessels: FishMap Môn Results"
-msgstr ""
+msgstr "Badau Dal mewn Cewyll Cyfun: Canlyniadau FishMap Môn"
 
 #: templates/index.html:181
 msgid "King Scallop Dredging Vessels: FishMap Môn Results"
-msgstr ""
+msgstr "Badau Treillio Cregyn Bylchog: Canlyniadau FishMap Môn"
 
 #: templates/index.html:182
 msgid "Light Otter Trawl Vessels: FishMap Môn Results"
-msgstr ""
+msgstr "Badau Llusgrwyd Estyllod Ysgafn: Canlyniadau FishMap Môn"
 
 #: templates/index.html:183
 msgid "Mussel Seed Harvesting Vessels: FishMap Môn Results"
-msgstr ""
+msgstr "Badau Cynaeafu Grawn Cregyn Gleision: Canlyniadau FishMap Môn"
 
 #: templates/index.html:184
 msgid "Bottom Set Nets Vessels: FishMap Môn Results"
-msgstr ""
+msgstr "Badau Rhwydi wedi’u Gosod ar Wely’r Môr: Canlyniadau FishMap Môn"
 
 #: templates/index.html:185
 msgid "Professional Hand Gathering Visits: FishMap Môn Results"
-msgstr ""
+msgstr "Ymweliadau Casglu Proffesiynol â Llaw: Canlyniadau FishMap Môn"
 
 #: templates/index.html:186
 msgid "Queen Scallop Dredging Vessels: FishMap Môn Results"
-msgstr ""
+msgstr "Badau Treillio am Gwiniaid: Canlyniadau FishMap Môn"
 
 #: templates/index.html:187
 msgid "Charter Boat Angling Vessels: FishMap Môn Results"
-msgstr ""
+msgstr "Badau Pysgota Cychod Siarter: Canlyniadau FishMap Môn"
 
 #: templates/index.html:188
 msgid "Private Boat Angling Vessels: FishMap Môn Results"
-msgstr ""
+msgstr "Badau Pysgota Cychod Preifat: Canlyniadau FishMap Môn"
 
 #: templates/index.html:189
 msgid "Combined Boat Angling Vessels: FishMap Môn Results"
-msgstr ""
+msgstr "Badau Pysgota Cychod Cyfun: Canlyniadau FishMap Môn"
 
 #: templates/index.html:190
 msgid "Shore Angling Visits: FishMap Môn Results"
-msgstr ""
+msgstr "Ymweliadau Pysgota’r Glannau: Canlyniadau FishMap Môn"
 
 #: templates/index.html:191
 msgid "Casual Hand Gathering Visits: Scenario Results"
-msgstr ""
+msgstr "Ymweliadau Casglu Achlysurol â Llaw: Canlyniadau Senario"
 
 #: templates/index.html:192
 msgid "Commercial Potting Vessels: Scenario Results"
-msgstr ""
+msgstr "Badau Dal mewn Cewyll Masnachol: Canlyniadau Senario"
 
 #: templates/index.html:193
 msgid "Recreational Potting Vessels: Scenario Results"
-msgstr ""
+msgstr "Badau Dal mewn Cewyll Hamdden: Canlyniadau Senario"
 
 #: templates/index.html:194
 msgid "Combined Potting Vessels: Scenario Results"
-msgstr ""
+msgstr "Badau Dal mewn Cewyll Cyfun: Canlyniadau Senario"
 
 #: templates/index.html:195
 msgid "King Scallop Dredging Vessels: Scenario Results"
-msgstr ""
+msgstr "Badau Treillio am Gregyn Bylchog: Canlyniadau Senario"
 
 #: templates/index.html:196
 msgid "Light Otter Trawl Vessels: Scenario Results"
-msgstr ""
+msgstr "Badau Llusgrwyd Estyllod Ysgafn: Canlyniadau Senario"
 
 #: templates/index.html:197
 msgid "Mussel Seed Harvesting Vessels: Scenario Results"
-msgstr ""
+msgstr "Badau Cynaeafu Grawn Cregyn Gleision: Canlyniadau Senario"
 
 #: templates/index.html:198
 msgid "Bottom Set Nets Vessels: Scenario Results"
-msgstr ""
+msgstr "Badau Rhwydi wedi’u Gosod ar Wely’r Môr: Canlyniadau Senario"
 
 #: templates/index.html:199
 msgid "Professional Hand Gathering Visits: Scenario Results"
-msgstr ""
+msgstr "Ymweliadau Casglu Proffesiynol â Llaw: Canlyniadau Senario"
 
 #: templates/index.html:200
 msgid "Queen Scallop Dredging Vessels: Scenario Results"
-msgstr ""
+msgstr "Badau Treillio am Gwiniaid: Canlyniadau Senario"
 
 #: templates/index.html:201
 msgid "Charter Boat Angling Vessels: Scenario Results"
-msgstr ""
+msgstr "Badau Pysgota Cychod Siarter: Canlynidau Senario"
 
 #: templates/index.html:202
 msgid "Private Boat Angling Vessels: Scenario Results"
-msgstr ""
+msgstr "Badau Pysgota Cychod Preifat: Canlyniadau Senario"
 
 #: templates/index.html:203
 msgid "Combined Boat Angling Vessels: Scenario Results"
-msgstr ""
+msgstr "Badau Pysgota Cychod Cyfun: Canlyniadau Senario"
 
 #: templates/index.html:204
 msgid "Shore Angling Visits: Scenario Results"
-msgstr ""
+msgstr "Ymweliadau Pysgota’r Glannau: Canlyniadau Senario"
 
 #: templates/index.html:205
 msgid "Casual Hand Gathering Visits: Combined Results"
-msgstr ""
+msgstr "Ymweliadau Casglu Achlysurol â Llaw: Canlyniadau Cyfun"
 
 #: templates/index.html:206
 msgid "Commercial Potting Vessels: Combined Results"
-msgstr ""
+msgstr "Badau Dal mewn Cewyll Masnachol: Canlyniadau Cyfun"
 
 #: templates/index.html:207
 msgid "Recreational Potting Vessels: Combined Results"
-msgstr ""
+msgstr "Badau Dal mewn Cewyll Hamdden: Canlyniadau Cyfun"
 
 #: templates/index.html:208
 msgid "Combined Potting Vessels: Combined Results"
-msgstr ""
+msgstr "Badau Dal mewn Cewyll Cyfun: Canlyniadau Cyfun"
 
 #: templates/index.html:209
 msgid "King Scallop Dredging Vessels: Combined Results"
-msgstr ""
+msgstr "Badau Treillio am Gregyn Bylchog: Canlyniadau Cyfun"
 
 #: templates/index.html:210
 msgid "Light Otter Trawl Vessels: Combined Results"
-msgstr ""
+msgstr "Badau Llusgrwyd Estyllod Ysgafn: Canlyniadau Cyfun"
 
 #: templates/index.html:211
 msgid "Mussel Seed Harvesting Vessels: Combined Results"
-msgstr ""
+msgstr "Badau Cynaeaefu Grawn Cregyn Gleision: Canlyniadau Cyfun"
 
 #: templates/index.html:212
 msgid "Bottom Set Nets Vessels: Combined Results"
-msgstr ""
+msgstr "Badau Rhwydi wedi’u Gosod ar Wely’r Môr: Canlyniadau Cyfun"
 
 #: templates/index.html:213
 msgid "Professional Hand Gathering Visits: Combined Results"
-msgstr ""
+msgstr "Ymweliadau Casglu Proffesiynol â Llaw: Canlyniadau Cyfun"
 
 #: templates/index.html:214
 msgid "Queen Scallop Dredging Vessels: Combined Results"
-msgstr ""
+msgstr "Badau Treillio am Gwiniaid: Canlyniadau Cyfun"
 
 #: templates/index.html:215
 msgid "Charter Boat Angling Vessels: Combined Results"
-msgstr ""
+msgstr "Badau Pysgota Cychod Siarter: Canlyniadau Cyfun"
 
 #: templates/index.html:216
 msgid "Private Boat Angling Vessels: Combined Results"
-msgstr ""
+msgstr "Badau Pysgota Cychod Preifat: Canlyniadau Cyfun"
 
 #: templates/index.html:217
 msgid "Combined Angling Vessels: Combined Results"
-msgstr ""
+msgstr "Badau Pysgota Cyfun: Canlyniadau Cyfun"
 
 #: templates/index.html:218
 msgid "Shore Angling Visits: Combined Results"
-msgstr ""
+msgstr "Ymweliadau Pysgota’r Glannau: Canlyniadau Cyfun"
 
 #: templates/index.html:233
 msgid "Habitat Sensitivity"
-msgstr ""
+msgstr "Sensitifrwydd Cynefin"
 
 #: templates/index.html:234
 msgid "Sensitivity to Casual Hand Gather: FishMap Môn Results"
-msgstr ""
+msgstr "Sensitifrwydd i Gasglu Achlysurol â Llaw: Canlyniadau FishMap Môn"
 
 #: templates/index.html:235
 msgid "Sensitivity to Commercial Potting: FishMap Môn Results"
-msgstr ""
+msgstr "Sensitifrwydd i Ddal mewn Cewyll Masnachol: Canlyniadau FishMap Môn"
 
 #: templates/index.html:236
 msgid "Sensitivity to Recreational Potting: FishMap Môn Results"
-msgstr ""
+msgstr "Sensitifrwydd i Ddal mewn Cewyll Hamdden: Canlyniadau FishMap Môn"
 
 #: templates/index.html:237
 msgid "Sensitivity to Combined Potting: FishMap Môn Results"
-msgstr ""
+msgstr "Sensitifrwydd i Ddal mewn Cewyll Cyfun: Canlyniadau FishMap Môn"
 
 #: templates/index.html:238
 msgid "Sensitivity to King Scallop Dredging: FishMap Môn Results"
-msgstr ""
+msgstr "Sensitifrwydd i Dreillio am Gregyn Bylchog: Canlyniadau FishMap Môn"
 
 #: templates/index.html:239
 msgid "Sensitivity to Light Otter Trawl: FishMap Môn Results"
-msgstr ""
+msgstr "Sensitifrwydd i Lusgrwyd Estyllod Ysgafn: Canlyniadau FishMap Môn"
 
 #: templates/index.html:240
 msgid "Sensitivity to Mussel Seed Harvesting: FishMap Môn Results"
-msgstr ""
+msgstr "Sensitifrwydd i Gynaeafu Grawn Cregyn Gleision: Canlyniadau FishMap Môn"
 
 #: templates/index.html:241
 msgid "Sensitivity to Bottom Set Nets: FishMap Môn Results"
-msgstr ""
+msgstr "Sensitifrwydd i Rwydi wedi’u Gosod ar Wely’r Môr: Canlyniadau FishMap Môn"
 
 #: templates/index.html:242
 msgid "Sensitivity to Professional Hand Gather: FishMap Môn Results"
-msgstr ""
+msgstr "Sensitifrwydd i Gasglu Proffesiynol â Llaw: Canlyniadau FishMap Môn"
 
 #: templates/index.html:243
 msgid "Sensitivity to Queen Scallop Dredging: FishMap Môn Results"
-msgstr ""
+msgstr "Sensitifrwydd i Dreillio am Gwiniaid: Canlyniadau FishMap Môn"
 
 #: templates/index.html:244
 msgid "Sensitivity to Charter Boat Angling: FishMap Môn Results"
-msgstr ""
+msgstr "Sensitifrwydd i Bysgota Cychod Siarter: Canlyniadau FishMap Môn"
 
 #: templates/index.html:245
 msgid "Sensitivity to Private Boat Angling: FishMap Môn Results"
-msgstr ""
+msgstr "Sensitifrwydd i Bysgota Cychod Preifat: Canlyniadau FishMap Môn"
 
 #: templates/index.html:246
 msgid "Sensitivity to Combined Boat Angling: FishMap Môn Results"
-msgstr ""
+msgstr "Sensitifrwydd i Bysgota Cychod Cyfun: Canlyniadau FishMap Môn"
 
 #: templates/index.html:247
 msgid "Sensitivity to Shore Angling: FishMap Môn Results"
-msgstr ""
+msgstr "Sensitifrwydd i Bysgota’r Glannau: Canlyniadau FishMap Môn"
 
 #: templates/index.html:248
 msgid "Sensitivity to Casual Hand Gather: Scenario Results"
-msgstr ""
+msgstr "Sensitifrwydd i Gasglu Achlysurol â Llaw: Canlyniadau Senario"
 
 #: templates/index.html:249
 msgid "Sensitivity to Commercial Potting: Scenario Results"
-msgstr ""
+msgstr "Sensitifrwydd i Ddal mewn Cewyll Masnachol: Canlyniadau Senario"
 
 #: templates/index.html:250
 msgid "Sensitivity to Recreational Potting: Scenario Results"
-msgstr ""
+msgstr "Sensitifrwydd i Ddal mewn Cewyll Hamdden: Canlyniadau Senario"
 
 #: templates/index.html:251
 msgid "Sensitivity to Combined Potting: Scenario Results"
-msgstr ""
+msgstr "Sensitifrwydd i Ddal mewn Cewyll Cyfun: Canlyniadau Senario"
 
 #: templates/index.html:252
 msgid "Sensitivity to King Scallop Dredging: Scenario Results"
-msgstr ""
+msgstr "Sensitifrwydd i Dreillio am Gregyn Bylchog: Canlyniadau Senario"
 
 #: templates/index.html:253
 msgid "Sensitivity to Light Otter Trawl: Scenario Results"
-msgstr ""
+msgstr "Sensitifrwydd i Lusgrwyd Estyllod Ysgafn: Canlyniadau Senario"
 
 #: templates/index.html:254
 msgid "Sensitivity to Mussel Seed Harvesting: Scenario Results"
-msgstr ""
+msgstr "Sensitifrwydd i Gynaeafu Grawn Cregyn Gleision: Canlyniadau Senario"
 
 #: templates/index.html:255
 msgid "Sensitivity to Bottom Set Nets: Scenario Results"
-msgstr ""
+msgstr "Sensitifrwydd i Rwydi wedi’u Gosod ar Wely’r Môr: Canlyniadau Senario"
 
 #: templates/index.html:256
 msgid "Sensitivity to Professional Hand Gather: Scenario Results"
-msgstr ""
+msgstr "Sensitifrwydd i Gasglu Proffesiynol â Llaw: Canlyniadau Senario"
 
 #: templates/index.html:257
 msgid "Sensitivity to Queen Scallop Dredging: Scenario Results"
-msgstr ""
+msgstr "Sensitifrwydd i Dreillio am Gwiniaid: Canlyniadau Senario"
 
 #: templates/index.html:258
 msgid "Sensitivity to Charter Boat Angling: Scenario Results"
-msgstr ""
+msgstr "Sensitifrwydd i Bysgota Cychod Siarter: Canlyniadau Senario"
 
 #: templates/index.html:259
 msgid "Sensitivity to Private Boat Angling: Scenario Results"
-msgstr ""
+msgstr "Sensitifrwydd i Bysgota Cychod Preifat: Canlyniadau Senario"
 
 #: templates/index.html:260
 msgid "Sensitivity to Combined Boat Angling: Scenario Results"
-msgstr ""
+msgstr "Sensitifrwydd i Bysgota Cychod Cyfun: Canlyniadau Senario"
 
 #: templates/index.html:261
 msgid "Sensitivity to Shore Angling: Scenario Results"
-msgstr ""
+msgstr "Sensitifrwydd i Bysgota’r Glannau: Canlyniadau Senario"
 
 #: templates/index.html:262
 msgid "Sensitivity to Casual Hand Gather: Combined Results"
-msgstr ""
+msgstr "Sensitifrwydd i Gasglu Achlysurol â Llaw: Canlyniadau Cyfun"
 
 #: templates/index.html:263
 msgid "Sensitivity to Commercial Potting: Combined Results"
-msgstr ""
+msgstr "Sensitifrwydd i Ddal mewn Cewyll Masnachol: Canlyniadau Cyfun"
 
 #: templates/index.html:264
 msgid "Sensitivity to Recreational Potting: Combined Results"
-msgstr ""
+msgstr "Sensitifrwydd i Ddal mewn Cewyll Hamdden: Canlyniadau Cyfun"
 
 #: templates/index.html:265
 msgid "Sensitivity to Combined Potting: Combined Results"
-msgstr ""
+msgstr "Sensitifrwydd i Ddal mewn Cewyll Cyfun: Canlyniadau Cyfun"
 
 #: templates/index.html:266
 msgid "Sensitivity to King Scallop Dredging: Combined Results"
-msgstr ""
+msgstr "Sensitifrwydd i Dreillio am Gregyn Bylchog: Canlyniadau Cyfun"
 
 #: templates/index.html:267
 msgid "Sensitivity to Light Otter Trawl: Combined Results"
-msgstr ""
+msgstr "Sensitifrwydd i Lusgrwyd Estyllod Ysgafn: Canlyniadau Cyfun"
 
 #: templates/index.html:268
 msgid "Sensitivity to Mussel Seed Harvesting: Combined Results"
-msgstr ""
+msgstr "Sensitifrwydd i Gynaeafu Grawn Cregyn Gleision: Canlyniadau Cyfun"
 
 #: templates/index.html:269
 msgid "Sensitivity to Bottom Set Nets: Combined Results"
-msgstr ""
+msgstr "Sensitifrwydd i Rwydi wedi’u Gosod ar Wely’r Môr: Canlyniadau Cyfun"
 
 #: templates/index.html:270
 msgid "Sensitivity to Professional Hand Gather: Combined Results"
-msgstr ""
+msgstr "Sensitifrwydd i Gasglu Proffesiynol â Llaw: Canlyniadau Cyfun"
 
 #: templates/index.html:271
 msgid "Sensitivity to Queen Scallop Dredging: Combined Results"
-msgstr ""
+msgstr "Sensitifrwydd i Dreillio am Gwiniaid: Canlyniadau Cyfun"
 
 #: templates/index.html:272
 msgid "Sensitivity to Charter Boat Angling: Combined Results"
-msgstr ""
+msgstr "Sensitifrwydd i Bysgota Cychod Siarter: Canlyniadau Cyfun"
 
 #: templates/index.html:273
 msgid "Sensitivity to Private Boat Angling: Combined Results"
-msgstr ""
+msgstr "Sensitifrwydd i Bysgota Cychod Preifat: Canlyniadau Cyfun"
 
 #: templates/index.html:274
 msgid "Sensitivity to Combined Boat Angling: Combined Results"
-msgstr ""
+msgstr "Sensitifrwydd i Bysgota Cychod Cyfun: Canlyniadau Cyfun"
 
 #: templates/index.html:275
 msgid "Sensitivity to Shore Angling: Combined Results"
-msgstr ""
+msgstr "Sensitifrwydd i Bysgota’r Glannau: Canlyniadau Cyfun"
 
 #: templates/index.html:276 templates/sensitivity.sld:7
 #: templates/sensvtyconf.sld:21
 msgid "Low"
-msgstr ""
+msgstr "Isel"
 
 #: templates/index.html:277 templates/sensitivity.sld:24
 msgid "Medium"
-msgstr ""
+msgstr "Canolig"
 
 #: templates/index.html:278 templates/sensitivity.sld:41
 #: templates/sensvtyconf.sld:49
 msgid "High"
-msgstr ""
+msgstr "Uchel"
 
 #: templates/index.html:279
 msgid "Habitat Sensitivity Confidence"
-msgstr ""
+msgstr "Hyder ynghylch Sensitifrwydd Cynefin"
 
 #: templates/index.html:280
 msgid "Casual Hand Gather Habitat Sensitivity Confidence"
-msgstr ""
+msgstr "Hyder Ynghylch Sensitifrwydd Cynefin Casglu Achlysurol â Llaw"
 
 #: templates/index.html:281
 msgid "Commercial Potting Habitat Sensitivity Confidence"
-msgstr ""
+msgstr "Hyder Ynghylch Sensitifrwydd Cynefin Dal mewn Cewyll Masnachol"
 
 #: templates/index.html:282
 msgid "Recreational Potting Habitat Sensitivity Confidence"
-msgstr ""
+msgstr "Hyder Ynghylch Sensitifrwydd Cynefin Dal mewn Cewyll Hamdden"
 
 #: templates/index.html:283
 msgid "Combined Potting Habitat Sensitivity Confidence"
-msgstr ""
+msgstr "Hyder Ynghylch Sensitifrwydd Cynefin Dal mewn Cewyll Cyfun"
 
 #: templates/index.html:284
 msgid "King Scallop Dredging Habitat Sensitivity Confidence"
-msgstr ""
+msgstr "Hyder Ynghylch Sensitifrwydd Cynefin Treillio am Gregyn Gleision"
 
 #: templates/index.html:285
 msgid "Light Otter Trawl Habitat Sensitivity Confidence"
-msgstr ""
+msgstr "Hyder Ynghylch Sensitifrwydd Cynefin Llusgrwyd Estyllod Ysgafn"
 
 #: templates/index.html:286
 msgid "Mussel Seed Harvesting Habitat Sensitivity Confidence"
-msgstr ""
+msgstr "Hyder Ynghylch Sensitifrwydd Cynefin Cynaeafu Grawn Cregyn Gleision"
 
 #: templates/index.html:287
 msgid "Bottom Set Nets Habitat Sensitivity Confidence"
-msgstr ""
+msgstr "Hyder Ynghylch Sensitifrwydd Cynefin Rhwydi wedi’u Gosod ar Wely’r Môr"
 
 #: templates/index.html:288
 msgid "Professional Hand Gather Habitat Sensitivity Confidence"
-msgstr ""
+msgstr "Hyder Ynghylch Sensitifrwydd Cynefin Casglu Proffesiynol â Llaw"
 
 #: templates/index.html:289
 msgid "Queen Scallop Dredging Habitat Sensitivity Confidence"
-msgstr ""
+msgstr "Hyder Ynghylch Sensitifrwydd Cynefin Treillio am Gwiniaid"
 
 #: templates/index.html:290
 msgid "Charter Boat Angling Habitat Sensitivity Confidence"
-msgstr ""
+msgstr "Hyder Ynghylch Sensitifrwydd Cynefin Pysgota Cychod Siarter"
 
 #: templates/index.html:291
 msgid "Private Boat Angling Habitat Sensitivity Confidence"
-msgstr ""
+msgstr "Hyder Ynghylch Sensitifrwydd Cynefin Pysgota Cychod Preifat"
 
 #: templates/index.html:292
 msgid "Combined Boat Angling Habitat Sensitivity Confidence"
-msgstr ""
+msgstr "Hyder Ynghylch Sensitifrwydd Cynefin Pysgota Cychod Cyfun"
 
 #: templates/index.html:293
 msgid "Shore Angling Habitat Sensitivity Confidence"
-msgstr ""
+msgstr "Hyder Ynghylch Sensitifrwydd Cynefin Pysgota’r Glannau"
 
 #: templates/index.html:294
 msgid "Fishing Activity Extents"
-msgstr ""
+msgstr "Ardaloedd Gweithgareddau Pysgota"
 
 #: templates/index.html:302
 msgid "Casual Hand Gather Extents"
-msgstr ""
+msgstr "Ardaloedd Casglu Achlysurol â Llaw"
 
 #: templates/index.html:303
 msgid "Professional Hand Gather Extents"
-msgstr ""
+msgstr "Ardaloedd Casglu Proffesiynol â Llaw"
 
 #: templates/index.html:309
 msgid "Admiralty Chart"
-msgstr ""
+msgstr "Siartiau’r Morlys"
 
 #: templates/index.html:310
 msgid "OS Map"
-msgstr ""
+msgstr "Mapiau AO"
 
 #: templates/index.html:311
 msgid "No Map"
-msgstr ""
+msgstr "Dim Mapiau"
 
 #: templates/index.html:313
 msgid "Name"
-msgstr ""
+msgstr "Enw"
 
 #: templates/index.html:314
 msgid "Habitat"
@@ -1239,263 +1241,263 @@ msgstr "cynefinoedd"
 
 #: templates/index.html:315
 msgid "Confidence"
-msgstr ""
+msgstr "Cynefin"
 
 #: templates/index.html:406 templates/index.html:408
 msgid "Click to show"
-msgstr ""
+msgstr "Cliciwch i ddangos"
 
 #: templates/index.html:406 templates/index.html:407
 msgid "layer"
-msgstr ""
+msgstr "haen"
 
 #: templates/index.html:407 templates/index.html:409
 msgid "Click to hide"
-msgstr ""
+msgstr "Cliciwch i guddio"
 
 #: templates/index.html:408 templates/index.html:409
 msgid "layers"
-msgstr ""
+msgstr "haenau"
 
 #: templates/index.html:434
 msgid "Select a fishing activity type"
-msgstr ""
+msgstr "Dewiswch fath o weithgaredd pysgota"
 
 #: templates/index.html:440
 msgid "Please draw an area on the map."
-msgstr ""
+msgstr "Tynnwch lun o ardal ar y map"
 
 #: templates/index.html:440
 msgid "Click to add a point and double click to finish drawing."
-msgstr ""
+msgstr "Cliciwch i ychwanegu pwynt a chliciwch ddwywaith i orffen lluniadu"
 
 #: templates/index.html:441
 msgid ""
 "Please provide details of the fishing activity and click \"Calculate "
 "Scenario\"."
-msgstr ""
+msgstr "Rhowch fanylion y gweithgaredd pysgota a chliciwch \ “Calculate” "Scenario \""
 
 #: templates/index.html:444
 msgid "Scenario Area"
-msgstr ""
+msgstr "Ardal Senario"
 
 #: templates/index.html:450
 msgid "January"
-msgstr ""
+msgstr "Ionawr"
 
 #: templates/index.html:451
 msgid "February"
-msgstr ""
+msgstr "Chwefror"
 
 #: templates/index.html:452
 msgid "March"
-msgstr ""
+msgstr "Mawrth"
 
 #: templates/index.html:453
 msgid "April"
-msgstr ""
+msgstr "Ebrill"
 
 #: templates/index.html:454
 msgid "May"
-msgstr ""
+msgstr "Mai"
 
 #: templates/index.html:455
 msgid "June"
-msgstr ""
+msgstr "Mehefin"
 
 #: templates/index.html:456
 msgid "July"
-msgstr ""
+msgstr "Gorffennaf"
 
 #: templates/index.html:457
 msgid "August"
-msgstr ""
+msgstr "Awst"
 
 #: templates/index.html:458
 msgid "September"
-msgstr ""
+msgstr "Medi"
 
 #: templates/index.html:459
 msgid "October"
-msgstr ""
+msgstr "Hydref"
 
 #: templates/index.html:460
 msgid "November"
-msgstr ""
+msgstr "Tachwedd"
 
 #: templates/index.html:461
 msgid "December"
-msgstr ""
+msgstr "Rhagfyr"
 
 #: templates/index.html:464
 msgid "Gear Speed (knots)"
-msgstr ""
+msgstr "Cyflymder y Taclau (milltir fôr)"
 
 #: templates/index.html:468
 msgid "Gear Time (hours per day)"
-msgstr ""
+msgstr "Amser y Taclau (awr y dydd)"
 
 #: templates/index.html:472
 msgid "Gear Width (metres)"
-msgstr ""
+msgstr "Lled y Taclau (metrau)"
 
 #: templates/index.html:476
 msgid "Number of Dredges"
-msgstr ""
+msgstr "Nifer y Treilliadau"
 
 #: templates/index.html:480
 msgid "Net Length (metres)"
-msgstr ""
+msgstr "Hyd y Rhwyd (metrau)"
 
 #: templates/index.html:484
 msgid "Number of Nets"
-msgstr ""
+msgstr "Nifer y Rhwydi"
 
 #: templates/index.html:488
 msgid "Number of Pots"
-msgstr ""
+msgstr "Nifer y Cewyll"
 
 #: templates/index.html:492
 msgid "Number of Anchors"
-msgstr ""
+msgstr "Nifer yr Angorau"
 
 #: templates/index.html:496
 msgid "Number of Fishermen/Rods"
-msgstr ""
+msgstr "Nifer y Pysgotwyr/Gwialenni"
 
 #: templates/index.html:500
 msgid "Average Hours"
-msgstr ""
+msgstr "Oriau Cyfartalog"
 
 #: templates/index.html:504
 msgid "Number of Gatherers"
-msgstr ""
+msgstr "Nifer y Casglwyr"
 
 #: templates/index.html:512
 msgid "Calculate Scenario"
-msgstr ""
+msgstr "Cyfrif Senario"
 
 #: templates/index.html:512
 msgid "Clear Scenario"
-msgstr ""
+msgstr "Clirio Senario"
 
 #: templates/index.html:514
 msgid "View the results of your scenario by enabling the scenario layers below."
-msgstr ""
+msgstr "Gweld canlyniadau’ch senario drwy alluogi’r haenau senario isod"
 
 #: templates/index.html:514
 msgid ""
 "If you change the criteria above click the \"Calculate Scenario\" button "
 "to see the changes on the map."
-msgstr ""
+msgstr "Os ydych yn newid y meini prawf uchod cliciwch y botwm  \"Calculate Scenario\" i weld y newidiadau ar y map."
 
 #: templates/index.html:517
 msgid "Create Fishing Scenario"
-msgstr ""
+msgstr "Creu Senario Pysgota"
 
 #: templates/index.html:599
 msgid "Further information on Seabed Habitats"
-msgstr ""
+msgstr "Rhagor o wybodaeth am Gynefinoedd Gwely’r Môr"
 
 #: templates/index.html:629
 msgid "Further information on Seabed Habitat Confidence"
-msgstr ""
+msgstr "Rhagor o wybodaeth am Hyder Ynghylch Cynefin Gwely’r Môr"
 
 #: templates/index.html:659
 msgid "Further information on SAC"
-msgstr ""
+msgstr "Rhagor o wybodaeth am ACA"
 
 #: templates/index.html:693
 msgid "Further information on SAC Features"
-msgstr ""
+msgstr "Rhagor o wybodaeth am Nodweddion ACA"
 
 #: templates/index.html:723
 msgid "Further information on SPAs"
-msgstr ""
+msgstr "Rhagor o wybodaeth am AGA"
 
 #: templates/index.html:753
 msgid "Further information on SSSIs"
-msgstr ""
+msgstr "Rhagor o wybodaeth am SoDdGA"
 
 #: templates/index.html:783
 msgid "Further information on RAMSAR"
-msgstr ""
+msgstr "Rhagor o wybodaeth am RAMSAR"
 
 #: templates/index.html:813
 msgid "Further information on Areas Closed to Scalloping"
-msgstr ""
+msgstr "Rhagor o wybodaeth am Ardaloedd ar Gau i Gasglu Cregyn Bylchog"
 
 #: templates/index.html:843
 msgid "Further information on Several and Regulating Areas"
-msgstr ""
+msgstr "Rhagor o wybodaeth am Ardaloedd Gorchmynion Pysgodfa Unigol a Rheoleiddio Pysgodfa"
 
 #: templates/index.html:1440
 msgid "Further information on Wrecks"
-msgstr ""
+msgstr "Rhagor o wybodaeth am Longau Drylliedig"
 
 #: templates/index.html:1569
 msgid "Further information on "
-msgstr ""
+msgstr "Rhagor o wybodaeth am "
 
 #: templates/index.html:1605
 msgid "Further information on Number of Vessels"
-msgstr ""
+msgstr "Rhagor o wybodaeth am Nifer y Badau"
 
 #: templates/index.html:1642
 msgid "Further information on Habitat Sensitivity"
-msgstr ""
+msgstr "Rhagor o wybodaeth am Sensitifrwydd Ynghylch Cynefin"
 
 #: templates/index.html:1668
 msgid "Further information on Habitat Sensitivity Confidence"
-msgstr ""
+msgstr "Rhagor o wybodaeth am Hyder Ynghylch Cynefin"
 
 #: templates/index.html:1694
 msgid "Further information on Fishing Activity Extents"
-msgstr ""
+msgstr "Rhagor o wybodaeth am Ardaloedd Gweithgareddau Pysgota"
 
 #: templates/restricted_closed_scalloping.sld:7
 msgid "Areas closed to Scalloping"
-msgstr ""
+msgstr "Ardaloedd ar Gau i Gasglu Cregyn Bylchog"
 
 #: templates/sac_features.sld:7
 msgid "Mudflats and Sandflats"
-msgstr ""
+msgstr "Gwastadeddau llaid a gwastadeddau tywod"
 
 #: templates/sac_features.sld:28
 msgid "Shallow Inlets and Bays"
-msgstr ""
+msgstr "Cilfachau a baeau bas"
 
 #: templates/sac_features.sld:49
 msgid "Reefs"
-msgstr ""
+msgstr "Riffiau"
 
 #: templates/sac_features.sld:70
 msgid "Sandbanks"
-msgstr ""
+msgstr "Ponciau tywod"
 
 #: templates/sac_features.sld:91
 msgid "Sea Caves"
-msgstr ""
+msgstr "Ogofau mor"
 
 #: templates/sac_features.sld:110
 msgid "Atlantic Salt Meadows"
-msgstr ""
+msgstr "Dolydd heli yr Atlantig"
 
 #: templates/sac_features.sld:131
 msgid "Drift Lines"
-msgstr ""
+msgstr "Llinellau drifft"
 
 #: templates/sac_features.sld:152
 msgid "Estuaries"
-msgstr ""
+msgstr "Aberoedd"
 
 #: templates/sac_features.sld:173
 msgid "Fixed Dunes"
-msgstr ""
+msgstr "Twyni sefydlog"
 
 #: templates/sac_features.sld:194
 msgid "Lagoons"
-msgstr ""
+msgstr "Lagynau"
 
 #: templates/sac_features.sld:219
 msgid "Salicornia"
@@ -1503,33 +1505,33 @@ msgstr ""
 
 #: templates/sensvtyconf.sld:35
 msgid "Moderate"
-msgstr ""
+msgstr "Cymedrol"
 
 #: templates/several_and_regulatory_orders.sld:7
 msgid "Several and Regulating Orders"
-msgstr ""
+msgstr "Gorchmynion Pysgodfa Unigol a Rheoleiddio Pysgodfa"
 
 #: templates/security/_menu.html:6
 msgid "Register"
-msgstr ""
+msgstr "Cofrestru"
 
 #: templates/security/_menu.html:9
 msgid "Forgot password"
-msgstr ""
+msgstr "Wedi anghofio cyfrinair"
 
 #: templates/security/_menu.html:12
 msgid "Confirm account"
-msgstr ""
+msgstr "Cadarnhau cyfrif"
 
 #: templates/security/login_user.html:8
 msgid "Username"
-msgstr ""
+msgstr "Enw defnyddiwr"
 
 #: templates/security/login_user.html:10
 msgid "Password"
-msgstr ""
+msgstr "Cyfrinair"
 
 #: templates/security/login_user.html:12
 msgid "Remember me"
-msgstr ""
+msgstr "Cofiwch fi"
 
