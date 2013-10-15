@@ -220,13 +220,18 @@
     map.addControl(legendPanel);
     legendPanel.showLayers(jQuery.grep(visibleOverlays, function(item) {return item.legend}));
 
+    var mapPanel = jQuery('#mappanel');
+
     var mapSearch = new OpenLayers.Control.MapSearch({
         tooltip: FISH_MAP.getText('search_tooltip'),
-        noResultsMessage: FISH_MAP.getText('search_noresults')
+        noResultsMessage: FISH_MAP.getText('search_noresults'),
+        div: mapPanel.find('.olControlMapSearch').get(0)
     });
     map.addControl(mapSearch);
 
-    var baseMapSwitcher = new OpenLayers.Control.BaseMapSwitcher();
+    var baseMapSwitcher = new OpenLayers.Control.BaseMapSwitcher({
+        div: mapPanel.find('.olControlBaseMapSwitcher').get(0)
+    });
     map.addControl(baseMapSwitcher);
 
     info = new OpenLayers.Control.WMSGetFeatureInfo({
@@ -591,7 +596,8 @@
         buttonText: FISH_MAP.getText('export_export_image'),
         waitText: FISH_MAP.getText('export_wait'),
         errorMessage: FISH_MAP.getText('export_error'),
-        downloadText: FISH_MAP.getText('export_download')
+        downloadText: FISH_MAP.getText('export_download'),
+        div: mapPanel.find('.olControlExportLink').get(0)
     });
     map.addControl(exportLink);
 

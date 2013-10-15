@@ -304,11 +304,17 @@ div.info a, p.info a {
     margin-bottom: 0;
 }
 
+#mappanel {
+    position: absolute;
+    right: 2px;
+    top: 2px;
+    z-index: 1000;
+}
+
 /* Base Map Switcher */
 
 .olControlBaseMapSwitcher {
-    right: 5px;
-    top: 5px;
+    display: inline-block;
 }
 
 .olControlBaseMapSwitcher a {
@@ -323,8 +329,8 @@ div.info a, p.info a {
 /* Export Link */
 
 .olControlExportLink {
-    right: 503px;
-    top: 6px;
+    display: inline-block;
+    padding-right: 0.5em;
 }
 
 .olControlExportLink a.button {
@@ -341,7 +347,7 @@ div.info a, p.info a {
 .olControlExportLink p.info {
     display: none;
     position: absolute;
-    padding: 0.5em 0 0.5em 2em;
+    padding: 0.5em 0.5em 0.5em 2em;
     margin: 2px 0 0;
     /* Based on common div.info, p.info rule */
 }
@@ -353,13 +359,14 @@ div.info a, p.info a {
 /* Map Search */
 
 .olControlMapSearch {
-    right: 259px;
-    top: 8px;
+    display: inline-block;
+    padding-right: 0.5em;
 }
 
 .olControlMapSearch input {
     font-size: 1.2em;
     width: 225px;
+    height: 18px;
     border: 2px solid #3F3F3F;
     padding: 2px;
     -webkit-border-radius: 5px;
@@ -377,6 +384,7 @@ div.info a, p.info a {
 .olControlMapSearch .msg {
     font-size: 1.2em;
     padding: 0.5em;
+    position: absolute;
 }
 
 /* OpenLayer overrides */
