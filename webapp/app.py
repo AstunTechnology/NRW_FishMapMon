@@ -108,7 +108,7 @@ class User(auth_db.Model, UserMixin):
     login_count = auth_db.Column(auth_db.Integer())
     roles = auth_db.relationship('Role', secondary=users_roles,
                                  backref=auth_db.backref('users',
-                                 lazy='dynamic'))
+                                                         lazy='dynamic'))
 
 
 class NewUserForm(Form, NewPasswordFormMixin, PasswordConfirmFormMixin,
@@ -197,11 +197,25 @@ def home():
 
 @app.route('/user_add', methods=['POST', 'GET'])
 def user_add():
-    if (g.user.is_authenticated() or 'dev' in g.user.roles
-            or 'admin' in g.user.roles):
+    if (g.user.is_authenticated() and ('dev' in g.user.roles
+                                       or 'admin' in g.user.roles)):
         form = NewUserForm(request.form)
+        msg = None
+        try:
+            email = str(form.email.data)
+            if form.validate_on_submit():
+                new_user = auth_datastore.create_user(
+                    email=email,
+                    password=encrypt_password(str(form.password.data)))
+                new_user.roles = [auth_datastore.find_role('user')]
+                auth_datastore.commit()
+                msg = 'User {} created'.format(email)
+        except KeyError, IntegrityError:
+            auth_db.session.rollback()  # user exists
+            msg = ('User {} not created - user already exists'
+                       .format(email))
         return render_template('user_add.html',
-                               user=g.user, new_user_form=form)
+                               user=g.user, new_user_form=form, msg=msg)
     else:
         abort(404)
 
