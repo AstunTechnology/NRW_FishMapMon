@@ -5,6 +5,7 @@
     <head>
     </head>
     <body>
+        {% if msg %}<strong>{{ msg }}</strong>{% endif %}
         <form action="{{ url_for('user_add') }}" method="POST" name="new_user_form">
             <h1>{{ _('Register a new user') }}</h1>
             {{ new_user_form.hidden_tag() }}
