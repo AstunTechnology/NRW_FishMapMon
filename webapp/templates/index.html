@@ -71,7 +71,7 @@
                 "search_noresults": "{{ _('No results found.') }}",
                 "export_export_image": "{{ _('Export image') }}",
                 "export_wait": "{{ _('Please wait...') }}",
-                "export_error": "{{ _('An error occured, please try again.') }}",
+                "export_error": "{{ _('An error occurred, please try again.') }}",
                 "export_download": "{{ _('Download image') }}",
                 // Layer and group names
                 "project_area_grp": "{{ _('Project Area') }}",
@@ -605,7 +605,7 @@
             <tr>
                 <td colspan="2">
                     {% endraw %}
-                    <p class="more-info"><a href="{{ url_for('static', filename='docs/help.pdf#habitats') }}">{{ _('Further information on Seabed Habitats') }}</a></p>
+                    <p class="more-info"><a href="{{ g.layer_info_url }}#habitats">{{ _('Further information on Seabed Habitats') }}</a></p>
                     {% raw %}
                 </td>
             </tr>
@@ -635,7 +635,7 @@
             <tr>
                 <td colspan="2">
                     {% endraw %}
-                    <p class="more-info"><a href="{{ url_for('static', filename='docs/help.pdf#habitats_confidence') }}">{{ _('Further information on Seabed Habitat Confidence') }}</a></p>
+                    <p class="more-info"><a href="{{ g.layer_info_url }}#habitats_confidence">{{ _('Further information on Seabed Habitat Confidence') }}</a></p>
                     {% raw %}
                 </td>
             </tr>
@@ -665,7 +665,7 @@
             <tr>
                 <td colspan="2">
                     {% endraw %}
-                    <p class="more-info"><a href="{{ url_for('static', filename='docs/help.pdf#sac') }}">{{ _('Further information on SAC') }}</a></p>
+                    <p class="more-info"><a href="{{ g.layer_info_url }}#sac">{{ _('Further information on SAC') }}</a></p>
                     {% raw %}
                 </td>
             </tr>
@@ -699,7 +699,7 @@
             <tr>
                 <td colspan="2">
                     {% endraw %}
-                    <p class="more-info"><a href="{{ url_for('static', filename='docs/help.pdf#sac_features') }}">{{ _('Further information on SAC Features') }}</a></p>
+                    <p class="more-info"><a href="{{ g.layer_info_url }}#sac_features">{{ _('Further information on SAC Features') }}</a></p>
                     {% raw %}
                 </td>
             </tr>
@@ -729,7 +729,7 @@
             <tr>
                 <td colspan="2">
                     {% endraw %}
-                    <p class="more-info"><a href="{{ url_for('static', filename='docs/help.pdf#spa') }}">{{ _('Further information on SPAs') }}</a></p>
+                    <p class="more-info"><a href="{{ g.layer_info_url }}#spa">{{ _('Further information on SPAs') }}</a></p>
                     {% raw %}
                 </td>
             </tr>
@@ -759,7 +759,7 @@
             <tr>
                 <td colspan="2">
                     {% endraw %}
-                    <p class="more-info"><a href="{{ url_for('static', filename='docs/help.pdf#sssi') }}">{{ _('Further information on SSSIs') }}</a></p>
+                    <p class="more-info"><a href="{{ g.layer_info_url }}#sssi">{{ _('Further information on SSSIs') }}</a></p>
                     {% raw %}
                 </td>
             </tr>
@@ -789,7 +789,7 @@
             <tr>
                 <td colspan="2">
                     {% endraw %}
-                    <p class="more-info"><a href="{{ url_for('static', filename='docs/help.pdf#ramsar') }}">{{ _('Further information on RAMSAR') }}</a></p>
+                    <p class="more-info"><a href="{{ g.layer_info_url }}#ramsar">{{ _('Further information on RAMSAR') }}</a></p>
                     {% raw %}
                 </td>
             </tr>
@@ -819,7 +819,7 @@
             <tr>
                 <td colspan="2">
                     {% endraw %}
-                    <p class="more-info"><a href="{{ url_for('static', filename='docs/help.pdf#areas_closed_to_scalloping') }}">{{ _('Further information on Areas Closed to Scalloping') }}</a></p>
+                    <p class="more-info"><a href="{{ g.layer_info_url }}#areas_closed_to_scalloping">{{ _('Further information on Areas Closed to Scalloping') }}</a></p>
                     {% raw %}
                 </td>
             </tr>
@@ -849,7 +849,7 @@
             <tr>
                 <td colspan="2">
                     {% endraw %}
-                    <p class="more-info"><a href="{{ url_for('static', filename='docs/help.pdf#several_and_regulating_areas') }}">{{ _('Further information on Several and Regulating Areas') }}</a></p>
+                    <p class="more-info"><a href="{{ g.layer_info_url }}#several_and_regulating_areas">{{ _('Further information on Several and Regulating Areas') }}</a></p>
                     {% raw %}
                 </td>
             </tr>
@@ -1446,7 +1446,7 @@
             <tr>
                 <td colspan="2">
                     {% endraw %}
-                    <p class="more-info"><a href="{{ url_for('static', filename='docs/help.pdf#wrecks') }}">{{ _('Further information on Wrecks') }}</a></p>
+                    <p class="more-info"><a href="{{ g.layer_info_url }}#wrecks">{{ _('Further information on Wrecks') }}</a></p>
                     {% raw %}
                 </td>
             </tr>
@@ -1575,7 +1575,7 @@
         <tbody>
             <tr>
                 <td colspan="2">
-                    <p class="more-info"><a href="{% endraw %}{{ url_for('static', filename='docs/help.pdf#intensity') }}">{{ _('Further information on ') }}{% raw %} {{#_}}{{id}}{{/_}}</a></p>
+                    <p class="more-info"><a href="{% endraw %}{{ g.layer_info_url }}{% raw %}#intensity">{% endraw %}{{ _('Further information on ') }}{% raw %} {{#_}}{{id}}{{/_}}</a></p>
                 </td>
             </tr>
         </tbody>
@@ -1611,7 +1611,9 @@
         <tbody>
             <tr>
                 <td colspan="2">
-                    <p class="more-info"><a href="{% endraw %}{{ url_for('static', filename='docs/help.pdf#vessels') }}">{{ _('Further information on Number of Vessels') }}{% raw %}</a></p>
+                    {% endraw %}
+                    <p class="more-info"><a href="{{ g.layer_info_url }}#vessels">{{ _('Further information on Number of Vessels') }}</a></p>
+                    {% raw %}
                 </td>
             </tr>
         </tbody>
@@ -1648,7 +1650,7 @@
             <tr>
                 <td colspan="2">
                     {% endraw %}
-                    <p class="more-info"><a href="{{ url_for('static', filename='docs/help.pdf#sensitivity') }}">{{ _('Further information on Habitat Sensitivity') }}</a></p>
+                    <p class="more-info"><a href="{{ g.layer_info_url }}#sensitivity">{{ _('Further information on Habitat Sensitivity') }}</a></p>
                     {% raw %}
                 </td>
             </tr>
@@ -1674,7 +1676,7 @@
             <tr>
                 <td colspan="2">
                     {% endraw %}
-                    <p class="more-info"><a href="{{ url_for('static', filename='docs/help.pdf#sensvtyconf') }}">{{ _('Further information on Habitat Sensitivity Confidence') }}</a></p>
+                    <p class="more-info"><a href="{{ g.layer_info_url }}#sensvtyconf">{{ _('Further information on Habitat Sensitivity Confidence') }}</a></p>
                     {% raw %}
                 </td>
             </tr>
@@ -1700,7 +1702,7 @@
             <tr>
                 <td colspan="2">
                     {% endraw %}
-                    <p class="more-info"><a href="{{ url_for('static', filename='docs/help.pdf#extents') }}">{{ _('Further information on Fishing Activity Extents') }}</a></p>
+                    <p class="more-info"><a href="{{ g.layer_info_url }}#extents">{{ _('Further information on Fishing Activity Extents') }}</a></p>
                     {% raw %}
                 </td>
             </tr>

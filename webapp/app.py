@@ -190,6 +190,9 @@ def before_first_request():
 def before_request():
     set_locale()
     g.user = current_user
+    g.layer_info_url = 'http://naturalresourceswales.gov.uk/our-work/about-us/nrw-funded-projects/fishmap-mon/fishmap-mon-info/?lang=en'
+    if g.locale == 'cy':
+        g.layer_info_url = 'http://cyfoethnaturiolcymru.gov.uk/our-work/about-us/nrw-funded-projects/fishmap-mon/fishmap-mon-info/?lang=cy'
 
 
 @app.route('/')
