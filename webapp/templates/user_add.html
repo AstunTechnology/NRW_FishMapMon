@@ -1,0 +1,19 @@
+{% from "security/_macros.html" import render_field_with_errors, render_field %}
+{% include "security/_messages.html" %}
+<!DOCTYPE html>
+<html>
+    <head>
+    </head>
+    <body>
+        <form action="{{ url_for('user_add') }}" method="POST" name="new_user_form">
+            <h1>{{ _('Register a new user') }}</h1>
+            {{ new_user_form.hidden_tag() }}
+            <dl>
+                <dt><label for="email">Email:</label></dt><dd>{{ render_field_with_errors(new_user_form.email) }}</dd>
+                <dt><label for="password">Enter password</label></dt><dd>{{ render_field_with_errors(new_user_form.password) }}</dd>
+                <dt><label for="password_confirm">Confirm password</label></dt><dd>{{ render_field_with_errors(new_user_form.password_confirm) }}</dd>
+            </dl>
+            <p>{{ render_field(new_user_form.submit) }} </p>
+        </form>
+    </body>
+</html>
