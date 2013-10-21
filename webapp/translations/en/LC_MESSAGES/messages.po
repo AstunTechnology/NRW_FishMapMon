@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-09-30 12:56+0100\n"
+"POT-Creation-Date: 2013-10-21 12:26+0100\n"
 "PO-Revision-Date: 2013-05-23 16:26+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: app.py:102
+#: app.py:116
 msgid "Register user"
 msgstr ""
 
@@ -186,31 +186,31 @@ msgstr ""
 msgid "Casual Hand Gathering Extents"
 msgstr ""
 
-#: templates/extents_king_scallops.sld:7 templates/index.html:295
+#: templates/extents_king_scallops.sld:7 templates/index.html:302
 msgid "King Scallop Dredging Extents"
 msgstr ""
 
-#: templates/extents_lot.sld:7 templates/index.html:296
+#: templates/extents_lot.sld:7 templates/index.html:303
 msgid "Light Otter Trawl Extents"
 msgstr ""
 
-#: templates/extents_mussels.sld:7 templates/index.html:297
+#: templates/extents_mussels.sld:7 templates/index.html:304
 msgid "Mussel Seed Harvesting Extents"
 msgstr ""
 
-#: templates/extents_nets.sld:7 templates/index.html:298
+#: templates/extents_nets.sld:7 templates/index.html:305
 msgid "Bottom Set Nets Extents"
 msgstr ""
 
-#: templates/extents_pots_combined.sld:7 templates/index.html:301
+#: templates/extents_pots_combined.sld:7 templates/index.html:308
 msgid "Combined Potting Extents"
 msgstr ""
 
-#: templates/extents_pots_commercial.sld:7 templates/index.html:299
+#: templates/extents_pots_commercial.sld:7 templates/index.html:306
 msgid "Commercial Potting Extents"
 msgstr ""
 
-#: templates/extents_pots_recreational.sld:7 templates/index.html:300
+#: templates/extents_pots_recreational.sld:7 templates/index.html:307
 msgid "Recreational Potting Extents"
 msgstr ""
 
@@ -218,23 +218,23 @@ msgstr ""
 msgid "Professional Hand Gathering Extents"
 msgstr ""
 
-#: templates/extents_queen_scallops.sld:7 templates/index.html:304
+#: templates/extents_queen_scallops.sld:7 templates/index.html:311
 msgid "Queen Scallop Dredging Extents"
 msgstr ""
 
-#: templates/extents_rsa_charterboats.sld:7 templates/index.html:305
+#: templates/extents_rsa_charterboats.sld:7 templates/index.html:312
 msgid "Charter Boat Angling Extents"
 msgstr ""
 
-#: templates/extents_rsa_combined.sld:7 templates/index.html:307
+#: templates/extents_rsa_combined.sld:7 templates/index.html:314
 msgid "Combined Boat Angling Extents"
 msgstr ""
 
-#: templates/extents_rsa_noncharter.sld:7 templates/index.html:306
+#: templates/extents_rsa_noncharter.sld:7 templates/index.html:313
 msgid "Private Boat Angling Extents"
 msgstr ""
 
-#: templates/extents_rsa_shore.sld:7 templates/index.html:308
+#: templates/extents_rsa_shore.sld:7 templates/index.html:315
 msgid "Shore Angling Extents"
 msgstr ""
 
@@ -386,7 +386,7 @@ msgstr ""
 msgid "Natural Resources Wales"
 msgstr ""
 
-#: templates/index.html:5 templates/index.html:55
+#: templates/index.html:5 templates/index.html:56
 msgid "FishMap Môn"
 msgstr ""
 
@@ -411,1043 +411,1059 @@ msgstr ""
 msgid "Sign in"
 msgstr ""
 
-#: templates/index.html:54
+#: templates/index.html:55
 msgid ""
 "Natural Resources Wales, FishMap Môn, European Fisheries Fund and Welsh "
 "Government logos"
 msgstr ""
 
-#: templates/index.html:58
+#: templates/index.html:60
 msgid "FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:64
+#: templates/index.html:67
 msgid "Crown Copyright and database right 2013. Ordnance Survey 100019741"
 msgstr ""
 
-#: templates/index.html:65
+#: templates/index.html:68
 msgid ""
 "British Crown and OceanWise Ltd, 2013. All rights reserved. License No. "
 "EK001-20120402. Not to be used for Navigation"
 msgstr ""
 
-#: templates/index.html:66
+#: templates/index.html:69
 msgid "Legend"
 msgstr ""
 
-#: templates/index.html:67
+#: templates/index.html:70
 msgid "Search for place name or postcode."
 msgstr ""
 
-#: templates/index.html:68
+#: templates/index.html:71
 msgid "No results found."
 msgstr ""
 
-#: templates/index.html:70 templates/index.html:71
-msgid "Project Area"
-msgstr ""
-
 #: templates/index.html:72
-msgid "Protected Sites"
+msgid "Export image"
 msgstr ""
 
-#: templates/index.html:73 templates/sac.sld:7
-msgid "SAC"
+#: templates/index.html:73
+msgid "Please wait..."
 msgstr ""
 
 #: templates/index.html:74
-msgid "SAC Features"
+msgid "An error occurred, please try again."
 msgstr ""
 
-#: templates/index.html:75 templates/spa.sld:7
-msgid "SPA"
+#: templates/index.html:75
+msgid "Download image"
 msgstr ""
 
-#: templates/index.html:76 templates/sssi.sld:7
-msgid "SSSI"
-msgstr ""
-
-#: templates/index.html:77 templates/ramsar.sld:7
-msgid "RAMSAR"
-msgstr ""
-
-#: templates/index.html:78
-msgid "Seabed Habitat Confidence"
+#: templates/index.html:77 templates/index.html:78
+msgid "Project Area"
 msgstr ""
 
 #: templates/index.html:79
-msgid "Habitats"
+msgid "Protected Sites"
 msgstr ""
 
-#: templates/index.html:80
-msgid "Seabed Habitats"
+#: templates/index.html:80 templates/sac.sld:7
+msgid "SAC"
 msgstr ""
 
 #: templates/index.html:81
-msgid "Restricted Zones"
+msgid "SAC Features"
 msgstr ""
 
-#: templates/index.html:82
-msgid "Areas Closed to Scalloping"
+#: templates/index.html:82 templates/spa.sld:7
+msgid "SPA"
 msgstr ""
 
-#: templates/index.html:83
-msgid "Several and Regulating Areas"
+#: templates/index.html:83 templates/sssi.sld:7
+msgid "SSSI"
 msgstr ""
 
-#: templates/index.html:84
-msgid "Reference Data"
+#: templates/index.html:84 templates/ramsar.sld:7
+msgid "RAMSAR"
 msgstr ""
 
 #: templates/index.html:85
-msgid "National Limits"
+msgid "Seabed Habitat Confidence"
 msgstr ""
 
 #: templates/index.html:86
-msgid "Wrecks"
+msgid "Habitats"
 msgstr ""
 
 #: templates/index.html:87
-msgid "Casual Hand Gather"
+msgid "Seabed Habitats"
 msgstr ""
 
 #: templates/index.html:88
-msgid "Commercial Potting"
+msgid "Restricted Zones"
 msgstr ""
 
 #: templates/index.html:89
-msgid "Recreational Potting"
+msgid "Areas Closed to Scalloping"
 msgstr ""
 
 #: templates/index.html:90
-msgid "Combined Potting"
+msgid "Several and Regulating Areas"
 msgstr ""
 
 #: templates/index.html:91
-msgid "King Scallop Dredging"
+msgid "Reference Data"
 msgstr ""
 
 #: templates/index.html:92
-msgid "Light Otter Trawl"
+msgid "National Limits"
 msgstr ""
 
 #: templates/index.html:93
-msgid "Mussel Seed Harvesting"
+msgid "Wrecks"
 msgstr ""
 
 #: templates/index.html:94
-msgid "Bottom Set Nets"
+msgid "Casual Hand Gather"
 msgstr ""
 
 #: templates/index.html:95
-msgid "Professional Hand Gather"
+msgid "Commercial Potting"
 msgstr ""
 
 #: templates/index.html:96
-msgid "Queen Scallop Dredging"
+msgid "Recreational Potting"
 msgstr ""
 
 #: templates/index.html:97
-msgid "Charter Boat Angling"
+msgid "Combined Potting"
 msgstr ""
 
 #: templates/index.html:98
-msgid "Private Boat Angling"
+msgid "King Scallop Dredging"
 msgstr ""
 
 #: templates/index.html:99
-msgid "Combined Boat Angling"
+msgid "Light Otter Trawl"
 msgstr ""
 
 #: templates/index.html:100
-msgid "Shore Angling"
+msgid "Mussel Seed Harvesting"
 msgstr ""
 
 #: templates/index.html:101
-msgid "Detailed Fishing Activity"
+msgid "Bottom Set Nets"
 msgstr ""
 
 #: templates/index.html:102
-msgid "Combined Commercial Activity"
+msgid "Professional Hand Gather"
 msgstr ""
 
 #: templates/index.html:103
-msgid "Shore Angling Locations"
+msgid "Queen Scallop Dredging"
 msgstr ""
 
 #: templates/index.html:104
-msgid "Combined Non-Commercial Activity"
+msgid "Charter Boat Angling"
 msgstr ""
 
 #: templates/index.html:105
+msgid "Private Boat Angling"
+msgstr ""
+
+#: templates/index.html:106
+msgid "Combined Boat Angling"
+msgstr ""
+
+#: templates/index.html:107
+msgid "Shore Angling"
+msgstr ""
+
+#: templates/index.html:108
+msgid "Detailed Fishing Activity"
+msgstr ""
+
+#: templates/index.html:109
+msgid "Combined Commercial Activity"
+msgstr ""
+
+#: templates/index.html:110
+msgid "Shore Angling Locations"
+msgstr ""
+
+#: templates/index.html:111
+msgid "Combined Non-Commercial Activity"
+msgstr ""
+
+#: templates/index.html:112
 msgid "Fishing Intensity"
 msgstr ""
 
-#: templates/index.html:106 templates/index.html:108 templates/index.html:109
-#: templates/index.html:110 templates/index.html:111 templates/index.html:112
-#: templates/index.html:113 templates/index.html:114 templates/index.html:116
+#: templates/index.html:113 templates/index.html:115 templates/index.html:116
 #: templates/index.html:117 templates/index.html:118 templates/index.html:119
-#: templates/index.html:220 templates/index.html:221 templates/index.html:222
-#: templates/index.html:223 templates/index.html:224 templates/index.html:225
-#: templates/index.html:226 templates/index.html:228 templates/index.html:229
-#: templates/index.html:230 templates/index.html:231 templates/index.html:508
+#: templates/index.html:120 templates/index.html:121 templates/index.html:123
+#: templates/index.html:124 templates/index.html:125 templates/index.html:126
+#: templates/index.html:227 templates/index.html:228 templates/index.html:229
+#: templates/index.html:230 templates/index.html:231 templates/index.html:232
+#: templates/index.html:233 templates/index.html:235 templates/index.html:236
+#: templates/index.html:237 templates/index.html:238 templates/index.html:517
 msgid "Number of Vessels"
 msgstr ""
 
-#: templates/index.html:107 templates/index.html:115 templates/index.html:120
-#: templates/index.html:219 templates/index.html:227 templates/index.html:232
+#: templates/index.html:114 templates/index.html:122 templates/index.html:127
+#: templates/index.html:226 templates/index.html:234 templates/index.html:239
 msgid "Number of Visits"
 msgstr ""
 
-#: templates/index.html:121
+#: templates/index.html:128
 msgid "Casual Hand Gather Intensity: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:122
+#: templates/index.html:129
 msgid "Commercial Potting Intensity: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:123
+#: templates/index.html:130
 msgid "Recreational Potting Intensity: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:124
+#: templates/index.html:131
 msgid "Combined Potting Intensity: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:125
+#: templates/index.html:132
 msgid "King Scallop Dredging Intensity: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:126
+#: templates/index.html:133
 msgid "Light Otter Trawl Intensity: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:127
+#: templates/index.html:134
 msgid "Mussel Seed Harvesting Intensity: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:128
+#: templates/index.html:135
 msgid "Bottom Set Nets Intensity: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:129
+#: templates/index.html:136
 msgid "Professional Hand Gather Intensity: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:130
+#: templates/index.html:137
 msgid "Queen Scallop Dredging Intensity: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:131
+#: templates/index.html:138
 msgid "Charter Boat Angling Intensity: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:132
+#: templates/index.html:139
 msgid "Private Boat Angling Intensity: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:133
+#: templates/index.html:140
 msgid "Combined Boat Angling Intensity: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:134
+#: templates/index.html:141
 msgid "Shore Angling Intensity: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:135
+#: templates/index.html:142
 msgid "Casual Hand Gather Intensity: Scenario Results"
 msgstr ""
 
-#: templates/index.html:136
+#: templates/index.html:143
 msgid "Commercial Potting Intensity: Scenario Results"
 msgstr ""
 
-#: templates/index.html:137
+#: templates/index.html:144
 msgid "Recreational Potting Intensity: Scenario Results"
 msgstr ""
 
-#: templates/index.html:138
+#: templates/index.html:145
 msgid "Combined Potting Intensity: Scenario Results"
 msgstr ""
 
-#: templates/index.html:139
+#: templates/index.html:146
 msgid "King Scallop Dredging Intensity: Scenario Results"
 msgstr ""
 
-#: templates/index.html:140
+#: templates/index.html:147
 msgid "Light Otter Trawl Intensity: Scenario Results"
 msgstr ""
 
-#: templates/index.html:141
+#: templates/index.html:148
 msgid "Mussel Seed Harvesting Intensity: Scenario Results"
 msgstr ""
 
-#: templates/index.html:142
+#: templates/index.html:149
 msgid "Bottom Set Nets Intensity: Scenario Results"
 msgstr ""
 
-#: templates/index.html:143
+#: templates/index.html:150
 msgid "Professional Hand Gather Intensity: Scenario Results"
 msgstr ""
 
-#: templates/index.html:144
+#: templates/index.html:151
 msgid "Queen Scallop Dredging Intensity: Scenario Results"
 msgstr ""
 
-#: templates/index.html:145
+#: templates/index.html:152
 msgid "Charter Boat Angling Intensity: Scenario Results"
 msgstr ""
 
-#: templates/index.html:146
+#: templates/index.html:153
 msgid "Private Boat Angling Intensity: Scenario Results"
 msgstr ""
 
-#: templates/index.html:147
+#: templates/index.html:154
 msgid "Combined Boat Angling Intensity: Scenario Results"
 msgstr ""
 
-#: templates/index.html:148
+#: templates/index.html:155
 msgid "Shore Angling Intensity: Scenario Results"
 msgstr ""
 
-#: templates/index.html:149
+#: templates/index.html:156
 msgid "Casual Hand Gather Intensity: Combined Results"
 msgstr ""
 
-#: templates/index.html:150
+#: templates/index.html:157
 msgid "Commercial Potting Intensity: Combined Results"
 msgstr ""
 
-#: templates/index.html:151
+#: templates/index.html:158
 msgid "Recreational Potting Intensity: Combined Results"
 msgstr ""
 
-#: templates/index.html:152
+#: templates/index.html:159
 msgid "Combined Potting Intensity: Combined Results"
 msgstr ""
 
-#: templates/index.html:153
+#: templates/index.html:160
 msgid "King Scallop Dredging Intensity: Combined Results"
 msgstr ""
 
-#: templates/index.html:154
+#: templates/index.html:161
 msgid "Light Otter Trawl Intensity: Combined Results"
 msgstr ""
 
-#: templates/index.html:155
+#: templates/index.html:162
 msgid "Mussel Seed Harvesting Intensity: Combined Results"
 msgstr ""
 
-#: templates/index.html:156
+#: templates/index.html:163
 msgid "Bottom Set Nets Intensity: Combined Results"
 msgstr ""
 
-#: templates/index.html:157
+#: templates/index.html:164
 msgid "Professional Hand Gather Intensity: Combined Results"
 msgstr ""
 
-#: templates/index.html:158
+#: templates/index.html:165
 msgid "Queen Scallop Dredging Intensity: Combined Results"
 msgstr ""
 
-#: templates/index.html:159
+#: templates/index.html:166
 msgid "Charter Boat Angling Intensity: Combined Results"
 msgstr ""
 
-#: templates/index.html:160
+#: templates/index.html:167
 msgid "Private Boat Angling Intensity: Combined Results"
 msgstr ""
 
-#: templates/index.html:161
+#: templates/index.html:168
 msgid "Combined Boat Angling Intensity: Combined Results"
 msgstr ""
 
-#: templates/index.html:162
+#: templates/index.html:169
 msgid "Shore Angling Intensity: Combined Results"
 msgstr ""
 
-#: templates/index.html:163 templates/index.html:164 templates/index.html:169
-#: templates/index.html:170
+#: templates/index.html:170 templates/index.html:171 templates/index.html:176
+#: templates/index.html:177
 msgid "(Number of times area fished per year)"
 msgstr ""
 
-#: templates/index.html:165 templates/index.html:172
+#: templates/index.html:172 templates/index.html:179
 msgid "(Number of People /ha /day)"
 msgstr ""
 
-#: templates/index.html:166 templates/index.html:167 templates/index.html:168
+#: templates/index.html:173 templates/index.html:174 templates/index.html:175
 msgid "(Number of Pots lifted & dropped / ha / day)"
 msgstr ""
 
-#: templates/index.html:171
+#: templates/index.html:178
 msgid "(Number of 100m net panels fished in a km2 / year)"
 msgstr ""
 
-#: templates/index.html:173 templates/index.html:174 templates/index.html:175
-#: templates/index.html:176
+#: templates/index.html:180 templates/index.html:181 templates/index.html:182
+#: templates/index.html:183
 msgid "(Number of People /ha /week)"
 msgstr ""
 
-#: templates/index.html:177
+#: templates/index.html:184
 msgid "Casual Hand Gathering Visits: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:178
+#: templates/index.html:185
 msgid "Commercial Potting Vessels: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:179
+#: templates/index.html:186
 msgid "Recreational Potting Vessels: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:180
+#: templates/index.html:187
 msgid "Combined Potting Vessels: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:181
+#: templates/index.html:188
 msgid "King Scallop Dredging Vessels: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:182
+#: templates/index.html:189
 msgid "Light Otter Trawl Vessels: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:183
+#: templates/index.html:190
 msgid "Mussel Seed Harvesting Vessels: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:184
+#: templates/index.html:191
 msgid "Bottom Set Nets Vessels: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:185
+#: templates/index.html:192
 msgid "Professional Hand Gathering Visits: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:186
+#: templates/index.html:193
 msgid "Queen Scallop Dredging Vessels: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:187
+#: templates/index.html:194
 msgid "Charter Boat Angling Vessels: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:188
+#: templates/index.html:195
 msgid "Private Boat Angling Vessels: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:189
+#: templates/index.html:196
 msgid "Combined Boat Angling Vessels: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:190
+#: templates/index.html:197
 msgid "Shore Angling Visits: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:191
+#: templates/index.html:198
 msgid "Casual Hand Gathering Visits: Scenario Results"
 msgstr ""
 
-#: templates/index.html:192
+#: templates/index.html:199
 msgid "Commercial Potting Vessels: Scenario Results"
 msgstr ""
 
-#: templates/index.html:193
+#: templates/index.html:200
 msgid "Recreational Potting Vessels: Scenario Results"
 msgstr ""
 
-#: templates/index.html:194
+#: templates/index.html:201
 msgid "Combined Potting Vessels: Scenario Results"
 msgstr ""
 
-#: templates/index.html:195
+#: templates/index.html:202
 msgid "King Scallop Dredging Vessels: Scenario Results"
 msgstr ""
 
-#: templates/index.html:196
+#: templates/index.html:203
 msgid "Light Otter Trawl Vessels: Scenario Results"
 msgstr ""
 
-#: templates/index.html:197
+#: templates/index.html:204
 msgid "Mussel Seed Harvesting Vessels: Scenario Results"
 msgstr ""
 
-#: templates/index.html:198
+#: templates/index.html:205
 msgid "Bottom Set Nets Vessels: Scenario Results"
 msgstr ""
 
-#: templates/index.html:199
+#: templates/index.html:206
 msgid "Professional Hand Gathering Visits: Scenario Results"
 msgstr ""
 
-#: templates/index.html:200
+#: templates/index.html:207
 msgid "Queen Scallop Dredging Vessels: Scenario Results"
 msgstr ""
 
-#: templates/index.html:201
+#: templates/index.html:208
 msgid "Charter Boat Angling Vessels: Scenario Results"
 msgstr ""
 
-#: templates/index.html:202
+#: templates/index.html:209
 msgid "Private Boat Angling Vessels: Scenario Results"
 msgstr ""
 
-#: templates/index.html:203
+#: templates/index.html:210
 msgid "Combined Boat Angling Vessels: Scenario Results"
 msgstr ""
 
-#: templates/index.html:204
+#: templates/index.html:211
 msgid "Shore Angling Visits: Scenario Results"
 msgstr ""
 
-#: templates/index.html:205
+#: templates/index.html:212
 msgid "Casual Hand Gathering Visits: Combined Results"
 msgstr ""
 
-#: templates/index.html:206
+#: templates/index.html:213
 msgid "Commercial Potting Vessels: Combined Results"
 msgstr ""
 
-#: templates/index.html:207
+#: templates/index.html:214
 msgid "Recreational Potting Vessels: Combined Results"
 msgstr ""
 
-#: templates/index.html:208
+#: templates/index.html:215
 msgid "Combined Potting Vessels: Combined Results"
 msgstr ""
 
-#: templates/index.html:209
+#: templates/index.html:216
 msgid "King Scallop Dredging Vessels: Combined Results"
 msgstr ""
 
-#: templates/index.html:210
+#: templates/index.html:217
 msgid "Light Otter Trawl Vessels: Combined Results"
 msgstr ""
 
-#: templates/index.html:211
+#: templates/index.html:218
 msgid "Mussel Seed Harvesting Vessels: Combined Results"
 msgstr ""
 
-#: templates/index.html:212
+#: templates/index.html:219
 msgid "Bottom Set Nets Vessels: Combined Results"
 msgstr ""
 
-#: templates/index.html:213
+#: templates/index.html:220
 msgid "Professional Hand Gathering Visits: Combined Results"
 msgstr ""
 
-#: templates/index.html:214
+#: templates/index.html:221
 msgid "Queen Scallop Dredging Vessels: Combined Results"
 msgstr ""
 
-#: templates/index.html:215
+#: templates/index.html:222
 msgid "Charter Boat Angling Vessels: Combined Results"
 msgstr ""
 
-#: templates/index.html:216
+#: templates/index.html:223
 msgid "Private Boat Angling Vessels: Combined Results"
 msgstr ""
 
-#: templates/index.html:217
+#: templates/index.html:224
 msgid "Combined Angling Vessels: Combined Results"
 msgstr ""
 
-#: templates/index.html:218
+#: templates/index.html:225
 msgid "Shore Angling Visits: Combined Results"
 msgstr ""
 
-#: templates/index.html:233
+#: templates/index.html:240
 msgid "Habitat Sensitivity"
 msgstr ""
 
-#: templates/index.html:234
+#: templates/index.html:241
 msgid "Sensitivity to Casual Hand Gather: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:235
+#: templates/index.html:242
 msgid "Sensitivity to Commercial Potting: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:236
+#: templates/index.html:243
 msgid "Sensitivity to Recreational Potting: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:237
+#: templates/index.html:244
 msgid "Sensitivity to Combined Potting: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:238
+#: templates/index.html:245
 msgid "Sensitivity to King Scallop Dredging: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:239
+#: templates/index.html:246
 msgid "Sensitivity to Light Otter Trawl: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:240
+#: templates/index.html:247
 msgid "Sensitivity to Mussel Seed Harvesting: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:241
+#: templates/index.html:248
 msgid "Sensitivity to Bottom Set Nets: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:242
+#: templates/index.html:249
 msgid "Sensitivity to Professional Hand Gather: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:243
+#: templates/index.html:250
 msgid "Sensitivity to Queen Scallop Dredging: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:244
+#: templates/index.html:251
 msgid "Sensitivity to Charter Boat Angling: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:245
+#: templates/index.html:252
 msgid "Sensitivity to Private Boat Angling: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:246
+#: templates/index.html:253
 msgid "Sensitivity to Combined Boat Angling: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:247
+#: templates/index.html:254
 msgid "Sensitivity to Shore Angling: FishMap Môn Results"
 msgstr ""
 
-#: templates/index.html:248
+#: templates/index.html:255
 msgid "Sensitivity to Casual Hand Gather: Scenario Results"
 msgstr ""
 
-#: templates/index.html:249
+#: templates/index.html:256
 msgid "Sensitivity to Commercial Potting: Scenario Results"
 msgstr ""
 
-#: templates/index.html:250
+#: templates/index.html:257
 msgid "Sensitivity to Recreational Potting: Scenario Results"
 msgstr ""
 
-#: templates/index.html:251
+#: templates/index.html:258
 msgid "Sensitivity to Combined Potting: Scenario Results"
 msgstr ""
 
-#: templates/index.html:252
+#: templates/index.html:259
 msgid "Sensitivity to King Scallop Dredging: Scenario Results"
 msgstr ""
 
-#: templates/index.html:253
+#: templates/index.html:260
 msgid "Sensitivity to Light Otter Trawl: Scenario Results"
 msgstr ""
 
-#: templates/index.html:254
+#: templates/index.html:261
 msgid "Sensitivity to Mussel Seed Harvesting: Scenario Results"
 msgstr ""
 
-#: templates/index.html:255
+#: templates/index.html:262
 msgid "Sensitivity to Bottom Set Nets: Scenario Results"
 msgstr ""
 
-#: templates/index.html:256
+#: templates/index.html:263
 msgid "Sensitivity to Professional Hand Gather: Scenario Results"
 msgstr ""
 
-#: templates/index.html:257
+#: templates/index.html:264
 msgid "Sensitivity to Queen Scallop Dredging: Scenario Results"
 msgstr ""
 
-#: templates/index.html:258
+#: templates/index.html:265
 msgid "Sensitivity to Charter Boat Angling: Scenario Results"
 msgstr ""
 
-#: templates/index.html:259
+#: templates/index.html:266
 msgid "Sensitivity to Private Boat Angling: Scenario Results"
 msgstr ""
 
-#: templates/index.html:260
+#: templates/index.html:267
 msgid "Sensitivity to Combined Boat Angling: Scenario Results"
 msgstr ""
 
-#: templates/index.html:261
+#: templates/index.html:268
 msgid "Sensitivity to Shore Angling: Scenario Results"
 msgstr ""
 
-#: templates/index.html:262
+#: templates/index.html:269
 msgid "Sensitivity to Casual Hand Gather: Combined Results"
 msgstr ""
 
-#: templates/index.html:263
+#: templates/index.html:270
 msgid "Sensitivity to Commercial Potting: Combined Results"
 msgstr ""
 
-#: templates/index.html:264
+#: templates/index.html:271
 msgid "Sensitivity to Recreational Potting: Combined Results"
 msgstr ""
 
-#: templates/index.html:265
+#: templates/index.html:272
 msgid "Sensitivity to Combined Potting: Combined Results"
 msgstr ""
 
-#: templates/index.html:266
+#: templates/index.html:273
 msgid "Sensitivity to King Scallop Dredging: Combined Results"
 msgstr ""
 
-#: templates/index.html:267
+#: templates/index.html:274
 msgid "Sensitivity to Light Otter Trawl: Combined Results"
 msgstr ""
 
-#: templates/index.html:268
+#: templates/index.html:275
 msgid "Sensitivity to Mussel Seed Harvesting: Combined Results"
 msgstr ""
 
-#: templates/index.html:269
+#: templates/index.html:276
 msgid "Sensitivity to Bottom Set Nets: Combined Results"
 msgstr ""
 
-#: templates/index.html:270
+#: templates/index.html:277
 msgid "Sensitivity to Professional Hand Gather: Combined Results"
 msgstr ""
 
-#: templates/index.html:271
+#: templates/index.html:278
 msgid "Sensitivity to Queen Scallop Dredging: Combined Results"
 msgstr ""
 
-#: templates/index.html:272
+#: templates/index.html:279
 msgid "Sensitivity to Charter Boat Angling: Combined Results"
 msgstr ""
 
-#: templates/index.html:273
+#: templates/index.html:280
 msgid "Sensitivity to Private Boat Angling: Combined Results"
 msgstr ""
 
-#: templates/index.html:274
+#: templates/index.html:281
 msgid "Sensitivity to Combined Boat Angling: Combined Results"
 msgstr ""
 
-#: templates/index.html:275
+#: templates/index.html:282
 msgid "Sensitivity to Shore Angling: Combined Results"
 msgstr ""
 
-#: templates/index.html:276 templates/sensitivity.sld:7
+#: templates/index.html:283 templates/sensitivity.sld:7
 #: templates/sensvtyconf.sld:21
 msgid "Low"
 msgstr ""
 
-#: templates/index.html:277 templates/sensitivity.sld:24
+#: templates/index.html:284 templates/sensitivity.sld:24
 msgid "Medium"
 msgstr ""
 
-#: templates/index.html:278 templates/sensitivity.sld:41
+#: templates/index.html:285 templates/sensitivity.sld:41
 #: templates/sensvtyconf.sld:49
 msgid "High"
 msgstr ""
 
-#: templates/index.html:279
+#: templates/index.html:286
 msgid "Habitat Sensitivity Confidence"
 msgstr ""
 
-#: templates/index.html:280
+#: templates/index.html:287
 msgid "Casual Hand Gather Habitat Sensitivity Confidence"
 msgstr ""
 
-#: templates/index.html:281
+#: templates/index.html:288
 msgid "Commercial Potting Habitat Sensitivity Confidence"
 msgstr ""
 
-#: templates/index.html:282
+#: templates/index.html:289
 msgid "Recreational Potting Habitat Sensitivity Confidence"
 msgstr ""
 
-#: templates/index.html:283
+#: templates/index.html:290
 msgid "Combined Potting Habitat Sensitivity Confidence"
 msgstr ""
 
-#: templates/index.html:284
+#: templates/index.html:291
 msgid "King Scallop Dredging Habitat Sensitivity Confidence"
 msgstr ""
 
-#: templates/index.html:285
+#: templates/index.html:292
 msgid "Light Otter Trawl Habitat Sensitivity Confidence"
 msgstr ""
 
-#: templates/index.html:286
+#: templates/index.html:293
 msgid "Mussel Seed Harvesting Habitat Sensitivity Confidence"
 msgstr ""
 
-#: templates/index.html:287
+#: templates/index.html:294
 msgid "Bottom Set Nets Habitat Sensitivity Confidence"
 msgstr ""
 
-#: templates/index.html:288
+#: templates/index.html:295
 msgid "Professional Hand Gather Habitat Sensitivity Confidence"
 msgstr ""
 
-#: templates/index.html:289
+#: templates/index.html:296
 msgid "Queen Scallop Dredging Habitat Sensitivity Confidence"
 msgstr ""
 
-#: templates/index.html:290
+#: templates/index.html:297
 msgid "Charter Boat Angling Habitat Sensitivity Confidence"
 msgstr ""
 
-#: templates/index.html:291
+#: templates/index.html:298
 msgid "Private Boat Angling Habitat Sensitivity Confidence"
 msgstr ""
 
-#: templates/index.html:292
+#: templates/index.html:299
 msgid "Combined Boat Angling Habitat Sensitivity Confidence"
 msgstr ""
 
-#: templates/index.html:293
+#: templates/index.html:300
 msgid "Shore Angling Habitat Sensitivity Confidence"
 msgstr ""
 
-#: templates/index.html:294
+#: templates/index.html:301
 msgid "Fishing Activity Extents"
 msgstr ""
 
-#: templates/index.html:302
+#: templates/index.html:309
 msgid "Casual Hand Gather Extents"
 msgstr ""
 
-#: templates/index.html:303
+#: templates/index.html:310
 msgid "Professional Hand Gather Extents"
 msgstr ""
 
-#: templates/index.html:309
+#: templates/index.html:316
 msgid "Admiralty Chart"
 msgstr ""
 
-#: templates/index.html:310
+#: templates/index.html:317
 msgid "OS Map"
 msgstr ""
 
-#: templates/index.html:311
+#: templates/index.html:318
 msgid "No Map"
 msgstr ""
 
-#: templates/index.html:313
+#: templates/index.html:320
 msgid "Name"
 msgstr ""
 
-#: templates/index.html:314
+#: templates/index.html:321
 msgid "Habitat"
 msgstr ""
 
-#: templates/index.html:315
+#: templates/index.html:322
 msgid "Confidence"
 msgstr ""
 
-#: templates/index.html:406 templates/index.html:408
+#: templates/index.html:415 templates/index.html:417
 msgid "Click to show"
 msgstr ""
 
-#: templates/index.html:406 templates/index.html:407
+#: templates/index.html:415 templates/index.html:416
 msgid "layer"
 msgstr ""
 
-#: templates/index.html:407 templates/index.html:409
+#: templates/index.html:416 templates/index.html:418
 msgid "Click to hide"
 msgstr ""
 
-#: templates/index.html:408 templates/index.html:409
+#: templates/index.html:417 templates/index.html:418
 msgid "layers"
 msgstr ""
 
-#: templates/index.html:434
+#: templates/index.html:443
 msgid "Select a fishing activity type"
 msgstr ""
 
-#: templates/index.html:440
+#: templates/index.html:449
 msgid "Please draw an area on the map."
 msgstr ""
 
-#: templates/index.html:440
+#: templates/index.html:449
 msgid "Click to add a point and double click to finish drawing."
 msgstr ""
 
-#: templates/index.html:441
+#: templates/index.html:450
 msgid ""
 "Please provide details of the fishing activity and click \"Calculate "
 "Scenario\"."
 msgstr ""
 
-#: templates/index.html:444
+#: templates/index.html:453
 msgid "Scenario Area"
 msgstr ""
 
-#: templates/index.html:450
+#: templates/index.html:459
 msgid "January"
 msgstr ""
 
-#: templates/index.html:451
+#: templates/index.html:460
 msgid "February"
 msgstr ""
 
-#: templates/index.html:452
+#: templates/index.html:461
 msgid "March"
 msgstr ""
 
-#: templates/index.html:453
+#: templates/index.html:462
 msgid "April"
 msgstr ""
 
-#: templates/index.html:454
+#: templates/index.html:463
 msgid "May"
 msgstr ""
 
-#: templates/index.html:455
+#: templates/index.html:464
 msgid "June"
 msgstr ""
 
-#: templates/index.html:456
+#: templates/index.html:465
 msgid "July"
 msgstr ""
 
-#: templates/index.html:457
+#: templates/index.html:466
 msgid "August"
 msgstr ""
 
-#: templates/index.html:458
+#: templates/index.html:467
 msgid "September"
 msgstr ""
 
-#: templates/index.html:459
+#: templates/index.html:468
 msgid "October"
 msgstr ""
 
-#: templates/index.html:460
+#: templates/index.html:469
 msgid "November"
 msgstr ""
 
-#: templates/index.html:461
+#: templates/index.html:470
 msgid "December"
 msgstr ""
 
-#: templates/index.html:464
+#: templates/index.html:473
 msgid "Gear Speed (knots)"
 msgstr ""
 
-#: templates/index.html:468
+#: templates/index.html:477
 msgid "Gear Time (hours per day)"
 msgstr ""
 
-#: templates/index.html:472
+#: templates/index.html:481
 msgid "Gear Width (metres)"
 msgstr ""
 
-#: templates/index.html:476
+#: templates/index.html:485
 msgid "Number of Dredges"
 msgstr ""
 
-#: templates/index.html:480
+#: templates/index.html:489
 msgid "Net Length (metres)"
 msgstr ""
 
-#: templates/index.html:484
+#: templates/index.html:493
 msgid "Number of Nets"
 msgstr ""
 
-#: templates/index.html:488
+#: templates/index.html:497
 msgid "Number of Pots"
 msgstr ""
 
-#: templates/index.html:492
+#: templates/index.html:501
 msgid "Number of Anchors"
 msgstr ""
 
-#: templates/index.html:496
+#: templates/index.html:505
 msgid "Number of Fishermen/Rods"
 msgstr ""
 
-#: templates/index.html:500
+#: templates/index.html:509
 msgid "Average Hours"
 msgstr ""
 
-#: templates/index.html:504
+#: templates/index.html:513
 msgid "Number of Gatherers"
 msgstr ""
 
-#: templates/index.html:512
+#: templates/index.html:521
 msgid "Calculate Scenario"
 msgstr ""
 
-#: templates/index.html:512
+#: templates/index.html:521
 msgid "Clear Scenario"
 msgstr ""
 
-#: templates/index.html:514
+#: templates/index.html:523
 msgid "View the results of your scenario by enabling the scenario layers below."
 msgstr ""
 
-#: templates/index.html:514
+#: templates/index.html:523
 msgid ""
 "If you change the criteria above click the \"Calculate Scenario\" button "
 "to see the changes on the map."
 msgstr ""
 
-#: templates/index.html:517
+#: templates/index.html:526
 msgid "Create Fishing Scenario"
 msgstr ""
 
-#: templates/index.html:599
+#: templates/index.html:608
 msgid "Further information on Seabed Habitats"
 msgstr ""
 
-#: templates/index.html:629
+#: templates/index.html:638
 msgid "Further information on Seabed Habitat Confidence"
 msgstr ""
 
-#: templates/index.html:659
+#: templates/index.html:668
 msgid "Further information on SAC"
 msgstr ""
 
-#: templates/index.html:693
+#: templates/index.html:702
 msgid "Further information on SAC Features"
 msgstr ""
 
-#: templates/index.html:723
+#: templates/index.html:732
 msgid "Further information on SPAs"
 msgstr ""
 
-#: templates/index.html:753
+#: templates/index.html:762
 msgid "Further information on SSSIs"
 msgstr ""
 
-#: templates/index.html:783
+#: templates/index.html:792
 msgid "Further information on RAMSAR"
 msgstr ""
 
-#: templates/index.html:813
+#: templates/index.html:822
 msgid "Further information on Areas Closed to Scalloping"
 msgstr ""
 
-#: templates/index.html:843
+#: templates/index.html:852
 msgid "Further information on Several and Regulating Areas"
 msgstr ""
 
-#: templates/index.html:1440
+#: templates/index.html:1449
 msgid "Further information on Wrecks"
 msgstr ""
 
-#: templates/index.html:1569
+#: templates/index.html:1578
 msgid "Further information on "
 msgstr ""
 
-#: templates/index.html:1605
+#: templates/index.html:1615
 msgid "Further information on Number of Vessels"
 msgstr ""
 
-#: templates/index.html:1642
+#: templates/index.html:1653
 msgid "Further information on Habitat Sensitivity"
 msgstr ""
 
-#: templates/index.html:1668
+#: templates/index.html:1679
 msgid "Further information on Habitat Sensitivity Confidence"
 msgstr ""
 
-#: templates/index.html:1694
+#: templates/index.html:1705
 msgid "Further information on Fishing Activity Extents"
 msgstr ""
 
