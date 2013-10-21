@@ -46,9 +46,13 @@ LOCALES = {
 
 SALT = os.environ.get('FISHMAP_SALT')
 PASSWORD = os.environ.get('FISHMAP_PASSWORD')
+DEV_USER = os.environ.get('FISHMAP_DEV_USER')
+DEV_PASS = os.environ.get('FISHMAP_DEV_PASS')
 
 assert SALT
 assert PASSWORD
+assert DEV_USER
+assert DEV_PASS
 
 app = Flask(__name__)
 babel = Babel(app)
@@ -174,8 +178,8 @@ def get_locale():
 def before_first_request():
     try:
         default_dev = auth_datastore.create_user(
-            email='fmm@astuntechnology.com',
-            password=encrypt_password('<password>'))
+            email=DEV_USER,
+            password=encrypt_password(DEV_PASS))
         default_dev.roles = [auth_datastore.find_role('dev')]
         auth_datastore.commit()
     except IntegrityError:

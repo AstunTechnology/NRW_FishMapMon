@@ -1,4 +1,7 @@
-﻿CREATE ROLE fishmap_webapp LOGIN PASSWORD '<password>' VALID UNTIL 'infinity';
+﻿-- Read environment variables
+\set fishmap_password `echo $FISHMAP_PASSWORD`
+
+CREATE ROLE fishmap_webapp LOGIN PASSWORD :'fishmap_password' VALID UNTIL 'infinity';
 
 CREATE DATABASE fishmap
 WITH ENCODING='UTF8'

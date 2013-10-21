@@ -47,6 +47,26 @@ The export images only need to be kept for a short while, the following entry in
 
     * */6 * * * find /home/apps/fishmap/webapp/static/tmp/ -mmin +180 -type f -iname "*.png" -delete
 
+Configuration
+-------------
+
+The application requires the following configuration be set:
+
+### Required Enviroment Variables
+
+* `FISHMAP_SALT` - The password salt used with authenticated users passwords
+* `FISHMAP_PASSWORD` - Password for the fishmap database user
+* `FISHMAP_DEV_USER` - Username of development superuser
+* `FISHMAP_DEV_PASS` - Password of development superuser
+
+### Optional Enviroment Variables
+
+* `HTTP_AUTH_USER` - Username for basic HTTP auth (only required if the app is protected with basic auth)
+* `HTTP_AUTH_PASS` - Password for basic HTTP auth (only required if the app is protected with basic auth)
+* `FISHMAP_CONFIG_FILE` - Path to a configuration file that overrides settings in app.py
+
+### Loading Configuration from a File
+
 TODO
 ----
 
