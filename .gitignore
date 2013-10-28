@@ -2,3 +2,4 @@
 data/
 webapp/static/tiles/
 gunicorn.conf
+webapp/static/tmp/*.png
