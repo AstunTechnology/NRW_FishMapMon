@@ -1,3 +1,3 @@
-CONNECTION "user=fishmap_webapp password=<password> dbname=fishmap host=localhost"
+CONNECTION "user=fishmap_webapp password={3153D9718FCD9ACA12BF24A205646EAC} dbname=fishmap host=localhost"
 CONNECTIONTYPE POSTGIS
 PROCESSING "CLOSE_CONNECTION=DEFER"

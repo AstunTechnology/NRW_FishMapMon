@@ -47,10 +47,15 @@ The export images only need to be kept for a short while, the following entry in
 
     * */6 * * * find /home/apps/fishmap/webapp/static/tmp/ -mmin +180 -type f -iname "*.png" -delete
 
+Running the application
+-----------------------
+
+There are various ways to run a Python Flask web application including running under [Gunicorn](http://gunicorn.org/) using [Nginx](http://nginx.com/) as a front-end web server. The application sets HTTP headers to enable caching of most content including map images using something like [Varnish](https://www.varnish-cache.org/).
+
 Configuration
 -------------
 
-The application requires the following configuration be set:
+The application requires the following configuration be set in it's environment:
 
 ### Required Enviroment Variables
 
@@ -65,10 +70,21 @@ The application requires the following configuration be set:
 * `HTTP_AUTH_PASS` - Password for basic HTTP auth (only required if the app is protected with basic auth)
 * `FISHMAP_CONFIG_FILE` - Path to a configuration file that overrides settings in app.py
 
-### Loading Configuration from a File
+### MapServer encryption key
 
-TODO
-----
+The password used to connect to the PostgreSQL database within the MapServer mapfile is encrypted. In order to render maps do the following:
+
+Create a key file:
+
+    msencrypt -keygen fishmap.key
+
+Generate an encrypted password and update `config/mapserver/pgconnection.inc` with the value output:
+
+    msencrypt -key fishmap.key "<password>"
+
+Update the `MS_ENCRYPTION_KEY` setting in `config/mapserver/fishmap.map` with the path to your key file.
+
+Further details on [msencrypt are available in the MapServer docs](http://www.mapserver.org/utilities/msencrypt.html).
 
 Notes
 -----
