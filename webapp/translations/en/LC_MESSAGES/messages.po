@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-21 12:26+0100\n"
+"POT-Creation-Date: 2013-10-28 14:24+0000\n"
 "PO-Revision-Date: 2013-05-23 16:26+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en <LL@li.org>\n"
@@ -18,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: app.py:116
+#: app.py:120
 msgid "Register user"
 msgstr ""
 
@@ -271,7 +270,9 @@ msgid "Rockpools and Overhangs"
 msgstr ""
 
 #: templates/habitats.sld:119
-msgid "Brown Seaweeds, Barnacles and Fucoids"
+msgid ""
+"Intertidal brown seaweeds, barnacles or ephemeral seaweeds on boulders, "
+"cobbles and pebbles"
 msgstr ""
 
 #: templates/habitats.sld:133
@@ -339,7 +340,7 @@ msgid "Oyster Beds"
 msgstr ""
 
 #: templates/habitats.sld:357
-msgid "Underboulder and Cobbles Shallow Subtidal Community "
+msgid "Underboulder communities on lower shore and shallow subtidal boulders"
 msgstr ""
 
 #: templates/habitats.sld:371
@@ -351,7 +352,9 @@ msgid "Stable, Species Rich Mixed Sediments"
 msgstr ""
 
 #: templates/habitats.sld:399
-msgid "Unstable Coarse Sediments - Robust Fauna"
+msgid ""
+"Unstable cobbles, pebbles, gravels and/or coarse sands supporting "
+"relatively robust communities"
 msgstr ""
 
 #: templates/habitats.sld:413
@@ -1293,6 +1296,10 @@ msgstr ""
 msgid "Scenario Area"
 msgstr ""
 
+#: templates/index.html:458
+msgid "Days per month"
+msgstr ""
+
 #: templates/index.html:459
 msgid "January"
 msgstr ""
@@ -1523,6 +1530,10 @@ msgstr ""
 msgid "Several and Regulating Orders"
 msgstr ""
 
+#: templates/user_add.html:10
+msgid "Register a new user"
+msgstr ""
+
 #: templates/security/_menu.html:6
 msgid "Register"
 msgstr ""
@@ -1546,4 +1557,3 @@ msgstr ""
 #: templates/security/login_user.html:12
 msgid "Remember me"
 msgstr ""
-

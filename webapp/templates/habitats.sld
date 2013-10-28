@@ -116,7 +116,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>9 {{ _('Brown Seaweeds, Barnacles and Fucoids') }}</Name>
+                <Name>9 {{ _('Intertidal brown seaweeds, barnacles or ephemeral seaweeds on boulders, cobbles and pebbles') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -354,7 +354,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>26 {{ _('Underboulder and Cobbles Shallow Subtidal Community ') }}</Name>
+                <Name>26 {{ _('Underboulder communities on lower shore and shallow subtidal boulders') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>
@@ -396,7 +396,7 @@
                 </PolygonSymbolizer>
             </Rule>
             <Rule>
-                <Name>29 {{ _('Unstable Coarse Sediments - Robust Fauna') }}</Name>
+                <Name>29 {{ _('Unstable cobbles, pebbles, gravels and/or coarse sands supporting relatively robust communities') }}</Name>
                 <Filter>
                     <PropertyIsEqualTo>
                         <PropertyName>habitat_code</PropertyName>

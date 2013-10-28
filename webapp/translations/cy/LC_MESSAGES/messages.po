@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2013-10-21 12:26+0100\n"
+"POT-Creation-Date: 2013-10-28 14:24+0000\n"
 "PO-Revision-Date: 2013-05-23 16:30+0100\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: cy <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 0.9.6\n"
 
-#: app.py:116
+#: app.py:120
 msgid "Register user"
 msgstr "Cofrestru defnyddiwr"
 
@@ -259,14 +259,12 @@ msgid "Moderately Exposed Intertidal Rock"
 msgstr "Craig rynglanwol y mae’r tonnau’n effeithio’n gymedrol arni"
 
 #: templates/habitats.sld:49
-#, fuzzy
 msgid "Seaweeds and Mussels on Moderately Exposed Rock"
 msgstr ""
 "Gwymon coch a brown a chregyn gleision ar graig sy’n weddol agored (ar "
 "ran isaf rynglanwol y lan)"
 
 #: templates/habitats.sld:63
-#, fuzzy
 msgid "Mussels and Piddocks on Intertidal Clay and Peat"
 msgstr ""
 "Cregyn gleision a chregyn deuglawr sy’n tyllu (pidogau) ar glai a mawn "
@@ -277,7 +275,6 @@ msgid "Honeycomb Worm Reefs"
 msgstr "Riffiau’r llyngyren ddiliau"
 
 #: templates/habitats.sld:91
-#, fuzzy
 msgid "Sheltered Bedrock, Boulders and Cobbles"
 msgstr "Creigwely, clogfeini a cherrig crynion rhynglanwol cysgodol"
 
@@ -286,18 +283,20 @@ msgid "Rockpools and Overhangs"
 msgstr "Pyllau trai a bargodion"
 
 #: templates/habitats.sld:119
-msgid "Brown Seaweeds, Barnacles and Fucoids"
+msgid ""
+"Intertidal brown seaweeds, barnacles or ephemeral seaweeds on boulders, "
+"cobbles and pebbles"
 msgstr ""
+"Gwymon brown, gwyrain neu wymon dros dro rhynglanwol ar glogfeini, "
+"cerrig crynion a cherrig mân"
 
 #: templates/habitats.sld:133
-#, fuzzy
 msgid "Muddy Sands - Excluding Gaper Clams"
 msgstr ""
 "Tywod lleidiog rhynglanwol – heb gynnwys biotopau sy’n cynnal cregyn "
 "blacen"
 
 #: templates/habitats.sld:147
-#, fuzzy
 msgid "Muds and Sands - Including Gaper Clams"
 msgstr " Llaid a thywod rhynglanwol sy’n cynnal cregyn blacen"
 
@@ -318,7 +317,6 @@ msgid "Erect and Branching Species That are Very Slow Growing"
 msgstr "Rhywogaethau islanwol talsyth, canghennog sy’n tyfu’n araf iawn"
 
 #: templates/habitats.sld:217
-#, fuzzy
 msgid "Sand and Gravels with Long Lived Bivalves"
 msgstr ""
 "Tywod a graean bras gyda chymunedau sy’n cynnwys cregyn deuglawr mawr "
@@ -337,14 +335,12 @@ msgid "Stable Muddy Sands, Sandy Muds and Muds"
 msgstr "Tywod lleidiog, llaid tywodlyd a llaid sefydlog islanwol"
 
 #: templates/habitats.sld:273
-#, fuzzy
 msgid "Rockwith Low-lying Fast Growing Faunal Turf"
 msgstr ""
 " Craig sy’n islanwol yn bennaf gyda thyfiant milodol isel sy’n tyfu’n "
 "gyflym "
 
 #: templates/habitats.sld:287
-#, fuzzy
 msgid "Rock with Erect and Branching Species"
 msgstr ""
 "Craig sy’n islanwol yn bennaf gyda rhywogaethau talsyth, canghennog sy’n "
@@ -367,8 +363,8 @@ msgid "Oyster Beds"
 msgstr "Gwelyau wystrys"
 
 #: templates/habitats.sld:357
-msgid "Underboulder and Cobbles Shallow Subtidal Community "
-msgstr ""
+msgid "Underboulder communities on lower shore and shallow subtidal boulders"
+msgstr "Cymunedau dan glogfeini ar ran isaf y lan a chlogfeini islanwol bas"
 
 #: templates/habitats.sld:371
 msgid "Biogenic Reef on Sediment"
@@ -379,15 +375,18 @@ msgid "Stable, Species Rich Mixed Sediments"
 msgstr "Gwaddodion cymysg, sefydlog sy’n cynnwys cyfoeth o rywogaethau"
 
 #: templates/habitats.sld:399
-msgid "Unstable Coarse Sediments - Robust Fauna"
+msgid ""
+"Unstable cobbles, pebbles, gravels and/or coarse sands supporting "
+"relatively robust communities"
 msgstr ""
+"Tywod bras a / neu gerrig crynion, cerrig mân a graean ansefydlog"
+"sy’n cynnal cymunedau eithaf cadarn"
 
 #: templates/habitats.sld:413
 msgid "Seagrass Beds"
 msgstr "Gwelyau morwellt"
 
 #: templates/habitats.sld:427
-#, fuzzy
 msgid "Stable but Tidal Swept Cobbles, Pebbles and Gravel"
 msgstr ""
 "errig crynion, cerrig mân, graean a gwaddodion bras sy’n sefydlog ond a "
@@ -490,7 +489,7 @@ msgstr "Arhoswch"
 
 #: templates/index.html:74
 msgid "An error occurred, please try again."
-msgstr ""
+msgstr "Cafwydd gwall, rhowch gynnig eto arni"
 
 #: templates/index.html:75
 msgid "Download image"
@@ -1324,13 +1323,15 @@ msgstr "Cliciwch i ychwanegu pwynt a chliciwch ddwywaith i orffen lluniadu"
 msgid ""
 "Please provide details of the fishing activity and click \"Calculate "
 "Scenario\"."
-msgstr ""
-"Rhowch fanylion y gweithgaredd pysgota a chliciwch \"Calculate "
-"Scenario \""
+msgstr "Rhowch fanylion y gweithgaredd pysgota a chliciwch \"Calculate Scenario \""
 
 #: templates/index.html:453
 msgid "Scenario Area"
 msgstr "Ardal Senario"
+
+#: templates/index.html:458
+msgid "Days per month"
+msgstr "Diwrnod y Mis"
 
 #: templates/index.html:459
 msgid "January"
@@ -1491,12 +1492,10 @@ msgid "Further information on Wrecks"
 msgstr "Rhagor o wybodaeth am Longau Drylliedig"
 
 #: templates/index.html:1578
-#, fuzzy
 msgid "Further information on "
 msgstr "Rhagor o wybodaeth am ACA"
 
 #: templates/index.html:1615
-#, fuzzy
 msgid "Further information on Number of Vessels"
 msgstr "Rhagor o wybodaeth am Longau Drylliedig"
 
@@ -1567,6 +1566,10 @@ msgstr "Cymedrol"
 #: templates/several_and_regulatory_orders.sld:7
 msgid "Several and Regulating Orders"
 msgstr "Gorchmynion Pysgodfa Unigol a Rheoleiddio Pysgodfa"
+
+#: templates/user_add.html:10
+msgid "Register a new user"
+msgstr "Cofrestru defnyddiwr"
 
 #: templates/security/_menu.html:6
 msgid "Register"
