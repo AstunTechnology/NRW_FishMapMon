@@ -295,9 +295,10 @@ div.info a, p.info a {
 #legend .content {
     padding: 0 1em 1em 1em;
     border: 1px solid grey;
+    max-width: 400px;
     max-height: 300px;
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: auto;
 }
 
 #legend .content h3 {
