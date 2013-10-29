@@ -4,7 +4,7 @@ Natural Resources Wales FishMap Mon
 Dependencies
 ------------
 
-The dependencies for the Python web application are defined in webapp/REQUIREMENTS and can be installed using pip, it is assumed that the application is installed with a Python 2.7 virtualenv. Additional dependencies include:
+The following system wide dependencies are must be installed:
 
 From `ppa:ubuntugis/ppa`:
 
@@ -43,7 +43,7 @@ For Export Image functionality:
 
 ### Install Python dependencies
 
-It is recommended that python-virtualenv (or virtualenvwrapper) are used to create a standalone environment for the application. Installing either package will provide access to `pip` the Python package manager which can be used to install all Python dependencies. The file `webapp/REQUIREMENTS` contains a list of all of the packages and their versions. Once the virtual environment is activated run `pip pip install -r REQUIREMENTS` from the `webapp` directory.
+It is recommended that `python-virtualenv` (or `virtualenvwrapper`) are used to create a standalone Python 2.7 environment for the application. Installing either package will provide access to `pip` the Python package manager which can be used to install all Python dependencies. The file `webapp/REQUIREMENTS` contains a list of all of the packages and their versions. Once the virtual environment is activated run `pip pip install -r REQUIREMENTS` from the `webapp` directory.
 
 Running the application
 -----------------------
