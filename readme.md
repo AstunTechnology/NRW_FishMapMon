@@ -4,7 +4,7 @@ Natural Resources Wales FishMap Mon
 Dependencies
 ------------
 
-The dependencies for the Python web applicaion are defined in webapp/REQUIREMENTS and can be installed using pip, it is assumed that the application is installed with a Python 2.7 virtualenv. Additional dependencies include:
+The dependencies for the Python web application are defined in webapp/REQUIREMENTS and can be installed using pip, it is assumed that the application is installed with a Python 2.7 virtualenv. Additional dependencies include:
 
 From `ppa:ubuntugis/ppa`:
 
@@ -26,7 +26,7 @@ For Export Image functionality:
 * `phantomjs`
 * `casperjs`
 
-## Install PhantomJS & CasperJS
+### Install PhantomJS & CasperJS
 
     # All software installed in /usr/local/src
     cd /usr/local/src
@@ -41,28 +41,42 @@ For Export Image functionality:
     sudo git clone git://github.com/n1k0/casperjs.git
     sudo ln -sf /usr/local/src/casperjs/bin/casperjs /usr/local/bin/casperjs
 
+### Install Python dependencies
+
+It is recommended that python-virtualenv (or virtualenvwrapper) are used to create a standalone environment for the application. Installing either package will provide access to `pip` the Python package manager which can be used to install all Python dependencies. The file `webapp/REQUIREMENTS` contains a list of all of the packages and their versions. Once the virtual environment is activated run `pip pip install -r REQUIREMENTS` from the `webapp` directory.
+
 Running the application
 -----------------------
 
-There are various ways to run a Python Flask web application including running under [Gunicorn](http://gunicorn.org/) using [Nginx](http://nginx.com/) as a front-end web server. The application sets HTTP headers to enable caching of most content including map images using something like [Varnish](https://www.varnish-cache.org/).
+### Development
+
+During development the application can be run using the builtin Flask web server. Simply run `python app.py` from the `webapp` directory once you have activated the virtual environment and installed the dependencies. The application will then be available at: http://localhost:5000/
+
+### Production
+
+In production there are various ways to run a Python Flask web application including running under [Gunicorn](http://gunicorn.org/) using [Nginx](http://nginx.com/) as a front-end web server. The application sets HTTP headers to enable caching of most content including map images using something like [Varnish](https://www.varnish-cache.org/).
 
 Configuration
 -------------
 
 The application requires the following configuration be set in it's environment:
 
-### Required Enviroment Variables
+### Required Environment Variables
 
 * `FISHMAP_SALT` - The password salt used with authenticated users passwords
 * `FISHMAP_PASSWORD` - Password for the fishmap database user
 * `FISHMAP_DEV_USER` - Username of development superuser
 * `FISHMAP_DEV_PASS` - Password of development superuser
 
-### Optional Enviroment Variables
+### Optional Environment Variables
 
 * `HTTP_AUTH_USER` - Username for basic HTTP auth (only required if the app is protected with basic auth)
 * `HTTP_AUTH_PASS` - Password for basic HTTP auth (only required if the app is protected with basic auth)
 * `FISHMAP_CONFIG_FILE` - Path to a configuration file that overrides settings in app.py
+
+### Overriding Configuration
+
+The default configuration in `app.py` can be overridden by specifying a configuration to load via the `FISHMAP_CONFIG_FILE` environment variable which must point to a Python ini style configuration file with a value per line.
 
 ### MapServer encryption key
 
@@ -104,37 +118,6 @@ Edit translations/cy/LC_MESSAGES/messages.po to add the msgstr value for each st
 
     pybabel compile -f -d translations
 
-## WebServices
-
-FishMap is expected to be run as two services behind a single front-end web server. 
-
-### Web server
-**Nginx** (sample config supplied) or similar. This is used to pass on dynamic requests to the two services and to serve static files.
-
-*TODO*: Sample config update to serve static files.
-
-
-### Webapp service
-A **Flask** application listening to port 5000, spawned by a WSGI server like Gunicorn.
-
-Can be started manually for development purposes.
-
-*TODO*: Sample config for Gunicorn
-
-### Geodata service
-Ultimately this is Mapserver, but runs behind MapProxy to provide layer security.
-
-*TODO*: Replace **lighttpd** config with MapProxy.
-
-
-### MapServer 
-
-#### Paths
-
-Mapfiles: [project_root]/config/mapserver
-
-Basemap data: [project_root]/data/BaseMapping
-
 #### Custom parameters
 
 For requests made to show impact of project area selection the following custom parameters are used:
@@ -148,20 +131,21 @@ For requests made to show impact of project area selection the following custom 
     * WKT (WKT representation of project area(s))
     * ARGn (number of numeric arguments, see below as to what they refer to for each FISHING type)
 
-<table>
-<caption>Arguments for each fishing activity in intensity calculations</caption>
-<tr><th>FISHING          </th><th> ARG1      </th><th> ARG2       </th><th> ARG3       </th><th> ARG4      </th><th> ARG5</th></tr>
-<tr><td>king_scallops    </td><td> days/year </td><td> speed      </td><td> avg. hours </td><td> net width </td><td> # boats</td></tr>
-<tr><td>queen_scallops   </td><td> days/year </td><td> speed      </td><td> avg. hours </td><td> net width </td><td> # boats</td></tr>
-<tr><td>mussels          </td><td> days/year </td><td> speed      </td><td> avg. hours </td><td> net width </td><td> # boats</td></tr>
-<tr><td>lot              </td><td> days/year </td><td> speed      </td><td> avg. hours </td><td> net width </td><td> </td></tr>
-<tr><td>nets             </td><td> days/year </td><td> net length </td><td> # nets     </td><td>           </td><td> </td></tr>
-<tr><td>pots_combined    </td><td> days/year </td><td> # anchors  </td><td> # pots     </td><td>           </td><td> </td></tr>
-<tr><td>rsa_charterboats </td><td> days/year </td><td> rods       </td><td> avg. hours </td><td>           </td><td> </td></tr>
-<tr><td>rsa_combined     </td><td> days/year </td><td> rods       </td><td> avg. hours </td><td>           </td><td> </td></tr>
-<tr><td>rsa_noncharter   </td><td> days/year </td><td> rods       </td><td> avg. hours  </td><td>           </td><td> </td></tr>
-<tr><td>rsa_shore        </td><td> days/year </td><td> rods       </td><td> avg. hours  </td><td>           </td><td> </td></tr>
-<tr><td>cas_hand_gath    </td><td> days/year </td><td> avg. hours </td><td> # people   </td><td>           </td><td> </td></tr>
-<tr><td>pro_hand_gath    </td><td> days/year </td><td> avg. hours </td><td> # people   </td><td>           </td><td> </td></tr>
-</table>
+Arguments for each fishing activity in intensity calculations
 
+<pre>
+| FISHING          | ARG1      | ARG2       | ARG3       | ARG4      | ARG5    |
+-------------------------------------------------------------------------------
+| king_scallops    | days/year | speed      | avg. hours | net width | # boats |
+| queen_scallops   | days/year | speed      | avg. hours | net width | # boats |
+| mussels          | days/year | speed      | avg. hours | net width | # boats |
+| lot              | days/year | speed      | avg. hours | net width |         |
+| nets             | days/year | net length | # nets     |           |         |
+| pots_combined    | days/year | # anchors  | # pots     |           |         |
+| rsa_charterboats | days/year | rods       | avg. hours |           |         |
+| rsa_combined     | days/year | rods       | avg. hours |           |         |
+| rsa_noncharter   | days/year | rods       | avg. hours |           |         |
+| rsa_shore        | days/year | rods       | avg. hours |           |         |
+| cas_hand_gath    | days/year | avg. hours | # people   |           |         |
+| pro_hand_gath    | days/year | avg. hours | # people   |           |         |
+</pre>
