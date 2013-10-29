@@ -1,6 +1,6 @@
 MAP
-
     CONFIG PROJ_LIB "/usr/share/proj"
+    CONFIG "MS_ENCRYPTION_KEY" "/etc/mapserver/fishmap.key"
     PROJECTION
         "init=epsg:27700"
     END
