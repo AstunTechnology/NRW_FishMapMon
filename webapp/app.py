@@ -70,7 +70,7 @@ app.config['SEND_REGISTER_EMAIL'] = False
 app.config.from_object('security_strings')
 
 # Own settings
-app.config['WMS_URL'] = 'http://127.0.0.1:5001/cgi-bin/mapserv?'
+app.config['WMS_URL'] = 'http://127.0.0.1/cgi-bin/mapserv?'
 app.config['AUTH_USER'] = 'fishmap_webapp'
 app.config['AUTH_DB'] = 'fishmap_auth'
 
