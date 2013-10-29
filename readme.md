@@ -133,19 +133,17 @@ For requests made to show impact of project area selection the following custom 
 
 Arguments for each fishing activity in intensity calculations
 
-<pre>
-| FISHING          | ARG1      | ARG2       | ARG3       | ARG4      | ARG5    |
--------------------------------------------------------------------------------
-| king_scallops    | days/year | speed      | avg. hours | net width | # boats |
-| queen_scallops   | days/year | speed      | avg. hours | net width | # boats |
-| mussels          | days/year | speed      | avg. hours | net width | # boats |
-| lot              | days/year | speed      | avg. hours | net width |         |
-| nets             | days/year | net length | # nets     |           |         |
-| pots_combined    | days/year | # anchors  | # pots     |           |         |
-| rsa_charterboats | days/year | rods       | avg. hours |           |         |
-| rsa_combined     | days/year | rods       | avg. hours |           |         |
-| rsa_noncharter   | days/year | rods       | avg. hours |           |         |
-| rsa_shore        | days/year | rods       | avg. hours |           |         |
-| cas_hand_gath    | days/year | avg. hours | # people   |           |         |
-| pro_hand_gath    | days/year | avg. hours | # people   |           |         |
-</pre>
+    | FISHING          | ARG1      | ARG2       | ARG3       | ARG4      | ARG5    |
+    -------------------------------------------------------------------------------
+    | king_scallops    | days/year | speed      | avg. hours | net width | # boats |
+    | queen_scallops   | days/year | speed      | avg. hours | net width | # boats |
+    | mussels          | days/year | speed      | avg. hours | net width | # boats |
+    | lot              | days/year | speed      | avg. hours | net width |         |
+    | nets             | days/year | net length | # nets     |           |         |
+    | pots_combined    | days/year | # anchors  | # pots     |           |         |
+    | rsa_charterboats | days/year | rods       | avg. hours |           |         |
+    | rsa_combined     | days/year | rods       | avg. hours |           |         |
+    | rsa_noncharter   | days/year | rods       | avg. hours |           |         |
+    | rsa_shore        | days/year | rods       | avg. hours |           |         |
+    | cas_hand_gath    | days/year | avg. hours | # people   |           |         |
+    | pro_hand_gath    | days/year | avg. hours | # people   |           |         |
