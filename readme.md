@@ -1,6 +1,15 @@
 Natural Resources Wales FishMap Mon
 ===================================
 
+FishMap Môn is a pilot project funded by the European Fisheries Fund and run in partnership between Natural Resources Wales (NRW) and the fishing community in North Wales. Project partners include the North Wales Fisherman’s Cooperative Limited, Bangor Mussel Producers Limited and the Welsh Federation of Sea Anglers. The project sets out to inform the sustainable management of the Welsh marine environment by collecting and mapping fishing activity and combining it with information on seabed habitats and their sensitivity to such activity.
+
+The live application can be found at: [http://fishmapmon.naturalresourceswales.gov.uk/](http://fishmapmon.naturalresourceswales.gov.uk/)
+
+License
+-------
+
+Copyright (c) 2013 Astun Technology Ltd. See the LICENSE.md file for license rights and limitations (MIT).
+
 Dependencies
 ------------
 
