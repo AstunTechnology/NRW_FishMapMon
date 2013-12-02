@@ -72,6 +72,7 @@ The application requires the following configuration be set in it's environment:
 
 ### Required Environment Variables
 
+* `SECRET_KEY` - A random string used to cryptographically sign session cookies (see http://flask.pocoo.org/docs/quickstart/#sessions for further details)
 * `FISHMAP_SALT` - The password salt used with authenticated users passwords
 * `FISHMAP_PASSWORD` - Password for the fishmap database user
 * `FISHMAP_DEV_USER` - Username of development superuser
