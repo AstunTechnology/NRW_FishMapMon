@@ -150,11 +150,12 @@
 
     var charts = new OpenLayers.Layer.TMS(
         FISH_MAP.getText("admiralty_chart"),
-        FISH_MAP.TMS_ROOT_URL,
+        "http://tms.oceanwise.eu/NRW/BNG",
         {
             attribution: FISH_MAP.getText('chart_copy'),
-            layername: 'charts',
-            type: 'png'
+            layername: 'RCx',
+            type: 'png',
+            serviceVersion: ''
         }
     );
     map.addLayer(charts);
