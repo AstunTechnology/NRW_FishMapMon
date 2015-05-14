@@ -1235,7 +1235,7 @@ msgid "Professional Hand Gather Extents"
 msgstr ""
 
 #: templates/index.html:316
-msgid "Admiralty Chart"
+msgid "Nautical Chart"
 msgstr ""
 
 #: templates/index.html:317

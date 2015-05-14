@@ -149,7 +149,7 @@
     // map.addLayer(os);
 
     var charts = new OpenLayers.Layer.TMS(
-        FISH_MAP.getText("admiralty_chart"),
+        FISH_MAP.getText("nautical_chart"),
         "http://tms.oceanwise.eu/NRW/BNG",
         {
             attribution: FISH_MAP.getText('chart_copy'),

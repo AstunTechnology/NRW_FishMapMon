@@ -1268,8 +1268,8 @@ msgid "Professional Hand Gather Extents"
 msgstr "Ardaloedd Casglu Proffesiynol â Llaw"
 
 #: templates/index.html:316
-msgid "Admiralty Chart"
-msgstr "Siartiau’r Morlys"
+msgid "Nautical Chart"
+msgstr "Siart morwrol"
 
 #: templates/index.html:317
 msgid "OS Map"
