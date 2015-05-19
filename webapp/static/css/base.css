@@ -461,3 +461,9 @@ img.olTileImage {
     -ms-perspective: inherit;
     perspective: inherit;
 }
+
+/* Hide tiles that can't be loaded such as land tiles from Nautical Chart at
+   largest scale */
+.olImageLoadError {
+    display: none !important;
+}
